@@ -1,0 +1,78 @@
+.navArrowLeft {	
+	background:url(images/ssb-nav-arrow-menu-sprites.png) no-repeat -54px 0;	
+}	
+.navArrowRight {	
+	background:url(images/ssb-nav-arrow-menu-sprites.png) no-repeat  -36px 0;	
+}	
+.navArrowLeftDisabled {	
+	background:url(images/ssb-nav-arrow-menu-sprites.png) no-repeat -18px 0;	
+}	
+.navArrowRightDisabled {	
+	background:url(images/ssb-nav-arrow-menu-sprites.png) no-repeat 0px 0px;	
+}	
+.navArrowLeftSmall {	
+	background:url(images/ssb-nav-arrow-sprites.png) no-repeat 0px -48px;	
+}	
+.navArrowRightSmall {	
+	background:url(images/ssb-nav-arrow-sprites.png) no-repeat  0px -32px;	
+}	
+.navArrowLeftSmallDisabled {	
+	background:url(images/ssb-nav-arrow-sprites.png) no-repeat 0px -16px;	
+}	
+.navArrowRightSmallDisabled {	
+	background:url(images/ssb-nav-arrow-sprites.png) no-repeat 0px 0px;	
+}	
+.selectedListItem span {	
+	background: #7FADCA url(images/bp-arrow-right-selected.png) no-repeat -38px .5em;	
+}	
+.navList .parent span:hover {	
+	background:#E1EFFD url(images/bp-arrow-right-blue.png) no-repeat -38px .5em;	
+}	
+.parent {	
+    background:transparent url(images/arrow-right-gray.png) no-repeat -38px .4em;	
+}	
+.navListStart .parent span:hover {	
+    background:#999 url(images/bp-arrow-right-selected.png) no-repeat -38px .6em;	
+}	
+.navListStart .parent {	
+    background:transparent url(images/arrow-right-gray.png) no-repeat -38px .6em;	
+}	
+.signOutText {	
+	background: url(images/icon-lock.png) no-repeat scroll 38px center;	
+}	
+.helpText {	
+	background:transparent url(images/icon-help.png) no-repeat scroll 36px center	
+}
+#globalNav li a.preferenceText {
+	background:url("images/gear_icon.png") no-repeat 43px center;
+}
+.htmlButtonLevel2-3 h3 {	
+	background:url(images/level-2-nav-arrow-down.png) no-repeat 10px center;	
+}	
+.htmlButtonLevel2-3.selected h3 {	
+	background:url(images/level-2-nav-arrow-up.png) no-repeat 10px center;	
+}	
+.items h3 {	
+	background:url(images/square-bullet-6x6-blue.png) no-repeat right 10px;	
+}	
+#footerLinks li {	
+	background:url(images/square-bullet-6x6-blue.png) no-repeat left center;	
+}	
+.btn-l {	
+    background:#646464 url(images/bp-horiz-nav-btns.png) no-repeat -18px center;	
+}	
+.btn-r {	
+    background:#646464 url(images/bp-horiz-nav-btns.png) no-repeat -1px center;	
+}	
+.backurl a {	
+	background: url(images/backlink_sprites.png) no-repeat -2px -23px;	
+}	
+.backurl a:hover {	
+	background: url(images/backlink_sprites.png) no-repeat -21px -23px;	
+}	
+.ac_loading {	
+	background: white url('images/indicator.gif') left center no-repeat;	
+}
+.headerButtonDownArrow:link, .headerButtonDownArrow:active, .headerButtonDownArrow:visited {
+    background: url("images/crumbarrow_down.png") no-repeat scroll left 10px transparent;
+}

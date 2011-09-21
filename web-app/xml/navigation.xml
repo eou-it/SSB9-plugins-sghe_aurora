@@ -1,0 +1,10 @@
+<NavigationEntries>
+<NavigationEntryValueObject id="1" menu="Banner/Flexible Registration" form="*FLEXREG" path="null.zul" name="*FLEXREG" caption="Flexible Registration" type="MENU" url="" parent=""/>
+<NavigationEntryValueObject id="2" menu="Banner/Student" form="*STUDENT" path="null.zul" name="*STUDENT" caption="Student" type="MENU" url="" parent=""/>
+<NavigationEntryValueObject id="3" menu="Banner/Advancement" form="*ALUMNI" path="null.zul" name="*ALUMNI" caption="Advancement" type="MENU" url="" parent=""/>
+<NavigationEntryValueObject id="4" menu="Banner/Finance System Menu" form="*FINANCE" path="null.zul" name="*FINANCE" caption="Finance System Menu" type="MENU" url="" parent=""/>
+<NavigationEntryValueObject id="5" menu="Banner/Human Resources" form="*HRS" path="null.zul" name="*HRS" caption="Human Resources" type="MENU" url="" parent=""/>
+<NavigationEntryValueObject id="6" menu="Banner/Financial Aid" form="*RESOURCE" path="null.zul" name="*RESOURCE" caption="Financial Aid" type="MENU" url="" parent=""/>
+<NavigationEntryValueObject id="7" menu="Banner/General" form="*GENERAL" path="null.zul" name="*GENERAL" caption="General" type="MENU" url="" parent=""/>
+<NavigationEntryValueObject id="8" menu="Banner/Document Management" form="*BDMS" path="null.zul" name="*BDMS" caption="Document Management" type="MENU" url="" parent=""/>
+</NavigationEntries>

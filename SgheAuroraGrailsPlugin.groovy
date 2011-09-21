@@ -1,6 +1,6 @@
-class @plugin.name@GrailsPlugin {
+class SgheAuroraGrailsPlugin {
     // the plugin version
-    def version = "@plugin.version@"
+    def version = "0.1"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "1.3.5 > *"
     // the other plugins this plugin depends on
@@ -19,7 +19,7 @@ Brief description of the plugin.
 '''
 
     // URL to the plugin's documentation
-    def documentation = "http://grails.org/plugin/@plugin.short.name@"
+    def documentation = "http://grails.org/plugin/sghe-aurora"
 
     def doWithWebDescriptor = { xml ->
         // TODO Implement additions to web.xml (optional), this event occurs before 
