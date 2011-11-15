@@ -18,6 +18,7 @@ SendFailures.txt
 .idea/**/*
 *.ser
 out/
+*.sha1
 plugin.xml
 grails-sghe-aurora*.zip
 stacktrace.log
