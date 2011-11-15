@@ -20,6 +20,7 @@ SendFailures.txt
 *.sha1
 grails-sghe*.zip
 out/
+*.sha1
 plugin.xml
 grails-sghe-aurora*.zip
 stacktrace.log

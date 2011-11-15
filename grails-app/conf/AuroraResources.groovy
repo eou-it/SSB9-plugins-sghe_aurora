@@ -15,11 +15,11 @@ modules = {
         dependsOn "jquery"
         defaultBundle environment == "development" ? false : "aurora"
 
-        resource url:[plugin: 'sghe-aurora', file: 'js/utils.js'],  disposition: 'head'
-        resource url:[plugin: 'sghe-aurora', file: 'js/config.js'],  disposition: 'head'
-        resource url:[plugin: 'sghe-aurora', file: 'js/common-controls.js'],  disposition: 'head'
-        resource url:[plugin: 'sghe-aurora', file: 'js/common-integration.js'],  disposition: 'head'
-        resource url:[plugin: 'sghe-aurora', file: 'js/common-navigation.js'],  disposition: 'head'
-        resource url:[plugin: 'sghe-aurora', file: 'js/common-platform.js'],  disposition: 'head'
+        resource url:[plugin: 'sghe-aurora', file: 'js/utils.js']
+        resource url:[plugin: 'sghe-aurora', file: 'js/config.js']
+        resource url:[plugin: 'sghe-aurora', file: 'js/common-controls.js']
+        resource url:[plugin: 'sghe-aurora', file: 'js/common-integration.js']
+        resource url:[plugin: 'sghe-aurora', file: 'js/common-navigation.js']
+        resource url:[plugin: 'sghe-aurora', file: 'js/common-platform.js']
     }
 }
