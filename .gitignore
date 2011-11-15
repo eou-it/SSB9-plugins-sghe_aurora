@@ -17,6 +17,8 @@ SendFailures.txt
 .idea/workspace.xml
 .idea/**/*
 *.ser
+*.sha1
+grails-sghe*.zip
 out/
 plugin.xml
 grails-sghe-aurora*.zip
