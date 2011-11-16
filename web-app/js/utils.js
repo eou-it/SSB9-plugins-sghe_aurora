@@ -689,10 +689,6 @@ var FontResizeDetector = {
 	stop:false,
 	
 	initialize: function() {
-		if (CommonContext.locale == "ar") {
-			FontResizeDetector.checkDiv = '<div id="checkdiv" style="right:1%;line-height:1;font-family:monospace;position:absolute;">&nbsp;</div>';
-		}
-		
 		$("body").prepend(FontResizeDetector.checkDiv);
 		FontResizeDetector.fontCheck(FontResizeDetector.receivechange);
 	},
