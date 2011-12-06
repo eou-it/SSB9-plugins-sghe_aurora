@@ -76,3 +76,49 @@
 .headerButtonDownArrow:link, .headerButtonDownArrow:active, .headerButtonDownArrow:visited {
     background: url("images/crumbarrow_down.png") no-repeat scroll left 10px transparent;
 }
+
+.headerButton .upArrow:link, .upArrow:active, .upArrow:visited {
+    background: url("images/callout_arrow.png") no-repeat scroll left 8px transparent;
+}
+
+.signOutText {
+    background: url("images/icon-lock.png") no-repeat scroll right center transparent;
+    margin-left: 8px;
+    margin-right: 4px;
+}
+
+#globalNav .globalnav-list-item:first-child {
+    margin-left: 4px;
+}
+
+#globalNav .globalnav-list-item {
+    padding: 2px 4px 0 0;
+}
+
+.navList .parent:focus span {
+    background: url("images/bp-arrow-right-blue.png") no-repeat scroll -38px 10px #E1EFFD;
+}
+
+.breadcrumb {
+    padding-right: 0;
+}
+
+#globalNav li a {
+	padding-left: 16px;
+}
+
+#browseButtonState {
+    right: 81px;
+}
+
+#menuArrow{
+    background:url("images/header-composite-button-sprites-rtl.png") no-repeat scroll right 0px transparent !important;
+}
+
+#menuArrow:hover {
+    background: transparent url("images/header-composite-button-sprites-rtl.png") no-repeat scroll 100% -48px !important;
+}
+
+#browseButton {
+    left: 79px;
+}

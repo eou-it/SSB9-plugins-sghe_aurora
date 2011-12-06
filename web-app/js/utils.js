@@ -1,6 +1,6 @@
 /*
  * ******************************************************************************
- *  © 2010 SunGard Higher Education.  All Rights Reserved.
+ *  ï¿½ 2010 SunGard Higher Education.  All Rights Reserved.
  *
  *  CONFIDENTIAL BUSINESS INFORMATION
  *
@@ -347,7 +347,9 @@ StylesheetFormatter = {
             }
         }
         var regex = new RegExp(val);
-        for (i in this.getSheets()) {
+
+        var noOfStyleSheets = this.getSheets().length;
+        for(var i = 0; i < noOfStyleSheets; i++) {
             if (regex.test(this.getSheets()[i].href)) {
                 this.styleSheet = i;
                 if (jQuery.browser.msie) {

@@ -25,4 +25,8 @@ modules = {
         resource url:[plugin: 'sghe-aurora', file: 'js/common-navigation.js']
         resource url:[plugin: 'sghe-aurora', file: 'js/common-platform.js']
     }
+
+    'auroraRTL' {
+        resource url:[plugin: 'sghe-aurora', file: 'css/rtl.css'],       attrs:[media:'screen, projection']
+    }
 }
