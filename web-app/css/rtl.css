@@ -26,10 +26,10 @@
 	background: #7FADCA url(images/bp-arrow-right-selected.png) no-repeat -38px .5em;	
 }	
 .navList .parent span:hover {	
-	background:#E1EFFD url(images/bp-arrow-right-blue.png) no-repeat -38px .5em;	
+	background:#E1EFFD url(images/bp-arrow-right-blue.png) no-repeat -38px 10px;
 }	
 .parent {	
-    background:transparent url(images/arrow-right-gray.png) no-repeat -38px .4em;	
+    background:transparent url(images/arrow-right-gray.png) no-repeat -38px 10px;
 }	
 .navListStart .parent span:hover {	
     background:#999 url(images/bp-arrow-right-selected.png) no-repeat -38px .6em;	
