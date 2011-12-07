@@ -1,6 +1,6 @@
 /*
  * ******************************************************************************
- *  © 2011 SunGard Higher Education.  All Rights Reserved.
+ *  ï¿½ 2011 SunGard Higher Education.  All Rights Reserved.
  *
  *  CONFIDENTIAL BUSINESS INFORMATION
  *
@@ -477,10 +477,10 @@ var ErrorManager = {
     show: function (message) {
         switch(typeof(message)) {
             case 'string':
-                MessageProcessor.processMessage(Messenger.encode(createErrorMessage(message)));
+                Messenger.encode(createErrorMessage(message));
                 break;
             case 'array':
-                MessageProcessor.processMessage(Messenger.encode(createErrorMessage("got an array of error messages")));
+                Messenger.encode(createErrorMessage("got an array of error messages"));
                 break;
             default:
                 break;
