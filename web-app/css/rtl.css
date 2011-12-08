@@ -37,7 +37,7 @@
 .navListStart .parent {	
     background:transparent url(images/arrow-right-gray.png) no-repeat -38px .6em;	
 }	
-.signOutText {	
+.signOutText, .signInText {
 	background: url(images/icon-lock.png) no-repeat scroll 38px center;	
 }	
 .helpText {	
@@ -81,7 +81,7 @@
     background: url("images/callout_arrow.png") no-repeat scroll left 8px transparent;
 }
 
-.signOutText {
+.signOutText, .signInText {
     background: url("images/icon-lock.png") no-repeat scroll right center transparent;
     margin-left: 8px;
     margin-right: 4px;
