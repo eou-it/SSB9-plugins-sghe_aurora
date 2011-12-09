@@ -23,7 +23,7 @@
 	background:url(images/ssb-nav-arrow-sprites.png) no-repeat 0px 0px;	
 }	
 .selectedListItem span {	
-	background: #7FADCA url(images/bp-arrow-right-selected.png) no-repeat -38px .5em;	
+	background: #7FADCA url(images/bp-arrow-right-selected.png) no-repeat -38px 10px;
 }	
 .navList .parent span:hover {	
 	background:#E1EFFD url(images/bp-arrow-right-blue.png) no-repeat -38px 10px;
