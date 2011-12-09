@@ -122,3 +122,8 @@
 #browseButton {
     left: 79px;
 }
+
+#globalNav .globalnav-list-item {
+	font-size:1.1em;
+	padding:0px 5px 0px 0px;
+}
