@@ -103,10 +103,6 @@
     padding-right: 0;
 }
 
-#globalNav li a {
-	padding-left: 16px;
-}
-
 #browseButtonState {
     right: 81px;
 }
@@ -129,4 +125,35 @@
 
 #globalNav .globalnav-list-item {
 	padding:0px 5px 0px 0px;
+}
+
+/** Added **/
+#globalNav li a {
+	padding-left: 0;
+	padding-right: 16px;
+}
+
+#openedItemsButtonState, #toolsButtonState {
+	float: left;
+}
+
+/*#toolsContainer {
+	right: auto;
+}*/
+
+#browseButtonState {
+    right: 4px;
+}
+
+#browseButton {
+    left: auto;
+    right: 25px;
+}
+
+#breadcrumb {
+    padding-left: 0;
+}
+
+.columns {
+    margin-right: -1px;
 }

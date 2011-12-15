@@ -7,9 +7,6 @@ var CookieConstants = {
 	domain: 'sungard.corp'
 };
 
-var cssFiles = ["common-controls.css", "common-platform.css", "rtl.css"];
-
-
 var ApplicationConfig = {
     /**
      * endpoint for application login page
