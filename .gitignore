@@ -25,3 +25,5 @@ plugin.xml
 grails-sghe-aurora*.zip
 stacktrace.log
 **-rtl.css
+plugin.xml
+
