@@ -76,6 +76,14 @@ var ContentManager = {
         if($('meta[name=menuBaseURL]').attr("content")){
            ContentManager.processor = $('meta[name=menuBaseURL]').attr("content") + '/';
         }
+
+        $( '.ui-aurora-tab-button').live('click', function() {
+            BreadCrumb.pushItem( new BreadCrumbValueObject ( $(this).attr("data-aurora-tab-id"), $(this).attr("data-aurora-tab-name"),  "", $(this).attr("data-aurora-tab-menu-id") ) );
+        });
+
+        $( '.ui-aurora-back-button').live('click', function() {
+            BreadCrumb.popItem();
+        });
     },
     /**
      * Instantiates a managed application.
