@@ -1,12 +1,12 @@
 /*********************************************************************************
  Copyright 2009-2011 SunGard Higher Education. All Rights Reserved.
- This copyrighted software contains confidential and proprietary information of 
- SunGard Higher Education and its subsidiaries. Any use of this software is limited 
- solely to SunGard Higher Education licensees, and is further subject to the terms 
- and conditions of one or more written license agreements between SunGard Higher 
+ This copyrighted software contains confidential and proprietary information of
+ SunGard Higher Education and its subsidiaries. Any use of this software is limited
+ solely to SunGard Higher Education licensees, and is further subject to the terms
+ and conditions of one or more written license agreements between SunGard Higher
  Education and the licensee in question. SunGard is either a registered trademark or
  trademark of SunGard Data Systems in the U.S.A. and/or other regions and/or countries.
- Banner and Luminis are either registered trademarks or trademarks of SunGard Higher 
+ Banner and Luminis are either registered trademarks or trademarks of SunGard Higher
  Education in the U.S.A. and/or other regions and/or countries.
  **********************************************************************************/
 
@@ -24,7 +24,7 @@ function stringToDoc(s){
         doc.async = 'false';
         doc.loadXML(s);
     }
-    else 
+    else
         doc = (new DOMParser()).parseFromString(s, 'text/xml');
     return (doc && doc.documentElement &&
     doc.documentElement.tagName !=
@@ -55,7 +55,7 @@ function deparam(s, coerce){
  : coerce_types[d] !== undefined ? coerce_types[d] // true, false, null
  : d; // string
         }
-        
+
         if (typeof query[a] != 'undefined') {
             query[a] += ',' + d;
         }
@@ -63,7 +63,7 @@ function deparam(s, coerce){
             query[a] = d;
         }
     });
-    
+
     return query;
 }
 
@@ -76,9 +76,9 @@ function deparam(s, coerce){
 function truncateText(str, len, truncateWord){
     var TRUNCATION_INDICATOR = "...";
     var originalText = str;
-    
+
     if (originalText.length > len) {
-    
+
         /* Truncate the content of the P, then go back to the end of the
          previous word to ensure that we don't truncate in the middle of
          a word */
@@ -86,7 +86,7 @@ function truncateText(str, len, truncateWord){
         if (typeof(truncateWord) != 'undefined' && truncateWord == true) {
             originalText = originalText.replace(/\w+$/, '');
         }
-        
+
         /* Add an ellipses to the end */
         originalText += TRUNCATION_INDICATOR;
     }
@@ -108,10 +108,10 @@ var Url = {
         }
         return escape(this._utf8_encode(string));
     },
-    
+
     // public method for url decoding
 	/**
-	 * Decodes an UrlEncoded string. Optionally, you can convert '&' to '&amp' by setting the 
+	 * Decodes an UrlEncoded string. Optionally, you can convert '&' to '&amp' by setting the
 	 * <code>convertAmpersand</code> value to <code>true</code>
 	 * @param {String} string
 	 * @param {Boolean} convertAmpersand default <code>true</code>
@@ -124,29 +124,29 @@ var Url = {
 		if(typeof doConvertHTML == 'undefined') {
 			doConvertHTML = true;
 		}
-		
+
 //		var val = '';
 		var val = this._utf8_decode(unescape(string));
-		
+
 		if(doConvertHTML) {
 			val = escapeHTML(val);
 		}
         return val;
     },
-    
+
     // private method for UTF-8 encoding
     _utf8_encode: function(string){
         string = string.replace(/\r\n/g, "\n");
         var utftext = "";
-        
+
         for (var n = 0; n < string.length; n++) {
-        
+
             var c = string.charCodeAt(n);
-            
+
             if (c < 128) {
                 utftext += String.fromCharCode(c);
             }
-            else 
+            else
                 if ((c > 127) && (c < 2048)) {
                     utftext += String.fromCharCode((c >> 6) | 192);
                     utftext += String.fromCharCode((c & 63) | 128);
@@ -156,27 +156,27 @@ var Url = {
                     utftext += String.fromCharCode(((c >> 6) & 63) | 128);
                     utftext += String.fromCharCode((c & 63) | 128);
                 }
-            
+
         }
-        
+
         return utftext;
     },
-    
+
     // private method for UTF-8 decoding
     _utf8_decode: function(utftext){
         var string = "";
         var i = 0;
         var c = c1 = c2 = 0;
-        
+
         while (i < utftext.length) {
-        
+
             c = utftext.charCodeAt(i);
-            
+
             if (c < 128) {
                 string += String.fromCharCode(c);
                 i++;
             }
-            else 
+            else
                 if ((c > 191) && (c < 224)) {
                     c2 = utftext.charCodeAt(i + 1);
                     string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));
@@ -188,9 +188,9 @@ var Url = {
                     string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));
                     i += 3;
                 }
-            
+
         }
-        
+
         return string;
     }
 }
@@ -200,7 +200,7 @@ var Url = {
  */
 function deleteAllCookies(){
     var cookies = document.cookie.split(";");
-    
+
     for (var i = 0; i < cookies.length; i++) {
         var cookie = cookies[i];
         var eqPos = cookie.indexOf("=");
@@ -227,7 +227,7 @@ function getCookie(name){
     return null;
 }
 /**
- * Sets a cookie 
+ * Sets a cookie
  * @param {Object} name
  * @param {Object} value
  */
@@ -236,9 +236,9 @@ function setCookie(name, value){
 
     var date = new Date();
     date.setTime(date.getTime() + (ttl * 60 * 1000));
-    
+
     var expires = "expires=" + date.toGMTString();
-    
+
     document.cookie = name + "=" + value + "; " + expires + "; path=/";
 }
 /**
@@ -258,7 +258,7 @@ var TimeDiff = {
         d = new Date();
         time = d.getTime();
     },
-    
+
     getDiff: function(){
         d = new Date();
         return (d.getTime() - time);
@@ -270,15 +270,15 @@ var TimeDiff = {
  */
 function findPosX(obj){
     var curleft = 0;
-    if (obj.offsetParent) 
+    if (obj.offsetParent)
         while (1) {
             curleft += obj.offsetLeft;
-            if (!obj.offsetParent) 
+            if (!obj.offsetParent)
                 break;
             obj = obj.offsetParent;
         }
-    else 
-        if (obj.x) 
+    else
+        if (obj.x)
             curleft += obj.x;
     return curleft;
 }
@@ -288,15 +288,15 @@ function findPosX(obj){
  */
 function findPosY(obj){
     var curtop = 0;
-    if (obj.offsetParent) 
+    if (obj.offsetParent)
         while (1) {
             curtop += obj.offsetTop;
-            if (!obj.offsetParent) 
+            if (!obj.offsetParent)
                 break;
             obj = obj.offsetParent;
         }
-    else 
-        if (obj.y) 
+    else
+        if (obj.y)
             curtop += obj.y;
     return curtop;
 }
@@ -318,7 +318,7 @@ StylesheetFormatter = {
 	targetWin:this,
     styleSheet: 0,
     sheets: (document.styleSheets) ? document.styleSheets : undefined,
-	
+
 	getSheets:function() {
 		var win = StylesheetFormatter.targetWin;
 		return (win.document.styleSheets) ? win.document.styleSheets : undefined
@@ -328,16 +328,16 @@ StylesheetFormatter = {
      * @param {Object} val
      */
     getCssRules: function(val){
-        if (val == 'undefined') 
+        if (val == 'undefined')
             return this;
-        if (this.getSheets() == 'undefined') 
+        if (this.getSheets() == 'undefined')
             return undefined;
-        
+
         if (typeof val == 'number') {
             this.styleSheet = val;
-            if (val > this.getSheets().length) 
+            if (val > this.getSheets().length)
                 return;
-            
+
             if (jQuery.browser.msie) {
                 return this.getSheets()[val].rules;
             }
@@ -365,17 +365,17 @@ StylesheetFormatter = {
      * @param {Object} val
      */
     getContents: function(val){
-    
-        if (val == 'undefined') 
+
+        if (val == 'undefined')
             return this;
-        if (this.getSheets() == 'undefined') 
+        if (this.getSheets() == 'undefined')
             return undefined;
-        
+
         if (typeof val == 'number') {
             this.styleSheet = val;
-            if (val > this.getSheets().length) 
+            if (val > this.getSheets().length)
                 return;
-            
+
             if (typeof this.getSheets()[val].cssText != 'undefined') {
                 return this.getSheets()[val].cssText;
             }
@@ -395,16 +395,16 @@ StylesheetFormatter = {
 	 * @param {Object} val File name or index of the stylesheet
 	 */
 	getStylesheet: function(val){
-        if (val == 'undefined') 
+        if (val == 'undefined')
             return this;
-        if (this.getSheets() == 'undefined') 
+        if (this.getSheets() == 'undefined')
             return undefined;
-        
+
         if (typeof val == 'number') {
             this.styleSheet = val;
-            if (val > this.getSheets().length) 
+            if (val > this.getSheets().length)
                 return;
-            
+
             if (typeof this.getSheets()[val] != 'undefined') {
                 return this.getSheets()[val];
             }
@@ -420,82 +420,82 @@ StylesheetFormatter = {
         }
     },
     /**
-     * Toggles the styles of a given stylesheet file or id 
+     * Toggles the styles of a given stylesheet file or id
      * @param {Object} file Filename or index of the stylesheet
      */
     toggle: function(file){
-    	
-        var exceptions = ['prefwindow', 'errorwindow', '.browsebutton div', '.browsebutton div div', '.htmlbutton', 
-		'.menu', '.menu div', '.menusmall div', '.items li a', 
-		'.defaultbuttonsmall', '.defaultbuttonsmall div', '.defaultbuttonsmall div div', 
+
+        var exceptions = ['prefwindow', 'errorwindow', '.browsebutton div', '.browsebutton div div', '.htmlbutton',
+		'.menu', '.menu div', '.menusmall div', '.items li a',
+		'.defaultbuttonsmall', '.defaultbuttonsmall div', '.defaultbuttonsmall div div',
 		'.defaultbutton', '.defaultbutton div', '.defaultbutton div div'];
-        
+
 		// for IE
 		if (jQuery.browser.msie) {
 			var stylesheet = this.getStylesheet(file);
-			if (!stylesheet) 
+			if (!stylesheet)
 				return this;
-				
+
 			var set1 = stylesheet.cssText.split('}');
-			
+
 			for( var k=0; k<set1.length; k++ ) {
-				
+
 				var t = trim(set1[k]);
-				if(t == '') 
+				if(t == '')
 				continue;
-				
+
 				var set2 = t.split('{');
 				var selector = trim(set2[0]);
-				if ($.inArray(selector.toLowerCase(), exceptions) > -1) 
+				if ($.inArray(selector.toLowerCase(), exceptions) > -1)
                 continue;
-				
+
 				var props = trim(set2[1]);
-				
+
 				if(props.length == 0)
 				continue;
-				
+
 				var newCssStr = this.toggleStyle(props);
 				set2[1] = newCssStr;
-				
+
 				set1[k] = set2.join('{\n');
 			}
-			
+
 			stylesheet.cssText = set1.join('}\n');
-			
+
 			return;
 		}
-        
+
 		// for Mozilla browsers
-		
+
         var css = this.getCssRules(file);
 		if(!css)
 		return this;
-		
+
         var clen = css.length;
         for (var i = 0; i < clen; i++) {
-        	
+
 			if(!css[i].style)
 			continue;
-			
+
             var style = css[i].style;
             var selector = css[i].selectorText;
-            
-            if ($.inArray(selector.toLowerCase(), exceptions) > -1) 
+
+            if ($.inArray(selector.toLowerCase(), exceptions) > -1)
                 continue;
-            
-			
+
+
 			var cssStr = css[i].style.cssText;
-			
+
 			var newCssStr = this.toggleStyle(cssStr);
-			
+
 			if(jQuery.browser.safari) {
 				newCssStr = newCssStr.replace(/:\s/g, ':')
 			}
-			
+
             css[i].style.cssText = newCssStr;
         }
     },
-	
+
 	/**
 	 * Toggles the style properties for a given style
 	 * @param {Object} str
@@ -505,14 +505,14 @@ StylesheetFormatter = {
         var propStr = '';
         var len = csss.length;
         for (var j = 0; j < len; j++) {
-        
-            if (trim(csss[j]).length == 0) 
+
+            if (trim(csss[j]).length == 0)
                 continue;
-            
+
             var s = trim(csss[j]).split(/\s*:\s*/);
-            
+
 			switch(trim(s[0]).toLowerCase()) {
-				
+
 				case 'float':
 					if (trim(s[1]).toLowerCase() == 'left') {
 	                    s[1] = 'right';
@@ -567,7 +567,7 @@ StylesheetFormatter = {
 				case 'right':
 					s[0] = 'left';
 					break;
-				
+
 				/**
 				 * border-left
 				 */
@@ -580,7 +580,7 @@ StylesheetFormatter = {
 				case 'border-right':
 					s[0] = 'border-left';
 					break;
-					
+
 				/****************************************
 				 * SAFARI SPECIFIC STYLES
 				 ****************************************/
@@ -596,7 +596,7 @@ StylesheetFormatter = {
 				case 'border-right-width':
 					s[0] = 'border-left-width';
 					break;
-					
+
 				/**
 				 * border-left-style
 				 */
@@ -609,7 +609,7 @@ StylesheetFormatter = {
 				case 'border-right-style':
 					s[0] = 'border-left-style';
 					break;
-					
+
 				/**
 				 * border-left-color
 				 */
@@ -622,16 +622,16 @@ StylesheetFormatter = {
 				case 'border-right-color':
 					s[0] = 'border-left-color';
 					break;
-					
+
 				/***************************************/
-				
+
 				default:
 					break;
 			}
-			
+
             propStr += s.join(': ') + ';\n';
         }
-		
+
 		return propStr;
 	}
 };
@@ -671,7 +671,7 @@ function escapeHTML(val) {
  */
 function redrawObject(obj) {
 	if(obj) {
-		$(obj).css('display', 'none'); 
+		$(obj).css('display', 'none');
 		$(obj).css('display', 'block');
 	}
 }
@@ -684,30 +684,30 @@ function getNumber(val) {
 }
 
 var FontResizeDetector = {
-	
+
 	checkDiv: '<div id="checkdiv" style="left:1%;line-height:1;font-family:monospace;width:0px;position:absolute;">&nbsp;</div>',
-	
+
 	stop:false,
-	
+
 	initialize: function() {
 		$("body").prepend(FontResizeDetector.checkDiv);
 		FontResizeDetector.fontCheck(FontResizeDetector.receivechange);
 	},
-	
+
 	fontCheck: function(resultHandler) {
         var checkdiv = document.getElementById("checkdiv");
         var height = checkdiv.offsetHeight;
 		var width = checkdiv.offsetWidth;
 		var left = checkdiv.offsetLeft;
 		var right = checkdiv.offsetRight;
-        
+
         repeat();
         function repeat(){
 			// for some reason, offsetHeight doesn't change in FF (except my browser).
 			// added a check for 'offsetLeft', which is working on other FF browsers I tested in (but not in mine)
-			// a strange case, therefore decided to keep both checks  
+			// a strange case, therefore decided to keep both checks
 			//
-			if (checkdiv.offsetHeight != height || checkdiv.offsetLeft != left 
+			if (checkdiv.offsetHeight != height || checkdiv.offsetLeft != left
 			|| checkdiv.offsetWidth != width) {
 //				alert(checkdiv.offsetLeft +":"+left)
                 height = checkdiv.offsetHeight;
@@ -716,11 +716,11 @@ var FontResizeDetector = {
 				right = checkdiv.offsetRight;
                 resultHandler();
             }
-            if (!FontResizeDetector.stop) 
+            if (!FontResizeDetector.stop)
                 setTimeout(repeat, 500);
         }
 	},
-	
+
 	receivechange: function() {
 		window.location.reload();
 	}
