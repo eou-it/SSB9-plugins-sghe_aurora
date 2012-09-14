@@ -1095,13 +1095,18 @@ a.noButton span {
     text-decoration: none;
     padding: 0px 10px 0;
     color: #666666;
-    cursor: pointer;
+    /* cursor: pointer; */
     line-height: 28px;
 }
 
 .navList span:hover {
     color: #11679D;
     background-color: #E1EFFD;
+}
+
+.navList span a {
+    text-decoration: none;
+    color: #666666;
 }
 
 .selectedListItem span {

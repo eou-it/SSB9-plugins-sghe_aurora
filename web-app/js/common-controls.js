@@ -1772,11 +1772,14 @@ function ScrollableMenuTable(root) {
             } else if (list[x] instanceof NavigationEntryValueObject) {
 
                 if (x != Navigation.nonLeafNavEntryValObjKey) {
+                    var navItem = list[x];
                     var liCaption = this.getCaption(list[x])['caption'];
                     var liTitle = this.getCaption(list[x])['title'];
-                    var liTag = "<li id=\"" + id + "\" class=\"scrollableListItem\" tabindex=\"-1\"  role=\"treeitem\"  aria-level=" + columnIndex + " onclick=\"" + this.scrollableListItemClickHandler(list[x]) + "\">" +
-                    "<span title=\"" + liTitle + "\">"
-                    + liCaption +
+                    var liTag = "<li id=\"" + id + "\" class=\"scrollableListItem\" tabindex=\"-1\"  role=\"treeitem\"  aria-level=" + columnIndex + ">" +
+                    "<span title=\"" + liTitle + "\">" +
+                    "<a href=\"" + navItem.url + "\">" +
+                    liCaption +
+                    "</a>" +
                     "</span>" +
                     "</li>";
 
