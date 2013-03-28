@@ -70,7 +70,9 @@ var ContentManager = {
      * Initializes this class.
      */
     initialize: function() {
-        $( 'body' ).append( "<div id='" + ContentManager.container + "'></div>" );
+        if ( $( '#' + ContentManager.container ).length == 0) {
+            $( 'body' ).append( "<div id='" + ContentManager.container + "'></div>" );
+        }
         ContentManager.calculateContentHeight();
 
         if($('meta[name=menuBaseURL]').attr("content")){
