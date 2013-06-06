@@ -1700,6 +1700,8 @@ function ScrollableMenuTable(root) {
      * Loads list content and populates the next list for a selected list item.
      * @param {Element} item The JQuery element for the selected list item.
      */
+
+
     this.load = function(item) {
         var loc = item.attr('id').replace(this.marker, "").split("_");
         var thisObj = this;
@@ -1758,17 +1760,31 @@ function ScrollableMenuTable(root) {
             var columnIndex = next.parents('.columns:first').index() + 1;
 
             if ((list[x] instanceof Array || list[x]['type'] == 'MENU') && x != Navigation.nonLeafNavEntryValObjKey) {
+
                 var liCaption = this.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['caption'];
                 var liTitle = this.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['title'];
 
-                var node = thisObj.findElement(("<li id='" + id + "' class='parent scrollableListFolder' tabindex='-1'  role='treeitem' aria-expanded='false' aria-level=" + columnIndex + ">" +
-                "<span title=\"" + liTitle + "\">" +
-                liCaption +
-                "</span></li>"));
-                /*if(NavigationRC.navEntry && (NavigationRC.navEntry.menu.indexOf(x) > -1)) {
-                 node.addClass("selectedListItem");
-                 }*/
-                next.append(node);
+                var test = $('<li></li>');
+                test.addClass('parent scrollableListFolder')
+                    .attr('id', id)
+                    .attr('tabindex', '-1')
+                    .attr('role', 'treeitem')
+                    .attr('aria-expanded', 'false')
+                    .attr('aria-level', columnIndex);
+                var span = $('<span></span>');
+                span.attr('title', liTitle);
+                span.text(liCaption);
+                test.append(span);
+                next.append(test);
+
+                //var node = thisObj.findElement(("<li id='" + id + "' class='parent scrollableListFolder' tabindex='-1'  role='treeitem' aria-expanded='false' aria-level=" + columnIndex + ">" +
+                //"<span title=\"" + liTitle + "\">" +
+                //liCaption +
+                //"</span></li>"));
+                ///*if(NavigationRC.navEntry && (NavigationRC.navEntry.menu.indexOf(x) > -1)) {
+                // node.addClass("selectedListItem");
+                // }*/
+                //next.append(node);
             } else if (list[x] instanceof NavigationEntryValueObject) {
 
                 if (x != Navigation.nonLeafNavEntryValObjKey) {
