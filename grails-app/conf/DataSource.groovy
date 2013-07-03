@@ -10,10 +10,10 @@
  Education in the U.S.A. and/or other regions and/or countries.
  **********************************************************************************/
 dataSource {
-    pooled = true
-    driverClassName = "org.hsqldb.jdbcDriver"
-    username = "sa"
-    password = ""
+    //pooled = true
+    //driverClassName = "org.hsqldb.jdbcDriver"
+    //username = "sa"
+    //password = ""
 }
 hibernate {
     cache.use_second_level_cache = true
@@ -24,20 +24,20 @@ hibernate {
 environments {
     development {
         dataSource {
-            dbCreate = "create-drop" // one of 'create', 'create-drop','update'
-            url = "jdbc:hsqldb:mem:devDB"
+//            dbCreate = "create-drop" // one of 'create', 'create-drop','update'
+//            url = "jdbc:hsqldb:mem:devDB"
         }
     }
     test {
         dataSource {
-            dbCreate = "update"
-            url = "jdbc:hsqldb:mem:testDb"
+//            dbCreate = "update"
+//            url = "jdbc:hsqldb:mem:testDb"
         }
     }
     production {
         dataSource {
-            dbCreate = "update"
-            url = "jdbc:hsqldb:file:prodDb;shutdown=true"
+//            dbCreate = "update"
+//            url = "jdbc:hsqldb:file:prodDb;shutdown=true"
         }
     }
 }
