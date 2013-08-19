@@ -654,16 +654,18 @@ function trim(val){
 };
 
 /**
- * Converts ampersand and all HTML tags to character codes
+ * Converts ampersand and all HTML tags to entities.
+ * Does not re-escape well-formed HTML entities.
  * @param {String} val
+ * @test escapeHTML( escapeHTML( '<<&&>>&cent;&#32;&not-entity;' )) == '&lt;&lt;&amp;&amp;&gt;&gt;&cent;&#32;&amp;not-entity;'
  */
 function escapeHTML(val) {
 	if(val == null || typeof val == 'undefined') {
 		return null;
 	}
-	var val = val.replace(/&(?!amp;)/g, '&amp;');
-	val = val.replace(/</, '&lt;');
-	return val.replace(/>/, '&gt;');
+	var val = val.replace(/&(?!#?\w+;)/g, '&amp;');
+	val = val.replace(/</g, '&lt;');
+	return val.replace(/>/g, '&gt;');
 }
 
 /**
