@@ -1,30 +1,6 @@
-/** *****************************************************************************
+/*******************************************************************************
  Copyright 2014 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
-.navArrowLeft {
-	background:url(images/ssb-nav-arrow-menu-sprites.png) no-repeat -54px 0;
-}
-.navArrowRight {
-	background:url(images/ssb-nav-arrow-menu-sprites.png) no-repeat  -36px 0;
-}
-.navArrowLeftDisabled {
-	background:url(images/ssb-nav-arrow-menu-sprites.png) no-repeat -18px 0;
-}
-.navArrowRightDisabled {
-	background:url(images/ssb-nav-arrow-menu-sprites.png) no-repeat 0px 0px;
-}
-.navArrowLeftSmall {
-	background:url(images/ssb-nav-arrow-sprites.png) no-repeat 0px -48px;
-}
-.navArrowRightSmall {
-	background:url(images/ssb-nav-arrow-sprites.png) no-repeat  0px -32px;
-}
-.navArrowLeftSmallDisabled {
-	background:url(images/ssb-nav-arrow-sprites.png) no-repeat 0px -16px;
-}
-.navArrowRightSmallDisabled {
-	background:url(images/ssb-nav-arrow-sprites.png) no-repeat 0px 0px;
-}
 .selectedListItem span {
 	background: #7FADCA url(images/bp-arrow-right-selected.png) no-repeat -38px 10px;
 }
@@ -66,12 +42,6 @@
 }
 .btn-r {
     background:#646464 url(images/bp-horiz-nav-btns.png) no-repeat -1px center;
-}
-.backurl a {
-	background: url(images/backlink_sprites.png) no-repeat -2px -23px;
-}
-.backurl a:hover {
-	background: url(images/backlink_sprites.png) no-repeat -21px -23px;
 }
 .ac_loading {
 	background: white url('images/indicator.gif') left center no-repeat;
@@ -178,4 +148,3 @@
     background:url("images/breadcrumb-selected-left.png") no-repeat scroll 0 1px transparent;
     width:3px;
 }
-

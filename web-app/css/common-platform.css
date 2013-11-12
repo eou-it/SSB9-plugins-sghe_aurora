@@ -225,7 +225,7 @@ body {
 }
 
 #helpWindowControls #helpWindowCloseButton {
-    background: url('images/SUN001_CG_CloseMnIdle.png') no-repeat;
+    background: url('images/sun001_cg_closemnidle.png') no-repeat;
     position: relative;
     display: block;
     top: 7px;
@@ -237,11 +237,11 @@ body {
 }
 
 #helpWindowControls #helpWindowCloseButton:hover {
-    background: url('images/SUN001_CG_CloseMnSelect.png') no-repeat;
+    background: url('images/sun001_cg_closemnselect.png') no-repeat;
 }
 
 #helpWindowControls #helpWindowIcon {
-    background: url('images/SUN001_CG_HelpIndacator.png') no-repeat;
+    background: url('images/sun001_cg_helpindicator.png') no-repeat;
     position: relative;
     display: block;
     float: left;
