@@ -157,3 +157,13 @@
 .columns {
     margin-right: -1px;
 }
+
+.breadcrumb div div .breadCrumbItemArrow.breadCrumbSelectedRight  {
+    background:url("images/breadcrumb-selected-right.png") no-repeat scroll 0 1px transparent;
+    width:6px;
+}
+
+.breadcrumb div div .breadCrumbItemArrow.breadCrumbSelectedLeft  {
+    background:url("images/breadcrumb-selected-left.png") no-repeat scroll 0 1px transparent;
+    width:3px;
+}
