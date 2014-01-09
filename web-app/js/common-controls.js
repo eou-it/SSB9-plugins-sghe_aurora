@@ -384,7 +384,7 @@ function UserControls( options ) {
 
     // add user context
     if (CommonContext.user) {
-        var usrCtx = $("<span id='userIdentityText' class='userIdentityText'>" + CommonContext.user + "</span>");
+        var usrCtx = $("<span id='userIdentityText' tabindex='0' title='" + CommonContext.user + "' class='userIdentityText'>" + CommonContext.user + "</span>");
         usrCtx.css("border-left", "none");
         ControlBar.append(usrCtx);
     }
