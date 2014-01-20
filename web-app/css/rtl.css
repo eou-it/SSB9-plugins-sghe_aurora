@@ -160,3 +160,22 @@
 .columns {
     margin-right: -1px;
 }
+
+.breadcrumb .breadCrumbItemArrow  {
+    transform: scaleX(-1);         /* CSS 3 */
+    -ms-transform: scaleX(-1);     /* Internet Explorer */
+    -moz-transform: scaleX(-1);    /* Firefox */
+    -webkit-transform: scaleX(-1); /* Safari and Chrome */
+    -o-transform: scaleX(-1);      /* Opera */
+}
+
+.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedRight  {
+    background:url("images/breadcrumb-selected-right.png") no-repeat scroll 0 1px transparent;
+    width:6px;
+}
+
+.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedLeft  {
+    background:url("images/breadcrumb-selected-left.png") no-repeat scroll 0 1px transparent;
+    width:3px;
+}
+

@@ -1300,7 +1300,7 @@ a.breadcrumbleaf:link, a.breadcrumbleaf:active, a.breadcrumbleaf:visited {
     background:url("images/breadcrumb-selected-center.png") repeat-x scroll 0 1px transparent;
 }
 
-.breadcrumb div div .breadCrumbItemArrow {
+.breadcrumb .breadCrumbItemArrow {
     background:url("images/breadcrumb-divider.png") no-repeat scroll 0 0 transparent;
     color:#FFFFFF;
     float:left;
