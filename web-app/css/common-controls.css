@@ -1,3 +1,6 @@
+/** *****************************************************************************
+ Copyright 2014 Ellucian Company L.P. and its affiliates.
+ ****************************************************************************** */
 /*
  Updates to this file for IE6 ================================================================
  modified .hover styles to represent a different class altogether to fix bug with class chaining.
@@ -1307,12 +1310,12 @@ a.breadcrumbleaf:link, a.breadcrumbleaf:active, a.breadcrumbleaf:visited {
     width:7px;
 }
 
-.breadcrumb div div .breadCrumbItemArrow.breadCrumbSelectedRight {
+.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedRight {
     background:url("images/breadcrumb-selected-right.png") no-repeat scroll 0 1px transparent;
     width:6px;
 }
 
-.breadcrumb div div .breadCrumbItemArrow.breadCrumbSelectedLeft {
+.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedLeft {
     background:url("images/breadcrumb-selected-left.png") no-repeat scroll 0 1px transparent;
     width:3px;
 }
