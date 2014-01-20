@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2009-2012 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2014 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 /**
@@ -72,12 +72,8 @@ function addNavigationControls() {
     areas.append("<div id='browseButtonState'/>");
 
     var buttonContainer = $("<div id='buttonContainer' />");
-//    buttonContainer.append("<div id='openedItemsButtonState'/>");
     buttonContainer.append("<div id='toolsButtonState'/>");
     areas.append(buttonContainer);
-
-    //areas.append("<div id='toolsButtonState'/>");
-    //areas.append("<div id='openedItemsButtonState'/>");
 
     areas.find('#browseButtonState').append("<div id='homeButton' class='homeButton'>"
         + "<div>"
@@ -184,7 +180,7 @@ function handleBreadCrumbWidth() {
 
 function gotoMainPage() {
     // TODO:  We should be firing an event and allowing the application to handle the event.
-//    return ZkApplication.invoke('shell', 'toHomePage');
+
 }
 
 function closeOpenMenus() {
@@ -673,15 +669,10 @@ var NavigationRC = {
 
         NavigationRC.endpointIndex += 1;
         if (NavigationRC.endpointIndex >= NavigationRC.endpoints.length) {
-//            ErrorManager.show("Unable to preload page specific entries.");
             return false;
         }
         var ep = NavigationRC.endpoints[NavigationRC.endpointIndex];
-        /*var endpoint = window.location.protocol
-         + "//"
-         + window.location.host
-         + ep
-         + "?pageName=" + pageName;*/
+
         var endpoint = Application.getApplicationPath()
             + ep
             + "?pageName=" + pageName;
@@ -701,8 +692,6 @@ var NavigationRC = {
 
     getPageName: function() {
         var loc = window.location.href;
-//        return loc.split('/').pop().split('.').shift();
-//        return loc.substring(loc.indexOf("page=") + 5, loc.length)
         if ( loc.indexOf( "page=" ) != -1 ) {
             return loc.substring( loc.indexOf( "page=" ) + 5, loc.length )
         } else {
@@ -999,10 +988,6 @@ var BreadCrumb = {
 
         BreadCrumb.pushItem(item);
 
-//        code to push items in bulk to demo the rendering of item labels
-//        into folder-icons.
-//        BreadCrumb.bulkInitialize ();
-
     },
 
     addLeaf: function(item) {
@@ -1030,7 +1015,6 @@ var BreadCrumb = {
 
         var itemId = item.id;
         var itemIdSelector = BreadCrumb.escapeId(itemId);
-//        if(itemId.itemId != null) {
         BreadCrumb.UI.find('#' + itemIdSelector).click(function () {
             $.grep(BreadCrumb.items, function (anItem, index) {
                 if (anItem && (anItem.id == itemId)) {
@@ -1054,7 +1038,6 @@ var BreadCrumb = {
                 }
             });
         });
-//        }
     },
 
     getUsedWidth: function () {
@@ -1076,8 +1059,6 @@ var BreadCrumb = {
             BreadCrumb.UI.find('#' + itemIdSelector).parent().removeClass('folderIcon');
         });
 
-//        var buttonContainerwidth = $(document).width() - $('#buttonContainer').offset().left ;
-//        $('#browseButtonState').css('right',buttonContainerwidth);
         //starting from the beginning, converting into folder icons, if the displayed width
         // is more than the allowed width.
         var breadCrumbWidth = BreadCrumb.UI.find('#breadcrumbHeader').width();
@@ -1122,7 +1103,6 @@ var BreadCrumb = {
     },
 
     clear: function () {
-//        BreadCrumb.UI.find('.breadCrumbItem').remove();
 
         BreadCrumb.removeAllBreadCrumbItems();
 
@@ -1140,9 +1120,6 @@ var BreadCrumb = {
 
         var itemId = item.id;
 
-//        $('.breadCrumbSelectedRight').removeClass('breadCrumbSelectedRight');
-//        $('.breadCrumbSelectedLeft').removeClass('breadCrumbSelectedLeft');
-//        $('.breadCrumbSelected').removeClass('breadCrumbSelected');
         BreadCrumb.removeHighlight();
 
         var s = BreadCrumb.UI.find('.breadcrumbButton').filter(
@@ -1582,7 +1559,6 @@ function ScrollableMenuTable(root) {
             if (this.initialized == true) {
                 this.initialized = false;
 
-//       $('.navList > .scrollableListFolder').live('click', function() { ScrollableList.load($(this)); });
 
                 if (this.selectedListItem) {
                     this.load(this.selectedListItem);
@@ -1635,13 +1611,6 @@ function ScrollableMenuTable(root) {
                         + "<div id='columnsContainer' role='group'><div id='columnsContainerTrack' role='presentation'/></div>"
                     );
 
-                    // commented; because horizontal scroll should cover the header too.
-//                this.findElement('#columnsContainer').append(""
-//                        + "<div class='columns header'>"
-//                        + "<div class='scrollContainer'>"
-//                        + "<ul class='navList navListStart'></ul>"
-//                        + "</div>"
-//                        + "</div>");
 
                     this.findElement('#scrollableListContainer').append(""
                         + "<div id='btn-r' class='btn-r' role='presentation'/>"
@@ -1722,8 +1691,6 @@ function ScrollableMenuTable(root) {
 
             next.css("top", "0");
 
-//        item.parent().find("li").removeClass("selectedListItem");
-//        item.addClass("selectedListItem");
             this.selectedItem(item.attr('id'));
 
             var list = Navigation.menuList;
@@ -1741,11 +1708,9 @@ function ScrollableMenuTable(root) {
                     continue;
                 }
 
-                //&& (NavigationRC.pathList.length == 0 || $.inArray(list[x].name, NavigationRC.pathList) > -1)
                 if (list[x].path == "null.zul" && x != Navigation.nonLeafNavEntryValObjKey) {
                     var name = list[x].name;
                     this.loadFromService(item, name);
-                    //return;
                 }
 
                 var id = item.attr('id') + "_" + x;
@@ -1769,14 +1734,7 @@ function ScrollableMenuTable(root) {
                     test.append(span);
                     next.append(test);
 
-                    //var node = thisObj.findElement(("<li id='" + id + "' class='parent scrollableListFolder' tabindex='-1'  role='treeitem' aria-expanded='false' aria-level=" + columnIndex + ">" +
-                    //"<span title=\"" + liTitle + "\">" +
-                    //liCaption +
-                    //"</span></li>"));
-                    ///*if(NavigationRC.navEntry && (NavigationRC.navEntry.menu.indexOf(x) > -1)) {
-                    // node.addClass("selectedListItem");
-                    // }*/
-                    //next.append(node);
+
                 } else if (list[x] instanceof NavigationEntryValueObject) {
 
                     if (x != Navigation.nonLeafNavEntryValObjKey) {
@@ -1804,14 +1762,7 @@ function ScrollableMenuTable(root) {
             scrollContainer.removeClass('loader');
             scrollContainer.find('li:first').focus();
             this.refresh();
-            /*if(NavigationRC.pathList.length > 0) {
-             var bcName = loc.pop();
-             var breadCrumbItem = new BreadCrumbValueObject(bcName, bcName, '', item.attr('id') + "_" + bcName);
-             BreadCrumb.insertItem(loc.length, breadCrumbItem);
-             }*/
-//        var bcName = loc.pop();
-//        var breadCrumbItem = new BreadCrumbValueObject(bcName, bcName, '');
-//        BreadCrumb.insertItem(loc.length, breadCrumbItem);
+
             EventDispatcher
                 .dispatchEvent(this.events.click, item.attr('id'));
 
@@ -2121,23 +2072,7 @@ function ScrollableMenuTable(root) {
             }
         },
 
-        /*getNavigationEntry: function(list, id) {
-         var val = null;
-         if(list[id] != null) {
-         val = list[id];
-         } else {
-         for(var x in list) {
-         var res = null;
-         if(list[x] instanceof Array)
-         res = this.getNavigationEntry(list[x], id);
-         if(res != null)
-         val = res;
-         }
-         }
-         return val;
-         },
 
-         */
         this.getPath = function(list, id, path) {
             if (path == null)
                 path = '';
@@ -2206,24 +2141,7 @@ var ToolsMenu = {
         this.dropDown.find("#toolsCanvas").append("<ul/>")
         this.canvas = this.dropDown.find("#toolsCanvas ul");
 
-        // test data -----------------------------------------------------
-//        this.addSection( "sec1", "section 1" );
-//        this.addSection( "sec2", "section 2" );
 
-//        this.addItem( "item1", "Item 1", null, function() {
-//            console.log( 'item 1 clicked' )
-//        } );
-//        this.addItem( "item2", "Item 2", null, function( e ) {
-//            console.log( e.target )
-//        } );
-//
-//        var myItem = this.addItem( "item3", "Item 3", null );
-//        myItem.click( function( e ) {
-//            console.log( "click event handled separately." + e.target );
-//        } );
-//
-//        this.addItem( "item4", "Item 4" );
-        // -----------------------------------------------------
     },
 
     /**
