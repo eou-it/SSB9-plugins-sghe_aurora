@@ -493,7 +493,7 @@ var Footer = {
         + "<div id='footerApplicationBar'>"
         + "<ul id='footerIconContainer'></ul>"
         + "<span class='footerBrandingLogo'></span>"
-        + "<div id='footerAppContainer'"
+        + "<div id='footerAppContainer'>"
         + "</div>"
         + "</div>"
         + "</div>"
