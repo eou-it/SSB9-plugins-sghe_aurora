@@ -1,51 +1,66 @@
 /*******************************************************************************
- Copyright 2014 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2014 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
 .selectedListItem span {
-	background: #7FADCA url(images/bp-arrow-right-selected.png) no-repeat -38px 10px;
+    background: #7FADCA url(images/bp-arrow-right-selected.png) no-repeat -38px 10px;
 }
+
 .navList .parent span:hover {
-	background:#E1EFFD url(images/bp-arrow-right-blue.png) no-repeat -38px 10px;
+    background: #E1EFFD url(images/bp-arrow-right-blue.png) no-repeat -38px 10px;
 }
+
 .parent {
-    background:transparent url(images/arrow-right-gray.png) no-repeat -38px 10px;
+    background: transparent url(images/arrow-right-gray.png) no-repeat -38px 10px;
 }
+
 .navListStart .parent span:hover {
-    background:#999 url(images/bp-arrow-right-selected.png) no-repeat -38px .6em;
+    background: #999 url(images/bp-arrow-right-selected.png) no-repeat -38px .6em;
 }
+
 .navListStart .parent {
-    background:transparent url(images/arrow-right-gray.png) no-repeat -38px .6em;
+    background: transparent url(images/arrow-right-gray.png) no-repeat -38px .6em;
 }
+
 .signOutText, .signInText {
-	background: url(images/icon-lock.png) no-repeat scroll 38px center;
+    background: url(images/icon-lock.png) no-repeat scroll 38px center;
 }
+
 .helpText {
-	background:transparent url(images/icon-help.png) no-repeat scroll 36px center
+    background: transparent url(images/icon-help.png) no-repeat scroll 36px center
 }
+
 #globalNav li a.preferenceText {
-	background:url("images/gear_icon.png") no-repeat 43px center;
+    background: url("images/gear_icon.png") no-repeat 43px center;
 }
+
 .htmlButtonLevel2-3 h3 {
-	background:url(images/level-2-nav-arrow-down.png) no-repeat 10px center;
+    background: url(images/level-2-nav-arrow-down.png) no-repeat 10px center;
 }
+
 .htmlButtonLevel2-3.selected h3 {
-	background:url(images/level-2-nav-arrow-up.png) no-repeat 10px center;
+    background: url(images/level-2-nav-arrow-up.png) no-repeat 10px center;
 }
+
 .items h3 {
-	background:url(images/square-bullet-6x6-blue.png) no-repeat right 10px;
+    background: url(images/square-bullet-6x6-blue.png) no-repeat right 10px;
 }
+
 #footerLinks li {
-	background:url(images/square-bullet-6x6-blue.png) no-repeat left center;
+    background: url(images/square-bullet-6x6-blue.png) no-repeat left center;
 }
+
 .btn-l {
-    background:#646464 url(images/bp-horiz-nav-btns.png) no-repeat -18px center;
+    background: #646464 url(images/bp-horiz-nav-btns.png) no-repeat -18px center;
 }
+
 .btn-r {
-    background:#646464 url(images/bp-horiz-nav-btns.png) no-repeat -1px center;
+    background: #646464 url(images/bp-horiz-nav-btns.png) no-repeat -1px center;
 }
+
 .ac_loading {
-	background: white url('images/indicator.gif') left center no-repeat;
+    background: white url('images/indicator.gif') left center no-repeat;
 }
+
 .headerButtonDownArrow:link, .headerButtonDownArrow:active, .headerButtonDownArrow:visited {
     background: url("images/crumbarrow_down.png") no-repeat scroll left 10px transparent;
 }
@@ -80,8 +95,8 @@
     right: 81px;
 }
 
-#menuArrow{
-    background:url("images/header-composite-button-sprites-rtl.png") no-repeat scroll right 0px transparent !important;
+#menuArrow {
+    background: url("images/header-composite-button-sprites-rtl.png") no-repeat scroll right 0px transparent !important;
 }
 
 #menuArrow:hover {
@@ -93,26 +108,23 @@
 }
 
 #globalNav {
-    font-size:1.2em;
+    font-size: 1.2em;
 }
 
 #globalNav .globalnav-list-item {
-	padding:0px 5px 0px 0px;
+    padding: 0px 5px 0px 0px;
 }
 
 /** Added **/
 #globalNav li a {
-	padding-left: 0;
-	padding-right: 16px;
+    padding-left: 0;
+    padding-right: 16px;
 }
 
 #openedItemsButtonState, #toolsButtonState {
-	float: left;
+    float: left;
 }
 
-/*#toolsContainer {
-	right: auto;
-}*/
 
 #browseButtonState {
     right: 4px;
@@ -124,27 +136,27 @@
 }
 
 #breadcrumb {
-    margin-left : 8px;
+    margin-left: 8px;
 }
 
 .columns {
     margin-right: -1px;
 }
 
-.breadcrumb .breadCrumbItemArrow  {
-    transform: scaleX(-1);         /* CSS 3 */
-    -ms-transform: scaleX(-1);     /* Internet Explorer */
-    -moz-transform: scaleX(-1);    /* Firefox */
+.breadcrumb .breadCrumbItemArrow {
+    transform: scaleX(-1); /* CSS 3 */
+    -ms-transform: scaleX(-1); /* Internet Explorer */
+    -moz-transform: scaleX(-1); /* Firefox */
     -webkit-transform: scaleX(-1); /* Safari and Chrome */
-    -o-transform: scaleX(-1);      /* Opera */
+    -o-transform: scaleX(-1); /* Opera */
 }
 
-.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedRight  {
-    background:url("images/breadcrumb-selected-right.png") no-repeat scroll 0 1px transparent;
-    width:6px;
+.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedRight {
+    background: url("images/breadcrumb-selected-right.png") no-repeat scroll 0 1px transparent;
+    width: 6px;
 }
 
-.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedLeft  {
-    background:url("images/breadcrumb-selected-left.png") no-repeat scroll 0 1px transparent;
-    width:3px;
+.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedLeft {
+    background: url("images/breadcrumb-selected-left.png") no-repeat scroll 0 1px transparent;
+    width: 3px;
 }

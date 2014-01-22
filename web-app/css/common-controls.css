@@ -1,5 +1,5 @@
 /** *****************************************************************************
- Copyright 2014 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2014 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
 /*
  Updates to this file for IE6 ================================================================
@@ -410,39 +410,6 @@
     padding: 5px 20px;
 }
 
-/*.workspaceDivider {
-    position: relative;
-    float: left;
-    height: 35px;
-    width: 1px;
-    background-color: #CC3300;
-    display: none;
-}
-
-#addWorkspaceButton {
-    position: relative;
-    float: left;
-    display: none;
-    margin: 5px 0px 0px 10px;
-}
-
-#addWorkspaceButtonLeft {
-    position: relative;
-    float: left;
-    display: block;
-    background: url('images/areas_add_button_left.png') no-repeat;
-    width: 4px;
-    height: 20px;
-}
-
-#addWorkspaceButtonRight {
-    position: relative;
-    float: left;
-    display: block;
-    background: url('images/areas_add_button_right.png') no-repeat;
-    width: 4px;
-    height: 20px;
-}*/
 
 #browseMenuContainer {
     position: absolute;
@@ -475,27 +442,12 @@
 
 #browseButton {
     position: absolute;
-    /*
-        margin-left:10px;
-    */
-    /*margin-right:0px;*/
-    /*padding-left:4px;*/
-    /*
-        width: 80%;
-    */
     left: 66px;
-/*	right: 210px;*/
-    /*width: 45px;*/
-/*text-align: left;*/
     background-position: 0px 0px;
     z-index:1;
 }
-#browseButton div {
-    /*background-position: right 0px;*/
-}
-#browseButton div div {
-    /*background-position: 0px -24px;*/
-}
+
+
 /* used in browse menu, while the scrollable list is calculating the height of the invisible navList containers */
 .visibility {
     /* using display:none will not allow us to get the height of the container.
@@ -528,30 +480,15 @@
 }
 
 .browseButton {
-    /*background:url(images/header-composite-button-sprites.png) no-repeat  0px 0px;*/
-    /*height:24px;*/
-
-    /*
-        float:left;
-    */
     cursor:pointer;
     white-space: nowrap;
 }
 
 .browseButton div {
-    /*background:url(images/header-composite-button-sprites.png) no-repeat right 0px;*/
     height:24px;
-    /*padding-right:23px;*/
 }
 
 .browseButton div div {
-    /*background:url(images/header-composite-button-sprites.png) repeat-x 0px -24px;*/
-/*color:#fff;*/
-    /*
-        font-size:0.98em;
-    */
-/*text-align:center;*/
-/*line-height: 24px;*/
     padding:0px 5px;
 }
 .menuWrap{
@@ -566,49 +503,31 @@
     right:15px;
     top:0px;
 }
-.menuWrap:hover #menuArrow{
-    /*background-position:right 40px!important;*/
-}
+
 
 #menuArrow:hover {
     background: transparent url("images/header-composite-button-sprites.png") no-repeat scroll 100% -48px !important;
-    /*color: #FFF;*/
 }
 
 .browseButtonDownArrow:link, .browseButtonDownArrow:active, .browseButtonDownArrow:visited {
-    /*background: url("images/home-button-icon.png") no-repeat 0 6px;*/
     display: block;
-/*color: #FFF;*/
-/*font: bold 11.3px Arial, Tahoma, sans-serif;*/
-    /*padding: 10px;*/
-/*text-align: left;*/
-/*text-decoration: none;*/
 }
 
-.browseButtonDownArrow:hover {
-    /*background: url("images/home-button-icon.png") no-repeat 0 6px;*/
-/*color: #FFF;*/
-}
 
 .browseTab {
-    /*background:url(images/header-composite-button-sprites.png) no-repeat  0px -24px;*/
     height:24px;
     margin-left:0px;
     margin-right:0px;
-    /*padding-left:4px;*/
     float:left;
     cursor:pointer;
     white-space: nowrap;
 }
 
 .browseTab div {
-    /*background:url(images/header-composite-button-sprites.png) no-repeat right -24px;*/
     height:24px;
-    /*padding-right:20px;*/
 }
 
 .browseTab div div {
-    /*background:url(images/header-composite-button-sprites.png) repeat-x 0px -72px;*/
     color:#fff;
     text-align:center;
     line-height: 24px;
@@ -616,24 +535,14 @@
 }
 
 .browseTab .upArrow:link, .browseTab .upArrow:active, .browseTab .upArrow:visited {
-    /*background: url("images/home-button-icon.png") no-repeat 0 6px;*/
     display: block;
     padding: 0;
-/*color: #fff;*/
-/*font: bold 0.7em Tahoma, sans-serif;*/
-    /*padding: 10px;*/
-/*text-align: left;*/
-/*text-decoration: none;*/
 }
 /* other header buttons */
 
 .headerButton {
     background:url(images/header-button-sprites.png) no-repeat left 0px;
     height:24px;
-
-    /*
-        float:left;
-    */
     cursor:pointer;
     white-space: nowrap;
 }
@@ -648,9 +557,6 @@
 .headerButton div div {
     background:url(images/header-button-sprites.png) repeat-x 0px -24px;
     color:#fff;
-    /*
-        font-size:0.98em;
-    */
     text-align:center;
     line-height: 24px;
     padding:0px 5px;
@@ -692,9 +598,6 @@
     left: 0px;
     margin: 0 0 0 15px;
     z-index: 999;
-    /*
-     background: url('images/browse_menu_icon_full_new_bottom.png') no-repeat;
-     */
     width: 86px;
     height: 12px;
     cursor: pointer;
@@ -707,37 +610,22 @@
     left: 0px;
     margin: 0 0 0 15px;
     z-index: 999;
-    /*
-     background: url('images/browse_menu_icon_full_new_bottom_hover.png') no-repeat;
-     */
     width: 86px;
     height: 12px;
     cursor: pointer;
 }
 
-/*
- #browseButtonBottom.open {
- background: url('images/browse_menu_icon_full_new_bottom_open.png') no-repeat;
- }
-
- #browseButtonBottom.open.hover {
- background: url('images/browse_menu_icon_full_new_bottom_open_hover.png') no-repeat;
- }
- */
 
 /* opened items */
 
 #openedButton, #toolsButton {
     margin-left:0px;
-    /*width: 85px;*/
 }
 
 #openedItemsContainer {
     position: absolute;
     top: 75px;
     z-index: 1501;
-    /*width: 100%;*/
-    /*left: 300px;*/
     right: 99px;
     width: 50%;
 }
@@ -757,13 +645,11 @@
 }
 
 #openedItemsButtonState, #toolsButtonState {
-    /*background:none repeat scroll 0 0 #333333;*/
     border:1px solid transparent;
     float:left;
     height:33px;
     margin:0 0 0 -2px;
     padding:5px 5px 0px;
-    /*width:85px;*/
     -moz-border-radius: 4px 4px 0 0;
     -webkit-border-radius: 4px 4px 0 0;
 }
@@ -780,8 +666,6 @@
     position: absolute;
     top: 75px;
     z-index: 1000;
-    /*width: 100%;*/
-    /*left: 300px;*/
     right: 5px;
     width: 250px;
     left: auto;
@@ -898,8 +782,6 @@
     height: 100%;   /* 268px */
     width: 100%;
     background: #ffffff;
-    /*background: url('images/bp-extender-bg.png') repeat-x left -124px #ffffff;*/
-
 }
 
 #columnsContainer {
@@ -938,11 +820,6 @@
     display: none;
 }
 
-.scrollableListItem, .scrollableListFolder {
-    /*
-     font: normal .75em Tahoma, Geneva, sans-serif;
-     */
-}
 
 .upButton {
     display: none;  /*block*/
@@ -1070,17 +947,6 @@ a.noButton span {
     background: transparent url('images/arrow-right-gray.png') no-repeat 170px .6em;
 }
 
-.header {
-    /*
-        background: #fff url('images/bp-background.png') repeat-x bottom left;
-        border-right: 1px #7FADCA solid;
-        padding-top: 14px;
-        padding-bottom: 14px;
-        position: relative;
-        z-index: 3000;
-    */
-}
-
 /* default list style */
 .navList {
     list-style: none;
@@ -1157,12 +1023,6 @@ div[id=mainMenuContainer] .navList .parent:focus span {
 }
 
 #searchBox {
-    /*position: relative;*/
-    /*float: right;*/
-    /*top: 10px;*/
-    /*right: -10px;*/
-    /*width: 370px;*/
-    /*height: 25px;*/
     padding: 10px;
 }
 
@@ -1175,7 +1035,6 @@ div[id=mainMenuContainer] .navList .parent:focus span {
 }
 
 #searchBox span.findicon {
-/*background:url("images/icon-search-glass.png") no-repeat scroll left 5px transparent;*/
     background-image:url("images/search_icon_header.png");
     background-repeat: no-repeat;
     background-color: transparent;
@@ -1201,23 +1060,18 @@ div[id=mainMenuContainer] .navList .parent:focus span {
 #searchButton {
     float: right;
     background: url('images/search_submit_button.png') no-repeat;
-    /*width: 22px;*/
     height: 22px;
     color: #fff;
     text-decoration:underline;
 }
 
 #searchButton:hover {
-    /*float: left;*/
     background: url('images/search_submit_button_hover.png') no-repeat;
-    /*width: 22px;*/
     height: 22px;
 }
 
 #searchButton:active {
-    /*float: left;*/
     background: url('images/search_submit_button.png') no-repeat;
-    /*width: 22px;*/
     height: 22px;
 }
 
@@ -1325,35 +1179,20 @@ a.breadcrumbleaf:link, a.breadcrumbleaf:active, a.breadcrumbleaf:visited {
 #homeButton {
     left: 5px;
     position: absolute;
-    /*width: 50px;*/
     margin-right:0px;
-    /*background-position: 0px 0px;*/
 }
-#homeButton div {
-    /*background-position: right 0px;*/
-}
+
+
 #homeButton div div {
     background-position: 0px -24px;
 }
 
 
 .homeButton {
-    /*background:url(images/header-composite-button-sprites.png) no-repeat  0px 0px;*/
-    /*height:24px;*/
     cursor:pointer;
     white-space: nowrap;
 }
 
-.homeButton div {
-    /*background:url(images/header-composite-button-sprites.png) no-repeat right 0px;*/
-    /*height:24px;*/
-    /*padding-right:20px;*/
-}
-
-.homeButton div div {
-    /*background:url(images/header-composite-button-sprites.png) repeat-x 0px -24px;*/
-    /*padding:0px 5px;*/
-}
 
 .homeButtonDownArrow {
     display: block;
