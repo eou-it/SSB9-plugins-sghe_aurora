@@ -431,12 +431,11 @@
     border: 1px #13689E solid;
     border-top: none;
     background: #477b9c;
-	/*width:100%;*/
-	-moz-border-radius: 0 0 4px 4px;
-	-webkit-border-radius: 0 0 4px 4px;
-	box-shadow:2px 2px 2px #999999;
-	-moz-box-shadow:2px 2px 2px #999999;
-	-webkit-box-shadow:2px 2px 2px #999999;
+    -moz-border-radius: 0 0 4px 4px;
+    -webkit-border-radius: 0 0 4px 4px;
+    box-shadow: 2px 2px 2px #999999;
+    -moz-box-shadow: 2px 2px 2px #999999;
+    -webkit-box-shadow: 2px 2px 2px #999999;
 
 }
 
@@ -964,7 +963,6 @@ a.noButton span {
     text-decoration: none;
     padding: 0px 10px 0;
     color: #666666;
-    /* cursor: pointer; */
     line-height: 28px;
 }
 
@@ -985,7 +983,6 @@ a.noButton span {
 
 .selectedListPage span {
     color: #fff;
-    /*background: #7FADCA url('images/bp-arrow-right-selected.png') no-repeat 180px 10px;*/
     background-color: #7FADCA;
 }
 
