@@ -151,6 +151,11 @@
     -o-transform: scaleX(-1); /* Opera */
 }
 
+.ie8 .breadcrumb .breadCrumbItemArrow {
+    filter: FlipH; /* IE 8 */
+    -ms-filter: "FlipH"; /* IE 8 */
+}
+
 .breadcrumb .breadCrumbItemArrow.breadCrumbSelectedRight {
     background: url("images/breadcrumb-selected-right.png") no-repeat scroll 0 1px transparent;
     width: 6px;
