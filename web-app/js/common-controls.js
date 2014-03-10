@@ -53,6 +53,10 @@ function Button(id, label, callback, type) {
     return b;
 }
 
+function SkipLink() {
+    var skipText = ResourceManager.getString("skip_link_text");
+    return $("<a href='#maincontent' style='position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;'>" + skipText + "</a>");
+}
 /**
  * @author jmiller
  */
@@ -74,7 +78,6 @@ function InstitutionalBranding() {
 
 
 function addNavigationControls() {
-
     var areas = $('#areas');
 
     areas.append("<div id='browseButtonState'/>");
@@ -164,6 +167,7 @@ function addNavigationControls() {
     });
 
     // Add the localized strings
+
     $('#homeButton').attr("title", ResourceManager.getString("areas_label_home_shortcut"));
     $('#menuArrow, #breadcrumb').attr("title", ResourceManager.getString("areas_label_browse_shortcut"));
     $('#openedButton').attr("title", ResourceManager.getString("areas_label_opened_shortcut"));
@@ -2307,7 +2311,8 @@ var ToolsMenu = {
  */
 var ControlBar = {
 
-    node: $("<div id='globalNav'>"
+    node: $(
+      "<div id='globalNav'>"
     + "<div>"
     + "<ul class='globalnav-list'>"
     + "</ul>"
