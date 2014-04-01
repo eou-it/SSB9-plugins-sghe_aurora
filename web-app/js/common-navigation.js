@@ -1,14 +1,6 @@
 /*********************************************************************************
- Copyright 2009-2011 SunGard Higher Education. All Rights Reserved.
- This copyrighted software contains confidential and proprietary information of
- SunGard Higher Education and its subsidiaries. Any use of this software is limited
- solely to SunGard Higher Education licensees, and is further subject to the terms
- and conditions of one or more written license agreements between SunGard Higher
- Education and the licensee in question. SunGard is either a registered trademark or
- trademark of SunGard Data Systems in the U.S.A. and/or other regions and/or countries.
- Banner and Luminis are either registered trademarks or trademarks of SunGard Higher
- Education in the U.S.A. and/or other regions and/or countries.
- **********************************************************************************/
+ Copyright 2009-2014 Ellucian Company L.P. and its affiliates.
+ *********************************************************************************/
 
 /**
  * @class The class for holding the context for each individual managed application. <br>
@@ -83,7 +75,7 @@ var ContentManager = {
             BreadCrumb.pushItem( new BreadCrumbValueObject ( $(this).attr("data-aurora-tab-id"), $(this).attr("data-aurora-tab-name"),  "", $(this).attr("data-aurora-tab-menu-id") ) );
         });
 
-        $( '.ui-aurora-back-button').live('click', function() {
+        $( '.ui-aurora-back-button').live("click touchstart", function() {
             BreadCrumb.popItem();
         });
     },
