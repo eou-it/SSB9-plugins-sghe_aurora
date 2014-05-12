@@ -1708,7 +1708,7 @@ function ScrollableMenuTable(root) {
                     continue;
                 }
 
-                if (list[x].path == "null.zul" && x != Navigation.nonLeafNavEntryValObjKey) {
+                if ((list[x].path == "null.zul" || list[x].path == "null") && x != Navigation.nonLeafNavEntryValObjKey) {
                     var name = list[x].name;
                     this.loadFromService(item, name);
                 }
