@@ -13,6 +13,12 @@
  *
  * @author jmiller
  */
+
+function SkipLink() {
+    var skipText = ResourceManager.getString("skip_link_text");
+    return $("<a href='#maincontent' style='position:absolute; left:-10000px; top:auto; width:1px; height:1px; overflow:hidden;'>" + skipText + "</a>");
+}
+
 function Button(id, label, callback, type) {
     if (typeof(type) == "undefined") {
         type = "";
