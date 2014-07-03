@@ -1060,7 +1060,7 @@ var Navigation = {
                 var endpoint = Application.getApplicationPath()
                     + ep;
             }
-            endpoint = endpoint + "?menuName=" + navEntry.form + "&menu="+ navEntry.menu + "/" + navEntry.name + "&seq=" + navEntry.id;
+            endpoint = endpoint + "?menuName=" + navEntry.form + "&menu="+ encodeURIComponent(navEntry.menu) + "/" + encodeURIComponent(navEntry.name) + "&seq=" + navEntry.id;
 
             Navigation.removeNavigationEntry( navEntry.name );
 //            Navigation.parentMenu = navEntry;
