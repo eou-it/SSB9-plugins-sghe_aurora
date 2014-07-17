@@ -111,8 +111,8 @@ function addNavigationControls() {
         + "</div>");
 
     $('#browseMenuContainer').prepend("<div id='browseMenu' role='tree'>"
-        + "<div class='browseMenuShadow' role='presentation'>"
-        + "<div id='scrollableListContainer'  role='presentation'></div>"
+        + "<div class='browseMenuShadow'>"
+        + "<div id='scrollableListContainer'></div>"
         + "</div>"
         + "</div>"
         + "<span id='browseButtonBottom' class='browseButton'></span>");
@@ -1008,10 +1008,10 @@ var BreadCrumb = {
 
     drawItem: function (item) {
         var cHeader = BreadCrumb.UI.find('#breadcrumbHeader');
-        cHeader.append("<div class='breadCrumbItemBody' role='presentation'>"
+        cHeader.append("<div class='breadCrumbItemBody'>"
             + "<a id='" + item.id + "' class='breadcrumbButton' href='javascript:void(0)' role='option'></a>"
             + "</div>");
-        cHeader.append("<div class='breadCrumbItemArrow' role='presentation'></div>");
+        cHeader.append("<div class='breadCrumbItemArrow'></div>");
 
         var itemId = item.id;
         var itemIdSelector = BreadCrumb.escapeId(itemId);
@@ -1605,15 +1605,15 @@ function ScrollableMenuTable(root) {
             for (var x = 0; x < count; x++) {
                 if (x == 0) {
                     this.findElement('#scrollableListContainer').append(""
-                        + "<div id='btn-l' class='btn-l' role='presentation'/>"
+                        + "<div id='btn-l' class='btn-l' />"
                     );
                     this.findElement('#scrollableListContainer').append(""
-                        + "<div id='columnsContainer' role='group'><div id='columnsContainerTrack' role='presentation'/></div>"
+                        + "<div id='columnsContainer' role='group'><div id='columnsContainerTrack' /></div>"
                     );
 
 
                     this.findElement('#scrollableListContainer').append(""
-                        + "<div id='btn-r' class='btn-r' role='presentation'/>"
+                        + "<div id='btn-r' class='btn-r' />"
                     );
 
                 } else {
@@ -1626,23 +1626,23 @@ function ScrollableMenuTable(root) {
      */
         this.addColumn = function() {
             var mainMenuSep = (this.findElement('#columnsContainerTrack').parents("#mainMenuContainer").length > 0)
-                ? "<div class='mainpage-column-sep' role='presentation'></div>"
+                ? "<div class='mainpage-column-sep' ></div>"
                 : "";
 
             this.findElement('#columnsContainerTrack').append(""
-                + "<div class='columns' role='presentation'>"
-                + "<span class='scrollUpButton' role='presentation'></span>"
-                + "<div class='scrollContainer' role='presentation'>"
+                + "<div class='columns' >"
+                + "<span class='scrollUpButton' ></span>"
+                + "<div class='scrollContainer' >"
                 + "<ul class='navList' role='group'></ul>"
                 + mainMenuSep
                 + "</div>"
-                + "<span class='scrollDownButton' role='presentation'></span>"
+                + "<span class='scrollDownButton' ></span>"
                 + "</div>");
 
             this.numColumns++;
             var columnWidth = this.findElement('#columnsContainerTrack').find('.columns:last').width();
             this.findElement('#columnsContainerTrack').css('width', ((this.numColumns * columnWidth) + this.numColumns) + 'px');
-            this.findElement('#columnsContainerTrack').find(' > .columns:first ul.navList:first').attr('role', 'presentation');
+
 
             this.setScrollButtonStates();
         },
