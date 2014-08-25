@@ -94,27 +94,8 @@ var CommonPlatform = {
  * @author jmiller
  */
 var Authenticator = {
+	
 	/**
-	 * @private
-	 *
-	 * The service endpoint for workspace persistence.
-	 * @type String
-	 */
-	endpoints : {
-		index :-1,
-		authorize : [ "xml/authorization.xml",
-				"/magellan/xml/authorization.xml",
-				"/magellan-ws/resources/authorization/:udcid" ]
-
-	},
-	/**
-	 * Associated events.
-	 */
-	events : {
-		authorizationComplete :"authorizationComplete"
-	},
-
-    /**
 	 * Gets user details by inspecting meta tags in HTML.
 	 */
 	authenticateUser : function() {
