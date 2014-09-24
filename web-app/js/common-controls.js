@@ -400,9 +400,9 @@ function UserControls( options ) {
         CommonContext.user = null;
 
         if ($(this).hasClass('signInText')) {
-            window.location = ApplicationConfig.loginEndpoint;
+            window.location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
         } else {
-            window.location = ApplicationConfig.logoutEndpoint;
+            window.location = $('meta[name=logoutEndpoint]').attr("content") || ApplicationConfig.logoutEndpoint;
         }
     });
 
