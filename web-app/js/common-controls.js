@@ -394,7 +394,7 @@ function UserControls( options ) {
         + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>");
 
     var guestSignInLink
-    if(!CommonContext.user) {
+    if(!CommonContext.user && "true" == $('meta[name=guestLoginEnabled]').attr("content")) {
         guestSignInLink = $("<a id='guestSignInText' class='signInText pointer'>"
             + ResourceManager.getString("guestuserdetails_signin") + "</a>");
         ControlBar.append(guestSignInLink);
