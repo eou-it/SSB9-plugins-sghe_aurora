@@ -1205,3 +1205,9 @@ a.breadcrumbleaf:link, a.breadcrumbleaf:active, a.breadcrumbleaf:visited {
     background: url("images/btn-header-sprite.png") no-repeat 0 0;
 }
 
+.offscreen {
+    position: absolute;
+    left: -200em;
+    top: -20em;
+}
+
