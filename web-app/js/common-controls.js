@@ -394,6 +394,19 @@ function UserControls( options ) {
     var signInOutLink = $("<a id='signOutText' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer'>"
         + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>");
 
+    var guestSignInLink
+    if(!CommonContext.user && "true" == $('meta[name=guestLoginEnabled]').attr("content")) {
+        guestSignInLink = $("<a id='guestSignInText' class='signInText pointer'>"
+            + ResourceManager.getString("guestuserdetails_signin") + "</a>");
+        ControlBar.append(guestSignInLink);
+        guestSignInLink.click(function () {
+            // set CommonContext.user to null before removing the cookie
+            if ($(this).hasClass('signInText')) {
+                window.location = ApplicationConfig.loginEndpoint;
+            }
+        });
+    }
+
     ControlBar.append(signInOutLink);
 
     signInOutLink.click(function() {
@@ -401,11 +414,12 @@ function UserControls( options ) {
         CommonContext.user = null;
 
         if ($(this).hasClass('signInText')) {
-            window.location = ApplicationConfig.loginEndpoint;
+            window.location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
         } else {
-            window.location = ApplicationConfig.logoutEndpoint;
+            window.location = $('meta[name=logoutEndpoint]').attr("content") || ApplicationConfig.logoutEndpoint;
         }
     });
+
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
         var helpLink = $("<a id='helpText' class='helpText pointer'>" + ResourceManager.getString("userdetails_help") + "</a>");
