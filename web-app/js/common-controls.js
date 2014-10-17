@@ -153,12 +153,11 @@ function addNavigationControls() {
         });
 
     // Add the localized strings
-    var browseShortCut = ResourceManager.getString("areas_label_browse_title") + getEol() + ResourceManager.getString("areas_label_browse_shortcut")
-    var homeShortCut = ResourceManager.getString("areas_label_home_title") + getEol() + ResourceManager.getString("areas_label_browse_shortcut")
+
     $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
     $('#homeArrow').attr("alt", ResourceManager.getString("areas_label_home_description"));
-    $('#homeButton').attr("title", homeShortCut);
-    $('#browseButton').attr("title",browseShortCut);
+    $('#homeButton').attr("title", ResourceManager.getString("areas_label_home_shortcut"));
+    $('#browseButton').attr("title",ResourceManager.getString("areas_label_browse_shortcut"));
     $('#breadcrumb').attr("title", ResourceManager.getString("areas_label_browse_shortcut"));
     $('#openedButton').attr("title", ResourceManager.getString("areas_label_opened_shortcut"));
     $('#openedButton').find('div div a').text(ResourceManager.getString("areas_label_opened"));
