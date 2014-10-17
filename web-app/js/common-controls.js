@@ -89,7 +89,7 @@ function addNavigationControls() {
         + "<a id='browseArrow' class='browseButtonDownArrow' href='javascript:void(0)' tabindex='-1' ></a>"
         + "</div>"
         + "<label id='browseMenuDesc' class='offscreen'>"+ResourceManager.getString("areas_label_browse_description") +"</label>"
-        + "<div id='menuArrow' aria-labelledby='browseMenuDesc' tabindex='0'></div>"
+        + "<div id='menuArrow' aria-describedby='browseMenuDesc' tabindex='0'></div>"
         + "</div>"
         + "</div>");
 
