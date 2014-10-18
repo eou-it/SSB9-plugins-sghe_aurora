@@ -60,7 +60,7 @@ function Header() {
 }
 
 function InstitutionalBranding() {
-    return $("<a href='#' id='branding' tabindex='0' target='_parent'><span class='institutionalBranding'></span></a>");
+    return $("<a href='#' target='_parent'><span class='institutionalBranding'></span></a>");
     /* href link was ealier "/banner/" */
 }
 
@@ -78,7 +78,7 @@ function addNavigationControls() {
     areas.find('#browseButtonState').append("<div id='homeButton' class='homeButton'>"
         + "<div>"
         + "<div>"
-        + "<a id='homeArrow' class='homeButtonDownArrow'  href='javascript:void(0)'></a>"
+        + "<a id='homeArrow' class='homeButtonDownArrow' href='javascript:void(0)'></a>"
         + "</div>"
         + "</div>"
         + "</div>");
@@ -88,8 +88,7 @@ function addNavigationControls() {
         + "<div>"
         + "<a id='browseArrow' class='browseButtonDownArrow' href='javascript:void(0)' tabindex='-1' ></a>"
         + "</div>"
-        + "<label id='browseMenuDesc' class='offscreen'>"+ResourceManager.getString("areas_label_browse_description") +"</label>"
-        + "<div id='menuArrow' aria-describedby='browseMenuDesc' tabindex='0'></div>"
+        + "<div id='menuArrow' tabindex='0'></div>"
         + "</div>"
         + "</div>");
 
@@ -153,12 +152,8 @@ function addNavigationControls() {
         });
 
     // Add the localized strings
-
-    $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
-    $('#homeArrow').attr("alt", ResourceManager.getString("areas_label_home_description"));
     $('#homeButton').attr("title", ResourceManager.getString("areas_label_home_shortcut"));
-    $('#browseButton').attr("title",ResourceManager.getString("areas_label_browse_shortcut"));
-    $('#breadcrumb').attr("title", ResourceManager.getString("areas_label_browse_shortcut"));
+    $('#menuArrow, #breadcrumb').attr("title", ResourceManager.getString("areas_label_browse_shortcut"));
     $('#openedButton').attr("title", ResourceManager.getString("areas_label_opened_shortcut"));
     $('#openedButton').find('div div a').text(ResourceManager.getString("areas_label_opened"));
     $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
