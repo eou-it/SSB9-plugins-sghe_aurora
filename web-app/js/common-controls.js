@@ -67,7 +67,7 @@ function Header() {
 }
 
 function InstitutionalBranding() {
-    return $("<a href='#' target='_parent'><span class='institutionalBranding'></span></a>");
+    return $("<a href='#' id='branding' tabindex='0' target='_parent'><span class='institutionalBranding'></span></a>");
     /* href link was ealier "/banner/" */
 }
 
@@ -85,7 +85,7 @@ function addNavigationControls() {
     areas.find('#browseButtonState').append("<div id='homeButton' class='homeButton'>"
         + "<div>"
         + "<div>"
-        + "<a id='homeArrow' class='homeButtonDownArrow' href='javascript:void(0)'></a>"
+        + "<a id='homeArrow' class='homeButtonDownArrow'  href='javascript:void(0)'></a>"
         + "</div>"
         + "</div>"
         + "</div>");
@@ -95,7 +95,8 @@ function addNavigationControls() {
         + "<div>"
         + "<a id='browseArrow' class='browseButtonDownArrow' href='javascript:void(0)' tabindex='-1' ></a>"
         + "</div>"
-        + "<div id='menuArrow' tabindex='0'></div>"
+        + "<label id='browseMenuDesc' class='offscreen'>"+ResourceManager.getString("areas_label_browse_description") +"</label>"
+        + "<div id='menuArrow' aria-labelledby='browseMenuDesc' tabindex='0'></div>"
         + "</div>"
         + "</div>");
 
@@ -159,8 +160,13 @@ function addNavigationControls() {
         });
 
     // Add the localized strings
-    $('#homeButton').attr("title", ResourceManager.getString("areas_label_home_shortcut"));
-    $('#menuArrow, #breadcrumb').attr("title", ResourceManager.getString("areas_label_browse_shortcut"));
+    var browseShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
+    var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_browse_shortcut"));
+    $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
+    $('#homeArrow').attr("alt", ResourceManager.getString("areas_label_home_description"));
+    $('#homeButton').attr("title", homeShortCut);
+    $('#browseButton').attr("title",browseShortCut);
+    $('#breadcrumb').attr("title", ResourceManager.getString("areas_label_browse_shortcut"));
     $('#openedButton').attr("title", ResourceManager.getString("areas_label_opened_shortcut"));
     $('#openedButton').find('div div a').text(ResourceManager.getString("areas_label_opened"));
     $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
@@ -170,6 +176,19 @@ function addNavigationControls() {
 
 
     ToolsMenu.initialize();
+
+    var shortcuts = [
+        'shift+home', function() {
+            // click the first link in the home div.
+            // just $().click() doesn't work as the element is not an input
+            $('#homeButton a')[0].click();
+        },
+        'alt+m', toggleBrowseMenu
+        ];
+    $('#openedButton').is(':visible') && shortcuts.push( 'alt+g', toggleOpenedItems );
+    $('#openedButton').is(':visible') && shortcuts.push( 'alt+l', toggleToolsMenu );
+
+    key && key.bind.apply( window, shortcuts );
 }
 function handleBreadCrumbWidth() {
     // set the width of breadcrumb
@@ -1494,7 +1513,7 @@ function ScrollableMenuTable(root) {
                 var hasClassHeader = $(this).parents('.columns:first').hasClass('header');
                 var prevColumnInColCont = $(this).parents('.columns:first').prev('.columns');
                 var listContainer = $(this).parents('.#scrollableListContainer:first');
-                var mainPageFlag = jq(e.target).parents('#mainMenuContainer:first').length;
+                var mainPageFlag = $(e.target).parents('#mainMenuContainer:first').length;
                 $('#browseButtonState').addClass("over");
                 $('#browseMenu').addClass("over");
                 switch (code) {
