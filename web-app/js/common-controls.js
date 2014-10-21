@@ -176,6 +176,19 @@ function addNavigationControls() {
 
 
     ToolsMenu.initialize();
+
+    var shortcuts = [
+        'shift+home', function() {
+            // click the first link in the home div.
+            // just $().click() doesn't work as the element is not an input
+            $('#homeButton a')[0].click();
+        },
+        'alt+m', toggleBrowseMenu
+        ];
+    $('#openedButton').is(':visible') && shortcuts.push( 'alt+g', toggleOpenedItems );
+    $('#openedButton').is(':visible') && shortcuts.push( 'alt+l', toggleToolsMenu );
+
+    key && key.bind.apply( window, shortcuts );
 }
 function handleBreadCrumbWidth() {
     // set the width of breadcrumb
@@ -1500,7 +1513,7 @@ function ScrollableMenuTable(root) {
                 var hasClassHeader = $(this).parents('.columns:first').hasClass('header');
                 var prevColumnInColCont = $(this).parents('.columns:first').prev('.columns');
                 var listContainer = $(this).parents('.#scrollableListContainer:first');
-                var mainPageFlag = jq(e.target).parents('#mainMenuContainer:first').length;
+                var mainPageFlag = $(e.target).parents('#mainMenuContainer:first').length;
                 $('#browseButtonState').addClass("over");
                 $('#browseMenu').addClass("over");
                 switch (code) {
