@@ -60,29 +60,30 @@ var CommonPlatform = {
 
                 Localization.initialize(options.langDir);
 
-			//Initialize header
-			if (options.header && typeof(options.header) == 'boolean' && options.header || options.header == null) {
-                                $('body').prepend(Header().prepend(InstitutionalBranding()).prepend(UserControls( options ))).prepend(SkipLink( ));
+				//Initialize header
+				if (options.header && typeof(options.header) == 'boolean' && options.header || options.header == null) {
+					$('body').prepend(Header().prepend(InstitutionalBranding()).prepend(UserControls( options )));
 
-				if (options.globalNav && typeof (options.globalNav) == 'boolean' && options.globalNav || options.globalNav == null) {
-				    addNavigationControls();
-                                    Navigation.initialize(scrollableList);
-                                    scrollableList.initialize();
-                                    BreadCrumb.initialize();
+					if (options.globalNav && typeof (options.globalNav) == 'boolean' && options.globalNav || options.globalNav == null) {
+						addNavigationControls();
+                        Navigation.initialize(scrollableList);
+                        scrollableList.initialize();
+                        BreadCrumb.initialize();
+					}
+
 				}
 
+				ContentManager.initialize();
+
+
+				//In initialize footer
+				if (options.footer && typeof (options.footer) == 'boolean' && options.footer || options.footer == null) {
+					Footer.initialize();
+					OpenItems.initialize();
+				}
+
+				ContentManager.calculateContentHeight();
 			}
-			ContentManager.initialize();
-
-
-			//In initialize footer
-			if (options.footer && typeof (options.footer) == 'boolean' && options.footer || options.footer == null) {
-				Footer.initialize();
-				OpenItems.initialize();
-			}
-
-			ContentManager.calculateContentHeight();
-		}
             // dispatch event after a small delay
             setTimeout("EventDispatcher.dispatchEvent(Application.events.initialized)", 10);
 		}
