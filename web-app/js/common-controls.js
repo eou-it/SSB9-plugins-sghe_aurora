@@ -404,8 +404,15 @@ function UserControls( options ) {
         });
     }
 
-    var signInOutLink = $("<a id='signOutText' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer'>"
-        + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>");
+    var signInOutLink = $("<a id='signOutText' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
+        + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>").keydown(function(e) {
+            if (e.keyCode == 13 || e.keyCode == 32) {
+                e.preventDefault();
+                e.stopPropagation();
+                $(e.target).click();
+            }
+        });
+
 
     var guestSignInLink
     if(!CommonContext.user && "true" == $('meta[name=guestLoginEnabled]').attr("content")) {
