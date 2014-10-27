@@ -154,7 +154,7 @@ function addNavigationControls() {
 
     // Add the localized strings
     var browseShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
-    var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_browse_shortcut"));
+    var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_home_shortcut"));
     $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
     $('#homeArrow').attr("alt", ResourceManager.getString("areas_label_home_description"));
     $('#homeButton').attr("title", homeShortCut);
