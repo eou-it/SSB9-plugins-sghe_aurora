@@ -60,7 +60,7 @@ function Header() {
 }
 
 function InstitutionalBranding() {
-    return $("<a href='#' id='branding' tabindex='0' target='_parent'><span class='institutionalBranding'></span></a>");
+    return $("<a href='#' id='branding' target='_parent' class='institutionalBranding'></a>");
     /* href link was ealier "/banner/" */
 }
 
