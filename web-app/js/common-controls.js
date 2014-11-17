@@ -153,6 +153,11 @@ function addNavigationControls() {
         });
 
     // Add the localized strings
+    if(CommonContext.user){
+        var signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signout"), ResourceManager.getString("userdetails_signout_shortCut"));
+        $('#signOutDiv').attr("title",signOutShortCut);
+    }
+
     var browseShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
     var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_home_shortcut"));
     $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
@@ -385,6 +390,10 @@ function toggleToolsMenu() {
     return false;
 }
 
+function removeSignin(){
+    $("#signOutDiv").parent().remove();
+}
+
 function UserControls( options ) {
 
     ControlBar.initialize();
@@ -404,7 +413,7 @@ function UserControls( options ) {
         });
     }
 
-    var signInOutLink = $("<a id='signOutText' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
+    var signInOutLink = $("<span id='signOutShortCut' class='offscreen'>"+ ResourceManager.getString("userdetails_signout_description") + "</span><a  id='signOutText' aria-describedBy='" + (CommonContext.user ? 'signOutShortCut' : '') +"'  href='#' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
         + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>").keydown(function(e) {
             if (e.keyCode == 13 || e.keyCode == 32) {
                 e.preventDefault();
@@ -427,7 +436,11 @@ function UserControls( options ) {
         });
     }
 
-    ControlBar.append(signInOutLink);
+
+
+    var signOutWrapperdiv = $("<div></div>").append(signInOutLink);
+    var signOutDiv = $("<div id='signOutDiv' tabindex='-1'></div>").append(signOutWrapperdiv)
+    ControlBar.append(signOutDiv);
 
     signInOutLink.click(function() {
         // set CommonContext.user to null before removing the cookie
