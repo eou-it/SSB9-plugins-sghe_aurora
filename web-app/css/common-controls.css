@@ -1207,7 +1207,6 @@ a.breadcrumbleaf:link, a.breadcrumbleaf:active, a.breadcrumbleaf:visited {
 
 .offscreen {
     position: absolute;
-    right: auto;
     left: -200em;
     right: auto;
     top: -20em;
