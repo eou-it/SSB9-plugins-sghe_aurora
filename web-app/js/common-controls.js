@@ -432,7 +432,7 @@ function UserControls( options ) {
         signOut();
     });
 
-    signInOutLink.click(function() {
+    signInOutLink.click(function(e) {
         e.preventDefault();
         e.stopPropagation();
         signOut();
