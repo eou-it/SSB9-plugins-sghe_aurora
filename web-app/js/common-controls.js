@@ -181,7 +181,8 @@ function addNavigationControls() {
             // just $().click() doesn't work as the element is not an input
             $('#homeButton a')[0].click();
         },
-        'alt+m', toggleBrowseMenu
+        'alt+m', toggleBrowseMenu,
+        'ctrl+shift+F', signOut
         ];
     $('#openedButton').is(':visible') && shortcuts.push( 'alt+g', toggleOpenedItems );
     $('#openedButton').is(':visible') && shortcuts.push( 'alt+l', toggleToolsMenu );
@@ -394,6 +395,17 @@ function removeSignin(){
     $("#signOutDiv").parent().remove();
 }
 
+function signOut(){
+    // set CommonContext.user to null before removing the cookie
+    CommonContext.user = null;
+
+    if ($('#signOutText').hasClass('signInText')) {
+        window.location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
+    } else {
+        window.location = $('meta[name=logoutEndpoint]').attr("content") || ApplicationConfig.logoutEndpoint;
+    }
+}
+
 function UserControls( options ) {
 
     ControlBar.initialize();
@@ -414,14 +426,11 @@ function UserControls( options ) {
     }
 
     var signInOutLink = $("<span id='signOutShortCut' class='offscreen'>"+ ResourceManager.getString("userdetails_signout_description") + "</span><a  id='signOutText' aria-describedBy='" + (CommonContext.user ? 'signOutShortCut' : '') +"'  href='#' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
-        + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>").keydown(function(e) {
-            if (e.keyCode == 13 || e.keyCode == 32) {
-                e.preventDefault();
-                e.stopPropagation();
-                $(e.target).click();
-            }
-        });
+        + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>")
 
+    signInOutLink.click(function() {
+        signOut();
+    });
 
     var guestSignInLink
     if(!CommonContext.user && "true" == $('meta[name=guestLoginEnabled]').attr("content")) {
@@ -441,18 +450,6 @@ function UserControls( options ) {
     var signOutWrapperdiv = $("<div></div>").append(signInOutLink);
     var signOutDiv = $("<div id='signOutDiv' tabindex='-1'></div>").append(signOutWrapperdiv)
     ControlBar.append(signOutDiv);
-
-    signInOutLink.click(function() {
-        // set CommonContext.user to null before removing the cookie
-        CommonContext.user = null;
-
-        if ($(this).hasClass('signInText')) {
-            window.location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
-        } else {
-            window.location = $('meta[name=logoutEndpoint]').attr("content") || ApplicationConfig.logoutEndpoint;
-        }
-    });
-
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
         var helpLink = $("<a id='helpText' class='helpText pointer'>" + ResourceManager.getString("userdetails_help") + "</a>");
