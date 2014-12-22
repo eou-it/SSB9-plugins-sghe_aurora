@@ -427,9 +427,11 @@ function UserControls( options ) {
 
     var signInOutLink = $("<span id='signOutShortCut' class='offscreen'>"+ ResourceManager.getString("userdetails_signout_description") + "</span><a  id='signOutText' aria-describedBy='" + (CommonContext.user ? 'signOutShortCut' : '') +"'  href='#' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
         + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>").keydown(function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        signOut();
+        if (e.keyCode == 13 || e.keyCode == 32) {
+            e.preventDefault();
+            e.stopPropagation();
+            signOut();
+        }
     });
 
     signInOutLink.click(function(e) {
