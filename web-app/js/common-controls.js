@@ -153,10 +153,14 @@ function addNavigationControls() {
         });
 
     // Add the localized strings
+    var signOutShortCut
     if(CommonContext.user){
-        var signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signout"), ResourceManager.getString("userdetails_signout_shortCut"));
-        $('#signOutDiv').attr("title",signOutShortCut);
+        signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signout"), ResourceManager.getString("userdetails_signout_shortCut"));
+
+    }else{
+        signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signin"), ResourceManager.getString("userdetails_signout_shortCut"));
     }
+    $('#signOutDiv').attr("title",signOutShortCut);
 
     var browseShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
     var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_home_shortcut"));
@@ -425,7 +429,7 @@ function UserControls( options ) {
         });
     }
 
-    var signInOutLink = $("<span id='signOutShortCut' class='offscreen'>"+ ResourceManager.getString("userdetails_signout_description") + "</span><a  id='signOutText' aria-describedBy='" + (CommonContext.user ? 'signOutShortCut' : '') +"'  href='#' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
+    var signInOutLink = $("<span id='signOutShortCut' class='offscreen'>"+ ResourceManager.getString("userdetails_signout_description") + "</span><a  id='signOutText' aria-describedBy='signOutShortCut'  href='#' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
         + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>").keydown(function(e){
         if (e.keyCode == 13 || e.keyCode == 32) {
             e.preventDefault();
