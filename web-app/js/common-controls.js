@@ -186,13 +186,19 @@ function addNavigationControls() {
             $('#homeButton a')[0].click();
         },
         'alt+m', toggleBrowseMenu,
-        'ctrl+shift+F', signOut
+        'ctrl+shift+F', signOut,
+        'alt+n', toggleNotificationCenter
         ];
     $('#openedButton').is(':visible') && shortcuts.push( 'alt+g', toggleOpenedItems );
     $('#openedButton').is(':visible') && shortcuts.push( 'alt+l', toggleToolsMenu );
 
     key && key.bind.apply( window, shortcuts );
 }
+
+function toggleNotificationCenter(){
+    window.notificationCenter.toggle();
+}
+
 function handleBreadCrumbWidth() {
     // set the width of breadcrumb
     var dir = Localization.getLangDirection();
