@@ -558,7 +558,12 @@ var Navigation = {
                 if(!BreadCrumb.initialized) {
                     if($('meta[name=menuDefaultBreadcrumbId]').attr("content")){
                         var menuDefaultBreadcrumbId = $('meta[name=menuDefaultBreadcrumbId]').attr("content");
-                        scrollableList.setFullBreadCrumb(menuDefaultBreadcrumbId);
+                        if(isDesktop() || isTablet()){
+                            scrollableList.setFullBreadCrumb(menuDefaultBreadcrumbId);
+                        }
+                        else if(isMobile()){
+                            scrollableList.setBreadCrumb(menuDefaultBreadcrumbId);
+                        }
                     }
                 }
             }

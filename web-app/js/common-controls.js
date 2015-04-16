@@ -69,30 +69,6 @@ function addNavigationControls() {
 
     var areas = $('#areas');
 
-    areas.append("<div id='browseButtonState'/>");
-
-    var buttonContainer = $("<div id='buttonContainer' />");
-    buttonContainer.append("<div id='toolsButtonState'/>");
-    areas.append(buttonContainer);
-
-    areas.find('#browseButtonState').append("<div id='homeButton' class='homeButton'>"
-        + "<div>"
-        + "<div>"
-        + "<a id='homeArrow' class='homeButtonDownArrow'  href='javascript:void(0)'></a>"
-        + "</div>"
-        + "</div>"
-        + "</div>");
-
-    areas.find('#browseButtonState').append("<div id='browseButton' class='browseButton'>"
-        + "<div class='menuWrap'>"
-        + "<div>"
-        + "<a id='browseArrow' class='browseButtonDownArrow' href='javascript:void(0)' tabindex='-1' ></a>"
-        + "</div>"
-        + "<label id='browseMenuDesc' class='offscreen'>"+ ResourceManager.getString("areas_label_browse_description") +"</label>"
-        + "<div id='menuArrow' role='button' aria-labelledby='browseMenuDesc' tabindex='0'></div>"
-        + "</div>"
-        + "</div>");
-
     BreadCrumb.create();
 
     areas.find('#toolsButtonState').append("<div id='toolsButton' class='headerButton'>"
@@ -152,6 +128,7 @@ function addNavigationControls() {
             $(this).children().children().css("background-position", "0px 0px");
         });
 
+    areas.append("<div id='titlePanel'></div>");
     // Add the localized strings
     var signOutShortCut
     if(CommonContext.user){
@@ -174,9 +151,6 @@ function addNavigationControls() {
     $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
     $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
 
-    handleBreadCrumbWidth();
-
-
     ToolsMenu.initialize();
 
     var shortcuts = [
@@ -197,20 +171,6 @@ function addNavigationControls() {
 
 function toggleNotificationCenter(){
     window.notificationCenter.toggle();
-}
-
-function handleBreadCrumbWidth() {
-    // set the width of breadcrumb
-    var dir = Localization.getLangDirection();
-    if (dir == "ltr") {
-        var buttonContainerwidth = $(document).width() - $('#buttonContainer').offset().left;
-        $('#browseButtonState').css('right', buttonContainerwidth);
-        $('#browseButtonState').css('left', '');
-    } else {
-        var buttonContainerwidth = ($('#buttonContainer').width() + $('#buttonContainer').offset().left);
-        $('#browseButtonState').css('left', buttonContainerwidth);
-        $('#browseButtonState').css('right', '');
-    }
 }
 
 function gotoMainPage() {
@@ -913,11 +873,9 @@ var BreadCrumb = {
 
     items: [],
 
-    UI: $("<div id='breadcrumb' class='breadcrumb'>"
-        + "<div>"
-        + "<div id='breadcrumbHeader' role='listbox'>"
-        + "</div>"
-        + "</div>"
+    UI: $("<div id='breadcrumbContainer'>"
+        + "<ul id='breadcrumbHeader' role='listbox'>"
+        + "</ul>"
         + "</div>"),
 
     currentIndex: -1,
@@ -931,7 +889,7 @@ var BreadCrumb = {
     },
 
     create: function () {
-        $('#areas > #browseButtonState').append(BreadCrumb.UI);
+        $('#areas').append(BreadCrumb.UI);
     },
 
     initialized: false,
@@ -942,10 +900,8 @@ var BreadCrumb = {
 
         EventDispatcher.addEventListener(scrollableList.events.click,
             function(id) {
-                BreadCrumb.removeHighlight();
                 $.each(BreadCrumb.items, function() {
                     if (this.itemId == id) {
-                        BreadCrumb.highlightItem(this)
 //                      return false;
                     }
                 });
@@ -965,12 +921,10 @@ var BreadCrumb = {
         BreadCrumb.drawItem(item);
         BreadCrumb.items.push(item);
         BreadCrumb.currentIndex = BreadCrumb.items.length - 1;
-        BreadCrumb.highlightItem(BreadCrumb.items[BreadCrumb.currentIndex]);
         if (BreadCrumb.currentIndex > 0) {
             BreadCrumb.setTabIndex(item);
         }
-        BreadCrumb.initializeKeyboardShortcuts(BreadCrumb.escapeId(item.id))
-        BreadCrumb.redraw();
+        BreadCrumb.initializeKeyboardShortcuts(BreadCrumb.escapeId(item.id));
     },
     setTabIndex: function(item) {
         /* added to support keyboard navigation support*/
@@ -1016,30 +970,7 @@ var BreadCrumb = {
         });
 
     },
-    myClick:function(itemId) {
 
-        $.grep(BreadCrumb.items, function (anItem, index) {
-            if (anItem && (anItem.id == itemId)) {
-                BreadCrumb.currentIndex = index;
-                BreadCrumb.highlightItem(anItem);
-                BreadCrumb.redraw();
-
-                var loc = anItem.itemId.replace(scrollableList.marker, "").split("_");
-                NavigationRC.pathList = loc;
-                NavigationRC.doInitialLoad();
-
-                if ($('#browseMenu').is(':hidden'))
-                    BreadCrumb.openBrowseMenu();
-
-                EventDispatcher
-                    .dispatchEvent(BreadCrumb.events.click, anItem.itemId);
-
-                return true;
-            } else {
-                return false;
-            }
-        });
-    },
     insertItem: function(zero_based_index, item) {
         //insertItem cannot use to add items by leaving
         // empty items in between.
@@ -1076,36 +1007,9 @@ var BreadCrumb = {
 
     drawItem: function (item) {
         var cHeader = BreadCrumb.UI.find('#breadcrumbHeader');
-        cHeader.append("<div class='breadCrumbItemBody'>"
-            + "<a id='" + item.id + "' class='breadcrumbButton' href='javascript:void(0)' role='option'></a>"
-            + "</div>");
-        cHeader.append("<div class='breadCrumbItemArrow'></div>");
+        var breadcrumbItem = "<li><a class='breadcrumbButton' href='#'>"+item.caption+"</a></li>";
 
-        var itemId = item.id;
-        var itemIdSelector = BreadCrumb.escapeId(itemId);
-        BreadCrumb.UI.find('#' + itemIdSelector).click(function () {
-            $.grep(BreadCrumb.items, function (anItem, index) {
-                if (anItem && (anItem.id == itemId)) {
-                    BreadCrumb.currentIndex = index;
-                    BreadCrumb.highlightItem(anItem);
-                    BreadCrumb.redraw();
-
-                    var loc = item.itemId.replace(scrollableList.marker, "").split("_");
-                    NavigationRC.pathList = loc;
-                    NavigationRC.doInitialLoad();
-
-                    if (scrollableList.findElement('#browseMenu').is(':hidden'))
-                        BreadCrumb.openBrowseMenu();
-
-                    EventDispatcher
-                        .dispatchEvent(BreadCrumb.events.click, item.itemId);
-
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-        });
+        cHeader.append(breadcrumbItem);
     },
 
     getUsedWidth: function () {
@@ -1119,49 +1023,10 @@ var BreadCrumb = {
         return usedWidth;
     },
 
-    redraw: function () {
-        //initializing with original labels for the items
-        $(BreadCrumb.items).each(function (index) {
-            var itemIdSelector = BreadCrumb.escapeId(BreadCrumb.items[index].id);
-            BreadCrumb.UI.find('#' + itemIdSelector).text(BreadCrumb.items[index].caption);
-            BreadCrumb.UI.find('#' + itemIdSelector).parent().removeClass('folderIcon');
-        });
-
-        //starting from the beginning, converting into folder icons, if the displayed width
-        // is more than the allowed width.
-        var breadCrumbWidth = BreadCrumb.UI.find('#breadcrumbHeader').width();
-        var cumBreadCrumbWidth = BreadCrumb.getUsedWidth();
-        $(BreadCrumb.items).each(function (index) {
-            if (cumBreadCrumbWidth >= breadCrumbWidth) {
-                //currently highlighted item always should display original label
-                if (index != BreadCrumb.currentIndex) {
-                    var itemIdSelector = BreadCrumb.escapeId(BreadCrumb.items[index].id);
-                    var link = BreadCrumb.UI.find('#' + itemIdSelector);
-                    var body = $(link).parent();
-
-                    //Decrementing the width taken by the to-be-made-folder-icon item
-                    cumBreadCrumbWidth -= $(body).outerWidth() + $(body).next('.breadCrumbItemArrow').outerWidth();
-
-                    $(link).text("");
-                    $(body).addClass('folderIcon');
-
-                    //Incrementing the width taken by the folder-icon-made item
-                    cumBreadCrumbWidth += $(body).outerWidth() + $(body).next('.breadCrumbItemArrow').outerWidth();
-                }
-            }
-        });
-    },
-
-    removeBreadCrumbItem: function () {
-        BreadCrumb.UI.find('.breadCrumbItemBody').last().remove();
-        BreadCrumb.UI.find('.breadCrumbItemArrow').last().remove();
-    },
-
     popItem: function () {
         BreadCrumb.removeBreadCrumbItem();
         BreadCrumb.items.pop();
         BreadCrumb.currentIndex = BreadCrumb.items.length - 1;
-        BreadCrumb.highlightItem(BreadCrumb.items[BreadCrumb.currentIndex]);
         BreadCrumb.redraw();
     },
 
@@ -1180,29 +1045,6 @@ var BreadCrumb = {
 
     browseToActiveItem: function () {
 
-    },
-
-    highlightItem: function (item) {
-        if (item == undefined)
-            return;
-
-        var itemId = item.id;
-
-        BreadCrumb.removeHighlight();
-
-        var s = BreadCrumb.UI.find('.breadcrumbButton').filter(
-            function (index) {
-                return $(this).attr("id") == itemId;
-            }).parent();
-        s.addClass('breadCrumbSelected');
-        $(s).next('.breadCrumbItemArrow').addClass('breadCrumbSelectedRight');
-        $(s).prev('.breadCrumbItemArrow').addClass('breadCrumbSelectedLeft');
-    },
-
-    removeHighlight: function() {
-        BreadCrumb.UI.find('.breadCrumbSelectedRight').removeClass('breadCrumbSelectedRight');
-        BreadCrumb.UI.find('.breadCrumbSelectedLeft').removeClass('breadCrumbSelectedLeft');
-        BreadCrumb.UI.find('.breadCrumbSelected').removeClass('breadCrumbSelected');
     },
 
     openBrowseMenu: function() {
@@ -1973,7 +1815,7 @@ function ScrollableMenuTable(root) {
             var loc = itemId.replace(scrollableList.marker, "").split("_");
             var bcName = loc.pop()
             var breadCrumbItem = new BreadCrumbValueObject(bcName, bcName, '', itemId);
-            BreadCrumb.insertItem(loc.length, breadCrumbItem);
+            BreadCrumb.pushItem(breadCrumbItem);
         },
 
         this.setFullBreadCrumb =  function(itemId) {
@@ -1983,7 +1825,7 @@ function ScrollableMenuTable(root) {
                 var bcName = locArray[i];
                 bcItemId = bcItemId + "_" + bcName;
                 var breadCrumbItem = new BreadCrumbValueObject(bcName, bcName, '', bcItemId);
-                BreadCrumb.insertItem(i, breadCrumbItem);
+                BreadCrumb.pushItem(breadCrumbItem);
             }
         }
 

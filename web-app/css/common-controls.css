@@ -345,9 +345,7 @@
 }
 
 #header {
-
-    background:url("images/header-bg.png") repeat-x scroll left bottom #76AFDC;
-    background-color: #999999;
+    background-color: #206E9F;
     height: 75px;
 }
 
@@ -376,7 +374,6 @@
     background-color:transparent;
     clear:both;
     height:22px;
-    padding-top:5px;
     position:relative;
     width:100%;
     z-index:1000;
@@ -465,7 +462,6 @@
     float:left;
     height:33px;
     left:4px;
-    padding-top:5px;
     position:absolute;
     right:198px;
 }
@@ -1118,20 +1114,15 @@ div[id=mainMenuContainer] .navList .parent:focus span {
     background:url("images/header-button-sprites.png") repeat-x scroll 0 -24px transparent;
 }
 
-#breadcrumbHeader {
+#breadcrumbHeader li {
+    padding-top:10px;
+    padding-right: 25px;
+    font-size: 14pt;
+    font-family: "Open Sans";
 }
 
-a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited {
-    color:#FFFFFF;
-    display:inline;
-    font-size:0.9em;
-    margin:0;
-    padding:0 12px;
-    text-align:left;
-    text-decoration:none;
-}
-a.breadcrumbleaf:link, a.breadcrumbleaf:active, a.breadcrumbleaf:visited {
-    cursor: default;
+a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited  {
+    color: #41566F;
 }
 
 .breadcrumb div div .breadCrumbItemBody {
@@ -1161,15 +1152,6 @@ a.breadcrumbleaf:link, a.breadcrumbleaf:active, a.breadcrumbleaf:visited {
     width:7px;
 }
 
-.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedRight {
-    background:url("images/breadcrumb-selected-right.png") no-repeat scroll 0 1px transparent;
-    width:6px;
-}
-
-.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedLeft {
-    background:url("images/breadcrumb-selected-left.png") no-repeat scroll 0 1px transparent;
-    width:3px;
-}
 
 /* Main Page Menu */
 
@@ -1210,5 +1192,46 @@ a.breadcrumbleaf:link, a.breadcrumbleaf:active, a.breadcrumbleaf:visited {
     left: -200em;
     right: auto;
     top: -20em;
+}
+
+#breadcrumbContainer {
+    clear: both;
+    height: 40px;
+    position: relative;
+    width: auto;
+    background-color: #F9FAFB;
+    border-bottom: 1px solid #DEE5E7;
+}
+
+#breadcrumbHeader li{
+    list-style-type: disc;
+    float: left;
+    color: #B9B9B9;
+}
+
+#titlePanel{
+    clear: both;
+    height: 40px;
+    position: relative;
+    width: auto;
+    background-color: #F9FAFB;
+    border-bottom: 1px solid #DEE5E7;
+    font-size: 20pt;
+    font-family: "Open Sans";
+    color: #41566F;
+    padding-top: 10px;
+}
+
+#breadcrumbHeader li:first-child{
+    list-style-type:none;
+}
+
+#breadcrumbHeader li:last-child a{
+    text-decoration:none;
+    cursor: default;
+}
+
+ul#breadcrumbHeader,#titlePanel {
+    padding-left: 18px;
 }
 
