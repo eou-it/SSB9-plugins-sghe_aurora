@@ -1,0 +1,133 @@
+/*******************************************************************************
+ Copyright 2015 Ellucian Company L.P. and its affiliates.
+*******************************************************************************/
+
+#breadcrumbContainer {
+    clear: both;
+    height: 40px;
+    position: relative;
+    width: auto;
+    background-color: #F9FAFB;
+    border-bottom: 2px solid #DEE5E7;
+}
+
+#breadcrumbHeader li {
+    padding-right: 25px;
+    font-size: 14pt;
+    font-family: "Open Sans";
+    list-style-type: disc;
+    float: left;
+    color: #B9B9B9;
+}
+
+#breadcrumbHeader li:first-of-type{
+    list-style-type:none;
+}
+
+#breadcrumbHeader li:last-child a{
+    text-decoration:none;
+    cursor: default;
+}
+
+a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited  {
+    color: #41566F;
+}
+
+a.breadcrumbButton,#titlePanel{
+    line-height: 40px;
+}
+
+#titlePanel{
+    height: 40px;
+    position: relative;
+    width: auto;
+    background-color: #F9FAFB;
+    border-bottom: 2px solid #DEE5E7;
+    font-size: 20pt;
+    font-family: "Open Sans";
+    color: #41566F;
+}
+
+ul#breadcrumbHeader, #titlePanel {
+    padding-left: 18px;
+}
+
+#breadcrumbBackButton {
+    background:url("images/icon-arrow-back.svg") no-repeat;
+    position:relative;
+    height: 14px;
+    width: 14px;
+    float:left;
+}
+
+#content{
+    top:150px;
+}
+
+
+/*Mobile device*/
+
+@media only screen
+and (min-device-width: 0px)
+and (max-device-width: 768px) {
+
+    #breadcrumbContainer{
+        height: 36px;
+    }
+
+    #titlePanel{
+        height: 36px;
+        font-size: 16pt;
+    }
+
+    #globalNav{
+        height: 30px;
+    }
+
+    a.breadcrumbButton,#titlePanel{
+        line-height: 36px;
+    }
+
+    #breadcrumbBackButton{
+        margin-left: 13px;
+        margin-top: 10px;
+        margin-right: 10px;
+    }
+
+    #breadcrumbHeader li {
+        font-size: 10pt;
+    }
+
+    #content{
+        top:120px;
+    }
+
+}
+
+
+/*Tablet device*/
+
+@media only screen
+and (min-device-width: 769px)
+and (max-device-width: 1024px) {
+    #breadcrumbContainer{
+        height: 40px;
+    }
+
+    #titlePanel{
+        height: 40px;
+    }
+
+    #globalNav{
+        height: 50px;
+    }
+
+    a.breadcrumbButton,#titlePanel{
+        line-height: 40px;
+    }
+    #content{
+        top:140px;
+    }
+
+}
+

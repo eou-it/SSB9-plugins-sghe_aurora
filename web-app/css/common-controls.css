@@ -1,5 +1,5 @@
 /** *****************************************************************************
- Copyright 2009-2014 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
 /*
  Updates to this file for IE6 ================================================================
@@ -372,8 +372,6 @@
 
 #areas {
     background-color:transparent;
-    clear:both;
-    height:22px;
     position:relative;
     width:100%;
     z-index:1000;
@@ -1081,77 +1079,6 @@ div[id=mainMenuContainer] .navList .parent:focus span {
 #openItemsPanel li {
 
 }
-/* breadcrumbs */
-
-#breadcrumb {
-    left:55px;
-    position:absolute;
-    right: 0px;
-}
-
-#breadcrumbMainPage {
-    left:71px;
-    position:absolute;
-    right:10px;
-}
-
-.breadcrumb {
-    background:url("images/header-button-sprites.png") no-repeat scroll 0 0 transparent;
-    cursor:pointer;
-    margin-right:0;
-    padding-left:4px;
-    padding-right: 8px;
-    height:24px;
-}
-.breadcrumb div {
-    background:url("images/header-button-sprites.png") no-repeat scroll right 0px transparent;
-    height:24px;
-    margin-right:0px;
-    padding-right:4px;
-    padding-left:4px;
-}
-.breadcrumb div div {
-    background:url("images/header-button-sprites.png") repeat-x scroll 0 -24px transparent;
-}
-
-#breadcrumbHeader li {
-    padding-top:10px;
-    padding-right: 25px;
-    font-size: 14pt;
-    font-family: "Open Sans";
-}
-
-a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited  {
-    color: #41566F;
-}
-
-.breadcrumb div div .breadCrumbItemBody {
-    background:url("images/header-button-sprites.png") repeat-x scroll 0 -24px transparent;
-    color:#FFFFFF;
-    float:left;
-    height:24px;
-    line-height:20px;
-    margin:0 0;
-}
-
-.breadcrumb div div .breadCrumbItemBody.folderIcon {
-    background:url("images/breadcrumb-folder-icon.png") no-repeat scroll center center transparent;
-}
-
-.breadcrumb div div .breadCrumbItemBody.breadCrumbSelected {
-    background:url("images/breadcrumb-selected-center.png") repeat-x scroll 0 1px transparent;
-}
-
-.breadcrumb .breadCrumbItemArrow {
-    background:url("images/breadcrumb-divider.png") no-repeat scroll 0 0 transparent;
-    color:#FFFFFF;
-    float:left;
-    height:24px;
-    line-height:20px;
-    margin:0 0;
-    width:7px;
-}
-
 
 /* Main Page Menu */
 
@@ -1194,44 +1121,6 @@ a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited  
     top: -20em;
 }
 
-#breadcrumbContainer {
-    clear: both;
-    height: 40px;
-    position: relative;
-    width: auto;
-    background-color: #F9FAFB;
-    border-bottom: 1px solid #DEE5E7;
-}
 
-#breadcrumbHeader li{
-    list-style-type: disc;
-    float: left;
-    color: #B9B9B9;
-}
 
-#titlePanel{
-    clear: both;
-    height: 40px;
-    position: relative;
-    width: auto;
-    background-color: #F9FAFB;
-    border-bottom: 1px solid #DEE5E7;
-    font-size: 20pt;
-    font-family: "Open Sans";
-    color: #41566F;
-    padding-top: 10px;
-}
-
-#breadcrumbHeader li:first-child{
-    list-style-type:none;
-}
-
-#breadcrumbHeader li:last-child a{
-    text-decoration:none;
-    cursor: default;
-}
-
-ul#breadcrumbHeader,#titlePanel {
-    padding-left: 18px;
-}
 
