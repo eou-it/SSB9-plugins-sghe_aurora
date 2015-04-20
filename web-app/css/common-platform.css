@@ -14,23 +14,6 @@ body {
     position:relative;
 }
 
-
-.branding {
-    position: relative;
-    clear: both;
-    padding: 5px 15px 0 5px;
-}
-
-.institutionalBranding {
-                position:relative;
-                float:left;
-                left:10px;
-                top:11px;
-                height:19px;
-                width:179px;
-    background:url("images/ellucian-university-logo-sm.png") no-repeat;
-}
-
 .information {
     position: relative;
     float: right;

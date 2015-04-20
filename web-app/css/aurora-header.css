@@ -1,0 +1,57 @@
+/*******************************************************************************
+ Copyright 2015 Ellucian Company L.P. and its affiliates.
+*******************************************************************************/
+
+#header {
+    background-color:#206E9F;
+    height:60px;
+    width:100%;
+}
+.globalnav-list {
+    list-style-type: none;
+}
+
+#globalNavLeft  li{
+    float:left;
+}
+#globalNavRight{
+    float:right;
+    background-color:#1B6496;
+}
+#globalNavRight li{
+    float:left;
+}
+.globalnav-list-item a {
+    color: #ffffff;
+    font: 13px Open Sans;
+}
+#home {
+    background:url("images/menu.png") no-repeat;
+    display:inline-block;
+    position:relative;
+    height:15px;
+    width:20px;
+}
+
+.institutionalBranding {
+    background:url("images/elogo.png") no-repeat;
+    display:inline-block;
+    height:50px;
+    width:150px;
+}
+
+#tools {
+    background:url("images/tools.png") no-repeat;
+    display:inline-block;
+    position:relative;
+    height:25px;
+    width:20px;
+}
+
+#user {
+    background:url("images/avatar.png") no-repeat;
+    display:inline-block;
+    position:relative;
+    height:25px;
+    width:25px;
+}

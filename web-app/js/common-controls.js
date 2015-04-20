@@ -49,14 +49,31 @@ function Button(id, label, callback, type) {
  * @author jmiller
  */
 function Header() {
-    return $("<div id='header'>"
+    var header ="<div id='header'>"
+                    + "<ul class='globalnav-list' id='globalNavLeft'>"
+                        + "<li class='globalnav-list-item'>"
+                            + "<div id='homeDiv'>"
+                                 + "<a id='home' href='#' alt='Home'></a>"
+                            + "</div>"
+                        + "</li>"
+                        + "<li class='globalnav-list-item'>"
+                            + "<div id='brandingDiv'>"
+                                 + "<a id='branding' href='#' class='institutionalBranding'></a>"
+                            + "</div>"
+                        + "</li>"
+                    + "</ul>"
+                + "</div>";
+    //TODO: HRU:5803 cleanup
+   var subHeader = "<div id='subHeader'>"
         + "<div id='areas'></div>"
         + "<div id='browseMenuContainer' role='application'>"
         + "<span class='bottomDropShadow'></span>"
         + "</div>"
         + "<div id='openedItemsContainer'/>"
         + "<div id='toolsContainer'/>"
-        + "</div>");
+        + "</div>";
+    header+=subHeader;
+    return $(header);
 }
 
 function InstitutionalBranding() {
@@ -346,53 +363,61 @@ function UserControls( options ) {
     ControlBar.initialize();
 
     // add user context
-    if (CommonContext.user) {
-        var usrCtx = $("<span id='userIdentityText' tabindex='0' title='" + CommonContext.user + "' class='userIdentityText'>" + CommonContext.user + "</span>");
-        usrCtx.css("border-left", "none");
-        ControlBar.append(usrCtx);
+    if (CommonContext.user == null) {
+        var location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
+        var signInDiv = "<div id='signOutDiv'><a id='signOutText' href="+location+">"+ResourceManager.getString("userdetails_signin")+"</a></div>";
+        ControlBar.append(signInDiv);
+    } else {
+       var toolsDiv = "<div id='toolsDiv'><a id='tools' href='#'></a></div>";
+        var userDiv = "<div id='userDiv'><a id='user' href='#'></a><span id='username'>John Bean</span></div>";
+        var notificationDiv = "<div id='notificationDiv'><a id='notificationcnt' href='#'>3</a></div>";
+        ControlBar.append(toolsDiv);
+        ControlBar.append(userDiv);
+        ControlBar.append(notificationDiv);
     }
+    //TODO: HRU:5803 cleanup
+//
+//    if (CommonContext.mepHomeContext) {
+//        var mepLink = $("<span id='mepHomeContext' class='mepHomeContextText'>" + CommonContext.mepHomeContext + "</span>");
+//        ControlBar.attach(mepLink);
+//        mepLink.find('.mepChangeLink').click(function() {
+//
+//        });
+//    }
+//
+//    var signInOutLink = $("<span id='signOutShortCut' class='offscreen'>"+ ResourceManager.getString("userdetails_signout_description") + "</span><a  id='signOutText' aria-describedBy='signOutShortCut'  href='#' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
+//        + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>").keydown(function(e){
+//        if (e.keyCode == 13 || e.keyCode == 32) {
+//            e.preventDefault();
+//            e.stopPropagation();
+//            signOut();
+//        }
+//    });
+//
+//    signInOutLink.click(function(e) {
+//        e.preventDefault();
+//        e.stopPropagation();
+//        signOut();
+//    });
+//
+//    var guestSignInLink
+//    if(!CommonContext.user && "true" == $('meta[name=guestLoginEnabled]').attr("content")) {
+//        guestSignInLink = $("<a id='guestSignInText' class='signInText pointer'>"
+//            + ResourceManager.getString("guestuserdetails_signin") + "</a>");
+//        ControlBar.append(guestSignInLink);
+//        guestSignInLink.click(function () {
+//            // set CommonContext.user to null before removing the cookie
+//            if ($(this).hasClass('signInText')) {
+//                window.location = ApplicationConfig.loginEndpoint;
+//            }
+//        });
+//    }
 
-    if (CommonContext.mepHomeContext) {
-        var mepLink = $("<span id='mepHomeContext' class='mepHomeContextText'>" + CommonContext.mepHomeContext + "</span>");
-        ControlBar.attach(mepLink);
-        mepLink.find('.mepChangeLink').click(function() {
-
-        });
-    }
-
-    var signInOutLink = $("<span id='signOutShortCut' class='offscreen'>"+ ResourceManager.getString("userdetails_signout_description") + "</span><a  id='signOutText' aria-describedBy='signOutShortCut'  href='#' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
-        + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>").keydown(function(e){
-        if (e.keyCode == 13 || e.keyCode == 32) {
-            e.preventDefault();
-            e.stopPropagation();
-            signOut();
-        }
-    });
-
-    signInOutLink.click(function(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        signOut();
-    });
-
-    var guestSignInLink
-    if(!CommonContext.user && "true" == $('meta[name=guestLoginEnabled]').attr("content")) {
-        guestSignInLink = $("<a id='guestSignInText' class='signInText pointer'>"
-            + ResourceManager.getString("guestuserdetails_signin") + "</a>");
-        ControlBar.append(guestSignInLink);
-        guestSignInLink.click(function () {
-            // set CommonContext.user to null before removing the cookie
-            if ($(this).hasClass('signInText')) {
-                window.location = ApplicationConfig.loginEndpoint;
-            }
-        });
-    }
 
 
-
-    var signOutWrapperdiv = $("<div></div>").append(signInOutLink);
-    var signOutDiv = $("<div id='signOutDiv' tabindex='-1'></div>").append(signOutWrapperdiv)
-    ControlBar.append(signOutDiv);
+//    var signOutWrapperdiv = $("<div></div>").append(signInOutLink);
+//    var signOutDiv = $("<div id='signOutDiv' tabindex='-1'></div>").append(signOutWrapperdiv)
+//    ControlBar.append(signOutDiv);
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
         var helpLink = $("<a id='helpText' class='helpText pointer'>" + ResourceManager.getString("userdetails_help") + "</a>");
@@ -1919,43 +1944,39 @@ var ToolsMenu = {
  */
 var ControlBar = {
 
-    node: $("<div id='globalNav'>"
-        + "<div>"
-        + "<ul class='globalnav-list'>"
-        + "</ul>"
-        + "</div>"
-        + "</div>"),
+    node: $("<ul class='globalnav-list' id='globalNavRight'>"
+        + "</ul>"),
 
     component: $("<li class='globalnav-list-item'></li>"),
 
     canvas: null,
 
     initialize: function() {
-        this.canvas = this.node.find("ul");
+        this.canvas = this.node;
 
     },
 
     attach: function(node) {
         var c = this.component.clone();
         c.append(node);
-        this.node.find("ul").append(c);
+        this.node.append(c);
     },
 
     append: function(node, appendAfterId) {
         var c = this.component.clone();
         c.append(node);
         if (appendAfterId)
-            this.node.find("ul").find(appendAfterId).after(c);
+            this.node.find(appendAfterId).after(c);
         else
-            this.node.find("ul").append(c);
+            this.node.append(c);
     },
 
     prepend: function(node, prependBeforeId) {
         var c = this.component.clone();
         c.append(node);
         if (prependBeforeId)
-            this.node.find("ul").find(appendAfterId).before(c);
+            this.node.find(appendAfterId).before(c);
         else
-            this.node.find("ul").prepend(c);
+            this.node.prepend(c);
     }
 }

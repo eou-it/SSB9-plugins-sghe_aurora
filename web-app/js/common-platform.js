@@ -53,7 +53,7 @@ var CommonPlatform = {
 
 				//Initialize header
 				if (options.header && typeof(options.header) == 'boolean' && options.header || options.header == null) {
-					$('body').prepend(Header().prepend(UserControls( options )).prepend(InstitutionalBranding()));
+					$('body').prepend(Header().append(UserControls( options )));
 
 					if (options.globalNav && typeof (options.globalNav) == 'boolean' && options.globalNav || options.globalNav == null) {
 						addNavigationControls();
