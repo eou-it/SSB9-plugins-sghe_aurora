@@ -1,0 +1,89 @@
+@media (min-width:0px)
+and (max-width:768px)
+and (orientation : landscape)	{
+    #menu .menu-text	{
+        padding-left:30px;
+        font-family: "Open Sans";
+        letter-spacing: 2px;
+        font-size: 20px;
+        color: #41566F;
+        width:70%;
+        max-width:70%;
+        float:left;
+    }
+
+    .left-menu	{
+        margin-top:0px;
+        width: 70%;
+        background-color: #F3FCFF;
+    }
+}
+
+@media (min-width:0px)
+and (max-width:768px)
+and (orientation : portrait)	{
+    #menu .menu-text	{
+        padding-left:30px;
+        font-family: "Open Sans";
+        letter-spacing: 2px;
+        font-size: 20px;
+        color: #41566F;
+        width:70%;
+        max-width:70%;
+        float:left;
+    }
+
+    .left-menu	{
+        margin-top:0px;
+        width:100%;
+        background-color: #F3FCFF;
+    }
+}
+
+
+
+@media (min-width:768px)
+and (max-width:1023px)
+and (orientation : landscape)	{
+    .left-menu	{
+        margin-top:0px;
+        width:40%;
+        background-color: #F3FCFF;
+    }
+}
+
+@media (min-width:768px)
+and (orientation : portrait)	{
+    .left-menu	{
+        margin-top:0px;
+        width:40%;
+        background-color: #F3FCFF;
+    }
+}
+
+@media (min-width:768px)
+and (orientation : landscape)	{
+    .left-menu	{
+        margin-top:0px;
+        width:40%;
+        background-color: #F3FCFF;
+    }
+}
+
+@media (min-width:1024px)
+and (orientation : landscape)	{
+    .left-menu	{
+        margin-top:0px;
+        width: 30%;
+        background-color: #F3FCFF;
+    }
+}
+
+@media (min-width:1024px)
+and (orientation : portrait)	{
+    .left-menu	{
+        margin-top:0px;
+        width: 25%;
+        background-color: #F3FCFF;
+    }
+}

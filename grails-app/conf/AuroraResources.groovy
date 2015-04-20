@@ -11,6 +11,7 @@ modules = {
         resource url:[plugin: 'sghe-aurora', file: 'css/common-platform.css'], attrs:[media:'screen, projection']
         resource url:[plugin: 'sghe-aurora', file: 'css/aurora-header.css'], attrs:[media:'screen, projection']
         resource url:[plugin: 'sghe-aurora', file: 'css/aurora-breadcrumb.css'], attrs:[media:'screen, projection']
+        resource url:[plugin: 'sghe-aurora', file: 'css/aurora-menu.css'], attrs:[media:'screen, projection']
 
         resource url:[plugin: 'sghe-aurora', file: 'js/utils.js']
         resource url:[plugin: 'sghe-aurora', file: 'js/config.js']
