@@ -1,15 +1,83 @@
+.left-menu	{
+    margin-top:0px;
+    background-color: #F3FCFF;
+}
+
+.left-menu.hide	{
+    display:none;
+}
+
+.left-menu.show{
+    display:block;
+}
+
+#menu ul {
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
+
+#menu ul>li {
+    height:60px;
+    text-align: left;
+    vertical-align: middle;
+    border-bottom: 1px solid #D0DBDE;
+}
+
+#menu li:first-child	{
+    position: absolute;
+    top: 60px;
+    left: 25px;
+    margin: 0;
+    border-top: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid #F3FCFF;
+    padding: 0;
+    width: 0;
+    height: 0px;
+}
+
+#menu .menu-text	{
+    padding-left:30px;
+    padding-top:15px;
+    padding-bottom:15px;
+    font-family: "Open Sans";
+    letter-spacing: 2px;
+    font-size: 20px;
+    color: #41566F;
+    width:70%;
+    max-width:70%;
+    float:left;
+}
+
+#menu li:nth-child(2) .menu-text	{
+    text-transform: uppercase;
+}
+
+#menu li:nth-child(2) .menu-icon	{
+    background: url(images/close.png) no-repeat center;
+    padding-left:30px;
+    padding-top: 0px;
+    margin-top: -5px;
+}
+
+#menu .menu-icon	{
+    padding-top:15px;
+    padding-bottom:15px;
+    background:url(images/next.png) no-repeat center;
+    max-width: 10%;
+    height: 30px;
+    float:right;
+    width: 10%;
+    padding-left: 30px;
+}
+
 @media (min-width:0px)
 and (max-width:768px)
 and (orientation : landscape)	{
     #menu .menu-text	{
-        padding-left:30px;
-        font-family: "Open Sans";
-        letter-spacing: 2px;
         font-size: 20px;
-        color: #41566F;
-        width:70%;
-        max-width:70%;
-        float:left;
     }
 
     .left-menu	{
@@ -23,14 +91,7 @@ and (orientation : landscape)	{
 and (max-width:768px)
 and (orientation : portrait)	{
     #menu .menu-text	{
-        padding-left:30px;
-        font-family: "Open Sans";
-        letter-spacing: 2px;
         font-size: 20px;
-        color: #41566F;
-        width:70%;
-        max-width:70%;
-        float:left;
     }
 
     .left-menu	{
