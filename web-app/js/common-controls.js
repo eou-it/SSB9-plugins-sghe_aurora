@@ -369,12 +369,12 @@ function UserControls( options ) {
         ControlBar.append(signInDiv);
     } else {
        var toolsDiv = "<div id='toolsDiv'><a id='tools' href='#'></a></div>";
-        var userDiv = "<div id='userDiv'><a id='user' href='#'></a><span id='username'>John Bean</span></div>";
-        var notificationDiv = "<div id='notificationDiv'><a id='notificationcnt' href='#'>3</a></div>";
+        var userDiv = "<div id='userDiv'><a id='user' href='#'></a><span id='username'>"+CommonContext.user+"</span></div>";
         ControlBar.append(toolsDiv);
         ControlBar.append(userDiv);
-        ControlBar.append(notificationDiv);
     }
+    var notificationDiv = "<div id='notification-center'></div>";
+    ControlBar.append(notificationDiv);
     //TODO: HRU:5803 cleanup
 //
 //    if (CommonContext.mepHomeContext) {
@@ -1893,7 +1893,8 @@ var ToolsMenu = {
         var d = sec.find('div');
         d.attr("id", id);
         d.text(label);
-        this.canvas.append(sec);
+        //TODO: HRU:5803 cleanup
+      //  this.canvas.append(sec);
         return sec;
     },
 
@@ -1923,10 +1924,11 @@ var ToolsMenu = {
                 callback(e);
             toggleToolsMenu();
         });
-        if (sectionId)
-            this.canvas.find('#' + sectionId).next('ul').append(item);
-        else
-            this.canvas.append(item);
+        //TODO: HRU:5803 cleanup
+//        if (sectionId)
+//            this.canvas.find('#' + sectionId).next('ul').append(item);
+//        else
+//            this.canvas.append(item);
         return item;
     },
 
