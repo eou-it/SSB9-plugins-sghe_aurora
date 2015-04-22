@@ -2,7 +2,7 @@
  Copyright 2015 Ellucian Company L.P. and its affiliates.
 *******************************************************************************/
 
-#breadcrumbContainer {
+#breadcrumb-panel{
     clear: both;
     height: 40px;
     position: relative;
@@ -71,7 +71,7 @@ ul#breadcrumbHeader, #titlePanel {
 and (min-device-width: 0px)
 and (max-device-width: 768px) {
 
-    #breadcrumbContainer{
+    #breadcrumb-panel{
         height: 36px;
     }
 
@@ -110,7 +110,7 @@ and (max-device-width: 768px) {
 @media only screen
 and (min-device-width: 769px)
 and (max-device-width: 1024px) {
-    #breadcrumbContainer{
+    #breadcrumb-panel{
         height: 40px;
     }
 

@@ -370,13 +370,6 @@
     height: 9px;
 }
 
-#areas {
-    background-color:transparent;
-    position:relative;
-    width:100%;
-    z-index:1000;
-}
-
 #areasMenu {
     float: left;
     padding: 0;

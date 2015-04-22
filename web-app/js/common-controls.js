@@ -49,30 +49,21 @@ function Button(id, label, callback, type) {
  * @author jmiller
  */
 function Header() {
-    var header ="<div id='header'>"
-                    + "<ul class='globalnav-list' id='globalNavLeft'>"
-                        + "<li class='globalnav-list-item'>"
-                            + "<div id='homeDiv'>"
-                                 + "<a id='home' href='#' alt='Home'></a>"
-                            + "</div>"
-                        + "</li>"
-                        + "<li class='globalnav-list-item'>"
-                            + "<div id='brandingDiv'>"
-                                 + "<a id='branding' href='#' class='institutionalBranding'></a>"
-                            + "</div>"
-                        + "</li>"
-                    + "</ul>"
-                + "</div>";
-    //TODO: HRU:5803 cleanup
-   var subHeader = "<div id='subHeader'>"
-        + "<div id='areas'></div>"
-        + "<div id='browseMenuContainer' role='application'>"
-        + "<span class='bottomDropShadow'></span>"
+    var header ="<div id='header'><div id='navigation-panel'>"
+        + "<ul class='globalnav-list' id='globalNavLeft'>"
+        + "<li class='globalnav-list-item'>"
+        + "<div id='homeDiv'>"
+        + "<a id='home' href='#' alt='Home'></a>"
         + "</div>"
-        + "<div id='openedItemsContainer'/>"
-        + "<div id='toolsContainer'/>"
-        + "</div>";
-    header+=subHeader;
+        + "</li>"
+        + "<li class='globalnav-list-item'>"
+        + "<div id='brandingDiv'>"
+        + "<a id='branding' href='#' class='institutionalBranding'></a>"
+        + "</div>"
+        + "</li>"
+        + "</ul>"
+        + "</div></div>";
+
     return $(header);
 }
 
@@ -84,34 +75,12 @@ function InstitutionalBranding() {
 
 function addNavigationControls() {
 
-    var areas = $('#areas');
-
     BreadCrumb.create();
 
+    if(isDesktop() || isTablet()){
+        $('#header').append("<div id='title-panel' class='pageTitle'></div>");
+    }
 
-    areas.find('#homeButton').bind("click", gotoMainPage);
-    areas.find('#browseButton, #browseButtonBottom').bind("click", toggleBrowseMenu);
-    areas.find('#openedButton').bind("click", toggleOpenedItems);
-    areas.find('#toolsButton').bind("click", toggleToolsMenu);
-
-    areas.find('.browseButton').hover(
-        function() {
-            if (areas.find("#browseButton").hasClass('browseTab')) {
-                return;
-            }
-            $(this).css("background-position", "0px -48px");
-            $(this).children().css("background-position", "right -48px");
-            $(this).children().children().css("background-position", "0px -24px");
-        }).mouseleave(function() {
-            if (areas.find("#browseButton").hasClass('browseTab')) {
-                return;
-            }
-            $(this).css("background-position", "0px 0px");
-            $(this).children().css("background-position", "right 0px");
-            $(this).children().children().css("background-position", "0px 0px");
-        });
-
-    areas.append("<div id='titlePanel'></div>");
     // Add the localized strings
     var signOutShortCut
     if(CommonContext.user){
@@ -855,7 +824,7 @@ var BreadCrumb = {
 
     items: [],
 
-    UI: $("<div id='breadcrumbContainer'>"
+    UI: $("<div id='breadcrumb-panel'>"
         + "<ul id='breadcrumbHeader' role='listbox'>"
         + "</ul>"
         + "</div>"),
@@ -871,7 +840,7 @@ var BreadCrumb = {
     },
 
     create: function () {
-        $('#areas').append(BreadCrumb.UI);
+        $('#header').append(BreadCrumb.UI);
     },
 
     setBreadCrumbLeaf : function(breadCrumbItems) {
