@@ -67,6 +67,27 @@ function Header() {
     return $(header);
 }
 
+function addAttributesToHeader() {
+    var browseShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
+    $('#home').attr("title",browseShortCut);
+    $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
+    //Add href to branding
+    var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
+    var origin = document.location.origin || (document.location.protocol + '//' + document.location.host);
+    var appUrl = path.substring(0,path.indexOf('/ssb'))
+    $('#branding').attr('href', appUrl);
+
+    var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_home_shortcut"));
+    $('#branding').attr("title", homeShortCut);
+    if (CommonContext.user == null) {
+        var signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signin"), ResourceManager.getString("userdetails_signout_shortCut"));
+        $('#signInDiv').attr("title",signOutShortCut);
+    } else {
+        $('#tools').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
+        $('#user').attr("title", ResourceManager.getString("areas_label_avatar_shortcut"));
+    }
+
+}
 function InstitutionalBranding() {
     return $("<a href='#' id='branding' target='_parent' class='institutionalBranding'></a>");
     /* href link was ealier "/banner/" */
@@ -82,21 +103,22 @@ function addNavigationControls() {
     }
 
     // Add the localized strings
-    var signOutShortCut
-    if(CommonContext.user){
-        signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signout"), ResourceManager.getString("userdetails_signout_shortCut"));
-
-    }else{
-        signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signin"), ResourceManager.getString("userdetails_signout_shortCut"));
-    }
-    $('#signOutDiv').attr("title",signOutShortCut);
-
-    var browseShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
-    var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_home_shortcut"));
-    $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
-    $('#homeArrow').attr("alt", ResourceManager.getString("areas_label_home_description"));
-    $('#homeButton').attr("title", homeShortCut);
-    $('#browseButton').attr("title",browseShortCut);
+    //TODO: HRU:5803 cleanup
+//    var signOutShortCut
+//    if(CommonContext.user){
+//        signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signout"), ResourceManager.getString("userdetails_signout_shortCut"));
+//
+//    }else{
+//        signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signin"), ResourceManager.getString("userdetails_signout_shortCut"));
+//    }
+//    $('#signOutDiv').attr("title",signOutShortCut);
+//
+//    var browseShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
+//    var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_home_shortcut"));
+//    $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
+//    $('#homeArrow').attr("alt", ResourceManager.getString("areas_label_home_description"));
+//    $('#homeButton').attr("title", homeShortCut);
+//    $('#browseButton').attr("title",browseShortCut);
     $('#openedButton').attr("title", ResourceManager.getString("areas_label_opened_shortcut"));
     $('#openedButton').find('div div a').text(ResourceManager.getString("areas_label_opened"));
     $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
@@ -108,12 +130,12 @@ function addNavigationControls() {
         'shift+home', function() {
             // click the first link in the home div.
             // just $().click() doesn't work as the element is not an input
-            $('#homeButton a')[0].click();
+            $('#brandingDiv a')[0].click();
         },
         'alt+m', toggleBrowseMenu,
-        'ctrl+shift+F', signOut,
+        'ctrl+shift+F', signIn,
         'alt+n', toggleNotificationCenter
-        ];
+    ];
     $('#openedButton').is(':visible') && shortcuts.push( 'alt+g', toggleOpenedItems );
     $('#openedButton').is(':visible') && shortcuts.push( 'alt+l', toggleToolsMenu );
 
@@ -123,11 +145,11 @@ function addNavigationControls() {
 function toggleNotificationCenter(){
     window.notificationCenter.toggle();
 }
-
-function gotoMainPage() {
-    // TODO:  We should be firing an event and allowing the application to handle the event.
-
-}
+//TODO: HRU:5803 cleanup
+//function gotoMainPage() {
+//    // TODO:  We should be firing an event and allowing the application to handle the event.
+//
+//}
 
 function closeOpenMenus() {
     if (!$('#browseMenu').is(':hidden') && !$('#browseButtonState').hasClass('over') &&
@@ -311,20 +333,22 @@ function toggleToolsMenu() {
     }
     return false;
 }
+//TODO: HRU:5803 cleanup
+//function removeSignin(){
+//    $("#signOutDiv").parent().remove();
+//}
 
-function removeSignin(){
-    $("#signOutDiv").parent().remove();
-}
-
-function signOut(){
-    // set CommonContext.user to null before removing the cookie
-    CommonContext.user = null;
-
-    if ($('#signOutText').hasClass('signInText')) {
-        window.location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
-    } else {
-        window.location = $('meta[name=logoutEndpoint]').attr("content") || ApplicationConfig.logoutEndpoint;
-    }
+function signIn(){
+    //TODO: HRU:5803 cleanup
+//    // set CommonContext.user to null before removing the cookie
+//    CommonContext.user = null;
+//
+//    if ($('#signOutText').hasClass('signInText')) {
+//        window.location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
+//    } else {
+//        window.location = $('meta[name=logoutEndpoint]').attr("content") || ApplicationConfig.logoutEndpoint;
+//    }
+    $('#signInText')[0].click();
 }
 
 function UserControls( options ) {
@@ -334,10 +358,10 @@ function UserControls( options ) {
     // add user context
     if (CommonContext.user == null) {
         var location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
-        var signInDiv = "<div id='signOutDiv'><a id='signOutText' href="+location+">"+ResourceManager.getString("userdetails_signin")+"</a></div>";
+        var signInDiv = $("<div id='signInDiv'><a id='signInText' href="+location+">"+ResourceManager.getString("userdetails_signin")+"</a></div>");
         ControlBar.append(signInDiv);
     } else {
-       var toolsDiv = "<div id='toolsDiv'><a id='tools' href='#'></a></div>";
+        var toolsDiv = "<div id='toolsDiv'><a id='tools' href='#'></a></div>";
         var userDiv = "<div id='userDiv'><a id='user' href='#'></a><span id='username'>"+CommonContext.user+"</span></div>";
         ControlBar.append(toolsDiv);
         ControlBar.append(userDiv);
@@ -1324,15 +1348,15 @@ function ScrollableMenuTable(root) {
             for (var x = 0; x < count; x++) {
                 if (x == 0) {
                     this.findElement('#scrollableListContainer').append(""
-                        + "<div id='btn-l' class='btn-l' />"
+                            + "<div id='btn-l' class='btn-l' />"
                     );
                     this.findElement('#scrollableListContainer').append(""
-                        + "<div id='columnsContainer' role='group'><div id='columnsContainerTrack' /></div>"
+                            + "<div id='columnsContainer' role='group'><div id='columnsContainerTrack' /></div>"
                     );
 
 
                     this.findElement('#scrollableListContainer').append(""
-                        + "<div id='btn-r' class='btn-r' />"
+                            + "<div id='btn-r' class='btn-r' />"
                     );
 
                 } else {
@@ -1863,7 +1887,7 @@ var ToolsMenu = {
         d.attr("id", id);
         d.text(label);
         //TODO: HRU:5803 cleanup
-      //  this.canvas.append(sec);
+        //  this.canvas.append(sec);
         return sec;
     },
 

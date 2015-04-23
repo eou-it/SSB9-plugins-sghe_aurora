@@ -89,11 +89,6 @@ body {
    padding-left:5px;
 }
 
-.signOutText, .signInText {
-	background:url("images/lock_icon.png") no-repeat 10px center;
-	/*border-left:1px solid #FFFFFF;*/
-}
-
 .helpText {
 	/*border-left:1px #fff solid;*/
 	background:url("images/help_icon.png") no-repeat 8px center;

@@ -21,10 +21,6 @@
     background: transparent url(images/arrow-right-gray.png) no-repeat -38px .6em;
 }
 
-.signOutText, .signInText {
-    background: url(images/icon-lock.png) no-repeat scroll 38px center;
-}
-
 .helpText {
     background: transparent url(images/icon-help.png) no-repeat scroll 36px center
 }
@@ -67,12 +63,6 @@
 
 .headerButton .upArrow:link, .upArrow:active, .upArrow:visited {
     background: url("images/callout_arrow.png") no-repeat scroll left 8px transparent;
-}
-
-.signOutText, .signInText {
-    background: url("images/icon-lock.png") no-repeat scroll right center transparent;
-    margin-left: 8px;
-    margin-right: 4px;
 }
 
 #globalNav .globalnav-list-item:first-child {
