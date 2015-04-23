@@ -541,12 +541,14 @@ var Navigation = {
                 Navigation.onLoadComplete();
 
                 if($('meta[name=menuDefaultBreadcrumbId]').attr("content")){
-                    var breadCrumbItems = $('meta[name=menuDefaultBreadcrumbId]').attr("content");
+                    var breadcrumbItems = JSON.parse($('meta[name=menuDefaultBreadcrumbId]').attr("content")).breadcrumb;
+                    var pageTitle = JSON.parse($('meta[name=menuDefaultBreadcrumbId]').attr("content")).pageTitle;
                     if(isDesktop() || isTablet()){
-                        BreadCrumb.setFullBreadCrumb(breadCrumbItems);
+                        BreadCrumb.setFullBreadcrumb(breadcrumbItems);
+                        TitlePanel.create(pageTitle);
                     }
                     else if(isMobile()){
-                        BreadCrumb.setBreadCrumbLeaf(breadCrumbItems);
+                        BreadCrumb.setBreadcrumbLeaf(breadcrumbItems,pageTitle);
                     }
                 }
             }
