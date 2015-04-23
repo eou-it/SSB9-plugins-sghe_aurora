@@ -7,21 +7,18 @@
     height:60px;
     width:100%;
 }
-.globalnav-list {
-    list-style-type: none;
-}
 
-#globalNavLeft  li{
+#globalNavLeft  div{
     float:left;
 }
 #globalNavRight{
     float:right;
     background-color:#1B6496;
 }
-#globalNavRight li{
+#globalNavRight div{
     float:left;
 }
-.globalnav-list-item a {
+#signInText {
     color: #ffffff;
     font: 13px Open Sans;
 }

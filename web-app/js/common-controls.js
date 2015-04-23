@@ -50,19 +50,16 @@ function Button(id, label, callback, type) {
  */
 function Header() {
     var header ="<div id='header'><div id='navigation-panel'>"
-        + "<ul class='globalnav-list' id='globalNavLeft'>"
-        + "<li class='globalnav-list-item'>"
-        + "<div id='homeDiv'>"
-        + "<a id='home' href='#' alt='Home'></a>"
-        + "</div>"
-        + "</li>"
-        + "<li class='globalnav-list-item'>"
-        + "<div id='brandingDiv'>"
-        + "<a id='branding' href='#' class='institutionalBranding'></a>"
-        + "</div>"
-        + "</li>"
-        + "</ul>"
-        + "</div></div>";
+                + "<div  id='globalNavLeft'>"
+                    + "<div id='homeDiv'>"
+                         + "<a id='home' href='#' alt='Home'></a>"
+                    + "</div>"
+                    + "<div>"
+                        + "<div id='brandingDiv'>"
+                             + "<a id='branding' href='#' class='institutionalBranding'></a>"
+                        + "</div>"
+                + "</div>"
+                + "</div></div>";
 
     return $(header);
 }
@@ -1939,10 +1936,8 @@ var ToolsMenu = {
  */
 var ControlBar = {
 
-    node: $("<ul class='globalnav-list' id='globalNavRight'>"
-        + "</ul>"),
-
-    component: $("<li class='globalnav-list-item'></li>"),
+    node: $("<div id='globalNavRight'>"
+        + "</div>"),
 
     canvas: null,
 
@@ -1952,26 +1947,20 @@ var ControlBar = {
     },
 
     attach: function(node) {
-        var c = this.component.clone();
-        c.append(node);
-        this.node.append(c);
+        this.node.append(node);
     },
 
     append: function(node, appendAfterId) {
-        var c = this.component.clone();
-        c.append(node);
         if (appendAfterId)
-            this.node.find(appendAfterId).after(c);
+            this.node.find(appendAfterId).after(node);
         else
-            this.node.append(c);
+            this.node.append(node);
     },
 
     prepend: function(node, prependBeforeId) {
-        var c = this.component.clone();
-        c.append(node);
         if (prependBeforeId)
-            this.node.find(appendAfterId).before(c);
+            this.node.find(appendAfterId).before(node);
         else
-            this.node.prepend(c);
+            this.node.prepend(node);
     }
 }
