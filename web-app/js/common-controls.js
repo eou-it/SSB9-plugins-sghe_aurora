@@ -89,10 +89,6 @@ function addNavigationControls() {
 
     BreadCrumb.create();
 
-    if(isDesktop() || isTablet()){
-        $('#header').append("<div id='title-panel' class='pageTitle'></div>");
-    }
-
     // Add the localized strings
     //TODO: HRU:5803 cleanup
 //    var signOutShortCut
@@ -808,145 +804,119 @@ var NavigationRC = {
 };
 
 
-function BreadCrumbValueObject(id, caption, description, itemId) {
-
-    /**
-     * The unique id for the object
-     */
+function BreadCrumbValueObject(id, url) {
     this.id = id;
-    /**
-     * The name that is displayed in the breadcrumb
-     * @type string
-     */
-    this.caption = caption;
-
-    /**
-     * Description for the breadcrumb item, if any
-     * @type string
-     */
-    this.description = description;
-    /**
-     * The id of the HTML element in the browse menu to link to
-     */
-    this.itemId = itemId;
+    this.url = url;
 }
 
 var BreadCrumb = {
-    //properties
-    idMarker: "crumb_",
-
-    leafId: "breadcrumb_leaf",
 
     items: [],
 
     UI: $("<div id='breadcrumb-panel'>"
-        + "<ul id='breadcrumbHeader' role='listbox'>"
-        + "</ul>"
+        + "<span id='breadcrumbHeader'>"
+        + "</span>"
         + "</div>"),
-
-    currentIndex: -1,
-
-    focusIndex: 0,
-    /**
-     * Events associated with the ScrollableList.
-     */
-    events: {
-        click: "breadCrumbItemClick"
-    },
 
     create: function () {
         $('#header').append(BreadCrumb.UI);
     },
 
-    setBreadCrumbLeaf : function(breadCrumbItems) {
-        BreadCrumb.updateBreadCrumbItems(breadCrumbItems);
-        var breadcrumbItemLeaf = BreadCrumb.items.pop();
-        BreadCrumb.drawItem(breadcrumbItemLeaf);
+    setBreadcrumbLeaf : function(breadCrumbItems,pageTitle) {
+        BreadCrumb.updateBreadcrumbItems(breadCrumbItems);
         BreadCrumb.addBackButton();
+        var breadcrumbItemLeaf = BreadCrumb.items[BreadCrumb.items.length-1];
+        BreadCrumb.drawItem(breadcrumbItemLeaf);
+        BreadCrumb.showPageTitleAsBreadcrumb(pageTitle);
     },
 
-    setFullBreadCrumb : function(breadCrumbItems) {
-        BreadCrumb.updateBreadCrumbItems(breadCrumbItems);
+    setFullBreadcrumb : function(breadCrumbItems) {
+        BreadCrumb.updateBreadcrumbItems(breadCrumbItems);
         _.each(BreadCrumb.items,function(breadcrumItem){
             BreadCrumb.drawItem(breadcrumItem);
-        })
+        });
+        this.registerBreadcrumClickListener();
     },
 
-    updateBreadCrumbItems: function(breadCrumbItems){
-        var breadcrumbList = breadCrumbItems.split("_");
-        for (var i = 0; i < breadcrumbList.length; i++ ) {
-            var breadcrumbLabel = breadcrumbList[i];
-            var breadCrumbItem = new BreadCrumbValueObject(breadcrumbLabel, breadcrumbLabel, '', breadcrumbLabel);
+    updateBreadcrumbItems: function(breadcrumbItems){
+        $.each(breadcrumbItems, function(breadcrumbItem, url) {
+            var breadCrumbItem = new BreadCrumbValueObject(breadcrumbItem, url);
             BreadCrumb.items.push(breadCrumbItem);
-        }
+        });
     },
 
     drawItem: function (item) {
         var cHeader = BreadCrumb.UI.find('#breadcrumbHeader');
-        var breadcrumbItem = "<li><a class='breadcrumbButton' href='#'>"+item.caption+"</a></li>";
+        var breadcrumbItem = "<span class='breadcrumbButton' href='#'>"+item.id+"</span>";
+        if(item.url.length){
+            breadcrumbItem = "<a class='breadcrumbButton' href='#'>"+item.id+"</a>";
+        }
         cHeader.append(breadcrumbItem);
     },
 
-    addBackButton: function (item) {
-        BreadCrumb.UI.prepend("<a id='breadcrumbBackButton' href='#'></a>");
+    addBackButton: function () {
+        if(BreadCrumb.items.length > 1){
+            var backButton = "<a id='breadcrumbBackButton' href='#'></a>";
+            BreadCrumb.UI.prepend(backButton);
+            BreadCrumb.registerBackButtonClickListener();
+        }
     },
 
-    removeAllBreadCrumbItems: function () {
-        BreadCrumb.UI.find('.breadCrumbItemBody').remove();
-        BreadCrumb.UI.find('.breadCrumbItemArrow').remove();
+    showPageTitleAsBreadcrumb : function(pageTitle) {
+        if(!_.isUndefined(pageTitle) && pageTitle.trim().length){
+            $('<div id="breadcrumbPageTitle">'+pageTitle+'</div>').insertBefore('#breadcrumbHeader');
+            $('#breadcrumbHeader').addClass('hidden');
+        }
     },
 
-    clear: function () {
-
-        BreadCrumb.removeAllBreadCrumbItems();
-
-        BreadCrumb.items = []
-        BreadCrumb.currentIndex = -1;
+    registerBreadcrumClickListener: function(){
+        $('a.breadcrumbButton').on('click',function(){
+            var location = BreadCrumb.getBreadCrumbNavigationLocation($(this).text());
+            window.location = location;
+        })
     },
 
-    //element id's pre-fixed with * needs to be escaped when using
-    // as jquery id selectors.
-    escapeId: function (itemId) {
-        return itemId.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/])/g, '\\$1');
+    registerBackButtonClickListener: function(){
+        $('#breadcrumbBackButton').on('click',function(){
+            var breadcrumbItem =  $('.breadcrumbButton').text();
+            var location = BreadCrumb.getPreviousBreadCrumbNavigationLocation(breadcrumbItem);
+            window.location = location;
+        })
     },
 
+    getBreadCrumbNavigationLocation: function(breadcrumbId){
+        var navigationUrl;
+        $.each( BreadCrumb.items, function( index, breadcrumbObject ) {
+            if(breadcrumbObject.id == breadcrumbId){
+                navigationUrl = Application.getApplicationPath() + breadcrumbObject.url;
+                return false;
+            }
+        });
 
-    //code to push items in bulk to demo the rendering of item labels
-    // into folder-icons.
-    bulkInitialize: function () {
-        var items = [
-            new BreadCrumbValueObject("0", "label1", ""),
-            new BreadCrumbValueObject("1", "label2", ""),
-            new BreadCrumbValueObject("2", "label3", ""),
-            new BreadCrumbValueObject("3", "label4", ""),
-            new BreadCrumbValueObject("4", "label5", ""),
-            new BreadCrumbValueObject("5", "label6", ""),
-            new BreadCrumbValueObject("6", "label7", ""),
-            new BreadCrumbValueObject("7", "label8", ""),
-            new BreadCrumbValueObject("8", "label9", ""),
-            new BreadCrumbValueObject("9", "label10", ""),
-            new BreadCrumbValueObject("10", "label11", ""),
-            new BreadCrumbValueObject("11", "label12", ""),
-            new BreadCrumbValueObject("12", "label13", ""),
-            new BreadCrumbValueObject("13", "label14", ""),
-            new BreadCrumbValueObject("14", "label15", ""),
-            new BreadCrumbValueObject("15", "label16", ""),
-            new BreadCrumbValueObject("16", "label17", ""),
-            new BreadCrumbValueObject("17", "label18", ""),
-            new BreadCrumbValueObject("18", "label19", ""),
-            new BreadCrumbValueObject("19", "label20", ""),
-            new BreadCrumbValueObject("20", "label21", ""),
-            new BreadCrumbValueObject("21", "label22", ""),
-            new BreadCrumbValueObject("22", "label23", ""),
-            new BreadCrumbValueObject("23", "label24", ""),
-            new BreadCrumbValueObject("24", "label25", ""),
-            new BreadCrumbValueObject("25", "label26", ""),
-            new BreadCrumbValueObject("26", "label27", "")
-        ];
-        BreadCrumb.initialize(items);
+        return navigationUrl;
+    },
+
+    getPreviousBreadCrumbNavigationLocation: function(breadcrumbId){
+        var previousBreadcrumItem;
+        $.each( BreadCrumb.items, function( index, breadcrumbObject ) {
+            if(breadcrumbObject.id == breadcrumbId){
+                previousBreadcrumItem = BreadCrumb.items[index-1];
+                return false;
+            }
+        });
+
+        return Application.getApplicationPath() + previousBreadcrumItem.url;
     }
 };
 
+
+var TitlePanel = {
+    create: function (pageTitle) {
+        if(!_.isUndefined(pageTitle) && pageTitle.trim().length){
+            $('#header').append("<div id='title-panel'>"+pageTitle+"</div>");
+        }
+    }
+}
 
 /**
  * @class Contains application specific details.

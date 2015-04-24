@@ -4,66 +4,33 @@
 
 #breadcrumb-panel{
     clear: both;
-    height: 40px;
-    position: relative;
-    width: auto;
-    background-color: #F9FAFB;
-    border-bottom: 2px solid #DEE5E7;
+    height: 42px;
+    line-height: 42px;
 }
 
-#breadcrumbHeader li {
-    padding-right: 25px;
+a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited , .breadcrumbButton {
+    padding-right: 15px;
+    color: #557287;
     font-size: 14pt;
-    font-family: "Open Sans";
-    list-style-type: disc;
-    float: left;
-    color: #B9B9B9;
 }
 
-#breadcrumbHeader li:first-of-type{
-    list-style-type:none;
+a.breadcrumbButton{
+    text-decoration: underline;
 }
 
-#breadcrumbHeader li:last-child a{
-    text-decoration:none;
-    cursor: default;
+#title-panel{
+    height: 64px;
+    line-height: 64px;
+    font-size: 20pt;
 }
 
-a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited  {
-    color: #41566F;
-}
-
-a.breadcrumbButton,#titlePanel{
-    line-height: 40px;
-}
-
-#titlePanel{
-    height: 40px;
-    position: relative;
-    width: auto;
+#breadcrumb-panel, #title-panel{
     background-color: #F9FAFB;
     border-bottom: 2px solid #DEE5E7;
-    font-size: 20pt;
     font-family: "Open Sans";
-    color: #41566F;
-}
-
-ul#breadcrumbHeader, #titlePanel {
     padding-left: 18px;
+    color: #557287;
 }
-
-#breadcrumbBackButton {
-    background:url("images/icon-arrow-back.svg") no-repeat;
-    position:relative;
-    height: 14px;
-    width: 14px;
-    float:left;
-}
-
-#content{
-    top:150px;
-}
-
 
 /*Mobile device*/
 
@@ -72,62 +39,27 @@ and (min-device-width: 0px)
 and (max-device-width: 768px) {
 
     #breadcrumb-panel{
-        height: 36px;
-    }
-
-    #titlePanel{
-        height: 36px;
-        font-size: 16pt;
-    }
-
-    #globalNav{
-        height: 30px;
-    }
-
-    a.breadcrumbButton,#titlePanel{
-        line-height: 36px;
+        height: 42px;
+        line-height :42px;
+        padding-left:12px;
     }
 
     #breadcrumbBackButton{
-        margin-left: 13px;
-        margin-top: 10px;
+        background:url("images/icon-arrow-back.svg") no-repeat center;
+        position:relative;
+        height: 100%;
+        width: 14px;
+        float:left;
         margin-right: 10px;
     }
 
-    #breadcrumbHeader li {
-        font-size: 10pt;
+    #breadcrumbHeader, #breadcrumbPageTitle {
+        font-size: 15px;
     }
 
-    #content{
-        top:120px;
+    #breadcrumbHeader.hidden{
+        display:none;
     }
-
 }
 
-
-/*Tablet device*/
-
-@media only screen
-and (min-device-width: 769px)
-and (max-device-width: 1024px) {
-    #breadcrumb-panel{
-        height: 40px;
-    }
-
-    #titlePanel{
-        height: 40px;
-    }
-
-    #globalNav{
-        height: 50px;
-    }
-
-    a.breadcrumbButton,#titlePanel{
-        line-height: 40px;
-    }
-    #content{
-        top:140px;
-    }
-
-}
 
