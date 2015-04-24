@@ -4,11 +4,20 @@
 
 #header {
     background-color:#206E9F;
-    height:60px;
+    /*height:60px;*/
     width:100%;
 }
 
-#globalNavLeft  div{
+#header-main-section {
+    height:60px;
+}
+
+#header-main-section-west-part {
+    float:left;
+
+}
+
+#header-main-section-west-part  div{
     float:left;
 }
 #globalNavRight{
@@ -22,19 +31,22 @@
     color: #ffffff;
     font: 13px Open Sans;
 }
-#home {
-    background:url("images/menu.png") no-repeat;
-    display:inline-block;
-    position:relative;
-    height:15px;
-    width:20px;
+#bannerMenu {
+    background: url("images/menu.png") no-repeat;
+    display: inline-block;
+    position: relative;
+    height: 14px;
+    width: 14px;
+    left: 14px;
+    float: left;
 }
 
 .institutionalBranding {
-    background:url("images/elogo.png") no-repeat;
-    display:inline-block;
-    height:50px;
-    width:150px;
+    background: url("images/logo.svg") no-repeat;
+    display: inline-block;
+    height: 18px;
+    width: 78px;
+    float: left;
 }
 
 #tools {
@@ -52,3 +64,21 @@
     height:25px;
     width:25px;
 }
+
+
+/*Mobile device*/
+
+@media only screen
+and (min-device-width: 0px)
+and (max-device-width: 768px) {
+
+}
+
+/*Tablet device*/
+
+@media only screen
+and (min-device-width: 769px)
+and (max-device-width: 1024px) {
+
+}
+

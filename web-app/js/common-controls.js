@@ -49,24 +49,18 @@ function Button(id, label, callback, type) {
  * @author jmiller
  */
 function Header() {
-    var header ="<div id='header'><div id='navigation-panel'>"
-                + "<div  id='globalNavLeft'>"
-                    + "<div id='homeDiv'>"
-                         + "<a id='home' href='#' alt='Home'></a>"
-                    + "</div>"
-                    + "<div>"
-                        + "<div id='brandingDiv'>"
-                             + "<a id='branding' href='#' class='institutionalBranding'></a>"
-                        + "</div>"
-                + "</div>"
-                + "</div></div>";
+    var header ="<div id='header'><div id='header-main-section'>"
+                    + "<div id='header-main-section-west-part'>"
+                        + "<a id='bannerMenu' href='#' alt='Banner Menu'></a>"
+                        + "<a id='branding' href='#' class='institutionalBranding'></a>"
+                    + "</div></div>";
 
     return $(header);
 }
 
 function addAttributesToHeader() {
-    var browseShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
-    $('#home').attr("title",browseShortCut);
+    var bannerMenuTitleAndShortcut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
+    $('#bannerMenu').attr("title",bannerMenuTitleAndShortcut);
     $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
     //Add href to branding
     var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
@@ -127,7 +121,7 @@ function addNavigationControls() {
         'shift+home', function() {
             // click the first link in the home div.
             // just $().click() doesn't work as the element is not an input
-            $('#brandingDiv a')[0].click();
+            $('#branding')[0].click();
         },
         'alt+m', toggleBrowseMenu,
         'ctrl+shift+F', signIn,
