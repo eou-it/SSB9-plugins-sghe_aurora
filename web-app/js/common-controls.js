@@ -1900,7 +1900,7 @@ var ToolsMenu = {
  */
 var ControlBar = {
 
-    node: $("<div id='globalNavRight'>"
+    node: $("<div id='header-main-section-east-part'>"
         + "</div>"),
 
     canvas: null,

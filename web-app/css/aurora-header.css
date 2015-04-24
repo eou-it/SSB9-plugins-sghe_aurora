@@ -10,62 +10,109 @@
 
 #header-main-section {
     height:60px;
+    display: inline-table;
+    width: 100%;
 }
 
 #header-main-section-west-part {
-    float:left;
-
+    display: table-cell;
+    vertical-align: middle;
 }
 
 #header-main-section-west-part  div{
     float:left;
 }
-#globalNavRight{
-    float:right;
-    background-color:#1B6496;
+#header-main-section-east-part{
+    float: right;
+    background-color: #1B6496;
+    line-height: 62px;
+    border-left: 1px #1B64C1 solid;
+    height: 60px;
 }
-#globalNavRight div{
+
+#header-main-section-east-part #signInDiv {
+    padding-left: 22px;
+    padding-right: 21px;
+    border-right: 1px #1B64C1 solid;
+}
+
+
+#header-main-section-east-part #userDiv {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-left: 1px #1B64C1 solid;
+}
+
+#header-main-section-east-part #userDiv #username{
+    color: #ffffff;
+    font: 10pt Open Sans;
+    padding-left: 7px;
+}
+#header-main-section-east-part #toolsDiv {
+    padding-left: 20px;
+    padding-right: 20px;
+    border-left: 1px #1B64C1 solid;
+}
+
+#header-main-section-east-part #notification-center {
+    border-left: 1px #1B64C1 solid;
+}
+
+#header-main-section-east-part div{
     float:left;
 }
 #signInText {
     color: #ffffff;
-    font: 13px Open Sans;
+    font: 10pt Open Sans;
+    text-decoration: blink;
 }
 #bannerMenu {
     background: url("images/menu.png") no-repeat;
-    display: inline-block;
-    position: relative;
     height: 14px;
     width: 14px;
     left: 14px;
     float: left;
+    margin-left: 18px;
+    transform: translateY(47%);
 }
 
 .institutionalBranding {
     background: url("images/logo.svg") no-repeat;
-    display: inline-block;
-    height: 18px;
+    height: 19px;
     width: 78px;
     float: left;
+    margin-left: 13px;
 }
 
 #tools {
-    background:url("images/tools.png") no-repeat;
-    display:inline-block;
-    position:relative;
-    height:25px;
-    width:20px;
+    background: url("images/tools.png") no-repeat;
+    display: inline-block;
+    position: relative;
+    height: 25px;
+    width: 20px;
+    transform: translateY(47%);
 }
 
 #user {
-    background:url("images/avatar.png") no-repeat;
-    display:inline-block;
-    position:relative;
-    height:25px;
-    width:25px;
+    background: url("images/avatar.png") no-repeat;
+    display: inline-block;
+    position: relative;
+    height: 25px;
+    width: 25px;
+    transform: translateY(47%);
 }
 
+.notification-center {
+    color: #FFD079;
+    direction: ltr;
+}
 
+.notification-center-count {
+    text-align: center;
+    width: 32px;
+    font-size: 14px;
+    background-color: #FFD079;
+}
 /*Mobile device*/
 
 @media only screen
