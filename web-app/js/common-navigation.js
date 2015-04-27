@@ -236,6 +236,11 @@ var ContentManager = {
         }
 
         return name;
+    },
+
+    setContentPosition: function(){
+        var headerHeight = $('#header').height();
+        $( '#' + ContentManager.container).css('top', headerHeight);
     }
 };
 
@@ -545,7 +550,6 @@ var Navigation = {
                     var pageTitle = JSON.parse($('meta[name=menuDefaultBreadcrumbId]').attr("content")).pageTitle;
                     if(isDesktop() || isTablet()){
                         BreadCrumb.setFullBreadcrumb(breadcrumbItems);
-                        TitlePanel.create(pageTitle);
                     }
                     else if(isMobile()){
                         BreadCrumb.setBreadcrumbLeaf(breadcrumbItems,pageTitle);

@@ -1928,3 +1928,12 @@ var ControlBar = {
             this.node.prepend(node);
     }
 }
+
+
+$(document).ready(function(){
+    var pageTitle = JSON.parse($('meta[name=menuDefaultBreadcrumbId]').attr("content")).pageTitle;
+    if(isDesktop() || isTablet()){
+        TitlePanel.create(pageTitle);
+    }
+    ContentManager.setContentPosition();
+})
