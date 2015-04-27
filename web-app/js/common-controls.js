@@ -79,10 +79,6 @@ function addAttributesToHeader() {
     }
 
 }
-function InstitutionalBranding() {
-    return $("<a href='#' id='branding' target='_parent' class='institutionalBranding'></a>");
-    /* href link was ealier "/banner/" */
-}
 
 function initializeToolsMenu() {
     $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
@@ -111,25 +107,6 @@ function addNavigationControls() {
     BreadCrumb.create();
     initializeToolsMenu();
 
-    // Add the localized strings
-    //TODO: HRU:5803 cleanup
-//    var signOutShortCut
-//    if(CommonContext.user){
-//        signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signout"), ResourceManager.getString("userdetails_signout_shortCut"));
-//
-//    }else{
-//        signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signin"), ResourceManager.getString("userdetails_signout_shortCut"));
-//    }
-//    $('#signOutDiv').attr("title",signOutShortCut);
-//
-//    var browseShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
-//    var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_home_shortcut"));
-//    $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
-//    $('#homeArrow').attr("alt", ResourceManager.getString("areas_label_home_description"));
-//    $('#homeButton').attr("title", homeShortCut);
-//    $('#browseButton').attr("title",browseShortCut);
-    $('#openedButton').attr("title", ResourceManager.getString("areas_label_opened_shortcut"));
-    $('#openedButton').find('div div a').text(ResourceManager.getString("areas_label_opened"));
     var shortcuts = [
         'shift+home', function() {
             // click the first link in the home div.
@@ -141,31 +118,20 @@ function addNavigationControls() {
         'alt+n', toggleNotificationCenter,
         'alt+l',toggleToolsMenu
     ];
-    $('#openedButton').is(':visible') && shortcuts.push( 'alt+g', toggleOpenedItems );
-    //TODO: HRU:5803 cleanup
-//    $('#openedButton').is(':visible') && shortcuts.push( 'alt+l', toggleToolsMenu );
-
     key && key.bind.apply( window, shortcuts );
 }
 
 function toggleNotificationCenter(){
     window.notificationCenter.toggle();
 }
-//TODO: HRU:5803 cleanup
-//function gotoMainPage() {
-//    // TODO:  We should be firing an event and allowing the application to handle the event.
-//
-//}
+
 
 function closeOpenMenus() {
     if (!$('#browseMenu').is(':hidden') && !$('#browseButtonState').hasClass('over') &&
         !$('#browseMenu').hasClass('over')) {
         toggleBrowseMenu()
     }
-    if (!$('#openedItemsMenu').is(':hidden') && !$('#openedItemsButtonState').hasClass('over') &&
-        !$('#openedItemsMenu').hasClass('over')) {
-        toggleOpenedItems()
-    }
+
     if (!$('#toolsMenu').is(':hidden') && !$('#toolsButtonState').hasClass('over') &&
         !$('#toolsMenu').hasClass('over')) {
         toggleToolsMenu()
@@ -176,9 +142,7 @@ function closeAllMenus() {
     if (!$('#browseMenu').is(':hidden')) {
         toggleBrowseMenu()
     }
-    if (!$('#openedItemsMenu').is(':hidden')) {
-        toggleOpenedItems()
-    }
+
     if (!$('#toolsMenu').is(':hidden')) {
         toggleToolsMenu()
     }
@@ -247,65 +211,9 @@ function toggleBrowseMenu() {
     return false;
 }
 
-function toggleOpenedItems() {
-    if ($('#openedItemsMenu').is(':hidden')) {
-        $('#openedButton').removeClass("openedButton");
-
-        $('#openedArrow').removeClass('headerButtonDownArrow');
-        $('#openedArrow').addClass('upArrow');
-
-        $('#openedItemsButtonState').addClass('active over');
-
-        closeOpenMenus();
-        $('#openedItemsMenu').slideDown('normal', function() {
-            // add a handler to close the Browsemenu when the mouse is clicked outside
-            $('body').click(function() {
-                closeOpenMenus();
-            });
-
-        });
-
-        $('#openedItemsButtonState, #openedItemsMenu').bind('mouseenter', function() {
-            $(this).addClass("over");
-        });
-        $('#openedItemsButtonState, #openedItemsMenu').bind('mouseleave', function() {
-            $(this).removeClass("over");
-        });
-        $('#openedItemsButtonState').removeClass("over");
-        $('#openedItemsMenu').removeClass("over");
-        $('.zk-gotopanel input:first').focus();
-
-    } else {
-        //This code was added to fix the Goto issue where the width of recently opened list was not getting calculated properly
-        if ($('.zk-gotopanel:visible .c-box .z-group-img').hasClass('z-group-img-open')) {
-            setTimeout(function() {
-                $('.zk-gotopanel:visible .c-box .z-group-img-open').click();
-            }, 200);
-        }
-
-
-        $('#openedButton').addClass("openedButton");
-
-        $('#openedArrow').removeClass('upArrow');
-        $('#openedArrow').addClass('headerButtonDownArrow');
-
-        $('#openedItemsMenu').slideUp('normal', function() {
-            $('#openedItemsButtonState').removeClass('active');
-        });
-        $('.openedButton').mouseleave();
-        // force clearing any existing handler
-        $('body').unbind('click');
-    }
-    return false;
-}
-
 function toggleToolsMenu() {
     if ($('#toolsMenu').is(':hidden')) {
         $('#toolsButton').removeClass("toolsButton");
-
-        $('#toolsArrow').removeClass('headerButtonDownArrow');
-        $('#toolsArrow').addClass('upArrow');
-
         $('#toolsButtonState').addClass('active over');
 
         closeOpenMenus();
@@ -326,10 +234,6 @@ function toggleToolsMenu() {
         $('#toolsMenu').find('.selectedToolsItem').focus();
     } else {
         $('#toolsButton').addClass("toolsButton");
-
-        $('#toolsArrow').removeClass('upArrow');
-        $('#toolsArrow').addClass('headerButtonDownArrow');
-
         $('#toolsMenu').slideUp('normal', function() {
             $('#toolsButtonState').removeClass('active');
         });
@@ -339,21 +243,8 @@ function toggleToolsMenu() {
     }
     return false;
 }
-//TODO: HRU:5803 cleanup
-//function removeSignin(){
-//    $("#signOutDiv").parent().remove();
-//}
 
 function signIn(){
-    //TODO: HRU:5803 cleanup
-//    // set CommonContext.user to null before removing the cookie
-//    CommonContext.user = null;
-//
-//    if ($('#signOutText').hasClass('signInText')) {
-//        window.location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
-//    } else {
-//        window.location = $('meta[name=logoutEndpoint]').attr("content") || ApplicationConfig.logoutEndpoint;
-//    }
     $('#signInText')[0].click();
 }
 
@@ -376,49 +267,6 @@ function UserControls( options ) {
     ControlBar.append(notificationDiv);
     var toolsContainer = "<div id='toolsContainer'/>";
     ControlBar.append(toolsContainer);
-    //TODO: HRU:5803 cleanup
-//
-//    if (CommonContext.mepHomeContext) {
-//        var mepLink = $("<span id='mepHomeContext' class='mepHomeContextText'>" + CommonContext.mepHomeContext + "</span>");
-//        ControlBar.attach(mepLink);
-//        mepLink.find('.mepChangeLink').click(function() {
-//
-//        });
-//    }
-//
-//    var signInOutLink = $("<span id='signOutShortCut' class='offscreen'>"+ ResourceManager.getString("userdetails_signout_description") + "</span><a  id='signOutText' aria-describedBy='signOutShortCut'  href='#' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
-//        + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>").keydown(function(e){
-//        if (e.keyCode == 13 || e.keyCode == 32) {
-//            e.preventDefault();
-//            e.stopPropagation();
-//            signOut();
-//        }
-//    });
-//
-//    signInOutLink.click(function(e) {
-//        e.preventDefault();
-//        e.stopPropagation();
-//        signOut();
-//    });
-//
-//    var guestSignInLink
-//    if(!CommonContext.user && "true" == $('meta[name=guestLoginEnabled]').attr("content")) {
-//        guestSignInLink = $("<a id='guestSignInText' class='signInText pointer'>"
-//            + ResourceManager.getString("guestuserdetails_signin") + "</a>");
-//        ControlBar.append(guestSignInLink);
-//        guestSignInLink.click(function () {
-//            // set CommonContext.user to null before removing the cookie
-//            if ($(this).hasClass('signInText')) {
-//                window.location = ApplicationConfig.loginEndpoint;
-//            }
-//        });
-//    }
-
-
-
-//    var signOutWrapperdiv = $("<div></div>").append(signInOutLink);
-//    var signOutDiv = $("<div id='signOutDiv' tabindex='-1'></div>").append(signOutWrapperdiv)
-//    ControlBar.append(signOutDiv);
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
         var helpLink = $("<a id='helpText' class='helpText pointer'>" + ResourceManager.getString("userdetails_help") + "</a>");

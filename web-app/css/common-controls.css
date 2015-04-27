@@ -604,24 +604,10 @@
 
 /* opened items */
 
-#openedButton, #toolsButton {
+#toolsButton {
     margin-left:0px;
 }
 
-#openedItemsContainer {
-    position: absolute;
-    top: 75px;
-    z-index: 1501;
-    right: 99px;
-    width: 50%;
-}
-#openedItemsMenu {
-    display: none;
-    z-index: 999;
-}
-#openedItemsCanvas {
-    background: #477b9c;
-}
 
 #buttonContainer {
     float:right;
@@ -630,7 +616,7 @@
     left: auto;
 }
 
-#openedItemsButtonState, #toolsButtonState {
+#toolsButtonState {
     border:1px solid transparent;
     float:left;
     height:33px;
@@ -640,7 +626,7 @@
     -webkit-border-radius: 4px 4px 0 0;
 }
 
-#openedItemsButtonState.active, #toolsButtonState.active {
+#toolsButtonState.active {
     background-color: #477b9c;
     border:1px solid #13689E;
     border-bottom: none;
