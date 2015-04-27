@@ -50,10 +50,10 @@ function Button(id, label, callback, type) {
  */
 function Header() {
     var header ="<div id='header'><div id='header-main-section'>"
-                    + "<div id='header-main-section-west-part'>"
-                        + "<a id='bannerMenu' href='#' alt='Banner Menu'></a>"
-                        + "<a id='branding' href='#' class='institutionalBranding'></a>"
-                    + "</div></div>";
+        + "<div id='header-main-section-west-part'>"
+        + "<a id='bannerMenu' href='#' alt='Banner Menu'></a>"
+        + "<a id='branding' href='#' class='institutionalBranding'></a>"
+        + "</div></div>";
 
     return $(header);
 }
@@ -84,10 +84,32 @@ function InstitutionalBranding() {
     /* href link was ealier "/banner/" */
 }
 
+function initializeToolsMenu() {
+    $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
+    $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
+    $('#toolsContainer').prepend("<div id='toolsMenu'>"
+        + "<div class='browseMenuShadow'>"
+        + "<div id='toolsCanvas'></div>"
+        + "</div>"
+        + "</div>");
+
+    ToolsMenu.initialize();
+    $('#toolsButton').bind("click", toggleToolsMenu);
+    var parent=$('#toolsButton');
+    if (parent.length > 0) {
+        $('#toolsContainer').position({
+            my: "right top",
+            at: "right bottom",
+            of: parent
+        });
+    }
+}
+
 
 function addNavigationControls() {
 
     BreadCrumb.create();
+    initializeToolsMenu();
 
     // Add the localized strings
     //TODO: HRU:5803 cleanup
@@ -108,11 +130,6 @@ function addNavigationControls() {
 //    $('#browseButton').attr("title",browseShortCut);
     $('#openedButton').attr("title", ResourceManager.getString("areas_label_opened_shortcut"));
     $('#openedButton').find('div div a').text(ResourceManager.getString("areas_label_opened"));
-    $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
-    $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
-
-    ToolsMenu.initialize();
-
     var shortcuts = [
         'shift+home', function() {
             // click the first link in the home div.
@@ -121,10 +138,12 @@ function addNavigationControls() {
         },
         'alt+m', toggleBrowseMenu,
         'ctrl+shift+F', signIn,
-        'alt+n', toggleNotificationCenter
+        'alt+n', toggleNotificationCenter,
+        'alt+l',toggleToolsMenu
     ];
     $('#openedButton').is(':visible') && shortcuts.push( 'alt+g', toggleOpenedItems );
-    $('#openedButton').is(':visible') && shortcuts.push( 'alt+l', toggleToolsMenu );
+    //TODO: HRU:5803 cleanup
+//    $('#openedButton').is(':visible') && shortcuts.push( 'alt+l', toggleToolsMenu );
 
     key && key.bind.apply( window, shortcuts );
 }
@@ -338,23 +357,25 @@ function signIn(){
     $('#signInText')[0].click();
 }
 
+
 function UserControls( options ) {
 
     ControlBar.initialize();
-
+    var toolsDiv = $("<div id='toolsButton'><a id='tools' href='#'></a></div>");
+    ControlBar.append(toolsDiv);
     // add user context
     if (CommonContext.user == null) {
         var location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
         var signInDiv = $("<div id='signInDiv'><a id='signInText' href="+location+">"+ResourceManager.getString("userdetails_signin")+"</a></div>");
         ControlBar.append(signInDiv);
     } else {
-        var toolsDiv = "<div id='toolsDiv'><a id='tools' href='#'></a></div>";
-        var userDiv = "<div id='userDiv'><a id='user' href='#'></a><span id='username'>"+CommonContext.user+"</span></div>";
-        ControlBar.append(toolsDiv);
+        var userDiv = $("<div id='userDiv'><a id='user' href='#'></a><span id='username'>"+CommonContext.user+"</span></div>");
         ControlBar.append(userDiv);
     }
     var notificationDiv = "<div id='notification-center'></div>";
     ControlBar.append(notificationDiv);
+    var toolsContainer = "<div id='toolsContainer'/>";
+    ControlBar.append(toolsContainer);
     //TODO: HRU:5803 cleanup
 //
 //    if (CommonContext.mepHomeContext) {
@@ -1786,6 +1807,7 @@ function setCurrentPage(currentPage) {
     CommonContext.currentPage = currentPage;
 }
 
+
 /**
  * Tools menu class to manage the menu items under the Tools section in the Aurora header
  */
@@ -1847,8 +1869,7 @@ var ToolsMenu = {
         var d = sec.find('div');
         d.attr("id", id);
         d.text(label);
-        //TODO: HRU:5803 cleanup
-        //  this.canvas.append(sec);
+        this.canvas.append(sec);
         return sec;
     },
 
@@ -1878,11 +1899,10 @@ var ToolsMenu = {
                 callback(e);
             toggleToolsMenu();
         });
-        //TODO: HRU:5803 cleanup
-//        if (sectionId)
-//            this.canvas.find('#' + sectionId).next('ul').append(item);
-//        else
-//            this.canvas.append(item);
+        if (sectionId)
+            this.canvas.find('#' + sectionId).next('ul').append(item);
+        else
+            this.canvas.append(item);
         return item;
     },
 

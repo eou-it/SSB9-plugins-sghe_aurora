@@ -26,5 +26,6 @@ modules = {
         resource url:[plugin: 'sghe-aurora', file: 'css/common-platform-rtl.css'], attrs:[media:'screen, projection']
         resource url:[plugin: 'sghe-aurora', file: 'css/aurora-breadcrumb-rtl.css'], attrs:[media:'screen, projection']
         resource url:[plugin: 'sghe-aurora', file: 'css/rtl.css'],       attrs:[media:'screen, projection']
+        resource url:[plugin: 'sghe-aurora', file: 'css/aurora-header-rtl.css'], attrs:[media:'screen, projection']
     }
 }
