@@ -80,32 +80,16 @@ function addAttributesToHeader() {
 
 }
 
-function initializeToolsMenu() {
-    $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
-    $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
-    $('#toolsContainer').prepend("<div id='toolsMenu'>"
-        + "<div class='browseMenuShadow'>"
-        + "<div id='toolsCanvas'></div>"
-        + "</div>"
-        + "</div>");
-
-    ToolsMenu.initialize();
-    $('#toolsButton').bind("click", toggleToolsMenu);
-    var parent=$('#toolsButton');
-    if (parent.length > 0) {
-        $('#toolsContainer').position({
-            my: "right top",
-            at: "right bottom",
-            of: parent
-        });
-    }
-}
-
-
 function addNavigationControls() {
 
     BreadCrumb.create();
-    initializeToolsMenu();
+    ToolsMenu.initialize();
+
+    if (isDesktop()) {
+        SignInMenu.initialize();
+        SignInMenu.addItem("sign-in", 'Sign In');
+        SignInMenu.addItem("guest-sign-in", 'Guest SignIn');
+    }
 
     var shortcuts = [
         'shift+home', function() {
@@ -132,8 +116,7 @@ function closeOpenMenus() {
         toggleBrowseMenu()
     }
 
-    if (!$('#toolsMenu').is(':hidden') && !$('#toolsButtonState').hasClass('over') &&
-        !$('#toolsMenu').hasClass('over')) {
+    if (!$('#toolsMenu').is(':hidden') && !$('#toolsMenu').hasClass('over')) {
         toggleToolsMenu()
     }
 }
@@ -214,8 +197,6 @@ function toggleBrowseMenu() {
 function toggleToolsMenu() {
     if ($('#toolsMenu').is(':hidden')) {
         $('#toolsButton').removeClass("toolsButton");
-        $('#toolsButtonState').addClass('active over');
-
         closeOpenMenus();
         $('#toolsMenu').slideDown('normal', function() {
             // add a handler to close the Browsemenu when the mouse is clicked outside
@@ -224,25 +205,54 @@ function toggleToolsMenu() {
             });
         });
 
-        $('#toolsButtonState, #toolsMenu').bind('mouseenter', function() {
+        $('#toolsMenu').bind('mouseenter', function() {
             $(this).addClass("over");
         });
-        $('#toolsButtonState, #toolsMenu').bind('mouseleave', function() {
+        $('#toolsMenu').bind('mouseleave', function() {
             $(this).removeClass("over");
         });
 
         $('#toolsMenu').find('.selectedToolsItem').focus();
     } else {
         $('#toolsButton').addClass("toolsButton");
-        $('#toolsMenu').slideUp('normal', function() {
-            $('#toolsButtonState').removeClass('active');
-        });
+        $('#toolsMenu').slideUp('normal');
         $('.toolsButton').mouseleave();
         // force clearing any existing handler
         $('body').unbind('click');
     }
     return false;
 }
+
+
+function toggleSignInMenu() {
+    if ($('#signInMenu').is(':hidden')) {
+        $('#signInButton').removeClass("signInButton");
+        closeOpenMenus();
+        $('#signInMenu').slideDown('normal', function() {
+            // add a handler to close the Browsemenu when the mouse is clicked outside
+            $('body').click(function() {
+                closeOpenMenus();
+            });
+        });
+
+        $('#signInMenu').bind('mouseenter', function() {
+            $(this).addClass("over");
+        });
+        $('#signInMenu').bind('mouseleave', function() {
+            $(this).removeClass("over");
+        });
+
+        $('#signInMenu').find('.selectedToolsItem').focus();
+    } else {
+        $('#signInButton').addClass("toolsButton");
+        $('#signInMenu').slideUp('normal');
+        $('.signInButton').mouseleave();
+        // force clearing any existing handler
+        $('body').unbind('click');
+    }
+    return false;
+}
+
 
 function signIn(){
     $('#signInText')[0].click();
@@ -252,21 +262,33 @@ function signIn(){
 function UserControls( options ) {
 
     ControlBar.initialize();
+
     var toolsDiv = $("<div id='toolsButton'><a id='tools' href='#'></a></div>");
     ControlBar.append(toolsDiv);
+    var toolsContainer = $("<div id='toolsContainer'/>");
+    ControlBar.append(toolsContainer);
+
+
     // add user context
     if (CommonContext.user == null) {
         var location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
-        var signInDiv = $("<div id='signInDiv'><a id='signInText' href="+location+">"+ResourceManager.getString("userdetails_signin")+"</a></div>");
-        ControlBar.append(signInDiv);
+        if (isDesktop()) {
+            var signInContainer = $("<div id='signInContainer'/>");
+            ControlBar.append(signInContainer);
+            var signInButton = $("<div id='signInButton'><a id='signInText'  href='#'>ddd</a></div>");
+            ControlBar.append(signInButton);
+        } else {
+            var signInDiv = $("<div id='signInDiv'><a id='signInText' href="+location+">"+ResourceManager.getString("userdetails_signin")+"</a></div>");
+            ControlBar.append(signInDiv);
+        }
+
     } else {
         var userDiv = $("<div id='userDiv'><a id='user' href='#'></a><span id='username'>"+CommonContext.user+"</span></div>");
         ControlBar.append(userDiv);
     }
     var notificationDiv = "<div id='notification-center'></div>";
     ControlBar.append(notificationDiv);
-    var toolsContainer = "<div id='toolsContainer'/>";
-    ControlBar.append(toolsContainer);
+
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
         var helpLink = $("<a id='helpText' class='helpText pointer'>" + ResourceManager.getString("userdetails_help") + "</a>");
@@ -1659,12 +1681,7 @@ function setCurrentPage(currentPage) {
 /**
  * Tools menu class to manage the menu items under the Tools section in the Aurora header
  */
-var ToolsMenu = {
-
-    /**
-     * Tools menu button DOM
-     */
-    button: "",
+var NonHierarchicalMenu = {
 
     /**
      * Dropdown menu
@@ -1686,24 +1703,15 @@ var ToolsMenu = {
      */
     itemHtml: $("<li><div class='menu-item'></div></li>"),
 
-    initialize: function() {
-        this.button = $("#toolsButtonState");
-        this.dropDown = $("#toolsContainer");
-        this.dropDown.find("#toolsCanvas").append("<ul/>")
-        this.canvas = this.dropDown.find("#toolsCanvas ul");
-
-
-    },
+    callbackPostItemClick: null,
 
     /**
      * show/hide tools button
      */
-    visible: function(flag) {
+    visible: function (flag) {
         if (flag) {
-            this.button.show();
             this.dropDown.show();
         } else {
-            this.button.hide();
             this.dropDown.hide();
         }
     },
@@ -1712,7 +1720,7 @@ var ToolsMenu = {
      * @param id
      * @param label
      */
-    addSection: function(id, label) {
+    addSection: function (id, label) {
         var sec = this.sectionHtml.clone();
         var d = sec.find('div');
         d.attr("id", id);
@@ -1725,7 +1733,7 @@ var ToolsMenu = {
      * removes the specified section
      * @param id
      */
-    removeSection: function(id) {
+    removeSection: function (id) {
 
     },
 
@@ -1736,16 +1744,17 @@ var ToolsMenu = {
      * @param sectionId
      * @param callback
      */
-    addItem: function(id, label, sectionId, callback) {
+    addItem: function (id, label, sectionId, callback) {
         var item = this.itemHtml.clone();
         var i = item.find('div');
+        var handlerPostItemClick = this.callbackPostItemClick;
         i.attr('id', id);
         i.text(label);
 
-        item.click(function(e) {
+        item.click(function (e) {
             if (callback)
                 callback(e);
-            toggleToolsMenu();
+            handlerPostItemClick.call();
         });
         if (sectionId)
             this.canvas.find('#' + sectionId).next('ul').append(item);
@@ -1758,10 +1767,62 @@ var ToolsMenu = {
      * removes an menu item from the tools menu
      * @param id
      */
-    removeItem: function(id) {
+    removeItem: function (id) {
 
     }
 }
+
+var ToolsMenu = Object.create(NonHierarchicalMenu);
+ToolsMenu.initialize = function() {
+        $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
+        $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
+        $('#toolsContainer').prepend("<div id='toolsMenu'>"
+            + "<div class='browseMenuShadow'>"
+            + "<div id='toolsCanvas'></div>"
+            + "</div>"
+            + "</div>");
+        this.dropDown = $("#toolsContainer");
+        this.dropDown.find("#toolsCanvas").append("<ul/>")
+        this.canvas = this.dropDown.find("#toolsCanvas ul");
+        this.callbackPostItemClick = toggleToolsMenu;
+
+        $('#toolsButton').bind("click", toggleToolsMenu);
+        var parent=$('#toolsButton');
+        if (parent.length > 0) {
+            $('#toolsContainer').position({
+                my: "right top",
+                at: "right bottom",
+                of: parent
+            });
+        }
+
+}
+
+var SignInMenu = Object.create(NonHierarchicalMenu);
+SignInMenu.initialize = function() {
+    $('#signInContainer').prepend("<div id='signInMenu'>"
+        + "<div class='browseMenuShadow'>"
+        + "<div id='signInCanvas'></div>"
+        + "</div>"
+        + "</div>");
+    this.dropDown = $("#signInContainer");
+    this.dropDown.find("#signInCanvas").append("<ul/>")
+    this.canvas = this.dropDown.find("#signInCanvas ul");
+    this.callbackPostItemClick = toggleSignInMenu;
+
+    $('#signInButton').bind("click", toggleSignInMenu);
+    var parent=$('#signInButton');
+    if (parent.length > 0) {
+        $('#signInContainer').position({
+            my: "right top",
+            at: "right bottom",
+            of: parent
+        });
+    }
+
+}
+
+
 
 /**
  * Class to manage user controls on the top right corner of the Aurora header

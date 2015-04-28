@@ -107,11 +107,6 @@
     padding-right: 16px;
 }
 
-#openedItemsButtonState, #toolsButtonState {
-    float: left;
-}
-
-
 #browseButtonState {
     right: 4px;
 }

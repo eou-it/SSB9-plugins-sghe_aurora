@@ -616,22 +616,6 @@
     left: auto;
 }
 
-#toolsButtonState {
-    border:1px solid transparent;
-    float:left;
-    height:33px;
-    margin:0 0 0 -2px;
-    padding:5px 5px 0px;
-    -moz-border-radius: 4px 4px 0 0;
-    -webkit-border-radius: 4px 4px 0 0;
-}
-
-#toolsButtonState.active {
-    background-color: #477b9c;
-    border:1px solid #13689E;
-    border-bottom: none;
-}
-
 /* tools menu */
 
 #toolsContainer {
@@ -672,6 +656,43 @@
 }
 /* ============================================================================================ */
 
+/* tools menu */
+
+#signInContainer {
+    position: absolute;
+    z-index: 1000;
+    right: 5px;
+    width: 250px;
+    left: auto;
+}
+#signInMenu {
+    display: none;
+    z-index: 999;
+}
+#signInCanvas {
+    background: #FFFFFF; /*#477b9c*/
+}
+#signInCanvas ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+#signInCanvas .menu-section {
+    background: #999999;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 5px;
+}
+#signInCanvas .menu-item {
+    background: #CCCCCC;
+    font-size: 1.2em;
+    font-style: normal;
+    padding: 5px;
+    cursor: pointer;
+}
+#signInCanvas .menu-item:hover {
+    background: #bfbebe;
+}
 
 #outerFooter {
     background: transparent url("images/footer-background.png") repeat-x top left;

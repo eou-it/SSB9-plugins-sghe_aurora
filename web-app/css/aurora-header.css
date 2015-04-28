@@ -30,7 +30,7 @@
     height: 60px;
 }
 
-#header-main-section-east-part #signInDiv {
+#header-main-section-east-part #signInDiv, #header-main-section-east-part #signInButton  {
     padding-left: 22px;
     padding-right: 21px;
     border-right: 1px #1B64C1 solid;
