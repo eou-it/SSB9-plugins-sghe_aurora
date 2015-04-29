@@ -695,8 +695,9 @@ var NavigationRC = {
 };
 
 
-function BreadCrumbValueObject(id, url) {
+function BreadCrumbValueObject(id, label, url) {
     this.id = id;
+    this.label = label;
     this.url = url;
 }
 
@@ -730,23 +731,28 @@ var BreadCrumb = {
     },
 
     updateBreadcrumbItems: function(breadcrumbItems){
-        $.each(breadcrumbItems, function(breadcrumbItem, url) {
-            var breadCrumbItem = new BreadCrumbValueObject(breadcrumbItem, url);
+        var index = 0;
+        $.each(breadcrumbItems, function(label, url) {
+            index = index + 1;
+            var breadCrumbItem = new BreadCrumbValueObject(index,label, url.trim());
             BreadCrumb.items.push(breadCrumbItem);
         });
     },
 
     drawItem: function (item) {
         var cHeader = BreadCrumb.UI.find('#breadcrumbHeader');
-        var breadcrumbItem = "<span class='breadcrumbButton' href='#'>"+item.id+"</span>";
+        var breadcrumbItem = "<span class='breadcrumbButton' data-id='"+item.id+"' href='#'>"+item.label+"</span>";
         if(item.url.length){
-            breadcrumbItem = "<a class='breadcrumbButton' href='#'>"+item.id+"</a>";
+            breadcrumbItem = "<a class='breadcrumbButton' data-id='"+item.id+"' href='#'>"+item.label+"</a>";
         }
         cHeader.append(breadcrumbItem);
     },
 
     addBackButton: function () {
-        if(BreadCrumb.items.length > 1){
+        var leafItemId = _.last(BreadCrumb.items, [1])[0].id;
+        var previousNavigableURL = BreadCrumb.getPreviousBreadCrumbNavigationLocation(leafItemId);
+
+        if(previousNavigableURL.length){
             var backButton = "<a id='breadcrumbBackButton' href='#'></a>";
             BreadCrumb.UI.prepend(backButton);
             BreadCrumb.registerBackButtonClickListener();
@@ -762,14 +768,14 @@ var BreadCrumb = {
 
     registerBreadcrumClickListener: function(){
         $('a.breadcrumbButton').on('click',function(){
-            var location = BreadCrumb.getBreadCrumbNavigationLocation($(this).text());
+            var location = BreadCrumb.getBreadCrumbNavigationLocation($(this).attr('data-id'));
             window.location = location;
         })
     },
 
     registerBackButtonClickListener: function(){
         $('#breadcrumbBackButton').on('click',function(){
-            var breadcrumbItem =  $('.breadcrumbButton').text();
+            var breadcrumbItem =  $('.breadcrumbButton:last').attr('data-id');
             var location = BreadCrumb.getPreviousBreadCrumbNavigationLocation(breadcrumbItem);
             window.location = location;
         })
@@ -778,7 +784,7 @@ var BreadCrumb = {
     getBreadCrumbNavigationLocation: function(breadcrumbId){
         var navigationUrl;
         $.each( BreadCrumb.items, function( index, breadcrumbObject ) {
-            if(breadcrumbObject.id == breadcrumbId){
+            if(breadcrumbObject.id == parseInt(breadcrumbId)){
                 navigationUrl = Application.getApplicationPath() + breadcrumbObject.url;
                 return false;
             }
@@ -788,15 +794,16 @@ var BreadCrumb = {
     },
 
     getPreviousBreadCrumbNavigationLocation: function(breadcrumbId){
-        var previousBreadcrumItem;
-        $.each( BreadCrumb.items, function( index, breadcrumbObject ) {
-            if(breadcrumbObject.id == breadcrumbId){
-                previousBreadcrumItem = BreadCrumb.items[index-1];
-                return false;
-            }
+        var previousNavigableURL = "";
+        var itemsWithURL = BreadCrumb.items.filter(function(breadcrumb) {
+           return (breadcrumb.url.length > 0 && (breadcrumb.id < parseInt(breadcrumbId))) ;
         });
 
-        return Application.getApplicationPath() + previousBreadcrumItem.url;
+        var previousBreadcrumbWithURL = _.last(itemsWithURL, [1]);
+        if(previousBreadcrumbWithURL.length){
+            previousNavigableURL = Application.getApplicationPath() + previousBreadcrumbWithURL[0].url;
+        }
+        return previousNavigableURL;
     }
 };
 
