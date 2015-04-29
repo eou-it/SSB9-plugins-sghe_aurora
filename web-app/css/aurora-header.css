@@ -45,7 +45,7 @@
 
 #header-main-section-east-part #userDiv #username{
     color: #ffffff;
-    font: 10pt Open Sans;
+    font: 12px Open Sans;
     padding-left: 7px;
 }
 #header-main-section-east-part #toolsDiv {
@@ -117,8 +117,73 @@
 
 @media only screen
 and (min-device-width: 0px)
-and (max-device-width: 768px) {
+and (max-device-width: 320px) {
+    #header {
+    }
 
+    #header-main-section {
+        height:42px;
+    }
+
+    #header-main-section-west-part {
+    }
+
+    #header-main-section-west-part  div{
+    }
+
+    #header-main-section-east-part{
+        line-height: 44px;
+        height: 42px;
+        border: none;
+        background-color: #206e9f;
+    }
+
+    #header-main-section-east-part #signInDiv {
+        padding-left: 13px;
+        padding-right: 13px;
+    }
+
+    #header-main-section-east-part #userDiv {
+        padding-left: 20px;
+        padding-right: 10px;
+        border: none;
+    }
+
+    #header-main-section-east-part #userDiv #username{
+        display: none;
+    }
+    #header-main-section-east-part #toolsDiv {
+        display: none;
+        border: none;
+    }
+
+    #header-main-section-east-part #notification-center {
+        border: none;
+    }
+
+    #header-main-section-east-part div{
+    }
+    #signInText {
+    }
+    #bannerMenu {
+        height: 12px;
+        width: 12px;
+    }
+    .institutionalBranding {
+        margin-left: 6px;
+    }
+
+    #tools {
+    }
+
+    #user {
+    }
+
+    .notification-center {
+    }
+
+    .notification-center-count {
+    }
 }
 
 /*Tablet device*/
@@ -126,6 +191,60 @@ and (max-device-width: 768px) {
 @media only screen
 and (min-device-width: 769px)
 and (max-device-width: 1024px) {
+    #header {
+    }
+
+    #header-main-section {
+        height:50px;
+    }
+
+    #header-main-section-west-part {
+    }
+
+    #header-main-section-west-part  div{
+    }
+
+    #header-main-section-east-part{
+        line-height: 52px;
+        height: 50px;
+    }
+
+    #header-main-section-east-part #signInDiv {
+    }
+
+    #header-main-section-east-part #userDiv {
+    }
+
+    #header-main-section-east-part #userDiv #username{
+        font: 10px Open Sans;
+    }
+    #header-main-section-east-part #toolsDiv {
+    }
+
+    #header-main-section-east-part #notification-center {
+    }
+
+    #header-main-section-east-part div{
+    }
+    #signInText {
+    }
+    #bannerMenu {
+    }
+    .institutionalBranding {
+    }
+
+    #tools {
+    }
+
+    #user {
+    }
+
+    .notification-center {
+    }
+
+    .notification-center-count {
+    }
+
 
 }
 
