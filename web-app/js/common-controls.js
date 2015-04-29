@@ -85,7 +85,7 @@ function addNavigationControls() {
     BreadCrumb.create();
     ToolsMenu.initialize();
 
-    if (isDesktop()) {
+    if (isMobile()) {
         SignInMenu.initialize();
         SignInMenu.addItem("sign-in", 'Sign In');
         SignInMenu.addItem("guest-sign-in", 'Guest SignIn');
@@ -272,7 +272,7 @@ function UserControls( options ) {
     // add user context
     if (CommonContext.user == null) {
         var location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
-        if (isDesktop()) {
+        if (isMobile()) {
             var signInContainer = $("<div id='signInContainer'/>");
             ControlBar.append(signInContainer);
             var signInButton = $("<div id='signInButton'><a id='signInText'  href='#'>ddd</a></div>");
