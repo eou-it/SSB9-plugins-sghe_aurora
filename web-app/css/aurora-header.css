@@ -85,7 +85,7 @@
 }
 
 #tools {
-    background: url("images/tools.png") no-repeat;
+    background: url("images/settings.svg") no-repeat;
     display: inline-block;
     position: relative;
     height: 25px;
@@ -94,7 +94,7 @@
 }
 
 #user {
-    background: url("images/avatar.png") no-repeat;
+    background: url("images/avatar.svg") no-repeat;
     display: inline-block;
     position: relative;
     height: 25px;
