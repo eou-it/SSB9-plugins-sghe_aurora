@@ -53,11 +53,11 @@ var CommonPlatform = {
 
 				//Initialize header
 				if (options.header && typeof(options.header) == 'boolean' && options.header || options.header == null) {
-					$('body').prepend(Header());
-                    $('#header-main-section').append(UserControls( options ));
-					addAttributesToHeader();
+                    $('body').prepend(AuroraHeader.createSkeleton());
+                    AuroraHeader.placeUserControls(options);
+                    AuroraHeader.addAttributesToHeader();
 					if (options.globalNav && typeof (options.globalNav) == 'boolean' && options.globalNav || options.globalNav == null) {
-						addNavigationControls();
+                        AuroraHeader.addNavigationControls();
                         Navigation.initialize(scrollableList);
                         scrollableList.initialize();
 					}

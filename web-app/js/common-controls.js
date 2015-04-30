@@ -45,64 +45,66 @@ function Button(id, label, callback, type) {
     return b;
 }
 
-/**
- * @author jmiller
- */
-function Header() {
-    var header ="<div id='header'><div id='header-main-section'>"
-        + "<div id='header-main-section-west-part'>"
-        + "<a id='bannerMenu' href='#' alt='Banner Menu'></a>"
-        + "<a id='branding' href='#' class='institutionalBranding'></a>"
-        + "</div></div>";
+var AuroraHeader =  {
+    createSkeleton: function () {
+        var header ="<div id='header'><div id='header-main-section'>"
+            + "<div id='header-main-section-west-part'>"
+            + "<a id='bannerMenu' href='#' alt='Banner Menu'></a>"
+            + "<a id='branding' href='#' class='institutionalBranding'></a>"
+            + "</div></div>";
 
-    return $(header);
-}
+        return $(header);
+    },
 
-function addAttributesToHeader() {
-    var bannerMenuTitleAndShortcut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
-    $('#bannerMenu').attr("title",bannerMenuTitleAndShortcut);
-    $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
-    //Add href to branding
-    var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
-    var origin = document.location.origin || (document.location.protocol + '//' + document.location.host);
-    var appUrl = path.substring(0,path.indexOf('/ssb'))
-    $('#branding').attr('href', appUrl);
+    addAttributesToHeader: function () {
+        var bannerMenuTitleAndShortcut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
+        $('#bannerMenu').attr("title",bannerMenuTitleAndShortcut);
+        $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
+        //Add href to branding
+        var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
+        var origin = document.location.origin || (document.location.protocol + '//' + document.location.host);
+        var appUrl = path.substring(0,path.indexOf('/ssb'))
+        $('#branding').attr('href', appUrl);
 
-    var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_home_shortcut"));
-    $('#branding').attr("title", homeShortCut);
-    if (CommonContext.user == null) {
-        var signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signin"), ResourceManager.getString("userdetails_signout_shortCut"));
-        $('#signInDiv').attr("title",signOutShortCut);
-    } else {
-        $('#tools').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
-        $('#user').attr("title", ResourceManager.getString("areas_label_avatar_shortcut"));
+        var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_home_shortcut"));
+        $('#branding').attr("title", homeShortCut);
+        if (CommonContext.user == null) {
+            var signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signin"), ResourceManager.getString("userdetails_signout_shortCut"));
+            $('#signInDiv').attr("title",signOutShortCut);
+        } else {
+            $('#tools').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
+            $('#user').attr("title", ResourceManager.getString("areas_label_avatar_shortcut"));
+        }
+    },
+
+    placeUserControls: function (options) {
+        $('#header-main-section').append(UserControls( options ));
+    },
+
+    addNavigationControls: function () {
+        BreadCrumb.create();
+        ToolsMenu.initialize();
+
+        if (isMobile()) {
+            SignInMenu.initialize();
+            SignInMenu.addItem("sign-in", 'Sign In');
+            SignInMenu.addItem("guest-sign-in", 'Guest SignIn');
+        }
+
+        var shortcuts = [
+            'shift+home', function() {
+                // click the first link in the home div.
+                // just $().click() doesn't work as the element is not an input
+                $('#branding')[0].click();
+            },
+            'alt+m', toggleBrowseMenu,
+            'ctrl+shift+F', signIn,
+            'alt+n', toggleNotificationCenter,
+            'alt+l',toggleToolsMenu
+        ];
+        key && key.bind.apply( window, shortcuts );
     }
 
-}
-
-function addNavigationControls() {
-
-    BreadCrumb.create();
-    ToolsMenu.initialize();
-
-    if (isMobile()) {
-        SignInMenu.initialize();
-        SignInMenu.addItem("sign-in", 'Sign In');
-        SignInMenu.addItem("guest-sign-in", 'Guest SignIn');
-    }
-
-    var shortcuts = [
-        'shift+home', function() {
-            // click the first link in the home div.
-            // just $().click() doesn't work as the element is not an input
-            $('#branding')[0].click();
-        },
-        'alt+m', toggleBrowseMenu,
-        'ctrl+shift+F', signIn,
-        'alt+n', toggleNotificationCenter,
-        'alt+l',toggleToolsMenu
-    ];
-    key && key.bind.apply( window, shortcuts );
 }
 
 function toggleNotificationCenter(){
