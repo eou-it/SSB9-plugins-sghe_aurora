@@ -37,7 +37,6 @@
     float:left;
 }
 
-
 #header-main-section-east-part #userDiv {
     padding-left: 20px;
     padding-right: 20px;
@@ -139,7 +138,7 @@ and (max-device-width: 320px) {
         background-color: #206e9f;
     }
 
-    #header-main-section-east-part #signInDiv {
+    #header-main-section-east-part #signInDiv, #header-main-section-east-part #signInButton {
         padding-left: 13px;
         padding-right: 13px;
     }
@@ -210,7 +209,7 @@ and (max-device-width: 1024px) {
         height: 50px;
     }
 
-    #header-main-section-east-part #signInDiv {
+    #header-main-section-east-part #signInDiv, #header-main-section-east-part #signInButton {
     }
 
     #header-main-section-east-part #userDiv {
