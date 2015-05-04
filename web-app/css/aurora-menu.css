@@ -132,6 +132,32 @@ and (orientation : portrait)    {
 }
 
 @media only screen
+and (max-width:768px)
+and (orientation : landscape)   {
+    #menu .menu-text    {
+        font-size: 20px;
+    }
+
+    .institution-menu   {
+        margin-top:0px;
+        width: 70%;
+    }
+}
+
+@media only screen
+and (max-width:768px)
+and (orientation : portrait)    {
+    #menu .menu-text    {
+        font-size: 20px;
+    }
+
+    .institution-menu   {
+        margin-top:0px;
+        width:100%;
+    }
+}
+
+@media only screen
 and (min-width:768px)
 and (max-width:1023px)
 and (orientation : landscape)   {
