@@ -36,12 +36,17 @@
     left: 12px;
 }
 
+.institution-menu a:link{
+    text-decoration: none;
+}
+
 #menu .menu-item{
     line-height: 60px;
 }
 
 #menu .menu-submenu-item{
     line-height: 50px;
+    background-color: #F3FCFF;
 }
 
 #menu ul {
@@ -59,29 +64,31 @@
 
 #menu ul li:hover{
     background-color: #F3FCFF;
+    cursor:pointer;
+}
+
+#menu ul li:hover .menu-submenu-item{
+    cursor:pointer;
 }
 
 #menu .menu-text    {
-  padding-left:30px;
-    height:inherit;
-    letter-spacing: 2px;
-    font-size: 20px;
-    color: #41566F;
-    width:70%;
-    max-width:70%;
-    float:left;
-}
-
-#menu .menu-submenu-header    {
     padding-left:30px;
     height:inherit;
     letter-spacing: 2px;
     font-size: 20px;
-    color: #41566F;
+    color: #2A7C97;
     width:70%;
     max-width:70%;
     float:left;
-    font-size:10pt;
+    white-space: nowrap;
+}
+
+#menu .menu-submenu-header    {
+    padding-left:30px;
+    font-size: 20px;
+    color: #1154A4;
+    float:left;
+    font-size:12pt;
 }
 
 
@@ -96,7 +103,8 @@
     padding-left: 30px;
 }
 
-@media (min-width:0px)
+@media only screen
+and (min-width:0px)
 and (max-width:768px)
 and (orientation : landscape)   {
     #menu .menu-text    {
@@ -109,7 +117,8 @@ and (orientation : landscape)   {
     }
 }
 
-@media (min-width:0px)
+@media only screen
+and (min-width:0px)
 and (max-width:768px)
 and (orientation : portrait)    {
     #menu .menu-text    {
@@ -122,7 +131,8 @@ and (orientation : portrait)    {
     }
 }
 
-@media (min-width:768px)
+@media only screen
+and (min-width:768px)
 and (max-width:1023px)
 and (orientation : landscape)   {
     .institution-menu   {
@@ -131,7 +141,9 @@ and (orientation : landscape)   {
     }
 }
 
-@media (min-width:768px)
+@media only screen
+and (min-width:768px)
+and (max-width:1023px)
 and (orientation : portrait)    {
     .institution-menu   {
         margin-top:0px;
@@ -139,26 +151,20 @@ and (orientation : portrait)    {
     }
 }
 
-@media (min-width:768px)
+@media only screen
+and (min-width:1024px)
 and (orientation : landscape)   {
     .institution-menu   {
         margin-top:0px;
-        width:40%;
+        width: 30%;
     }
 }
 
-@media (min-width:1024px)
-and (orientation : landscape)   {
-    .institution-menu   {
-        margin-top:0px;
-        width: 45%;
-    }
-}
-
-@media (min-width:1024px)
+@media only screen
+and (min-width:1024px)
 and (orientation : portrait)    {
     .institution-menu   {
         margin-top:0px;
-        width: 25%;
+        width: 30%;
     }
 }

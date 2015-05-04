@@ -75,23 +75,19 @@ function ScrollableMenuTable(root, menuList) {
         }
 
         function _fnGetCurrentSelectedMenu(){
-            console.log('currentSelectedMenuFullpath is ',currentSelectedMenuFullPath);
             return currentSelectedMenuFullPath;
         }
 
         function _fnGetSelectedMenuName(){
             var menuName = _fnGetCurrentSelectedMenu();
-            console.log('before in GetSelectedMenuName',menuName);
             menuName = menuName.substr(menuName.lastIndexOf(SPLIT_CHAR));
             menuName = menuName.replace(SPLIT_CHAR,"");
-            console.log('after in GetSelectedMenuName',menuName);
             return menuName;
         }
 
         function _fnGetParentMenuPath(){
            var currMenuFullPath = _fnGetCurrentSelectedMenu();
            var parentMenuPath = currMenuFullPath.substr(0,currMenuFullPath.lastIndexOf(SPLIT_CHAR));
-           console.log('parentMenuPath is ',parentMenuPath);
            return parentMenuPath;
         }
 
@@ -209,7 +205,6 @@ function ScrollableMenuTable(root, menuList) {
         };
 
         function _fnLoadMenu(item, list)  {
-            console.log('item Name in fnLoadMenu is ',item);
             var next = $('#menuList');
             var thisObj = this;
             var menuItem = "";
@@ -277,11 +272,9 @@ function ScrollableMenuTable(root, menuList) {
         function _isCurrentMenuASubMenu(){
             var result = true;
             var currentMenuFullPath = _fnGetCurrentSelectedMenu();
-            console.log('isCurrentMenuASubMenu ',currentMenuFullPath);
             if(currentMenuFullPath == "list"){
                 return false;
             }
-            console.log('result is ',result);
             return result;
         };
 

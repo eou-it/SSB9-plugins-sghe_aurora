@@ -111,21 +111,20 @@ var AuroraHeader =  {
 function setupBannerMenu(){
     $('#header').after("<div id=menuContainer role=application/>");
     $('#bannerMenu').on('click',function(e) {
-        if ($('#menu').hasClass('show')) {
-            $('#menu').addClass('hide');
-            $('#menu').removeClass('show');
-        } else {
-            $('#menu').addClass('show');
-            $('#menu').removeClass('hide');
-        }
+        $('#menu').addClass('show');
+        $('#menu').removeClass('hide');
+        e.stopPropagation();
     });
 
-    /*$('body').on('click',function(e){
-     if ($('#menu').hasClass('show')) {
-     $('#menu').addClass('hide');
-     $('#menu').removeClass('show');
-     }
-     });*/
+    $('body').on('click', function(e){
+        var menuDiv = $(e.target).parents('#menu');
+        if(!menuDiv.length && $(e.target).attr('id') !== "backButton") {
+            if ($('#menu').hasClass('show')) {
+                $('#menu').addClass('hide');
+                $('#menu').removeClass('show');
+            }
+        }
+    });
 }
 
 function toggleNotificationCenter(){
