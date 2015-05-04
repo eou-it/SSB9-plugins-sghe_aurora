@@ -1,14 +1,47 @@
-.left-menu	{
-    margin-top:0px;
-    background-color: #F3FCFF;
-}
+/*********************************************************************************
+ Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
+ **********************************************************************************/
 
-.left-menu.hide	{
+.institution-menu.hide  {
     display:none;
 }
 
-.left-menu.show{
+.institution-menu.show{
     display:block;
+}
+
+.institution-menu
+{
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    margin-top:0px;
+    background-color: #ffffff;
+    opacity: .99;
+    position:absolute;
+    top: 65px;
+    z-index: 999;
+}
+
+.institution-menu:after
+{
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 0 13px 15px;
+    border-color: #ffffff transparent;
+    display: block;
+    width: 0;
+    top: -15px;
+    left: 12px;
+}
+
+#menu .menu-item{
+    line-height: 60px;
+}
+
+#menu .menu-submenu-item{
+    line-height: 50px;
 }
 
 #menu ul {
@@ -24,25 +57,13 @@
     border-bottom: 1px solid #D0DBDE;
 }
 
-#menu li:first-child	{
-    position: absolute;
-    top: 60px;
-    left: 25px;
-    margin: 0;
-    border-top: 0;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-    border-bottom: 10px solid #F3FCFF;
-    padding: 0;
-    width: 0;
-    height: 0px;
+#menu ul li:hover{
+    background-color: #F3FCFF;
 }
 
-#menu .menu-text	{
-    padding-left:30px;
-    padding-top:15px;
-    padding-bottom:15px;
-    font-family: "Open Sans";
+#menu .menu-text    {
+  padding-left:30px;
+    height:inherit;
     letter-spacing: 2px;
     font-size: 20px;
     color: #41566F;
@@ -51,21 +72,23 @@
     float:left;
 }
 
-#menu li:nth-child(2) .menu-text	{
-    text-transform: uppercase;
-}
-
-#menu li:nth-child(2) .menu-icon	{
-    background: url(images/close.png) no-repeat center;
+#menu .menu-submenu-header    {
     padding-left:30px;
-    padding-top: 0px;
-    margin-top: -5px;
+    height:inherit;
+    letter-spacing: 2px;
+    font-size: 20px;
+    color: #41566F;
+    width:70%;
+    max-width:70%;
+    float:left;
+    font-size:10pt;
 }
 
-#menu .menu-icon	{
+
+#menu .menu-icon    {
     padding-top:15px;
     padding-bottom:15px;
-    background:url(images/next.png) no-repeat center;
+    background:url(images/arrow-right.svg) no-repeat center;
     max-width: 10%;
     height: 30px;
     float:right;
@@ -75,76 +98,67 @@
 
 @media (min-width:0px)
 and (max-width:768px)
-and (orientation : landscape)	{
-    #menu .menu-text	{
+and (orientation : landscape)   {
+    #menu .menu-text    {
         font-size: 20px;
     }
 
-    .left-menu	{
+    .institution-menu   {
         margin-top:0px;
         width: 70%;
-        background-color: #F3FCFF;
     }
 }
 
 @media (min-width:0px)
 and (max-width:768px)
-and (orientation : portrait)	{
-    #menu .menu-text	{
+and (orientation : portrait)    {
+    #menu .menu-text    {
         font-size: 20px;
     }
 
-    .left-menu	{
+    .institution-menu   {
         margin-top:0px;
         width:100%;
-        background-color: #F3FCFF;
     }
 }
-
-
 
 @media (min-width:768px)
 and (max-width:1023px)
-and (orientation : landscape)	{
-    .left-menu	{
+and (orientation : landscape)   {
+    .institution-menu   {
         margin-top:0px;
         width:40%;
-        background-color: #F3FCFF;
     }
 }
 
 @media (min-width:768px)
-and (orientation : portrait)	{
-    .left-menu	{
+and (orientation : portrait)    {
+    .institution-menu   {
         margin-top:0px;
         width:40%;
-        background-color: #F3FCFF;
     }
 }
 
 @media (min-width:768px)
-and (orientation : landscape)	{
-    .left-menu	{
+and (orientation : landscape)   {
+    .institution-menu   {
         margin-top:0px;
         width:40%;
-        background-color: #F3FCFF;
     }
 }
 
 @media (min-width:1024px)
-and (orientation : landscape)	{
-    .left-menu	{
+and (orientation : landscape)   {
+    .institution-menu   {
         margin-top:0px;
-        width: 30%;
-        background-color: #F3FCFF;
+        width: 45%;
     }
 }
 
 @media (min-width:1024px)
-and (orientation : portrait)	{
-    .left-menu	{
+and (orientation : portrait)    {
+    .institution-menu   {
         margin-top:0px;
         width: 25%;
-        background-color: #F3FCFF;
     }
 }

@@ -84,6 +84,7 @@ var AuroraHeader =  {
     addNavigationControls: function () {
         BreadCrumb.create();
         ToolsMenu.initialize();
+        setupBannerMenu();
 
         if (isMobile()) {
             SignInMenu.initialize();
@@ -105,6 +106,26 @@ var AuroraHeader =  {
         key && key.bind.apply( window, shortcuts );
     }
 
+}
+
+function setupBannerMenu(){
+    $('#header').after("<div id=menuContainer role=application/>");
+    $('#bannerMenu').on('click',function(e) {
+        if ($('#menu').hasClass('show')) {
+            $('#menu').addClass('hide');
+            $('#menu').removeClass('show');
+        } else {
+            $('#menu').addClass('show');
+            $('#menu').removeClass('hide');
+        }
+    });
+
+    /*$('body').on('click',function(e){
+     if ($('#menu').hasClass('show')) {
+     $('#menu').addClass('hide');
+     $('#menu').removeClass('show');
+     }
+     });*/
 }
 
 function toggleNotificationCenter(){

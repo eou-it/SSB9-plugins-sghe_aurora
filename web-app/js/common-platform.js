@@ -1,7 +1,7 @@
 /*********************************************************************************
  Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
-var scrollableList = new ScrollableMenuTable('#browseMenuContainer');
+var scrollableList = new ScrollableMenuTable('#menuContainer', Navigation.menuList);
 
 var CommonPlatform = {
 	/**
