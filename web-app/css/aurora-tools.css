@@ -8,11 +8,11 @@
 
 #toolsContainer {
     position: absolute;
-    top: 75px;
     z-index: 1000;
-    right: 5px;
     width: 250px;
-    left: auto;
+    right: 75px;
+    top:60px; /* getting from aurora-header.css main-header-section */
+    left:auto;
 }
 #toolsMenu {
     display: none;
@@ -48,33 +48,25 @@
     background: #bfbebe;
 }
 
-@media (min-width:0px)
-and (max-width:768px)
-and (orientation : landscape)	{
+@media (min-width:0px) and (max-width:768px) {
+    #toolsContainer {
+        right: 75px;
+        top: 62px; /* getting from aurora-header.css main-header-section */
+
+    }
 }
 
-@media (min-width:0px)
-and (max-width:768px)
-and (orientation : portrait)	{
+@media (min-width:0px) and (max-width:768px) and (orientation : portrait)	{
+    #toolsContainer {
+        width: 100%;
+        right: 0px;
+        top: 44px; /* getting from aurora-header.css main-header-section */
+
+    }
 }
 
-@media (min-width:768px)
-and (max-width:1023px)
-and (orientation : landscape)	{
-}
-
-@media (min-width:768px)
-and (orientation : portrait)	{
-}
-
-@media (min-width:768px)
-and (orientation : landscape)	{
-}
-
-@media (min-width:1024px)
-and (orientation : landscape)	{
-}
-
-@media (min-width:1024px)
-and (orientation : portrait)	{
+@media (min-width:769px) and (max-width:1023px)	{
+    #toolsContainer {
+        top:52px; /* getting from aurora-header.css main-header-section */
+    }
 }
