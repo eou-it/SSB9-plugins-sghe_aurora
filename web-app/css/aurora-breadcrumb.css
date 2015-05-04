@@ -32,11 +32,23 @@ a.breadcrumbButton{
     color: #557287;
 }
 
+#breadcrumbBackButton, #breadcrumbPageTitle{
+    display: none;
+}
+
+
+#breadcrumbPageTitle, #title-panel{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
 /*Mobile device*/
 
 @media only screen
-and (min-device-width: 0px)
-and (max-device-width: 768px) {
+and (min-width: 0px)
+and (max-width: 768px) {
 
     #breadcrumb-panel{
         height: 42px;
@@ -57,9 +69,14 @@ and (max-device-width: 768px) {
         font-size: 15px;
     }
 
-    #breadcrumbHeader.hidden{
+    #breadcrumbHeader.hidden, #title-panel{
         display:none;
     }
+
+    #breadcrumbBackButton, #breadcrumbPageTitle{
+        display: block;
+    }
+
 }
 
 

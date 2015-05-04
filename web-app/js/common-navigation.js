@@ -241,6 +241,10 @@ var ContentManager = {
     setContentPosition: function(){
         var headerHeight = $('#header').height();
         $( '#' + ContentManager.container).css('top', headerHeight);
+    },
+
+    resizeContents: function(){
+        $( '#' + ContentManager.container).layout().resizeAll();
     }
 };
 
@@ -544,17 +548,6 @@ var Navigation = {
                 Navigation.scrollableMenu.reinitialize( location );
 
                 Navigation.onLoadComplete();
-
-                if($('meta[name=menuDefaultBreadcrumbId]').attr("content")){
-                    var breadcrumbItems = JSON.parse($('meta[name=menuDefaultBreadcrumbId]').attr("content")).breadcrumb;
-                    var pageTitle = JSON.parse($('meta[name=menuDefaultBreadcrumbId]').attr("content")).pageTitle;
-                    if(isDesktop() || isTablet()){
-                        BreadCrumb.setFullBreadcrumb(breadcrumbItems);
-                    }
-                    else if(isMobile()){
-                        BreadCrumb.setBreadcrumbLeaf(breadcrumbItems,pageTitle);
-                    }
-                }
             }
         }
     },

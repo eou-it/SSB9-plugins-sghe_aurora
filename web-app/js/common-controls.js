@@ -745,11 +745,13 @@ var BreadCrumb = {
         BreadCrumb.showPageTitleAsBreadcrumb(pageTitle);
     },
 
-    setFullBreadcrumb : function(breadCrumbItems) {
+    setFullBreadcrumb : function(breadCrumbItems, pageTitle) {
         BreadCrumb.updateBreadcrumbItems(breadCrumbItems);
         _.each(BreadCrumb.items,function(breadcrumItem){
             BreadCrumb.drawItem(breadcrumItem);
         });
+        BreadCrumb.addBackButton();
+        BreadCrumb.showPageTitleAsBreadcrumb(pageTitle);
         this.registerBreadcrumClickListener();
     },
 
@@ -1890,9 +1892,18 @@ var ControlBar = {
 
 
 $(document).ready(function(){
-    var pageTitle = JSON.parse($('meta[name=menuDefaultBreadcrumbId]').attr("content")).pageTitle;
-    if(isDesktop() || isTablet()){
+
+    if($('meta[name=menuDefaultBreadcrumbId]').attr("content")){
+        var breadcrumbItems = JSON.parse($('meta[name=menuDefaultBreadcrumbId]').attr("content")).breadcrumb;
+        var pageTitle = JSON.parse($('meta[name=menuDefaultBreadcrumbId]').attr("content")).pageTitle;
+        BreadCrumb.setFullBreadcrumb(breadcrumbItems, pageTitle);
         TitlePanel.create(pageTitle);
     }
+
     ContentManager.setContentPosition();
+
+    $(window).on('resize',function(){
+        ContentManager.setContentPosition();
+        ContentManager.resizeContents();
+    });
 })
