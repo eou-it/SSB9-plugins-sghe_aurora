@@ -288,9 +288,6 @@ function UserControls( options ) {
 
     var toolsDiv = $("<div id='toolsButton'><a id='tools' href='#'></a></div>");
     ControlBar.append(toolsDiv);
-    var toolsContainer = $("<div id='toolsContainer'/>");
-    ControlBar.append(toolsContainer);
-
 
     // add user context
     if (CommonContext.user == null) {
@@ -1808,7 +1805,11 @@ var ToolsMenu = Object.create(NonHierarchicalMenu);
 ToolsMenu.initialize = function() {
         $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
         $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
-        $('#toolsContainer').prepend("<div id='toolsMenu'>"
+
+    var toolsContainer = $("<div id='toolsContainer'/>");
+    $('#toolsButton').append(toolsContainer);
+
+    $('#toolsContainer').prepend("<div id='toolsMenu'>"
             + "<div class='browseMenuShadow'>"
             + "<div id='toolsCanvas'></div>"
             + "</div>"
@@ -1819,14 +1820,15 @@ ToolsMenu.initialize = function() {
         this.callbackPostItemClick = toggleToolsMenu;
 
         $('#toolsButton').bind("click", toggleToolsMenu);
-        var parent=$('#toolsButton');
-        if (parent.length > 0) {
-            $('#toolsContainer').position({
-                my: "right top",
-                at: "right bottom",
-                of: parent
-            });
-        }
+//        var parent=$('#toolsButton');
+//        if (parent.length > 0) {
+//            $('#toolsContainer').position({
+//                my: "right top",
+//                at: "right bottom",
+//                of: parent,
+//                within: "body"
+//            });
+//        }
 
 }
 
