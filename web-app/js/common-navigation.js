@@ -241,10 +241,6 @@ var ContentManager = {
     setContentPosition: function(){
         var headerHeight = $('#header').height();
         $( '#' + ContentManager.container).css('top', headerHeight);
-    },
-
-    resizeContents: function(){
-        $( '#' + ContentManager.container).layout().resizeAll();
     }
 };
 

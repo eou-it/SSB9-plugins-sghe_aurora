@@ -1905,6 +1905,5 @@ $(document).ready(function(){
 
     $(window).on('resize',function(){
         ContentManager.setContentPosition();
-        ContentManager.resizeContents();
     });
 })
