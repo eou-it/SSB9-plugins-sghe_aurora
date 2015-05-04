@@ -33,7 +33,7 @@
     display: block;
     width: 0;
     top: -15px;
-    left: 12px;
+    left: 10px;
 }
 
 .institution-menu a:link{
@@ -149,6 +149,10 @@ and (orientation : portrait)    {
         margin-top:0px;
         width:40%;
     }
+    #menu ul li:hover{
+        background-color: #F3FCFF;
+        cursor:pointer;
+    }
 }
 
 @media only screen
@@ -156,7 +160,11 @@ and (min-width:1024px)
 and (orientation : landscape)   {
     .institution-menu   {
         margin-top:0px;
-        width: 30%;
+        width: 35%;
+    }
+    #menu ul li:hover{
+        background-color: #F3FCFF;
+        cursor:pointer;
     }
 }
 
@@ -165,6 +173,10 @@ and (min-width:1024px)
 and (orientation : portrait)    {
     .institution-menu   {
         margin-top:0px;
-        width: 30%;
+        width: 35%;
+    }
+    #menu ul li:hover{
+        background-color: #F3FCFF;
+        cursor:pointer;
     }
 }

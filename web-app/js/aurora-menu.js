@@ -279,21 +279,23 @@ function ScrollableMenuTable(root, menuList) {
         };
 
         function _fnAddBackButtonIfItIsSubMenu(){
-            var next = $('#menuList');
+            if(_isCurrentMenuASubMenu()) {
+                var next = $('#menuList');
+                next.append(addBackButton());
+                $('#backButton').on('click',_fnBackButtonClickHandler);
+            }
+        };
+
+        function _fnBackButtonClickHandler(){
             var currParentMenu = _fnGetParentMenuPath();
             var loc = currParentMenu.split(SPLIT_CHAR);
             var list;
-            if(_isCurrentMenuASubMenu()) {
-                next.append(addBackButton());
-                $('#backButton').on('click',function(){
-                    _fnSetCurrentSelectedMenu(currParentMenu);
-                    if(currParentMenu != "list")  {
-                        list = _fnGetMenuItemsFor(loc);
-                        _fnLoadMenu(currParentMenu,list);
-                    } else {
-                        _fnMenuInitialize();
-                    }
-                });
+            _fnSetCurrentSelectedMenu(currParentMenu);
+            if(currParentMenu != "list")  {
+                list = _fnGetMenuItemsFor(loc);
+                _fnLoadMenu(currParentMenu,list);
+            } else {
+                _fnMenuInitialize();
             }
         };
 
