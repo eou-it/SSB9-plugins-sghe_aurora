@@ -413,7 +413,7 @@
     z-index: 999;
 }
 
-.browseMenuShadow{
+.browseMenuShadow {
     display:block;
     padding:7px 5px 5px;
     border: 1px #13689E solid;
@@ -609,44 +609,6 @@
     position: absolute;
     right: 7px;
     left: auto;
-}
-
-/* ============================================================================================ */
-
-#signInContainer {
-    position: absolute;
-    z-index: 1000;
-    right: 5px;
-    width: 250px;
-    left: auto;
-}
-#signInMenu {
-    display: none;
-    z-index: 999;
-}
-#signInCanvas {
-    background: #FFFFFF; /*#477b9c*/
-}
-#signInCanvas ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-#signInCanvas .menu-section {
-    background: #999999;
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 5px;
-}
-#signInCanvas .menu-item {
-    background: #CCCCCC;
-    font-size: 1.2em;
-    font-style: normal;
-    padding: 5px;
-    cursor: pointer;
-}
-#signInCanvas .menu-item:hover {
-    background: #bfbebe;
 }
 
 #outerFooter {

@@ -86,13 +86,14 @@ var AuroraHeader =  {
         TitlePanel.create();
         ToolsMenu.initialize();
         setupBannerMenu();
+        $('.signIn-mobile').click(function(){
+            if ( $('.signIn-list li').length > 1 ) {
+                $('#signInCanvas').toggleClass('signIn-active');
+            } else {
+               signIn();
+            }
 
-        if (isMobile()) {
-            SignInMenu.initialize();
-            SignInMenu.addItem("sign-in", 'Sign In');
-            SignInMenu.addItem("guest-sign-in", 'Guest SignIn');
-        }
-
+        });
         var shortcuts = [
             'shift+home', function() {
                 // click the first link in the home div.
@@ -246,39 +247,9 @@ function toggleToolsMenu() {
     return false;
 }
 
-
-function toggleSignInMenu() {
-    if ($('#signInMenu').is(':hidden')) {
-        $('#signInButton').removeClass("signInButton");
-        closeOpenMenus();
-        $('#signInMenu').slideDown('normal', function() {
-            // add a handler to close the Browsemenu when the mouse is clicked outside
-            $('body').click(function() {
-                closeOpenMenus();
-            });
-        });
-
-        $('#signInMenu').bind('mouseenter', function() {
-            $(this).addClass("over");
-        });
-        $('#signInMenu').bind('mouseleave', function() {
-            $(this).removeClass("over");
-        });
-
-        $('#signInMenu').find('.selectedToolsItem').focus();
-    } else {
-        $('#signInButton').addClass("toolsButton");
-        $('#signInMenu').slideUp('normal');
-        $('.signInButton').mouseleave();
-        // force clearing any existing handler
-        $('body').unbind('click');
-    }
-    return false;
-}
-
-
 function signIn(){
-    $('#signInText')[0].click();
+    var location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
+    window.location=location;
 }
 
 
@@ -291,15 +262,44 @@ function UserControls( options ) {
 
     // add user context
     if (CommonContext.user == null) {
-        var location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
-        if (isMobile()) {
-            var signInContainer = $("<div id='signInContainer'/>");
-            ControlBar.append(signInContainer);
-            var signInButton = $("<div id='signInButton'><a id='signInText'  href='#'>ddd</a></div>");
-            ControlBar.append(signInButton);
-        } else {
-            var signInDiv = $("<div id='signInDiv'><a id='signInText' href="+location+">"+ResourceManager.getString("userdetails_signin")+"</a></div>");
-            ControlBar.append(signInDiv);
+
+        var signInDom = $("<div id='signInButton'><a class='signIn-mobile'  />"
+            +"<div id='signInCanvas' class='signInMenuShadow'><div id='signInMenu'><ul id='signList' class='signIn-list'>"
+            +"</ul></div></div>"
+            +"</div>");
+        ControlBar.append(signInDom);
+
+        var signInShortCut
+        signInShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signin"), ResourceManager.getString("userdetails_signout_shortCut"));
+
+        var signInLink = $("<li class='sign-item'> <span id='signOutShortCut' class='offscreen'>"+ ResourceManager.getString("userdetails_signout_description") + "</span><div title='"+signInShortCut+"'> <a  id='signInText' aria-describedBy='signOutShortCut'  href='#' class='" +  "signInText" + " pointer' tabindex='0'>"
+            + ResourceManager.getString("userdetails_signin") + "</a></div></li>").keydown(function(e){
+            if (e.keyCode == 13 || e.keyCode == 32) {
+                e.preventDefault();
+                e.stopPropagation();
+                signIn();
+            }
+        });
+
+        signInLink.click(function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            signIn();
+        });
+
+        ControlBar.appendTo(signInLink, '#signList');
+        var guestSignInLink
+        if("true" == $('meta[name=guestLoginEnabled]').attr("content")) {
+            guestSignInLink = $("<li class='sign-item'><a id='guestSignInText' class='signInText pointer'>"
+                + ResourceManager.getString("guestuserdetails_signin") + "</a></li>");
+            ControlBar.append(guestSignInLink);
+            ControlBar.appendTo(guestSignInLink, '#signList');
+            guestSignInLink.click(function () {
+                // set CommonContext.user to null before removing the cookie
+                if ($(this).hasClass('signInText')) {
+                    window.location = ApplicationConfig.loginEndpoint;
+                }
+            });
         }
 
     } else {
@@ -1810,30 +1810,6 @@ ToolsMenu.initialize = function() {
 
 }
 
-var SignInMenu = Object.create(NonHierarchicalMenu);
-SignInMenu.initialize = function() {
-    $('#signInContainer').prepend("<div id='signInMenu'>"
-        + "<div class='browseMenuShadow'>"
-        + "<div id='signInCanvas'></div>"
-        + "</div>"
-        + "</div>");
-    this.dropDown = $("#signInContainer");
-    this.dropDown.find("#signInCanvas").append("<ul/>")
-    this.canvas = this.dropDown.find("#signInCanvas ul");
-    this.callbackPostItemClick = toggleSignInMenu;
-
-    $('#signInButton').bind("click", toggleSignInMenu);
-    var parent=$('#signInButton');
-    if (parent.length > 0) {
-        $('#signInContainer').position({
-            my: "right top",
-            at: "right bottom",
-            of: parent
-        });
-    }
-
-}
-
 
 
 /**
@@ -1862,9 +1838,16 @@ var ControlBar = {
             this.node.append(node);
     },
 
+    appendTo: function(node, appendToId) {
+        if (appendToId)
+            $( node ).appendTo( this.node.find(appendToId));
+        else
+            $( node ).appendTo( this.node );
+    },
+
     prepend: function(node, prependBeforeId) {
         if (prependBeforeId)
-            this.node.find(appendAfterId).before(node);
+            this.node.find(prependBeforeId).before(node);
         else
             this.node.prepend(node);
     }

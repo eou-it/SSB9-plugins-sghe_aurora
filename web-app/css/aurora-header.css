@@ -30,7 +30,7 @@
     height: 60px;
 }
 
-#header-main-section-east-part #signInDiv, #header-main-section-east-part #signInButton  {
+#header-main-section-east-part #signInButton  {
     padding-left: 22px;
     padding-right: 21px;
     border-right: 1px #1B64C1 solid;
@@ -49,7 +49,11 @@
     font: 12px Open Sans;
     padding-left: 7px;
 }
-#header-main-section-east-part #toolsButton {
+#header-main-section-east-part #signInButton {
+    margin: 0px;
+    padding: 0px;
+}
+#header-main-section-east-part #toolsButton, #header-main-section-east-part #signInButton li {
     padding-left: 20px;
     padding-right: 20px;
     border-left: 1px #1B64C1 solid;
@@ -61,7 +65,7 @@
     float:left;
 }
 
-#signInText {
+.signInText {
     color: #ffffff;
     font: 10pt Open Sans;
     text-decoration: blink;
@@ -112,6 +116,35 @@
     font-size: 14px;
     background-color: #FFD079;
 }
+
+#signInButton {
+    margin-left:0px;
+}
+
+#signInCanvas ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.signIn-mobile {
+    background: url("images/lock.svg") no-repeat;
+    display: inline-block;
+    position: relative;
+    height: 25px;
+    width: 20px;
+    transform: translateY(47%);
+    display: none;
+}
+
+#signInButton li {
+    display:inline-block;
+    vertical-align: top;
+}
+#signInButton ul {
+    list-style:none;
+    white-space:nowrap;
+}
 /*Mobile device*/
 
 @media only screen
@@ -157,6 +190,63 @@ and (max-device-width: 320px) {
     .institutionalBranding {
         margin-left: 6px;
     }
+    .signIn-mobile {
+        display:block;
+    }
+    #signInCanvas {
+        display:none;
+
+    }
+    #signInCanvas.signIn-active {
+        display: block;
+        right: 0;
+        top: 44px;
+        width: 100%;
+        left: auto;
+        position: absolute;
+        z-index: 1000;
+        padding: 0px;
+        margin: 0px;
+    }
+    #signInCanvas.signIn-active ul {
+        list-style:none;
+        white-space:nowrap;
+        display: block;
+        width: 100%;
+        background-color: #FFFFFF;
+        margin: 0;
+        padding: 0;
+    }
+
+    #signInCanvas.signIn-active li {
+        display:block;
+        vertical-align: top;
+    }
+
+    #signInCanvas.signIn-active ul,#signInCanvas.signIn-active ul li {
+        margin : 1px !important;
+        width: 100%;
+    }
+
+    #signInMenu {
+        background: none repeat scroll 0 0 #ffffff;
+    }
+    .signInMenuShadow {
+        border: 5px #13689E solid;
+    }
+    #signInCanvas.signIn-active .sign-item {
+        cursor: pointer;
+        font: 14pt Open Sans;
+        padding-right: 13px;
+        padding-left: 30px;
+        line-height: 30px;
+        color: #41566f;
+        border-bottom: 1px solid #DEE5E7;
+    }
+    .signInText {
+        color: #41566f;
+    }
+
 }
 
 /*Tablet device*/
@@ -177,4 +267,3 @@ and (max-device-width: 1023px) {
         font: 10px Open Sans;
     }
 }
-
