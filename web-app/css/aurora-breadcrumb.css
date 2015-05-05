@@ -69,11 +69,15 @@ and (max-width: 768px) {
         font-size: 15px;
     }
 
-    #breadcrumbHeader.hidden, #title-panel{
+    .breadcrumbButton, #title-panel{
         display:none;
     }
 
     #breadcrumbBackButton, #breadcrumbPageTitle{
+        display: block;
+    }
+
+    .breadcrumb-show-leaf .breadcrumbButton:last-child{
         display: block;
     }
 
