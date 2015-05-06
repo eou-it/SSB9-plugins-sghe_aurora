@@ -47,11 +47,11 @@ function Button(id, label, callback, type) {
 
 var AuroraHeader =  {
     createSkeleton: function () {
-        var header ="<div id='header'><div id='header-main-section'>"
+        var header ="<div id='header-main-section'>"
             + "<div id='header-main-section-west-part'>"
             + "<a id='bannerMenu' href='#' alt='Banner Menu'></a>"
             + "<a id='branding' href='#' class='institutionalBranding'></a>"
-            + "</div></div>";
+            + "</div>";
 
         return $(header);
     },
@@ -82,8 +82,8 @@ var AuroraHeader =  {
     },
 
     addNavigationControls: function () {
-        BreadCrumb.create();
         TitlePanel.create();
+        BreadCrumb.create();
         ToolsMenu.initialize();
         setupBannerMenu();
         $('.signIn-mobile').click(function(){
@@ -111,7 +111,7 @@ var AuroraHeader =  {
 }
 
 function setupBannerMenu(){
-    $('#header').after("<div id=menuContainer role=application/>");
+    $('#header-main-section').after("<div id=menuContainer role=application/>");
     $('#bannerMenu').on('click',function(e) {
         $('#menu').addClass('show');
         $('#menu').removeClass('hide');
@@ -731,7 +731,7 @@ var BreadCrumb = {
         + "</div>"),
 
     create: function () {
-        $('#header').append(BreadCrumb.UI);
+        $('#header-main-section').after(BreadCrumb.UI);
     },
 
     setFullBreadcrumb : function(breadCrumbItems, pageTitle) {
@@ -812,7 +812,7 @@ var BreadCrumb = {
 
 var TitlePanel = {
     create: function () {
-        $('#header').append("<div id='title-panel'></div>");
+        $('#header-main-section').after("<div id='title-panel'></div>");
     }
 }
 

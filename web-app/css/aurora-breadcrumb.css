@@ -4,8 +4,7 @@
 
 #breadcrumb-panel{
     clear: both;
-    height: 42px;
-    line-height: 42px;
+    height: 10%;
 }
 
 a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited , .breadcrumbButton {
@@ -19,8 +18,7 @@ a.breadcrumbButton{
 }
 
 #title-panel{
-    height: 64px;
-    line-height: 64px;
+    height: 10%;
     font-size: 20pt;
 }
 
@@ -51,8 +49,7 @@ and (min-width: 0px)
 and (max-width: 768px) {
 
     #breadcrumb-panel{
-        height: 42px;
-        line-height :42px;
+        height: 10%;
         padding-left:12px;
     }
 

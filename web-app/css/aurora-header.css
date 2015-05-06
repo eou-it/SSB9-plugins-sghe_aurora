@@ -4,19 +4,16 @@
 
 #header {
     background-color:#206E9F;
-    height:auto;
     width:100%;
 }
 
 #header-main-section {
-    height:60px;
-    display: inline-table;
     width: 100%;
+    background-color: #206E9F;
 }
 
 #header-main-section-west-part {
-    display: table-cell;
-    vertical-align: middle;
+    width: 61.875%;
 }
 
 #header-main-section-west-part  div{
@@ -25,9 +22,7 @@
 #header-main-section-east-part{
     float: right;
     background-color: #1B6496;
-    line-height: 62px;
     border-left: 1px #1B64C1 solid;
-    height: 60px;
 }
 
 #header-main-section-east-part #signInButton  {
@@ -71,12 +66,11 @@
     text-decoration: blink;
 }
 #bannerMenu {
-    background: url("images/menu.png") no-repeat;
-    height: 14px;
-    width: 14px;
-    left: 14px;
+    background: url("images/menu.svg") no-repeat;
+    height: 1.5em;
+    width: 1.5em;
     float: left;
-    margin-left: 18px;
+    margin-left: 1.5625em;
     transform: translateY(47%);
 }
 
@@ -94,7 +88,6 @@
     position: relative;
     height: 25px;
     width: 20px;
-    transform: translateY(47%);
 }
 
 #user {
@@ -112,9 +105,11 @@
 
 .notification-center-count {
     text-align: center;
-    width: 32px;
-    font-size: 14px;
+    width: 9.375%;
+    font-size: 1.5em;
     background-color: #FFD079;
+    font-family: Open Sans-Semibold;
+    color: #4F585F;
 }
 
 #signInButton {
@@ -133,7 +128,6 @@
     position: relative;
     height: 25px;
     width: 20px;
-    transform: translateY(47%);
     display: none;
 }
 
@@ -149,20 +143,30 @@
 
 @media only screen
 and (min-device-width: 0px)
-and (max-device-width: 320px) {
+and (max-device-width: 640px) {
     #header-main-section {
-        height:42px;
+        height: 7.39436%;
+        display: inline-block;
     }
     #header-main-section-east-part{
-        line-height: 44px;
-        height: 42px;
         border: none;
         background-color: #206e9f;
+        width: 28.75%;
+        float:right;
+    }
+
+    #header-main-section-west-part{
+        float:left;
     }
 
     #header-main-section-east-part #signInDiv, #header-main-section-east-part #signInButton {
-        padding-left: 13px;
-        padding-right: 13px;
+        padding-left: 1.5625%;
+        padding-right: 1.5625%;
+    }
+
+    #header-main-section-east-part #toolsButton {
+        padding-left: 1.5625%;
+        padding-right: 1.5625%;
     }
 
     #header-main-section-east-part #userDiv {
@@ -184,14 +188,18 @@ and (max-device-width: 320px) {
     }
 
     #bannerMenu {
-        height: 12px;
-        width: 12px;
+        height: 1.5em;
+        width: 1.5em;
     }
     .institutionalBranding {
-        margin-left: 6px;
+        margin-left: 1.5625em;
+        height: 2.125em;
+        width: 9.25em;
     }
     .signIn-mobile {
         display:block;
+        height: 2.5em;
+        width: 1.875em;
     }
     #signInCanvas {
         display:none;
@@ -245,6 +253,10 @@ and (max-device-width: 320px) {
     }
     .signInText {
         color: #41566f;
+    }
+    #tools {
+        height: 2.5em;
+        width: 2.5em;
     }
 
 }

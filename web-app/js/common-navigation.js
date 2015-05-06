@@ -239,8 +239,8 @@ var ContentManager = {
     },
 
     setContentPosition: function(){
-        var headerHeight = $('#header').height();
-        $( '#' + ContentManager.container).css('top', headerHeight);
+//        var headerHeight = $('#header-main-section').height();
+//        $( '#' + ContentManager.container).css('top', headerHeight);
     }
 };
 
