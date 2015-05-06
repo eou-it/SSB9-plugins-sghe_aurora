@@ -1860,8 +1860,10 @@ $(document).ready(function(){
         var headerAttributes = JSON.parse($('meta[name=headerAttributes]').attr("content"));
         var breadcrumbItems = headerAttributes.breadcrumb;
         var pageTitle = headerAttributes.pageTitle;
-        BreadCrumb.setFullBreadcrumb(breadcrumbItems, pageTitle);
         $('#title-panel').text(pageTitle);
+        if(!_.isEmpty(breadcrumbItems)){
+        BreadCrumb.setFullBreadcrumb(breadcrumbItems, pageTitle);
+        }
     }
 
     ContentManager.setContentPosition();
