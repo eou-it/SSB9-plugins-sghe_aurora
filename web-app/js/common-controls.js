@@ -48,15 +48,15 @@ function Button(id, label, callback, type) {
 var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<div id='header-main-section'>"
-            + "<div id='header-main-section-west-part'>"
-            + "<a id='bannerMenu' href='#' alt='Banner Menu'></a>"
-            + "<a id='branding' href='#' class='institutionalBranding'></a>"
-            + "</div>";
+                    + "<div id='header-main-section-west-part'>"
+                        + "<a id='bannerMenu' href='#' alt='Banner Menu'></a>"
+                        + "<a id='branding' href='#' class='institutionalBranding'></a>"
+                    + "</div>";
 
         return $(header);
     },
 
-    addAttributesToHeader: function () {
+    fillWestPart: function () {
         var bannerMenuTitleAndShortcut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
         $('#bannerMenu').attr("title",bannerMenuTitleAndShortcut);
         $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
@@ -77,8 +77,13 @@ var AuroraHeader =  {
         }
     },
 
-    placeUserControls: function (options) {
-        $('#header-main-section').append(UserControls( options ));
+    placeEastPart: function (options) {
+        var eastPartElement =  $("<div id='header-main-section-east-part'>"
+                            + "</div>");
+
+        $('#header-main-section').append(eastPartElement.append(UserControls( options )));
+        var notificationDiv = "<div id='notification-center'></div>";
+        eastPartElement.append(notificationDiv);
     },
 
     addNavigationControls: function () {
@@ -284,9 +289,6 @@ function UserControls( options ) {
         var userDiv = $("<div id='userDiv'><a id='user' href='#'></a><span id='username'>"+CommonContext.user+"</span></div>");
         ControlBar.append(userDiv);
     }
-    var notificationDiv = "<div id='notification-center'></div>";
-    ControlBar.append(notificationDiv);
-
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
         var helpLink = $("<a id='helpText' class='helpText pointer'>" + ResourceManager.getString("userdetails_help") + "</a>");
@@ -1819,7 +1821,7 @@ SignInMenu.addAccessibilityInfo = function(selector, elemAriaLabel, elemTitle) {
  */
 var ControlBar = {
 
-    node: $("<div id='header-main-section-east-part'>"
+    node: $("<div id='header-east-part-user-controls'>"
         + "</div>"),
 
     canvas: null,

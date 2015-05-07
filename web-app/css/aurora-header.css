@@ -21,13 +21,13 @@
     float: right;
     background-color: #1B6496;
     height:100%;
-    width: 20%;
+}
 
+div#header-east-part-user-controls {
+    display: inline-block;
 }
 
 #header-main-section-east-part #signInButton  {
-    padding-left: 22px;
-    padding-right: 21px;
     float:left;
 }
 
@@ -88,7 +88,8 @@
     position: relative;
     height: 26px;
     width: 26px;
-    transform: translateY(38%);}
+    transform: translateY(38%);
+}
 
 .notification-center {
     color: #FFD079;
@@ -97,11 +98,15 @@
 
 .notification-center-count {
     text-align: center;
-    width: 9.375%;
     font-size: 1.5em;
     background-color: #FFD079;
     font-family: Open Sans-Semibold;
     color: #4F585F;
+    height: 100%;
+}
+
+#notification-center-div {
+    height: 100%;
 }
 
 #signInButton {
@@ -135,7 +140,7 @@
 
 @media only screen
 and (min-device-width: 0px)
-and (max-device-width: 640px) {
+and (max-device-width: 768px) {
     #header-main-section {
         height: 7.39436%;
         display: inline-block;
@@ -147,21 +152,16 @@ and (max-device-width: 640px) {
 
     #header-main-section-east-part{
         border: none;
-        float:right;
-        height:100%;
-
+        float: right;
+        height: 100%;
     }
 
     #header-main-section-east-part #signInDiv, #header-main-section-east-part #signInButton {
-        margin-left: 1.5625%;
-        margin-right: 1.5625%;
-        transform: translateY(27%)
+        transform: translateY(27%);
     }
 
     #header-main-section-east-part #toolsButton {
-        margin-left: 1.5625%;
-        margin-right: 1.5625%;
-        transform: translateY(34%)
+        transform: translateY(34%);
     }
 
     #header-main-section-east-part #userDiv {
@@ -178,24 +178,40 @@ and (max-device-width: 640px) {
 
     #header-main-section-east-part #notification-center {
         border: none;
+        height: 100%;
+        float: right;
     }
 
     #bannerMenu {
         height: 1.5em;
         width: 1.5em;
-        transform: translateY(69%);
+        transform: translateY(100%);
     }
     .institutionalBranding {
-        margin-left: 1.5625%;
+        margin-left: 1.5625em;
         height: 2.125em;
         width: 9.125em;
-        transform: translateY(31%);
+        transform: translateY(50%);
     }
     .signIn-mobile {
         display:block;
         height: 2.5em;
         width: 1.875em;
+        margin-left: 1em;
+        margin-right: 1em;
     }
+
+    #user {
+        background: url("images/avatar.svg") no-repeat;
+        display: inline-block;
+        position: relative;
+        height: 3.125em;
+        width: 3.125em;
+        transform: translateY(23%);
+        margin-left: 1em;
+        margin-right: 1em;
+    }
+
     #signInCanvas {
         display:none;
 
@@ -252,8 +268,57 @@ and (max-device-width: 640px) {
     #tools {
         height: 2.5em;
         width: 2.5em;
+        margin-left: 1em;
     }
 
+    .notification-center {
+    }
+
+    .notification-center-count {
+        text-align: center;
+        font-size: 1.5em;
+        background-color: #FFD079;
+        font-family: Open Sans-Semibold;
+        color: #4F585F;
+        height: 100%;
+        width: 2em;
+    }
+
+    #notification-center-div {
+        height: 100%;
+    }
+
+    .notification-center-count span {
+        line-height: 326%;
+    }
+
+    a.notification-center-anchor.notification-center-anchor-hidden {
+        text-decoration: none;
+    }
+
+    .notification-center-anchor.notification-center-anchor-hidden:hover {
+        background: #0071A7;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        text-decoration: none;
+    }
+
+    div#header-east-part-user-controls {
+        display: inline-block;
+    }
+}
+
+@media (min-width:0px) and (max-width:768px) and (orientation : portrait)	{
+
+    #header-main-section-east-part #toolsButton {
+        transform: inherit;
+        height: 100%;
+    }
+
+    #tools {
+        transform: translateY(41%);
+    }
 }
 
 /*Tablet device*/
@@ -262,15 +327,15 @@ and (max-device-width: 640px) {
 and (min-device-width: 769px)
 and (max-device-width: 1023px) {
     #bannerMenu {
-        height: 0.875em;
-        width: 0.875em;
-        transform: translateY(69%);
+        height: 1.875em;
+        width: 1.875em;
+        transform: translateY(60%);
     }
     .institutionalBranding {
-        margin-left: 0.9765625%;
+        margin-left: 0.9765625em;
         height: 2.125em;
-        width: 9.25em;
-        transform: translateY(31%);
+        width: 8.125em;
+        transform: translateY(32%);
     }
 
     #header-main-section {
@@ -278,6 +343,11 @@ and (max-device-width: 1023px) {
         display: inline-block;
     }
 
+    div#header-east-part-user-controls {
+        display: inline-block;
+        height: 100%;
+        float: left;
+    }
 
     #header-main-section-east-part #userDiv #username{
         font: 10px Open Sans;
@@ -288,25 +358,30 @@ and (max-device-width: 1023px) {
     }
 
     #header-main-section-east-part{
-        width:100%;
         border: none;
-        float:right;
+        float: right;
+        height: 100%;
     }
 
     #header-main-section-east-part #signInDiv, #header-main-section-east-part #signInButton {
-        margin-left: 12.5625%;
-        transform: translateY(27%)
+        transform: translateY(27%);
+        width: 4.8828125em;
+        border-left: 1px #1D5F8C solid;
+        background-color: #1B6496;
     }
 
     #header-main-section-east-part #toolsButton {
-        margin-left: 12.5625%;
-        transform: translateY(34%)
+        border-left: 1px #1D5F8C solid;
+        width: 4.8828125em;
+        height: 100%;
+        transform: translateY(0%);
     }
 
     #header-main-section-east-part #userDiv {
-        padding-left: 20px;
-        padding-right: 10px;
         border: none;
+        border-left: 1px #1D5F8C solid;
+        background-color: #1B6496;
+        width: 4.8828125em;
     }
 
     #header-main-section-east-part #userDiv #username{
@@ -319,6 +394,7 @@ and (max-device-width: 1023px) {
 
     #header-main-section-east-part #notification-center {
         border: none;
+        height: 100%;
     }
 
     #bannerMenu {
@@ -327,15 +403,18 @@ and (max-device-width: 1023px) {
         transform: translateY(69%);
     }
     .institutionalBranding {
-        margin-left: 1.5625%;
-        height: 1.125em;
-        width: 5.125em;
-        transform: translateY(31%);
+        margin-left: 1.5625em;
+        height: 2.125em;
+        width: 8.125em;
+        transform: translateY(30%);
     }
     .signIn-mobile {
         display:block;
         height: 2.5em;
         width: 1.875em;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
     }
     #signInCanvas {
         display:none;
@@ -393,5 +472,54 @@ and (max-device-width: 1023px) {
     #tools {
         height: 2.5em;
         width: 2.5em;
+        display: block;
+        margin-right: auto;
+        margin-left: auto;
+        height: 100%;
+        transform: translateY(23%);
     }
+
+    #user {
+        background: url("images/avatar.svg") no-repeat;
+        display: block;
+        position: relative;
+        height: 3.25em;
+        width: 2.663em;
+        transform: translateY(15%);
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .notification-center {
+    }
+
+    .notification-center-count {
+        text-align: center;
+        font-size: 1.5em;
+        background-color: #FFD079;
+        font-family: Open Sans-Semibold;
+        color: #4F585F;
+        height: 100%;
+        width: 2em;
+    }
+
+    #notification-center-div {
+        height: 100%;
+    }
+
+    .notification-center-count span {
+        line-height: 263%;
+    }
+
+    .notification-center-anchor.notification-center-anchor-hidden:hover {
+        background: #0071A7;
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        text-decoration: none;
+    }
+    a.notification-center-anchor.notification-center-anchor-hidden {
+        text-decoration: none;
+    }
+
 }

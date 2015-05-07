@@ -10,8 +10,6 @@
     position: absolute;
     z-index: 1000;
     width: 250px;
-    right: 75px;
-    top:60px; /* getting from aurora-header.css main-header-section */
     left:auto;
 }
 #toolsMenu {
@@ -50,23 +48,23 @@
 
 @media (min-width:0px) and (max-width:768px) {
     #toolsContainer {
-        right: 75px;
-        top: 62px; /* getting from aurora-header.css main-header-section */
+        right: 0em;
 
     }
 }
 
 @media (min-width:0px) and (max-width:768px) and (orientation : portrait)	{
     #toolsContainer {
+        right: 0em;
+        left: 0em;
         width: 100%;
-        right: 0px;
-        top: 44px; /* getting from aurora-header.css main-header-section */
-
+        margin-top: 1em;
     }
+
 }
 
 @media (min-width:769px) and (max-width:1023px)	{
     #toolsContainer {
-        top:52px; /* getting from aurora-header.css main-header-section */
+        right: 0em;
     }
 }

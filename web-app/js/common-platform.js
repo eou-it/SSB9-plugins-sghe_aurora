@@ -54,8 +54,8 @@ var CommonPlatform = {
 				//Initialize header
 				if (options.header && typeof(options.header) == 'boolean' && options.header || options.header == null) {
                     $('body').prepend(AuroraHeader.createSkeleton());
-                    AuroraHeader.placeUserControls(options);
-                    AuroraHeader.addAttributesToHeader();
+                    AuroraHeader.placeEastPart(options);
+                    AuroraHeader.fillWestPart();
 					if (options.globalNav && typeof (options.globalNav) == 'boolean' && options.globalNav || options.globalNav == null) {
                         AuroraHeader.addNavigationControls();
                         Navigation.initialize(scrollableList);
