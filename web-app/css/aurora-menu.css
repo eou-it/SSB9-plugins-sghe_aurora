@@ -2,207 +2,73 @@
  Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
-.institution-menu.hide  {
+#menuContainer {
+    margin-top: 35px;
+    height: 90%;
+    width: 100%;
+}
+
+#menu   {
+    height:80%;
+    width:31.25%;
+    float:left;
+    top:35px;
+    position:fixed;
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 7px #000000;
+}
+
+
+.menu-wrapper.hide  {
     display:none;
 }
 
-.institution-menu.show{
+.menu-wrapper.show{
     display:block;
 }
 
-.institution-menu
+.menu-wrapper
 {
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    border-radius: 10px;
-    margin-top:0px;
     background-color: #ffffff;
     opacity: .99;
     position:absolute;
     top: 65px;
     z-index: 999;
+    border-color:1px solid red;
 }
 
-.institution-menu:after
+.menu-wrapper:after
 {
     content: '';
     position: absolute;
     border-style: solid;
-    border-width: 0 13px 15px;
+    border-width: 0 10px 18px;
     border-color: #ffffff transparent;
     display: block;
     width: 0;
     top: -15px;
-    left: 10px;
-}
-
-.institution-menu a:link{
-    text-decoration: none;
-}
-
-#menu .menu-item{
-    line-height: 60px;
-}
-
-#menu .menu-submenu-item{
-    line-height: 50px;
-    background-color: #F3FCFF;
+    left: 2.5%;
 }
 
 #menu ul {
     list-style-type: none;
-    margin:0;
-    padding:0;
+    height: inherit;
 }
 
 #menu ul>li {
-    height:60px;
-    text-align: left;
-    vertical-align: middle;
+    line-height: 4.8828125%;
     border-bottom: 1px solid #D0DBDE;
-}
-
-#menu ul li:hover{
-    background-color: #F3FCFF;
-    cursor:pointer;
-}
-
-#menu ul li:hover .menu-submenu-item{
-    cursor:pointer;
 }
 
 #menu .menu-text    {
     padding-left:30px;
     height:inherit;
     letter-spacing: 2px;
-    font-size: 20px;
-    color: #2A7C97;
+    font-family:"OpenSans";
+    font-size: 1em;
+    color: #41566F;
     width:70%;
     max-width:70%;
     float:left;
     white-space: nowrap;
-}
-
-#menu .menu-submenu-header    {
-    padding-left:30px;
-    font-size: 20px;
-    color: #1154A4;
-    float:left;
-    font-size:12pt;
-}
-
-
-#menu .menu-icon    {
-    padding-top:15px;
-    padding-bottom:15px;
-    background:url(images/arrow-right.svg) no-repeat center;
-    max-width: 10%;
-    height: 30px;
-    float:right;
-    width: 10%;
-    padding-left: 30px;
-}
-
-@media only screen
-and (min-width:0px)
-and (max-width:768px)
-and (orientation : landscape)   {
-    #menu .menu-text    {
-        font-size: 20px;
-    }
-
-    .institution-menu   {
-        margin-top:0px;
-        width: 70%;
-    }
-}
-
-@media only screen
-and (min-width:0px)
-and (max-width:768px)
-and (orientation : portrait)    {
-    #menu .menu-text    {
-        font-size: 20px;
-    }
-
-    .institution-menu   {
-        margin-top:0px;
-        width:100%;
-    }
-}
-
-@media only screen
-and (max-width:768px)
-and (orientation : landscape)   {
-    #menu .menu-text    {
-        font-size: 20px;
-    }
-
-    .institution-menu   {
-        margin-top:0px;
-        width: 70%;
-    }
-}
-
-@media only screen
-and (max-width:768px)
-and (orientation : portrait)    {
-    #menu .menu-text    {
-        font-size: 20px;
-    }
-
-    .institution-menu   {
-        margin-top:0px;
-        width:100%;
-    }
-}
-
-@media only screen
-and (min-width:768px)
-and (max-width:1023px)
-and (orientation : landscape)   {
-    .institution-menu   {
-        margin-top:0px;
-        width:40%;
-    }
-}
-
-@media only screen
-and (min-width:768px)
-and (max-width:1023px)
-and (orientation : portrait)    {
-    .institution-menu   {
-        margin-top:0px;
-        width:40%;
-    }
-    #menu ul li:hover{
-        background-color: #F3FCFF;
-        cursor:pointer;
-    }
-}
-
-@media only screen
-and (min-width:1024px)
-and (orientation : landscape)   {
-    .institution-menu   {
-        margin-top:0px;
-        width: 35%;
-    }
-    #menu ul li:hover{
-        background-color: #F3FCFF;
-        cursor:pointer;
-    }
-}
-
-@media only screen
-and (min-width:1024px)
-and (orientation : portrait)    {
-    .institution-menu   {
-        margin-top:0px;
-        width: 35%;
-    }
-    #menu ul li:hover{
-        background-color: #F3FCFF;
-        cursor:pointer;
-    }
 }

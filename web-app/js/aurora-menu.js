@@ -92,7 +92,7 @@ function ScrollableMenuTable(root, menuList) {
         }
 
        function createUI(){
-            var menu = "<div id='menu' role='application' class='institution-menu hide'>"+
+            var menu = "<div id='menu' role='application' class='menu-wrapper hide'>"+
                         "<ul id='menuList'></ul></div>";
             $(root).append(menu);
         }
