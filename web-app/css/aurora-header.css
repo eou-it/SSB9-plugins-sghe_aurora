@@ -294,14 +294,12 @@ and (max-device-width: 1023px) {
     }
 
     #header-main-section-east-part #signInDiv, #header-main-section-east-part #signInButton {
-        margin-left: 1.5625%;
-        margin-right: 1.5625%;
+        margin-left: 12.5625%;
         transform: translateY(27%)
     }
 
     #header-main-section-east-part #toolsButton {
-        margin-left: 1.5625%;
-        margin-right: 1.5625%;
+        margin-left: 12.5625%;
         transform: translateY(34%)
     }
 
