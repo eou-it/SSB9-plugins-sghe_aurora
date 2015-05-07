@@ -6,24 +6,26 @@
     margin-top: 35px;
     height: 90%;
     width: 100%;
+    overflow-y: auto;
+    display:none;
 }
 
 #menu   {
-    height:80%;
+    height:60%;
     width:31.25%;
     float:left;
-    top:35px;
+    top: 40px;
     position:fixed;
     background-color: #FFFFFF;
     box-shadow: 0 1px 7px #000000;
 }
 
 
-.menu-wrapper.hide  {
+.menu-wrapper.hide,#menuContainer.hide {
     display:none;
 }
 
-.menu-wrapper.show{
+.menu-wrapper.show, #menuContainer.show{
     display:block;
 }
 
@@ -31,10 +33,7 @@
 {
     background-color: #ffffff;
     opacity: .99;
-    position:absolute;
-    top: 65px;
     z-index: 999;
-    border-color:1px solid red;
 }
 
 .menu-wrapper:after
@@ -47,28 +46,66 @@
     display: block;
     width: 0;
     top: -15px;
-    left: 2.5%;
+    left: 20px;
 }
 
 #menu ul {
     list-style-type: none;
-    height: inherit;
+    -webkit-padding-start: 0px;
+    -webkit-margin-before: 0em;
+    height:100%;
+    border:1px solid yellow;
 }
 
 #menu ul>li {
-    line-height: 4.8828125%;
     border-bottom: 1px solid #D0DBDE;
+    text-align: left;
+    vertical-align: middle;
+    border:1px solid red;
+    height: 4.8828125%;
+    line-height: 4.8828125%;
+}
+
+.menu-item{
+    height:inherit;
+    line-height: 180%;
 }
 
 #menu .menu-text    {
-    padding-left:30px;
-    height:inherit;
+    padding-left:1%;
     letter-spacing: 2px;
-    font-family:"OpenSans";
     font-size: 1em;
     color: #41566F;
-    width:70%;
-    max-width:70%;
     float:left;
-    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+#menu ul li:hover{
+    background-color: #F3FCFF;
+    cursor:pointer;
+}
+
+#menu .menu-icon    {
+    background:url(images/arrow-right.svg) no-repeat;
+    float:right;
+    height:1.125em;
+    width:0.625em;
+    padding-right: 1%;
+}
+
+
+#menu .menu-back-icon    {
+    background:url(images/arrow-left.svg) no-repeat;
+    float:left;
+    height:1.125em;
+    width:0.625em;
+    padding-left: 1%;
+}
+
+#menu .menu-submenu-header    {
+    padding-left:30px;
+    font-size: 20px;
+    color: #1154A4;
+    float:left;
+    font-size:12pt;
 }

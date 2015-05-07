@@ -109,9 +109,13 @@ function setupBannerMenu() {
         if ($('#menu').hasClass('show')) {
             $('#menu').addClass('hide');
             $('#menu').removeClass('show');
+            $('#menuContainer').addClass('hide');
+            $('#menuContainer').removeClass('show');
         } else {
             $('#menu').addClass('show');
             $('#menu').removeClass('hide');
+            $('#menuContainer').removeClass('hide');
+            $('#menuContainer').addClass('show');
         }
         e.stopPropagation();
     });
