@@ -5,6 +5,7 @@
 #header-main-section {
     width: 100%;
     background-color: #206E9F;
+    height: 5.859375%;
 }
 
 #header-main-section-west-part {
@@ -51,7 +52,7 @@
     float:left;
 }
 
-.signInText {
+#signList .menu-item {
     color: #ffffff;
     font: 10pt Open Sans;
     text-decoration: blink;
@@ -236,7 +237,7 @@ and (max-device-width: 640px) {
     .signInMenuShadow {
         border: 5px #13689E solid;
     }
-    #signInCanvas.signIn-active .sign-item {
+    #signInCanvas.signIn-active .menu-item {
         cursor: pointer;
         font: 14pt Open Sans;
         padding-right: 13px;

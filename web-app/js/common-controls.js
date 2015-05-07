@@ -86,14 +86,7 @@ var AuroraHeader =  {
         BreadCrumb.create();
         ToolsMenu.initialize();
         setupBannerMenu();
-        $('.signIn-mobile').click(function(){
-            if ( $('.signIn-list li').length > 1 ) {
-                $('#signInCanvas').toggleClass('signIn-active');
-            } else {
-               signIn();
-            }
 
-        });
         var shortcuts = [
             'shift+home', function() {
                 // click the first link in the home div.
@@ -218,6 +211,10 @@ function toggleBrowseMenu() {
     return false;
 }
 
+function toggleSignMenu() {
+    $('#signInCanvas').toggleClass('signIn-active');
+}
+
 function toggleToolsMenu() {
     if ($('#toolsMenu').is(':hidden')) {
         $('#toolsButton').removeClass("toolsButton");
@@ -263,43 +260,24 @@ function UserControls( options ) {
     // add user context
     if (CommonContext.user == null) {
 
-        var signInDom = $("<div id='signInButton'><a class='signIn-mobile'  />"
-            +"<div id='signInCanvas' class='signInMenuShadow'><div id='signInMenu'><ul id='signList' class='signIn-list'>"
-            +"</ul></div></div>"
-            +"</div>");
-        ControlBar.append(signInDom);
-
-        var signInShortCut
-        signInShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signin"), ResourceManager.getString("userdetails_signout_shortCut"));
-
-        var signInLink = $("<li class='sign-item'> <span id='signOutShortCut' class='offscreen'>"+ ResourceManager.getString("userdetails_signout_description") + "</span><div title='"+signInShortCut+"'> <a  id='signInText' aria-describedBy='signOutShortCut'  href='#' class='" +  "signInText" + " pointer' tabindex='0'>"
-            + ResourceManager.getString("userdetails_signin") + "</a></div></li>").keydown(function(e){
-            if (e.keyCode == 13 || e.keyCode == 32) {
-                e.preventDefault();
-                e.stopPropagation();
+        SignInMenu.initialize();
+        SignInMenu.addItem("signIn", ResourceManager.getString("userdetails_signin"),undefined,
+            function () {
                 signIn();
             }
-        });
+        );
 
-        signInLink.click(function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            signIn();
-        });
+        var signInAccessibilityInfo = ResourceManager.getString("userdetails_signout_description")
+        var signInShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signin"), ResourceManager.getString("userdetails_signout_shortCut"));
+        SignInMenu.addAccessibilityInfo('#signIn',signInAccessibilityInfo,signInShortCut);
 
-        ControlBar.appendTo(signInLink, '#signList');
         var guestSignInLink
         if("true" == $('meta[name=guestLoginEnabled]').attr("content")) {
-            guestSignInLink = $("<li class='sign-item'><a id='guestSignInText' class='signInText pointer'>"
-                + ResourceManager.getString("guestuserdetails_signin") + "</a></li>");
-            ControlBar.append(guestSignInLink);
-            ControlBar.appendTo(guestSignInLink, '#signList');
-            guestSignInLink.click(function () {
-                // set CommonContext.user to null before removing the cookie
-                if ($(this).hasClass('signInText')) {
+            SignInMenu.addItem("guestSignIn",ResourceManager.getString("guestuserdetails_signin"),undefined,
+                function () {
                     window.location = ApplicationConfig.loginEndpoint;
                 }
-            });
+            );
         }
 
     } else {
@@ -798,7 +776,7 @@ var BreadCrumb = {
     getPreviousBreadCrumbNavigationLocation: function(breadcrumbId){
         var previousNavigableURL = "";
         var itemsWithURL = BreadCrumb.items.filter(function(breadcrumb) {
-           return (breadcrumb.url.length > 0 && (breadcrumb.id < parseInt(breadcrumbId))) ;
+            return (breadcrumb.url.length > 0 && (breadcrumb.id < parseInt(breadcrumbId))) ;
         });
 
         var previousBreadcrumbWithURI = _.last(itemsWithURL, [1]);
@@ -1757,11 +1735,20 @@ var NonHierarchicalMenu = {
         var handlerPostItemClick = this.callbackPostItemClick;
         i.attr('id', id);
         i.text(label);
-
+        i.attr('tabindex',0);
+        i.addClass('pointer');
         item.click(function (e) {
             if (callback)
                 callback(e);
             handlerPostItemClick.call();
+        });
+        item.keyup(function(e){
+            if(e.keyCode == 13 || e.keyCode == 32)
+            {
+                if (callback)
+                    callback(e);
+                handlerPostItemClick.call();
+            }
         });
         if (sectionId)
             this.canvas.find('#' + sectionId).next('ul').append(item);
@@ -1781,36 +1768,51 @@ var NonHierarchicalMenu = {
 
 var ToolsMenu = Object.create(NonHierarchicalMenu);
 ToolsMenu.initialize = function() {
-        $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
-        $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
+    $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
+    $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
 
     var toolsContainer = $("<div id='toolsContainer'/>");
     $('#toolsButton').append(toolsContainer);
 
     $('#toolsContainer').prepend("<div id='toolsMenu'>"
-            + "<div class='browseMenuShadow'>"
-            + "<div id='toolsCanvas'></div>"
-            + "</div>"
-            + "</div>");
-        this.dropDown = $("#toolsContainer");
-        this.dropDown.find("#toolsCanvas").append("<ul/>")
-        this.canvas = this.dropDown.find("#toolsCanvas ul");
-        this.callbackPostItemClick = toggleToolsMenu;
+        + "<div class='browseMenuShadow'>"
+        + "<div id='toolsCanvas'></div>"
+        + "</div>"
+        + "</div>");
+    this.dropDown = $("#toolsContainer");
+    this.dropDown.find("#toolsCanvas").append("<ul/>")
+    this.canvas = this.dropDown.find("#toolsCanvas ul");
+    this.callbackPostItemClick = toggleToolsMenu;
 
-        $('#toolsButton').bind("click", toggleToolsMenu);
-//        var parent=$('#toolsButton');
-//        if (parent.length > 0) {
-//            $('#toolsContainer').position({
-//                my: "right top",
-//                at: "right bottom",
-//                of: parent,
-//                within: "body"
-//            });
-//        }
-
+    $('#toolsButton').bind("click", toggleToolsMenu);
 }
 
+var SignInMenu = Object.create(NonHierarchicalMenu);
 
+SignInMenu.initialize = function() {
+    var signInDom = $("<div id='signInButton'><a class='signIn-mobile'  />"
+        +"<div id='signInCanvas' class='signInMenuShadow'><div id='signInMenu'><ul id='signList' class='signIn-list'>"
+        +"</ul></div></div>"
+        +"</div>");
+    ControlBar.append(signInDom);
+
+    this.dropDown = ControlBar.node.find("#signInCanvas");
+    this.canvas =  ControlBar.node.find('#signList');
+    this.callbackPostItemClick = toggleSignMenu;
+
+    ControlBar.node.find('.signIn-mobile').click(function(){
+        if ( $('.signIn-list li').length > 1 ) {
+            toggleSignMenu();
+        } else {
+            signIn();
+        }
+    });
+}
+SignInMenu.addAccessibilityInfo = function(selector, elemAriaLabel, elemTitle) {
+    var elemDiv = ControlBar.node.find(selector);
+    elemDiv.attr('title',elemTitle);
+    elemDiv.attr('aria-label', elemAriaLabel);
+}
 
 /**
  * Class to manage user controls on the top right corner of the Aurora header
@@ -1862,7 +1864,7 @@ $(document).ready(function(){
         var pageTitle = headerAttributes.pageTitle;
         $('#title-panel').text(pageTitle);
         if(!_.isEmpty(breadcrumbItems)){
-        BreadCrumb.setFullBreadcrumb(breadcrumbItems, pageTitle);
+            BreadCrumb.setFullBreadcrumb(breadcrumbItems, pageTitle);
         }
     }
 
