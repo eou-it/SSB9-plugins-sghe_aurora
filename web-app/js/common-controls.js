@@ -713,8 +713,8 @@ var BreadCrumb = {
     items: [],
 
     UI: $("<div id='breadcrumb-panel'>"
-        + "<span id='breadcrumbHeader'>"
-        + "</span>"
+        + "<div id='breadcrumbHeader'>"
+        + "</div>"
         + "</div>"),
 
     create: function () {
