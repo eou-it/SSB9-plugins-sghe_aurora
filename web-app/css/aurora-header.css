@@ -71,7 +71,7 @@ div#header-east-part-user-controls {
     width: 1.5em;
     float: left;
     margin-left: 1.5625em;
-    /*transform: translateY(39%);*/
+    transform: translateY(39%);
 }
 
 .institutionalBranding {
@@ -96,7 +96,7 @@ div#header-east-part-user-controls {
     position: relative;
     height: 1.375em;
     width: 1.5em;
-    /*transform: translateY(38%);*/
+    transform: translateY(38%);
 }
 
 .notification-center {
@@ -133,7 +133,6 @@ div#header-east-part-user-controls {
     position: relative;
     height: 1.375em;
     width: 1em;
-    display: none;
 }
 
 #signInButton li {
@@ -170,13 +169,11 @@ and (max-device-width: 768px) {
     }
 
     #header-main-section-east-part #signInButton {
-        /*transform: translateY(17%);*/
-        /*transform: translateY(27%)*/
+        transform: translateY(17%);
     }
 
     #header-main-section-east-part #toolsButton {
-        /*transform: translateY(20%);*/
-        /*transform: translateY(34%)*/
+        transform: translateY(20%);
     }
 
     #header-main-section-east-part #userDiv {
@@ -201,7 +198,7 @@ and (max-device-width: 768px) {
         margin-left: 1.5625em;
         height: 2.125em;
         width: 9.125em;
-        /*transform: translateY(20%);*/
+        transform: translateY(20%);
     }
     .signIn-mobile {
         display:block;
@@ -209,15 +206,19 @@ and (max-device-width: 768px) {
         width: 1.875em;
         margin-left: 1em;
         margin-right: 1em;
+        transform: translateY(20%);
     }
 
+    .signIn-mobile {
+
+    }
     #user {
         background: url("images/avatar.svg") no-repeat;
         display: inline-block;
         position: relative;
         height: 3.125em;
         width: 3.125em;
-        /*transform: translateY(12%)*/
+        transform: translateY(12%);
         margin-left: 1em;
         margin-right: 1em;
     }
@@ -284,6 +285,7 @@ and (max-device-width: 768px) {
         height: 2.5em;
         width: 2.5em;
         margin-left: 1em;
+        transform: translateY(22%);
     }
 
     .notification-center {
@@ -333,7 +335,19 @@ and (max-device-width: 768px) {
     }
 
     #tools {
-        /*transform: translateY(22%);*/
+        transform: translateY(22%);
+    }
+
+    .institutionalBranding {
+        transform: translateY(20%);
+    }
+
+    #bannerMenu {
+        transform: translateY(20%);
+    }
+
+    .signIn-mobile {
+        transform: translateY(20%);
     }
 }
 
@@ -345,13 +359,13 @@ and (max-device-width: 1023px) {
     #bannerMenu {
         height: 1.875em;
         width: 1.875em;
-        /*transform: translateY(45%);*/
+        transform: translateY(45%);
     }
     .institutionalBranding {
         margin-left: 0.9765625em;
         height: 2.125em;
         width: 8.125em;
-        /*transform: translateY(20%);*/
+        transform: translateY(20%);
     }
 
     #header-main-section {
@@ -379,18 +393,15 @@ and (max-device-width: 1023px) {
         height: 100%;
     }
 
-    #header-main-section-east-part #signInDiv, #header-main-section-east-part #signInButton {
-        /*transform: translateY(27%);*/
-        /*transform: translateY(27%)*/
+    #header-main-section-east-part #signInButton {
+        transform: translateY(27%);
         border-left: 1px #1D5F8C solid;
         background-color: #1B6496;
     }
 
     #header-main-section-east-part #toolsButton {
         border-left: 1px #1D5F8C solid;
-        /*transform: translateY(34%)*/
         height: 100%;
-        /*transform: translateY(0%);*/
     }
 
     #header-main-section-east-part #userDiv {
@@ -416,18 +427,14 @@ and (max-device-width: 1023px) {
     #bannerMenu {
         height: 1.5em;
         width: 1.5em;
-        /*transform: translateY(42%);*/
+        transform: translateY(20%);
     }
     .institutionalBranding {
         margin-left: 1.5625em;
         height: 2.125em;
         width: 8.125em;
-        /*transform: translateY(15%);*/
+        transform: translateY(15%);
     }
-        height: 1.5em;
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
 
     #tools {
         height: 2.5em;
@@ -435,8 +442,7 @@ and (max-device-width: 1023px) {
         display: block;
         margin-right: auto;
         margin-left: auto;
-        height: 100%;
-        /*transform: translateY(23%);*/
+        transform: translateY(23%);
     }
 
     #user {
@@ -445,7 +451,7 @@ and (max-device-width: 1023px) {
         position: relative;
         height: 3.25em;
         width: 2.663em;
-        /*transform: translateY(15%);*/
+        transform: translateY(15%);
         margin-left: auto;
         margin-right: auto;
     }
@@ -480,6 +486,10 @@ and (max-device-width: 1023px) {
     }
     a.notification-center-anchor.notification-center-anchor-hidden {
         text-decoration: none;
+    }
+
+    div#signInCanvas {
+        display: none;
     }
 
 }

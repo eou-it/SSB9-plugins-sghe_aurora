@@ -46,8 +46,6 @@
     background-color: #F3FCFF;
 }
 
-        right: 0em;
-
 @media (min-width:0px) and (max-width:768px) {
     #toolsList .menu-item {
         font: 0.875em Open sans;
@@ -63,8 +61,7 @@
 }
 
 @media (min-width:0px) and (max-width:768px) and (orientation : portrait)	{
-        right: 0em;
-        left: 0em;
+
 }
 
 
