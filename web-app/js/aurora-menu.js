@@ -355,6 +355,18 @@ function ScrollableMenuTable(root, menuList) {
                     }
                 }
             }
+        },
+
+        this.closeMenu = function() {
+            var currentElement = document.activeElement;
+            var menuDiv = $(currentElement).parents('#menu');
+
+            if (!menuDiv.length && $(currentElement).attr('id') !== "backButton") {
+                if ($('#menu').hasClass('show')) {
+                    $('#menu').addClass('hide');
+                    $('#menu').removeClass('show');
+                }
+            }
         }
 }
 ;

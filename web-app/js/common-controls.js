@@ -49,8 +49,8 @@ var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<div id='header-main-section'>"
             + "<div id='header-main-section-west-part'>"
-            + "<a id='bannerMenu' href='#' alt='Banner Menu'></a>"
-            + "<a id='branding' href='#' class='institutionalBranding'></a>"
+            + "<a id='bannerMenu'  alt='Banner Menu'></a>"
+            + "<a id='branding'  class='institutionalBranding'></a>"
             + "</div>";
 
         return $(header);
@@ -99,6 +99,12 @@ var AuroraHeader =  {
             'alt+l',toggleToolsMenu
         ];
         key && key.bind.apply( window, shortcuts );
+    },
+
+    addBodyClickListenerToCloseAllMenus: function() {
+        $('body').on('click', function (e) {
+            closeAllMenus();
+        });
     }
 
 }
@@ -106,62 +112,20 @@ var AuroraHeader =  {
 function setupBannerMenu() {
     $('#header-main-section').after("<div id=menuContainer role=application/>");
     $('#bannerMenu').on('click', function (e) {
-        if ($('#menu').hasClass('show')) {
-            $('#menu').addClass('hide');
-            $('#menu').removeClass('show');
-            $('#menuContainer').addClass('hide');
-            $('#menuContainer').removeClass('show');
-        } else {
-            $('#menu').addClass('show');
-            $('#menu').removeClass('hide');
-            $('#menuContainer').removeClass('hide');
-            $('#menuContainer').addClass('show');
-        }
-        e.stopPropagation();
+        toggleBrowseMenu();
     });
-
-    $('body').on('click', function (e) {
-        var menuDiv = $(e.target).parents('#menu');
-        if (!menuDiv.length && $(e.target).attr('id') !== "backButton") {
-            if ($('#menu').hasClass('show')) {
-                $('#menu').addClass('hide');
-                $('#menu').removeClass('show');
-            }
-        }
-    })
 }
 
 function toggleNotificationCenter(){
     window.notificationCenter.toggle();
 }
 
-
-function closeOpenMenus() {
-    if (!$('#browseMenu').is(':hidden') && !$('#browseButtonState').hasClass('over') &&
-        !$('#browseMenu').hasClass('over')) {
-        toggleBrowseMenu()
-    }
-
-    if (!$('#toolsMenu').is(':hidden') && !$('#toolsMenu').hasClass('over')) {
-        toggleToolsMenu()
-    }
+function closeAllMenus() {
+    scrollableList.closeMenu();
+    ToolsMenu.closeMenu();
+    SignInMenu.closeMenu();
 }
 
-function closeAllMenus(e) {
-    var menuDiv = $(e.target).parents('#menu');
-    if(!menuDiv.length && $(e.target).attr('id') !== "backButton") {
-        if ($('#menu').hasClass('show')) {
-            $('#menu').addClass('hide');
-            $('#menu').removeClass('show');
-        }
-    }
-    if (!$('#toolsCanvas').is(':hidden')) {
-        toggleToolsMenu()
-    }
-    if (!$('#signInCanvas').is(':hidden')) {
-        toggleSignMenu()
-    }
-}
 
 function scrollSelectedItemIntoView() {
     $('.navList').each(function(e) {
@@ -176,66 +140,35 @@ function scrollSelectedItemIntoView() {
     });
 }
 function toggleBrowseMenu() {
-    var browseMenu = $('#browseMenu');
-    var browseButtonState = $('#browseButtonState');
-    var browseButton = browseButtonState.find('#browseButton');
-    if (browseMenu.is(':hidden')) {
-        browseButton.removeClass("browseButton");
-        browseButton.addClass("browseTab");
-
-        browseButton.find('#browseArrow').removeClass('browseButtonDownArrow');
-        browseButton.find('#browseArrow').addClass('upArrow');
-
-        browseButtonState.addClass('active over');
-
-        closeOpenMenus();
-        browseMenu.slideDown('normal', function() {
-            // add a handler to close the Browsemenu when the mouse is clicked outside
-            $('body').click(function() {
-                closeOpenMenus();
-            });
-
-            // scroll the selectedItem into view
-            scrollSelectedItemIntoView();
-
-        });
-
-        $('#browseButtonState, #browseMenu').bind('mouseenter', function() {
-            $(this).addClass("over");
-        });
-        $('#browseButtonState, #browseMenu').bind('mouseleave', function() {
-            $(this).removeClass("over");
-        });
-        $('#browseMenu ul:first li:first').focus();
-
+    ToolsMenu.closeMenu();
+    SignInMenu.closeMenu();
+    if ($('#menu').hasClass('show')) {
+        $('#menu').addClass('hide');
+        $('#menu').removeClass('show');
+        $('#menuContainer').addClass('hide');
+        $('#menuContainer').removeClass('show');
     } else {
-        browseButton.removeClass("browseTab");
-        browseButton.addClass("browseButton");
-
-        browseButton.find('#browseArrow').removeClass('upArrow');
-        browseButton.find('#browseArrow').addClass('browseButtonDownArrow');
-
-        browseMenu.slideUp('normal', function() {
-            browseButtonState.removeClass('active');
-        });
-        browseButton.mouseleave();
-        // force clearing any existing handler
-        $('body').unbind('click');
-        $('#menuArrow').focus();
+        $('#menu').addClass('show');
+        $('#menu').removeClass('hide');
+        $('#menuContainer').removeClass('hide');
+        $('#menuContainer').addClass('show');
     }
     return false;
 }
 
 function toggleSignMenu() {
+    scrollableList.closeMenu();
+    ToolsMenu.closeMenu();
     if ($('#signInCanvas').is(':hidden')) {
         $('#signInCanvas').addClass('signIn-active');
-        // $('#toolsMenu').find('.selectedToolsItem').focus();
     } else {
         $('#signInCanvas').removeClass('signIn-active');
     }
 }
 
 function toggleToolsMenu() {
+    scrollableList.closeMenu();
+    SignInMenu.closeMenu();
     if ($('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').addClass('tools-active');
         // $('#toolsMenu').find('.selectedToolsItem').focus();
@@ -1050,6 +983,11 @@ ToolsMenu.initialize = function() {
 
     $('#tools').bind("click", toggleToolsMenu);
 }
+ToolsMenu.closeMenu = function() {
+    if (!$('#toolsCanvas').is(':hidden')) {
+        $('#toolsCanvas').removeClass('tools-active');
+    }
+}
 
 var SignInMenu = Object.create(NonHierarchicalMenu);
 
@@ -1062,7 +1000,7 @@ SignInMenu.initialize = function() {
 
     this.dropDown = ControlBar.node.find("#signInCanvas");
     this.canvas =  ControlBar.node.find('#signList');
-    this.callbackPostItemClick = toggleSignMenu;
+    this.callbackPostItemClick = signIn;
 
     ControlBar.node.find('.signIn-mobile').click(function(){
         if ( $('.signIn-list li').length > 1 ) {
@@ -1070,12 +1008,18 @@ SignInMenu.initialize = function() {
         } else {
             signIn();
         }
+        return false;
     });
 }
 SignInMenu.addAccessibilityInfo = function(selector, elemAriaLabel, elemTitle) {
     var elemDiv = ControlBar.node.find(selector);
     elemDiv.attr('title',elemTitle);
     elemDiv.attr('aria-label', elemAriaLabel);
+}
+SignInMenu.closeMenu = function() {
+    if (!$('#signInCanvas').is(':hidden')) {
+        $('#signInCanvas').removeClass('signIn-active');
+    }
 }
 
 /**

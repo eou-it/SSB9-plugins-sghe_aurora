@@ -1,38 +1,28 @@
 /** *****************************************************************************
  Copyright 2016 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
-
 #toolsCanvas {
-    display:none;
     background-color: #FFFFFF;
-}
-#toolsCanvas.tools-active {
-    display: block;
-    right: 0;
-    top: 44px;
-    left: auto;
     position: absolute;
     z-index: 1000;
     padding: 0px;
     margin: 0px;
 }
+#toolsCanvas {
+    display:none;
+}
+#toolsCanvas.tools-active {
+    display: block;
+}
 #toolsCanvas.tools-active ul {
     list-style:none;
     white-space:nowrap;
     display: block;
-    width: 100%;
-    margin: 0;
-    padding: 0;
 }
 
 #toolsCanvas.tools-active li {
     display:block;
     vertical-align: top;
-}
-
-#toolsCanvas.tools-active ul,#toolsCanvas.tools-active ul li {
-    margin : 1px !important;
-    width: 100%;
 }
 
 .toolsMenuShadow {
@@ -50,7 +40,7 @@
     height: 4.8828125%;
     padding-left: 1%;
     color: #41566F;
-    border-bottom: 1px solid #DEE5E7;
+    border-bottom: 1px solid #DEDEDE;
 }
 #toolsList .menu-item:hover {
     background-color: #F3FCFF;
@@ -58,24 +48,32 @@
 
 
 @media (min-width:0px) and (max-width:768px) {
-    #toolsContainer {
-        right: 75px;
-        top: 62px; /* getting from aurora-header.css main-header-section */
-
+    #toolsList .menu-item {
+        font: 0.875em Open sans;
+        height: 5.6338028169014086%;
+        padding-left: 1%;
+        color: #41566F;
+        border-bottom: 0.091em solid #DEDEDE;
+        width: 82.5%;
+    }
+    #toolsCanvas {
+        right: 0px;
     }
 }
 
 @media (min-width:0px) and (max-width:768px) and (orientation : portrait)	{
-    #toolsContainer {
-        width: 100%;
-        right: 0px;
-        top: 44px; /* getting from aurora-header.css main-header-section */
 
-    }
 }
 
 @media (min-width:769px) and (max-width:1023px)	{
-    #toolsContainer {
-        top:52px; /* getting from aurora-header.css main-header-section */
+    #toolsList .menu-item {
+        font: 1.25em Open sans;
+        height: 8.333333333333333%;
+        padding-left: 1.1428571428571429%;
+        color: #41566F;
+        border-bottom: 1px solid #DEDEDE;
+    }
+    #toolsCanvas {
+        right: 120px;
     }
 }
