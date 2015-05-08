@@ -128,8 +128,15 @@ function setupBannerMenu() {
             $('#menuContainer').removeClass('hide');
             $('#menuContainer').addClass('show');
         }
+        e.stopPropagation();
+    });
     $('body').on('click', function (e) {
         if (!menuDiv.length && $(e.target).attr('id') !== "backButton") {
+            if ($('#menu').hasClass('show')) {
+                $('#menu').addClass('hide');
+                $('#menu').removeClass('show');
+            }
+        }
     })
 }
 

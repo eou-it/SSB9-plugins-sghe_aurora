@@ -304,11 +304,12 @@ and (max-device-width: 768px) {
     }
 
     .notification-center-count span {
-        line-height: 326%;
+
     }
 
     a.notification-center-anchor.notification-center-anchor-hidden {
         text-decoration: none;
+        height: 100%;
     }
 
     .notification-center-anchor.notification-center-anchor-hidden:hover {
@@ -467,7 +468,7 @@ and (max-device-width: 1023px) {
     }
 
     .notification-center-count span {
-        line-height: 263%;
+
     }
 
     .notification-center-anchor.notification-center-anchor-hidden:hover {
