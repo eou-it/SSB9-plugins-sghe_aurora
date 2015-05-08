@@ -147,13 +147,19 @@ function closeOpenMenus() {
     }
 }
 
-function closeAllMenus() {
-    if (!$('#browseMenu').is(':hidden')) {
-        toggleBrowseMenu()
+function closeAllMenus(e) {
+    var menuDiv = $(e.target).parents('#menu');
+    if(!menuDiv.length && $(e.target).attr('id') !== "backButton") {
+        if ($('#menu').hasClass('show')) {
+            $('#menu').addClass('hide');
+            $('#menu').removeClass('show');
+        }
     }
-
-    if (!$('#toolsMenu').is(':hidden')) {
+    if (!$('#toolsCanvas').is(':hidden')) {
         toggleToolsMenu()
+    }
+    if (!$('#signInCanvas').is(':hidden')) {
+        toggleSignMenu()
     }
 }
 
@@ -221,34 +227,20 @@ function toggleBrowseMenu() {
 }
 
 function toggleSignMenu() {
-    $('#signInCanvas').toggleClass('signIn-active');
+    if ($('#signInCanvas').is(':hidden')) {
+        $('#signInCanvas').addClass('signIn-active');
+        // $('#toolsMenu').find('.selectedToolsItem').focus();
+    } else {
+        $('#signInCanvas').removeClass('signIn-active');
+    }
 }
 
 function toggleToolsMenu() {
-    if ($('#toolsMenu').is(':hidden')) {
-        $('#toolsButton').removeClass("toolsButton");
-        closeOpenMenus();
-        $('#toolsMenu').slideDown('normal', function() {
-            // add a handler to close the Browsemenu when the mouse is clicked outside
-            $('body').click(function() {
-                closeOpenMenus();
-            });
-        });
-
-        $('#toolsMenu').bind('mouseenter', function() {
-            $(this).addClass("over");
-        });
-        $('#toolsMenu').bind('mouseleave', function() {
-            $(this).removeClass("over");
-        });
-
-        $('#toolsMenu').find('.selectedToolsItem').focus();
+    if ($('#toolsCanvas').is(':hidden')) {
+        $('#toolsCanvas').addClass('tools-active');
+        // $('#toolsMenu').find('.selectedToolsItem').focus();
     } else {
-        $('#toolsButton').addClass("toolsButton");
-        $('#toolsMenu').slideUp('normal');
-        $('.toolsButton').mouseleave();
-        // force clearing any existing handler
-        $('body').unbind('click');
+        $('#toolsCanvas').removeClass('tools-active');
     }
     return false;
 }
@@ -263,7 +255,7 @@ function UserControls( options ) {
 
     ControlBar.initialize();
 
-    var toolsDiv = $("<div id='toolsButton'><a id='tools' href='#'></a></div>");
+    var toolsDiv = $("<div id='toolsButton'><a id='tools' ></a></div>");
     ControlBar.append(toolsDiv);
 
     // add user context
@@ -958,12 +950,12 @@ var NonHierarchicalMenu = {
     /**
      * HTML for rendering section
      */
-    sectionHtml: $("<li><div class='menu-section'/><ul></ul></li>"),
+    sectionHtml: $("<li class='menu-list-item'><div class='menu-section'/><ul></ul></li>"),
 
     /**
      * HTML for rendering menu items
      */
-    itemHtml: $("<li><div class='menu-item'></div></li>"),
+    itemHtml: $("<li class='menu-list-item'><div class='menu-item'></div></li>"),
 
     callbackPostItemClick: null,
 
@@ -1048,20 +1040,15 @@ ToolsMenu.initialize = function() {
     $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
     $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
 
-    var toolsContainer = $("<div id='toolsContainer'/>");
-    $('#toolsButton').append(toolsContainer);
-
-    $('#toolsContainer').prepend("<div id='toolsMenu'>"
-        + "<div class='browseMenuShadow'>"
-        + "<div id='toolsCanvas'></div>"
+    $('#toolsButton').append("<div id='toolsCanvas' class='toolsMenuShadow'>"
+        + "<div id='toolsMenu'><ul id='toolsList' class='tools-list'></div>"
         + "</div>"
         + "</div>");
-    this.dropDown = $("#toolsContainer");
-    this.dropDown.find("#toolsCanvas").append("<ul/>")
-    this.canvas = this.dropDown.find("#toolsCanvas ul");
+    this.dropDown = ControlBar.node.find("#toolsCanvas");
+    this.canvas =  ControlBar.node.find('#toolsList');
     this.callbackPostItemClick = toggleToolsMenu;
 
-    $('#toolsButton').bind("click", toggleToolsMenu);
+    $('#tools').bind("click", toggleToolsMenu);
 }
 
 var SignInMenu = Object.create(NonHierarchicalMenu);
