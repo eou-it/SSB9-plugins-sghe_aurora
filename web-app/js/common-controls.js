@@ -108,7 +108,7 @@ var AuroraHeader =  {
 
     addBodyClickListenerToCloseAllMenus: function() {
         $('body').on('click', function (e) {
-            closeAllMenus();
+            closeAllMenus(e.target);
         });
     }
 
@@ -126,8 +126,8 @@ function toggleNotificationCenter(){
     window.notificationCenter.toggle();
 }
 
-function closeAllMenus() {
-    scrollableList.closeMenu();
+function closeAllMenus(target) {
+    scrollableList.closeMenu(target);
     ToolsMenu.closeMenu();
     SignInMenu.closeMenu();
 }

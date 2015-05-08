@@ -51,6 +51,7 @@
     -webkit-padding-start: 0px;
     -webkit-margin-before: 0em;
     height:100%;
+    overflow:auto;
 }
 
 #menu ul>li {
@@ -61,19 +62,30 @@
 .menu-item  {
  /*   border:1px solid orange;*/
     background-color: #FFFFFF;
+    width:95%;
+    padding-left: 1%;
+    padding-right: 1%;
 }
 
 #menu .menu-text    {
-    padding-left:1%;
+    float:left;
+}
+
+#menu .menu-sub-header-text   {
+    float:right;
+    padding-right: 1%;
+}
+
+#menu .menu-text, #menu .menu-sub-header-text{
     letter-spacing: 2px;
     font-size: 1em;
     color: #41566F;
-    float:left;
     white-space: nowrap;
     text-overflow: ellipsis;
-   /* border: 1px solid red;*/
+    /* border: 1px solid red;*/
     transform:translateY(40%);
 }
+
 
 #menu ul li:hover{
     background-color: #F3FCFF;
@@ -85,7 +97,6 @@
     float:right;
     height:1.125em;
     width:0.625em;
-    padding-right: 1%;
    /* border: 1px solid red;*/
     transform:translateY(40%);
 }
@@ -93,12 +104,12 @@
 
 #menu .menu-back-icon    {
     transform:translateY(40%);
-    padding-left: 1%;
     background:url(images/arrow-left.svg) no-repeat;
     float:left;
     height:1.125em;
     width:0.625em;
-    border:solid 1px red;
+  /*  border:solid 1px red;*/
+    padding-right: 1%;
 }
 
 #menu .menu-submenu-header    {
@@ -166,7 +177,7 @@ and (orientation : portrait)   {
 
 
 @media only screen
-and (min-width:768px)
+and (min-width:769px)
 and (max-width:1024px)
 and (orientation : landscape)   {
     #menuContainer {
@@ -187,7 +198,7 @@ and (orientation : landscape)   {
 }
 
 @media only screen
-and (min-width:768px)
+and (min-width:769px)
 and (max-width:1024px)
 and (orientation : portrait)   {
     #menuContainer {
