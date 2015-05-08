@@ -47,8 +47,8 @@ function Button(id, label, callback, type) {
 
 var AuroraHeader =  {
     createSkeleton: function () {
-        var header ="<div id='header-main-section'>"
-                    + "<div id='header-main-section-west-part'>"
+        var header ="<div id='header-main-section' class='vertical-align'>"
+                    + "<div id='header-main-section-west-part' class='vertical-align'>"
             + "<a id='bannerMenu'  alt='Banner Menu'></a>"
             + "<a id='branding'  class='institutionalBranding'></a>"
                     + "</div>";
@@ -78,11 +78,11 @@ var AuroraHeader =  {
     },
 
     placeEastPart: function (options) {
-        var eastPartElement =  $("<div id='header-main-section-east-part'>"
+        var eastPartElement =  $("<div id='header-main-section-east-part' class='vertical-align'>"
                             + "</div>");
 
         $('#header-main-section').append(eastPartElement.append(UserControls( options )));
-        var notificationDiv = "<div id='notification-center'></div>";
+        var notificationDiv = "<div id='notification-center'  class='vertical-align'></div>";
         eastPartElement.append(notificationDiv);
     },
 
@@ -117,8 +117,20 @@ var AuroraHeader =  {
 function setupBannerMenu() {
     $('#header-main-section').after("<div id=menuContainer role=application/>");
     $('#bannerMenu').on('click', function (e) {
-        toggleBrowseMenu();
-    });
+        if ($('#menu').hasClass('show')) {
+            $('#menu').addClass('hide');
+            $('#menu').removeClass('show');
+            $('#menuContainer').addClass('hide');
+            $('#menuContainer').removeClass('show');
+        } else {
+            $('#menu').addClass('show');
+            $('#menu').removeClass('hide');
+            $('#menuContainer').removeClass('hide');
+            $('#menuContainer').addClass('show');
+        }
+    $('body').on('click', function (e) {
+        if (!menuDiv.length && $(e.target).attr('id') !== "backButton") {
+    })
 }
 
 function toggleNotificationCenter(){
