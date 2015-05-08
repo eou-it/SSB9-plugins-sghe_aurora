@@ -61,7 +61,7 @@ var CommonPlatform = {
                         Navigation.initialize(scrollableList);
                         scrollableList.initialize();
 					}
-
+                    AuroraHeader.addBodyClickListenerToCloseAllMenus();
 				}
 
 				ContentManager.initialize();
