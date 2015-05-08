@@ -7,74 +7,73 @@
     z-index: 1000;
     padding: 0px;
     margin: 0px;
+    width : 25%;
+    right:0;
 }
+
 #toolsCanvas {
     display:none;
 }
-#toolsCanvas.tools-active {
-    display: block;
-}
-#toolsCanvas.tools-active ul {
-    list-style:none;
-    white-space:nowrap;
-    display: block;
+
+#toolsCanvas .canvas-section, #toolsCanvas .canvas-item {
+    padding-bottom : 2%;
+    padding-top:2%;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #D0DBDE;
 }
 
-#toolsCanvas.tools-active li {
+#toolsCanvas.tools-active {
     display:block;
-    vertical-align: top;
 }
 
 .toolsMenuShadow {
     border:1px solid #DEE5E7;
 }
 
-
-#toolsList .menu-section {
+#toolsList .canvas-section {
     font-weight: bold;
     font: 1em Open sans;
     color: #41566F;
+    padding-left: 2%;
+    background-color: #F9FAFB;;
 }
-#toolsList .menu-item {
+
+#toolsList .canvas-item {
     font: 0.875em Open sans;
-    height: 4.8828125%;
-    padding-left: 1%;
+    padding-left: 6%;
     color: #41566F;
-    border-bottom: 1px solid #DEDEDE;
+    border-bottom: 1px solid #D0DBDE;
 }
-#toolsList .menu-item:hover {
+
+#toolsList .canvas-item:hover {
     background-color: #F3FCFF;
 }
 
+#toolsCanvas {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 7px #000000;
+}
+
+
+#toolsList:after{
+    content: '';
+    position: absolute;
+    border-style: solid;
+    border-width: 0 10px 18px;
+    border-color: #ffffff transparent;
+    display: block;
+    width: 0;
+    top: -15px;
+    left: 0px;
+}
+
 @media (min-width:0px) and (max-width:768px) {
-    #toolsList .menu-item {
-        font: 0.875em Open sans;
-        height: 5.6338028169014086%;
-        padding-left: 1%;
-        color: #41566F;
-        border-bottom: 0.091em solid #DEDEDE;
-        width: 82.5%;
-    }
-    #toolsCanvas {
-        right: 0px;
+    #toolsCanvas{
+        width : 82.5%;
     }
 }
+@media (min-width:0px) and (max-width:768px) and (orientation : portrait)	{}
 
-@media (min-width:0px) and (max-width:768px) and (orientation : portrait)	{
+@media (min-width:769px) and (max-width:1023px)	{ }
 
-}
-
-
-@media (min-width:769px) and (max-width:1023px)	{
-    #toolsList .menu-item {
-        right: 0em;
-        font: 1.25em Open sans;
-        height: 8.333333333333333%;
-        padding-left: 1.1428571428571429%;
-        color: #41566F;
-        border-bottom: 1px solid #DEDEDE;
-    }
-    #toolsCanvas {
-        right: 120px;
-    }
-}

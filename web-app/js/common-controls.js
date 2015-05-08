@@ -99,7 +99,7 @@ var AuroraHeader =  {
                 $('#branding')[0].click();
             },
             'alt+m', toggleBrowseMenu,
-            'ctrl+shift+F', signIn,
+            'ctrl+shift+F', toggleSignInAndSignOut,
             'alt+n', toggleNotificationCenter,
             'alt+l',toggleToolsMenu
         ];
@@ -108,7 +108,7 @@ var AuroraHeader =  {
 
     addBodyClickListenerToCloseAllMenus: function() {
         $('body').on('click', function (e) {
-            closeAllMenus();
+            closeAllMenus(e.target);
         });
     }
 
@@ -117,37 +117,20 @@ var AuroraHeader =  {
 function setupBannerMenu() {
     $('#header-main-section').after("<div id=menuContainer role=application/>");
     $('#bannerMenu').on('click', function (e) {
-        if ($('#menu').hasClass('show')) {
-            $('#menu').addClass('hide');
-            $('#menu').removeClass('show');
-            $('#menuContainer').addClass('hide');
-            $('#menuContainer').removeClass('show');
-        } else {
-            $('#menu').addClass('show');
-            $('#menu').removeClass('hide');
-            $('#menuContainer').removeClass('hide');
-            $('#menuContainer').addClass('show');
-        }
-        e.stopPropagation();
+        toggleBrowseMenu();
+        return false;
     });
-    $('body').on('click', function (e) {
-        if (!menuDiv.length && $(e.target).attr('id') !== "backButton") {
-            if ($('#menu').hasClass('show')) {
-                $('#menu').addClass('hide');
-                $('#menu').removeClass('show');
-            }
-        }
-    })
 }
 
 function toggleNotificationCenter(){
     window.notificationCenter.toggle();
 }
 
-function closeAllMenus() {
-    scrollableList.closeMenu();
+function closeAllMenus(target) {
+    scrollableList.closeMenu(target);
     ToolsMenu.closeMenu();
     SignInMenu.closeMenu();
+    ProfileMenu.closeMenu();
 }
 
 
@@ -166,6 +149,7 @@ function scrollSelectedItemIntoView() {
 function toggleBrowseMenu() {
     ToolsMenu.closeMenu();
     SignInMenu.closeMenu();
+    ProfileMenu.closeMenu();
     if ($('#menu').hasClass('show')) {
         $('#menu').addClass('hide');
         $('#menu').removeClass('show');
@@ -177,7 +161,6 @@ function toggleBrowseMenu() {
         $('#menuContainer').removeClass('hide');
         $('#menuContainer').addClass('show');
     }
-    return false;
 }
 
 function toggleSignMenu() {
@@ -190,9 +173,21 @@ function toggleSignMenu() {
     }
 }
 
+function toggleProfileMenu() {
+    scrollableList.closeMenu();
+    ToolsMenu.closeMenu();
+    if ($('#userCanvas').is(':hidden')) {
+        $('#userCanvas').addClass('user-active');
+    } else {
+        $('#userCanvas').removeClass('user-active');
+    }
+    return false;
+}
+
 function toggleToolsMenu() {
     scrollableList.closeMenu();
     SignInMenu.closeMenu();
+    ProfileMenu.closeMenu();
     if ($('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').addClass('tools-active');
         // $('#toolsMenu').find('.selectedToolsItem').focus();
@@ -203,10 +198,20 @@ function toggleToolsMenu() {
 }
 
 function signIn(){
-    var location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
-    window.location=location;
+    window.location=$('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
 }
 
+function signOut(){
+    window.location = $('meta[name=logoutEndpoint]').attr("content") || ApplicationConfig.logoutEndpoint;
+}
+
+function toggleSignInAndSignOut() {
+    if ($('#signInButton').length > 0) {
+        signIn();
+    } else {
+        signOut();
+    }
+}
 
 function UserControls( options ) {
 
@@ -239,8 +244,14 @@ function UserControls( options ) {
         }
 
     } else {
-        var userDiv = $("<div id='userDiv'><a id='user' href='#'></a><span id='username'>"+CommonContext.user+"</span></div>");
+        var userDiv = $("<div id='userDiv'><a id='user'></a><span id='username'>"+CommonContext.user+"</span></div>");
         ControlBar.append(userDiv);
+        ProfileMenu.initialize();
+        ProfileMenu.addItem("signOut", ResourceManager.getString("userdetails_signout"),undefined,
+            function () {
+                signOut();
+            }
+        );
     }
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
@@ -904,12 +915,12 @@ var NonHierarchicalMenu = {
     /**
      * HTML for rendering section
      */
-    sectionHtml: $("<li class='menu-list-item'><div class='menu-section'/><ul></ul></li>"),
+    sectionHtml: $("<div class='canvas-section'/></div>"),
 
     /**
      * HTML for rendering menu items
      */
-    itemHtml: $("<li class='menu-list-item'><div class='menu-item'></div></li>"),
+    itemHtml: $("<div class='canvas-item'/></div>"),
 
     callbackPostItemClick: null,
 
@@ -930,9 +941,8 @@ var NonHierarchicalMenu = {
      */
     addSection: function (id, label) {
         var sec = this.sectionHtml.clone();
-        var d = sec.find('div');
-        d.attr("id", id);
-        d.text(label);
+        sec.attr("id", id);
+        sec.text(label);
         this.canvas.append(sec);
         return sec;
     },
@@ -944,6 +954,105 @@ var NonHierarchicalMenu = {
     removeSection: function (id) {
 
     },
+
+    /**
+     * adds a menu item to the specified section and also attaches a callback, if provided
+     * @param id
+     * @param label
+     * @param sectionId
+     * @param callback
+     */
+    addItem: function (id, label, sectionId, callback) {
+        var item = this.itemHtml.clone();
+        var handlerPostItemClick = this.callbackPostItemClick;
+        item.attr('id', id);
+        item.text(label);
+        item.click(function (e) {
+            if (callback)
+                callback(e);
+            handlerPostItemClick.call();
+        });
+        item.keyup(function(e){
+            if(e.keyCode == 13 || e.keyCode == 32)
+            {
+                if (callback)
+                    callback(e);
+                handlerPostItemClick.call();
+            }
+        });
+        if (sectionId)
+            this.canvas.find('#' + sectionId).after(item);
+        else
+            this.canvas.append(item);
+        return item;
+    },
+
+    /**
+     * removes an menu item from the tools menu
+     * @param id
+     */
+    removeItem: function (id) {
+
+    }
+}
+
+
+var ProfileMenu = Object.create(NonHierarchicalMenu);
+ProfileMenu.initialize = function() {
+    ControlBar.node.find('#userDiv').append("<div id='userCanvas' class='userMenuShadow'>"
+        + "<div id='userMenu'><div id='userList' class='user-list'></div>"
+        + "</div>"
+        + "</div>");
+    this.dropDown = ControlBar.node.find("#userCanvas");
+    this.canvas =  ControlBar.node.find('#userList');
+    this.callbackPostItemClick = toggleProfileMenu;
+
+    ControlBar.node.find('#user').bind("click", toggleProfileMenu);
+}
+ProfileMenu.closeMenu = function() {
+    if (!$('#userCanvas').is(':hidden')) {
+        $('#userCanvas').removeClass('user-active');
+    }
+}
+
+var ToolsMenu = Object.create(NonHierarchicalMenu);
+ToolsMenu.initialize = function() {
+    $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
+    $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
+
+    $('#toolsButton').append("<div id='toolsCanvas' class='toolsMenuShadow'>"
+        + "<div id='toolsMenu'><div id='toolsList' class='tools-list'></div>"
+        + "</div>"
+        + "</div>");
+    this.dropDown = ControlBar.node.find("#toolsCanvas");
+    this.canvas =  ControlBar.node.find('#toolsList');
+    this.callbackPostItemClick = toggleToolsMenu;
+
+    $('#tools').bind("click", toggleToolsMenu);
+}
+ToolsMenu.closeMenu = function() {
+    if (!$('#toolsCanvas').is(':hidden')) {
+        $('#toolsCanvas').removeClass('tools-active');
+    }
+}
+
+var SignInMenu = {
+    /**
+     * Dropdown menu
+     */
+    dropDown: "",
+
+    /**
+     * container for menu items
+     */
+    canvas: "",
+
+    /**
+     * HTML for rendering menu items
+     */
+    itemHtml: $("<li class='signMenu-list-item'><div class='signMenu-item'></div></li>"),
+
+    callbackPostItemClick: null,
 
     /**
      * adds a menu item to the specified section and also attaches a callback, if provided
@@ -980,66 +1089,37 @@ var NonHierarchicalMenu = {
         return item;
     },
 
-    /**
-     * removes an menu item from the tools menu
-     * @param id
-     */
-    removeItem: function (id) {
-
-    }
-}
-
-var ToolsMenu = Object.create(NonHierarchicalMenu);
-ToolsMenu.initialize = function() {
-    $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
-    $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
-
-    $('#toolsButton').append("<div id='toolsCanvas' class='toolsMenuShadow'>"
-        + "<div id='toolsMenu'><ul id='toolsList' class='tools-list'></div>"
-        + "</div>"
-        + "</div>");
-    this.dropDown = ControlBar.node.find("#toolsCanvas");
-    this.canvas =  ControlBar.node.find('#toolsList');
-    this.callbackPostItemClick = toggleToolsMenu;
-
-    $('#tools').bind("click", toggleToolsMenu);
-}
-ToolsMenu.closeMenu = function() {
-    if (!$('#toolsCanvas').is(':hidden')) {
-        $('#toolsCanvas').removeClass('tools-active');
-    }
-}
-
-var SignInMenu = Object.create(NonHierarchicalMenu);
-
-SignInMenu.initialize = function() {
-    var signInDom = $("<div id='signInButton'><a class='signIn-mobile'  />"
-        +"<div id='signInCanvas' class='signInMenuShadow'><div id='signInMenu'><ul id='signList' class='signIn-list'>"
-        +"</ul></div></div>"
-        +"</div>");
-    ControlBar.append(signInDom);
-
-    this.dropDown = ControlBar.node.find("#signInCanvas");
-    this.canvas =  ControlBar.node.find('#signList');
-    this.callbackPostItemClick = signIn;
-
-    ControlBar.node.find('.signIn-mobile').click(function(){
-        if ( $('.signIn-list li').length > 1 ) {
-            toggleSignMenu();
-        } else {
-            signIn();
+    closeMenu: function() {
+        if (!$('#signInCanvas').is(':hidden')) {
+            $('#signInCanvas').removeClass('signIn-active');
         }
-        return false;
-    });
-}
-SignInMenu.addAccessibilityInfo = function(selector, elemAriaLabel, elemTitle) {
-    var elemDiv = ControlBar.node.find(selector);
-    elemDiv.attr('title',elemTitle);
-    elemDiv.attr('aria-label', elemAriaLabel);
-}
-SignInMenu.closeMenu = function() {
-    if (!$('#signInCanvas').is(':hidden')) {
-        $('#signInCanvas').removeClass('signIn-active');
+    },
+
+    addAccessibilityInfo: function(selector, elemAriaLabel, elemTitle) {
+        var elemDiv = ControlBar.node.find(selector);
+        elemDiv.attr('title',elemTitle);
+        elemDiv.attr('aria-label', elemAriaLabel);
+    },
+
+    initialize: function() {
+        var signInDom = $("<div id='signInButton'><a class='signIn-mobile'  />"
+            + "<div id='signInCanvas' class='signInMenuShadow'><div id='signInMenu'><ul id='signList' class='signIn-list'>"
+            + "</ul></div></div>"
+            + "</div>");
+        ControlBar.append(signInDom);
+
+        this.dropDown = ControlBar.node.find("#signInCanvas");
+        this.canvas = ControlBar.node.find('#signList');
+        this.callbackPostItemClick = toggleSignMenu;
+
+        ControlBar.node.find('.signIn-mobile').click(function () {
+            if ($('.signIn-list li').length > 1) {
+                toggleSignMenu();
+            } else {
+                signIn();
+            }
+            return false;
+        });
     }
 }
 

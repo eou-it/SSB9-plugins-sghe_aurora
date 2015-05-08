@@ -261,7 +261,7 @@ function ScrollableMenuTable(root, menuList) {
         function addBackButton(){
             var subMenuName = _fnGetSelectedMenuName();
             var backButton = "<li><div class='menu-item'>"
-                +"<div class='menu-back-icon'></div><div class='menu-text'><a href='#' id='backButton'> "+subMenuName+" </a></div>"
+                +"<div class='menu-back-icon'></div><div class='menu-subheader-text'><a href='#' id='backButton'> "+subMenuName+" </a></div>"
                 +"</div>"
             return backButton;
         };
@@ -357,14 +357,15 @@ function ScrollableMenuTable(root, menuList) {
             }
         },
 
-        this.closeMenu = function() {
-            var currentElement = document.activeElement;
+        this.closeMenu = function(target) {
+            var currentElement = target;
             var menuDiv = $(currentElement).parents('#menu');
-
             if (!menuDiv.length && $(currentElement).attr('id') !== "backButton") {
                 if ($('#menu').hasClass('show')) {
                     $('#menu').addClass('hide');
                     $('#menu').removeClass('show');
+                    $('#menuContainer').addClass('hide');
+                    $('#menuContainer').removeClass('show');
                 }
             }
         }
