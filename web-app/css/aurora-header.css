@@ -145,7 +145,7 @@ div#header-east-part-user-controls {
     white-space:nowrap;
 }
 
-#signList .menu-item  {
+#signList .signMenu-item  {
     color: #FFFFFF;
 }
 
@@ -269,14 +269,14 @@ and (max-device-width: 768px) {
         font: 1em Open sans;
         color: #41566F;
     }
-    #signList .menu-item {
+    #signList .signMenu-item {
         font: 0.875em Open sans;
         height: 4.8828125%;
         padding-left: 1%;
         color: #41566F;
         border-bottom: 1px solid #DEE5E7;
     }
-    #signList .menu-item:hover {
+    #signList .signMenu-item:hover {
         background-color: #F3FCFF;
     }
 
@@ -424,10 +424,7 @@ and (max-device-width: 1023px) {
         width: 8.125em;
         /*transform: translateY(15%);*/
     }
-        height: 1.5em;
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
+
 
     #tools {
         height: 2.5em;
