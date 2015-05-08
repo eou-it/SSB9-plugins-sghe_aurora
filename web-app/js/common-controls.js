@@ -885,12 +885,12 @@ var NonHierarchicalMenu = {
     /**
      * HTML for rendering section
      */
-    sectionHtml: $("<li class='menu-list-item'><div class='menu-section'/><ul></ul></li>"),
+    sectionHtml: $("<div class='canvas-section'/></div>"),
 
     /**
      * HTML for rendering menu items
      */
-    itemHtml: $("<li class='menu-list-item'><div class='menu-item'></div></li>"),
+    itemHtml: $("<div class='canvas-item'/></div>"),
 
     callbackPostItemClick: null,
 
@@ -911,9 +911,8 @@ var NonHierarchicalMenu = {
      */
     addSection: function (id, label) {
         var sec = this.sectionHtml.clone();
-        var d = sec.find('div');
-        d.attr("id", id);
-        d.text(label);
+        sec.attr("id", id);
+        sec.text(label);
         this.canvas.append(sec);
         return sec;
     },
@@ -935,12 +934,9 @@ var NonHierarchicalMenu = {
      */
     addItem: function (id, label, sectionId, callback) {
         var item = this.itemHtml.clone();
-        var i = item.find('div');
         var handlerPostItemClick = this.callbackPostItemClick;
-        i.attr('id', id);
-        i.text(label);
-        i.attr('tabindex',0);
-        i.addClass('pointer');
+        item.attr('id', id);
+        item.text(label);
         item.click(function (e) {
             if (callback)
                 callback(e);
@@ -955,7 +951,7 @@ var NonHierarchicalMenu = {
             }
         });
         if (sectionId)
-            this.canvas.find('#' + sectionId).next('ul').append(item);
+            this.canvas.find('#' + sectionId).after(item);
         else
             this.canvas.append(item);
         return item;
@@ -976,7 +972,7 @@ ToolsMenu.initialize = function() {
     $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
 
     $('#toolsButton').append("<div id='toolsCanvas' class='toolsMenuShadow'>"
-        + "<div id='toolsMenu'><ul id='toolsList' class='tools-list'></div>"
+        + "<div id='toolsMenu'><div id='toolsList' class='tools-list'></div>"
         + "</div>"
         + "</div>");
     this.dropDown = ControlBar.node.find("#toolsCanvas");
