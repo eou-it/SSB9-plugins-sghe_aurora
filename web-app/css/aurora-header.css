@@ -44,7 +44,7 @@ div#header-east-part-user-controls {
     margin: 0px;
     padding: 0px;
 }
-#header-main-section-east-part #toolsButton, #header-main-section-east-part #signInButton li {
+#header-main-section-east-part #toolsButton {
     float:left;
 }
 
@@ -52,11 +52,6 @@ div#header-east-part-user-controls {
     float:left;
 }
 
-#signList .menu-item {
-    color: #ffffff;
-    font: 10pt Open Sans;
-    text-decoration: blink;
-}
 #bannerMenu {
     background: url("images/menu.svg") no-repeat;
     height: 1.5em;
@@ -136,6 +131,11 @@ div#header-east-part-user-controls {
     list-style:none;
     white-space:nowrap;
 }
+
+#signList .menu-item  {
+    color: #FFFFFF;
+}
+
 /*Mobile device*/
 
 @media only screen
@@ -156,12 +156,14 @@ and (max-device-width: 768px) {
         height: 100%;
     }
 
-    #header-main-section-east-part #signInDiv, #header-main-section-east-part #signInButton {
+    #header-main-section-east-part #signInButton {
         transform: translateY(27%);
+        /*transform: translateY(27%)*/
     }
 
     #header-main-section-east-part #toolsButton {
         transform: translateY(34%);
+        /*transform: translateY(34%)*/
     }
 
     #header-main-section-east-part #userDiv {
@@ -170,10 +172,6 @@ and (max-device-width: 768px) {
 
     #header-main-section-east-part #userDiv #username{
         display: none;
-    }
-    #header-main-section-east-part #toolsDiv {
-        display: none;
-        border: none;
     }
 
     #header-main-section-east-part #notification-center {
@@ -251,20 +249,25 @@ and (max-device-width: 768px) {
         background: none repeat scroll 0 0 #ffffff;
     }
     .signInMenuShadow {
-        border: 5px #13689E solid;
+        border:1px solid #DEE5E7;
     }
-    #signInCanvas.signIn-active .menu-item {
-        cursor: pointer;
-        font: 14pt Open Sans;
-        padding-right: 13px;
-        padding-left: 30px;
-        line-height: 30px;
-        color: #41566f;
+
+    #signList .menu-section {
+        font-weight: bold;
+        font: 1em Open sans;
+        color: #41566F;
+    }
+    #signList .menu-item {
+        font: 0.875em Open sans;
+        height: 4.8828125%;
+        padding-left: 1%;
+        color: #41566F;
         border-bottom: 1px solid #DEE5E7;
     }
-    .signInText {
-        color: #41566f;
+    #signList .menu-item:hover {
+        background-color: #F3FCFF;
     }
+
     #tools {
         height: 2.5em;
         width: 2.5em;
@@ -365,14 +368,14 @@ and (max-device-width: 1023px) {
 
     #header-main-section-east-part #signInDiv, #header-main-section-east-part #signInButton {
         transform: translateY(27%);
-        width: 4.8828125em;
+        /*transform: translateY(27%)*/
         border-left: 1px #1D5F8C solid;
         background-color: #1B6496;
     }
 
     #header-main-section-east-part #toolsButton {
         border-left: 1px #1D5F8C solid;
-        width: 4.8828125em;
+        /*transform: translateY(34%)*/
         height: 100%;
         transform: translateY(0%);
     }
@@ -408,67 +411,10 @@ and (max-device-width: 1023px) {
         width: 8.125em;
         transform: translateY(30%);
     }
-    .signIn-mobile {
-        display:block;
-        height: 2.5em;
-        width: 1.875em;
         display: block;
         margin-right: auto;
         margin-left: auto;
-    }
-    #signInCanvas {
-        display:none;
 
-    }
-    #signInCanvas.signIn-active {
-        display: block;
-        right: 0;
-        top: 44px;
-        width: 100%;
-        left: auto;
-        position: absolute;
-        z-index: 1000;
-        padding: 0px;
-        margin: 0px;
-    }
-    #signInCanvas.signIn-active ul {
-        list-style:none;
-        white-space:nowrap;
-        display: block;
-        width: 100%;
-        background-color: #FFFFFF;
-        margin: 0;
-        padding: 0;
-    }
-
-    #signInCanvas.signIn-active li {
-        display:block;
-        vertical-align: top;
-    }
-
-    #signInCanvas.signIn-active ul,#signInCanvas.signIn-active ul li {
-        margin : 1px !important;
-        width: 100%;
-    }
-
-    #signInMenu {
-        background: none repeat scroll 0 0 #ffffff;
-    }
-    .signInMenuShadow {
-        border: 5px #13689E solid;
-    }
-    #signInCanvas.signIn-active .sign-item {
-        cursor: pointer;
-        font: 14pt Open Sans;
-        padding-right: 13px;
-        padding-left: 30px;
-        line-height: 30px;
-        color: #41566f;
-        border-bottom: 1px solid #DEE5E7;
-    }
-    .signInText {
-        color: #41566f;
-    }
     #tools {
         height: 2.5em;
         width: 2.5em;

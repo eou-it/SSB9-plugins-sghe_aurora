@@ -49,8 +49,8 @@ var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<div id='header-main-section'>"
                     + "<div id='header-main-section-west-part'>"
-                        + "<a id='bannerMenu' href='#' alt='Banner Menu'></a>"
-                        + "<a id='branding' href='#' class='institutionalBranding'></a>"
+            + "<a id='bannerMenu'  alt='Banner Menu'></a>"
+            + "<a id='branding'  class='institutionalBranding'></a>"
                     + "</div>";
 
         return $(header);
@@ -104,26 +104,20 @@ var AuroraHeader =  {
             'alt+l',toggleToolsMenu
         ];
         key && key.bind.apply( window, shortcuts );
+    },
+
+    addBodyClickListenerToCloseAllMenus: function() {
+        $('body').on('click', function (e) {
+            closeAllMenus();
+        });
     }
 
 }
 
-function setupBannerMenu(){
+function setupBannerMenu() {
     $('#header-main-section').after("<div id=menuContainer role=application/>");
-    $('#bannerMenu').on('click',function(e) {
-        $('#menu').addClass('show');
-        $('#menu').removeClass('hide');
-        e.stopPropagation();
-    });
-
-    $('body').on('click', function(e){
-        var menuDiv = $(e.target).parents('#menu');
-        if(!menuDiv.length && $(e.target).attr('id') !== "backButton") {
-            if ($('#menu').hasClass('show')) {
-                $('#menu').addClass('hide');
-                $('#menu').removeClass('show');
-            }
-        }
+    $('#bannerMenu').on('click', function (e) {
+        toggleBrowseMenu();
     });
 }
 
@@ -131,27 +125,12 @@ function toggleNotificationCenter(){
     window.notificationCenter.toggle();
 }
 
-
-function closeOpenMenus() {
-    if (!$('#browseMenu').is(':hidden') && !$('#browseButtonState').hasClass('over') &&
-        !$('#browseMenu').hasClass('over')) {
-        toggleBrowseMenu()
-    }
-
-    if (!$('#toolsMenu').is(':hidden') && !$('#toolsMenu').hasClass('over')) {
-        toggleToolsMenu()
-    }
-}
-
 function closeAllMenus() {
-    if (!$('#browseMenu').is(':hidden')) {
-        toggleBrowseMenu()
-    }
-
-    if (!$('#toolsMenu').is(':hidden')) {
-        toggleToolsMenu()
-    }
+    scrollableList.closeMenu();
+    ToolsMenu.closeMenu();
+    SignInMenu.closeMenu();
 }
+
 
 function scrollSelectedItemIntoView() {
     $('.navList').each(function(e) {
@@ -166,85 +145,40 @@ function scrollSelectedItemIntoView() {
     });
 }
 function toggleBrowseMenu() {
-    var browseMenu = $('#browseMenu');
-    var browseButtonState = $('#browseButtonState');
-    var browseButton = browseButtonState.find('#browseButton');
-    if (browseMenu.is(':hidden')) {
-        browseButton.removeClass("browseButton");
-        browseButton.addClass("browseTab");
-
-        browseButton.find('#browseArrow').removeClass('browseButtonDownArrow');
-        browseButton.find('#browseArrow').addClass('upArrow');
-
-        browseButtonState.addClass('active over');
-
-        closeOpenMenus();
-        browseMenu.slideDown('normal', function() {
-            // add a handler to close the Browsemenu when the mouse is clicked outside
-            $('body').click(function() {
-                closeOpenMenus();
-            });
-
-            // scroll the selectedItem into view
-            scrollSelectedItemIntoView();
-
-        });
-
-        $('#browseButtonState, #browseMenu').bind('mouseenter', function() {
-            $(this).addClass("over");
-        });
-        $('#browseButtonState, #browseMenu').bind('mouseleave', function() {
-            $(this).removeClass("over");
-        });
-        $('#browseMenu ul:first li:first').focus();
-
+    ToolsMenu.closeMenu();
+    SignInMenu.closeMenu();
+    if ($('#menu').hasClass('show')) {
+        $('#menu').addClass('hide');
+        $('#menu').removeClass('show');
+        $('#menuContainer').addClass('hide');
+        $('#menuContainer').removeClass('show');
     } else {
-        browseButton.removeClass("browseTab");
-        browseButton.addClass("browseButton");
-
-        browseButton.find('#browseArrow').removeClass('upArrow');
-        browseButton.find('#browseArrow').addClass('browseButtonDownArrow');
-
-        browseMenu.slideUp('normal', function() {
-            browseButtonState.removeClass('active');
-        });
-        browseButton.mouseleave();
-        // force clearing any existing handler
-        $('body').unbind('click');
-        $('#menuArrow').focus();
+        $('#menu').addClass('show');
+        $('#menu').removeClass('hide');
+        $('#menuContainer').removeClass('hide');
+        $('#menuContainer').addClass('show');
     }
     return false;
 }
 
 function toggleSignMenu() {
-    $('#signInCanvas').toggleClass('signIn-active');
+    scrollableList.closeMenu();
+    ToolsMenu.closeMenu();
+    if ($('#signInCanvas').is(':hidden')) {
+        $('#signInCanvas').addClass('signIn-active');
+    } else {
+        $('#signInCanvas').removeClass('signIn-active');
+    }
 }
 
 function toggleToolsMenu() {
-    if ($('#toolsMenu').is(':hidden')) {
-        $('#toolsButton').removeClass("toolsButton");
-        closeOpenMenus();
-        $('#toolsMenu').slideDown('normal', function() {
-            // add a handler to close the Browsemenu when the mouse is clicked outside
-            $('body').click(function() {
-                closeOpenMenus();
-            });
-        });
-
-        $('#toolsMenu').bind('mouseenter', function() {
-            $(this).addClass("over");
-        });
-        $('#toolsMenu').bind('mouseleave', function() {
-            $(this).removeClass("over");
-        });
-
-        $('#toolsMenu').find('.selectedToolsItem').focus();
+    scrollableList.closeMenu();
+    SignInMenu.closeMenu();
+    if ($('#toolsCanvas').is(':hidden')) {
+        $('#toolsCanvas').addClass('tools-active');
+        // $('#toolsMenu').find('.selectedToolsItem').focus();
     } else {
-        $('#toolsButton').addClass("toolsButton");
-        $('#toolsMenu').slideUp('normal');
-        $('.toolsButton').mouseleave();
-        // force clearing any existing handler
-        $('body').unbind('click');
+        $('#toolsCanvas').removeClass('tools-active');
     }
     return false;
 }
@@ -259,7 +193,7 @@ function UserControls( options ) {
 
     ControlBar.initialize();
 
-    var toolsDiv = $("<div id='toolsButton'><a id='tools' href='#'></a></div>");
+    var toolsDiv = $("<div id='toolsButton'><a id='tools' ></a></div>");
     ControlBar.append(toolsDiv);
 
     // add user context
@@ -706,8 +640,8 @@ var BreadCrumb = {
     items: [],
 
     UI: $("<div id='breadcrumb-panel'>"
-        + "<span id='breadcrumbHeader'>"
-        + "</span>"
+        + "<div id='breadcrumbHeader'>"
+        + "</div>"
         + "</div>"),
 
     create: function () {
@@ -921,738 +855,6 @@ var Application = {
     }
 };
 
-function ScrollableMenuTable(root) {
-    /**
-     * Flag to check if the ScrollableList is initialized
-     * @type Boolean
-     * @default false
-     */
-    this.initialized = false,
-    /**
-     * The scrolling speed.
-     * @type Number
-     * @default 5
-     */
-        this.speed = 5,
-    /**
-     * The height of the scrollable components.
-     * @type Number
-     * @default 110
-     */
-        this.height = 110,
-    /**
-     * @private
-     *
-     * The JavaScript interval id used to control scroll behavior.
-     * @type Number
-     */
-        this.interval = null,
-    /**
-     * @private
-     *
-     * The JQuery object representing the currently selected list during scrolling.
-     * @type Element
-     */
-        this.selectedList = null,
-    /**
-     * @private
-     *
-     * The JQuery object representing the last selected list item.
-     * @type Element
-     */
-        this.selectedListItem = null,
-    /**
-     * @private
-     *
-     * The internal marker suffixed to all generated ids.
-     * @type String
-     * @default "list_"
-     */
-        this.marker = "list_",
-    /**
-     * Total number of columns to display on initialization
-     */
-        this.totalColumns = 2,
-    /**
-     * Total number of columns that are added at runtime
-     */
-        this.numColumns = 0,
-    /**
-     * The root component holding the menu
-     */
-        this.root = root,
-    /**
-     * Events associated with the ScrollableList.
-     */
-        this.events = {
-            click: "navigationItemClick"
-        },
-
-    /**
-     * Keyboard navigation keys
-     */
-        this.MOVE_LEFT = 37,
-        this.MOVE_RIGHT = 39,
-        this.MOVE_UP = 38,
-        this.MOVE_DOWN = 40,
-        this.SELECT_KEY_DOWN1 = 32,
-        this.SELECT_KEY_DOWN2 = 13,
-        this.CLOSE_KEY = 27,
-        this.TAB_KEY = 9,
-
-        this.construct = function () {
-            this.initialize();
-        },
-
-    /**
-     * ScrollableList UI component initialization method.
-     */
-        this.initialize = function() {
-            // remove existing menu if any,
-            while (this.numColumns > 0) {
-                this.removeColumn();
-            }
-            this.findElement("#scrollableListContainer").empty();
-
-            var thisObj = this;
-
-            this.add(this.totalColumns);
-            this.findElement('.navList > .scrollableListFolder').live('click', function() {
-                thisObj.load($(this));
-            });
-            var menu = Navigation.menuList;
-            for (var x in menu) {
-                if (typeof menu[x] == "function") {
-                    continue;
-                }
-                if (x != "none") {
-                    if (menu[x] instanceof Array) {
-                        this.findElement('.navList:first').append("<li id='" + this.marker + x + "'  class='parent scrollableListFolder'  tabindex='0' role='treeitem' aria-expanded='false'><span>" + x + "</span></li>");
-                    } else {
-                        this.findElement('.navList:first').append("<li class='scrollableListItem'  tabindex='0' role='treeitem' aria-expanded='false'><span title='" + menu[x] + "'>" + menu[x] + "</span></li>");
-                    }
-                }
-            }
-            this.refresh();
-            this.attachScrollButtonHandlers();
-            //Intialise keyboard shortcut for Browse menu
-            this.initializeKeyboardShortcuts()
-            this.initialized = true;
-        },
-
-        this.findElement = function (expr) {
-            if (expr != undefined && $.trim(expr) != "") {
-                return $(this.root + ' ' + expr);
-            } else {
-                return $(this.root);
-            }
-        },
-
-        this.initializeKeyboardShortcuts = function() {
-            var thisObj = this;
-            $('#browseMenu li').live('keydown', function(e) {
-                var code = (e.keyCode ? e.keyCode : e.which);
-                var hasClassHeader = $(this).parents('.columns:first').hasClass('header');
-                var prevColumnInColCont = $(this).parents('.columns:first').prev('.columns');
-                var listContainer = $(this).parents('.#scrollableListContainer:first');
-                var mainPageFlag = $(e.target).parents('#mainMenuContainer:first').length;
-                $('#browseButtonState').addClass("over");
-                $('#browseMenu').addClass("over");
-                switch (code) {
-                    case thisObj.MOVE_LEFT://left arrow key is pressed
-                        // if its not the first column in browse menu
-                        if (!hasClassHeader) {
-                            if (prevColumnInColCont.length) {
-                                prevColumnInColCont.find('li.selectedListItem').focus();
-                            }
-                            else {
-                                listContainer.find('.columns:first li.selectedListItem').focus();
-                            }
-                        }
-                        break;
-                    case thisObj.MOVE_RIGHT://right arrow key is pressed
-                        // if its not a leaf node and not a selected list item do click()
-                        if ($(this).hasClass('scrollableListFolder') && !($(this).hasClass('selectedListItem'))) {
-                            $(this).click();
-                        } else if ($(this).hasClass('selectedListItem')) {
-                            if (hasClassHeader) {
-                                listContainer.find('#columnsContainer .columns:first li:first').focus();
-                            }
-                            //if its a first list is in scrollableListContainer
-                            else if ($(this).parents('.columns:first').next('.columns').length) {
-                                if (!($(this).hasClass('scrollableListFolder'))) break;  //If its not a scrollableListFolder don't move the focus to next list
-                                $(this).parents('.columns:first').next('.columns').find('li:first').focus();
-                            }
-                        }
-                        break;
-                    case thisObj.MOVE_UP: //up arrow key is pressed : select the previous list element if exits
-                        if ($(this).prev('li').length) {
-                            $(this).prev('li').focus();
-                        }
-                        break;
-                    case thisObj.MOVE_DOWN://down arrow key is pressed : select the next list element if exits
-                        if ($(this).next('li').length) {
-                            $(this).next('li').focus();
-                        }
-                        break;
-                    case thisObj.SELECT_KEY_DOWN1://Spacebar key is pressed
-                        $(this).click();
-                        break;
-                    case thisObj.SELECT_KEY_DOWN2://Enter key is pressed
-                        $(this).click();
-                        break;
-                    case thisObj.CLOSE_KEY://Esc key is pressed
-                        if (mainPageFlag) {
-                            break;
-                        }
-                        else {
-                            $('#browseArrow').click();
-                            $('#menuArrow').focus();
-                        }
-                        break;
-                    case thisObj.TAB_KEY://Tab key is pressed
-                        if (mainPageFlag) {
-                            break;
-                        }
-                        else {
-                            return false;
-                            break;
-                        }
-                }
-                $('#browseButtonState').removeClass("over");
-                $('#browseMenu').removeClass("over");
-            });
-        },
-
-        this.clickListItem = function(indexList) {
-            for (var x in indexList) {
-                var column = this.findElement('.columns')[x];
-                if (column != undefined) {
-
-                    var item = $(column).find('.navList > li')[indexList[x]];
-                    if (item != undefined && item.length > 0) {
-                        item.click();
-                    }
-                }
-            }
-        },
-
-        this.reinitialize = function(len) {
-            if (this.initialized == true) {
-                this.initialized = false;
-
-
-                if (this.selectedListItem) {
-                    this.load(this.selectedListItem);
-                    this.initialized = true;
-                    return;
-                }
-
-                var menu = Navigation.menuList;
-                for (var x in menu) {
-                    if (typeof menu[x] == "function") {
-                        continue;
-                    }
-
-                    if (x != "none") {
-                        if (len == 1) {
-                            this.findElement('.navList:first').append("<li id='" + this.marker + x + "'  class='parent scrollableListFolder' tabIndex='0' role='treeitem' aria-expanded='false' aria-level='1'><span>" + x + "</span></li>");
-                        } else {
-                            var temp = "list_" + x;
-                            this.findElement(this.escapeLocator('#' + temp)).remove();
-                            this.findElement('.selectedListItem').removeClass("selectedListItem");
-                            this.findElement('.navList:first').append("<li id='" + this.marker + x + "'  class='parent scrollableListFolder' tabIndex='0' role='treeitem' aria-expanded='false' aria-level='1'><span>" + x + "</span></li>");
-                        }
-                    }
-                }
-                this.refresh();
-                this.initialized = true;
-            }
-        },
-
-        this.escapeLocator = function (itemId) {
-            return itemId.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/])/g, '\\$1');
-        },
-    /**
-     * Adds an additional ScrollableList to the parent component.
-     * @param {Number} count The number of list components to add (optional).
-     */
-        this.add = function(count) {
-            if (!count
-                || count <= 0) {
-                count = 1;
-            }
-
-            var trackWidth = 0;
-            for (var x = 0; x < count; x++) {
-                if (x == 0) {
-                    this.findElement('#scrollableListContainer').append(""
-                            + "<div id='btn-l' class='btn-l' />"
-                    );
-                    this.findElement('#scrollableListContainer').append(""
-                            + "<div id='columnsContainer' role='group'><div id='columnsContainerTrack' /></div>"
-                    );
-
-
-                    this.findElement('#scrollableListContainer').append(""
-                            + "<div id='btn-r' class='btn-r' />"
-                    );
-
-                } else {
-                    this.addColumn();
-                }
-            }
-        },
-    /**
-     * Adds a column to the ScrollableList
-     */
-        this.addColumn = function() {
-            var mainMenuSep = (this.findElement('#columnsContainerTrack').parents("#mainMenuContainer").length > 0)
-                ? "<div class='mainpage-column-sep' ></div>"
-                : "";
-
-            this.findElement('#columnsContainerTrack').append(""
-                + "<div class='columns' >"
-                + "<span class='scrollUpButton' ></span>"
-                + "<div class='scrollContainer' >"
-                + "<ul class='navList' role='group'></ul>"
-                + mainMenuSep
-                + "</div>"
-                + "<span class='scrollDownButton' ></span>"
-                + "</div>");
-
-            this.numColumns++;
-            var columnWidth = this.findElement('#columnsContainerTrack').find('.columns:last').width();
-            this.findElement('#columnsContainerTrack').css('width', ((this.numColumns * columnWidth) + this.numColumns) + 'px');
-
-
-            this.setScrollButtonStates();
-        },
-    /**
-     * Removes the last column from the ScrollableList and sets the columnsContainerTrack width
-     */
-        this.removeColumn = function(col) {
-            this.findElement('#columnsContainerTrack').find('.columns:last').remove();
-
-            this.numColumns--;
-            var trackWidth = this.findElement('#columnsContainerTrack').find('.columns:first').width();
-            this.findElement('#columnsContainerTrack').css('width', ((this.numColumns * trackWidth) + this.numColumns) + 'px');
-        },
-
-    /**
-     * Loads list content and populates the next list for a selected list item.
-     * @param {Element} item The JQuery element for the selected list item.
-     */
-
-
-        this.load = function(item) {
-            var loc = item.attr('id').replace(this.marker, "").split("_");
-            var thisObj = this;
-
-            item.parent().parent().parent().nextAll().find('.navList').each(function(i) {
-                thisObj.removeColumn();
-            })
-
-            this.addColumn();
-
-            // show loader to the newly added column
-            // hidden below after data is loaded
-            var scrollContainer = null;
-            if (!item.parents('.columns').hasClass('header')) {
-                scrollContainer = item.parents('.columns').next().find('.scrollContainer');
-            }
-            else scrollContainer = item.parents('.#scrollableListContainer:first').find('#columnsContainer .columns:first').find('.scrollContainer');
-            scrollContainer.addClass('loader');
-
-            var next = null;
-            if (item.parent().hasClass('navListStart')) {
-                next = item.parent().parent().parent().next().next().find('.navList:first');
-            } else {
-                next = item.parent().parent().parent().next().find('.navList');
-            }
-
-            next.css("top", "0");
-
-            this.selectedItem(item.attr('id'));
-
-            var list = Navigation.menuList;
-
-            for (var x = 0; x < loc.length; x++) {
-                if (list[loc[x]]) {
-                    if (list[loc[x]] instanceof Array) {
-                        list = list[loc[x]];
-                    }
-                }
-            }
-
-            for (var x in list) {
-                if (typeof list[x] == "function") {
-                    continue;
-                }
-
-                if ((list[x].path == "null.zul" || list[x].path == "null") && x != Navigation.nonLeafNavEntryValObjKey) {
-                    var name = list[x].name;
-                    this.loadFromService(item, name);
-                }
-
-                var id = item.attr('id') + "_" + x;
-                var columnIndex = next.parents('.columns:first').index() + 1;
-
-                if ((list[x] instanceof Array || list[x]['type'] == 'MENU') && x != Navigation.nonLeafNavEntryValObjKey) {
-
-                    var liCaption = this.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['caption'];
-                    var liTitle = this.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['title'];
-
-                    var test = $('<li></li>');
-                    test.addClass('parent scrollableListFolder')
-                        .attr('id', id)
-                        .attr('tabindex', '-1')
-                        .attr('role', 'treeitem')
-                        .attr('aria-expanded', 'false')
-                        .attr('aria-level', columnIndex);
-                    var span = $('<span></span>');
-                    span.attr('title', liTitle);
-                    span.text(liCaption);
-                    test.append(span);
-                    next.append(test);
-
-
-                } else if (list[x] instanceof NavigationEntryValueObject) {
-
-                    if (x != Navigation.nonLeafNavEntryValObjKey) {
-                        var navItem = list[x];
-                        var liCaption = this.getCaption(list[x])['caption'];
-                        var liTitle = this.getCaption(list[x])['title'];
-                        var liTag = "<li id=\"" + id + "\" class=\"scrollableListItem\" tabindex=\"-1\"  role=\"treeitem\"  aria-level=" + columnIndex + ">" +
-                            "<span title=\"" + liTitle + "\">" +
-                            "<a href=\"" + navItem.url + "\">" +
-                            liCaption +
-                            "</a>" +
-                            "</span>" +
-                            "</li>";
-
-                        var leaf = $(liTag);
-                        next.append(leaf);
-                    }
-
-                } else {
-                    ErrorManager.show("Unknown entry encountered.");
-                }
-            }
-
-            // remove loader after data is loaded
-            scrollContainer.removeClass('loader');
-            scrollContainer.find('li:first').focus();
-            this.refresh();
-
-            EventDispatcher
-                .dispatchEvent(this.events.click, item.attr('id'));
-
-            // NavigationRC might have more menu items to be fetched automatically
-            NavigationRC.loadNext(thisObj);
-
-            // Remove column separator menu items has scroll bar.
-            var menuItem = scrollContainer.find(".mainpage-column-sep");
-
-            if ((menuItem.length > 0)
-                && (scrollContainer.height() < scrollContainer.attr("scrollHeight"))) {
-                menuItem.css({display: "none"});
-                scrollContainer.parent().css({width: "240px"});
-            }
-        },
-
-        this.getCaption = function (navEntry) {
-            var captionInfo = [];
-
-            captionInfo['caption'] = navEntry.pageCaption;
-            captionInfo['title'] = navEntry.pageCaption;
-            if (navEntry.captionProperty == "true") {
-                captionInfo['caption'] = captionInfo['caption'] + "<br/>" + "(" + navEntry.form + ")";
-                captionInfo['title'] = captionInfo['title'] + " (" + navEntry.form + ")";
-            }
-
-            return captionInfo;
-
-        },
-
-
-//element id's pre-fixed with * needs to be escaped when using
-        // as jquery id selectors.
-        this.escapeId = function (itemId) {
-            return itemId.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/])/g, '\\$1');
-        },
-
-
-        this.escapeApostrophe = function (str) {
-            return str.replace(/(['])/g, '\\$1');
-        },
-
-        this.navigateScript = function (listItem) {
-            return "Navigation.navigate(&#39;" + listItem.id + "&#39;)";
-        },
-
-        this.scrollableListItemClickHandler = function (listItem) {
-            return "toggleBrowseMenu(); " + this.navigateScript(listItem);
-
-        },
-
-    /**
-     * loads data using the service
-     * @param item jQuery object of the clicked HTML element
-     * @param name the name in the NavigationEntryValueObject
-     */
-        this.loadFromService = function(item, name) {
-            this.selectedListItem = item;
-            Navigation.setScrollableMenu(this);
-            Navigation.nextNavItem(name, item);
-        },
-
-        this.setSelectedListItem = function (id) {
-            this.selectedItem(id);
-            var node = this.findElement('.navList > .scrollableListFolder[id="' + id + '"]');
-            if (node.length == 0) {  // this is not a folder node
-                // check for leaf nodes
-                var node = this.findElement('.navList > .scrollableListItem[id="' + id + '"]');
-                if (node.length == 0)
-                    return;
-            }
-            this.selectedListItem = node;
-        },
-
-        this.selectedItem = function(id) {
-            // for folder nodes
-            var node = scrollableList.findElement('.navList > .scrollableListFolder[id="' + id + '"]');
-            if (node.length == 0) {  // this is not a folder node
-                // check for leaf nodes
-                var node = scrollableList.findElement('.navList > .scrollableListItem[id="' + id + '"]');
-                if (node.length == 0)
-                    return;
-                node.parent().find("li").removeClass("selectedListPage");
-                node.addClass("selectedListPage");
-                node.focus();
-            } else {
-                node.parent().find("li").removeClass("selectedListItem");
-                node.parent().find("li").attr('aria-expanded', 'false');
-                node.addClass("selectedListItem");
-                node.attr('aria-expanded', 'true');
-                node.focus();
-            }
-        },
-
-        this.getSelectedListItem = function (id) {
-            var node = this.findElement('.navList > .scrollableListFolder[id="' + id + '"]');
-            if (node.length == 0) {  // this is not a folder node
-                // check for leaf nodes
-                var node = this.findElement('.navList > .scrollableListItem[id="' + id + '"]');
-                if (node.length == 0)
-                    return;
-            }
-            return node;
-        },
-
-    /**
-     * Refreshes the scrolling state of all displayed list components.
-     */
-        this.refresh = function() {
-            this.findElement('.navList').each(function(i) {
-                if ($(this).height() > this.height) {
-                    var up = $(this).parent().parent().find('.scrollUpButton');
-                    if (!up.hasClass("upButton")) {
-                        up.removeClass("upButtonDisabled");
-                        up.addClass("upButton");
-                        up.append("<span class='navUpArrow'></span>");
-                    }
-
-                    var down = $(this).parent().parent().find('.scrollDownButton');
-                    if (!down.hasClass("downButton")) {
-                        down.removeClass("downButtonDisabled");
-                        down.addClass("downButton");
-                        down.append("<span class='navDownArrow'></span>");
-                    }
-                } else {
-                    var up = $(this).parent().parent().find('.scrollUpButton');
-                    up.removeClass("upButton");
-                    up.addClass("upButtonDisabled");
-                    up.empty();
-
-                    var down = $(this).parent().parent().find('.scrollDownButton');
-                    down.removeClass("downButton");
-                    down.addClass("downButtonDisabled");
-                    down.empty();
-                }
-            });
-        },
-
-
-    /**
-     * @private
-     *
-     * Callback method for scrolling a list up.
-     */
-        this.scrollup = function() {
-            if (this.selectedList) {
-                var top = this.selectedList.find('.navList').attr('offsetTop');
-                var newTop = (top < 0) ? top + this.speed : top;
-
-                this.selectedList.find('.navList').css("top", newTop + "px");
-            }
-        },
-    /**
-     * @private
-     *
-     * Callback method for scrolling a list down.
-     */
-        this.scrolldown = function() {
-            if (this.selectedList) {
-                var height = this.selectedList.find('.navList').attr('offsetHeight');
-                var top = this.selectedList.find('.navList').attr('offsetTop');
-                var newTop = ((height + top) > this.height) ? top - this.speed : top;
-
-                this.selectedList.find('.navList').css("top", newTop + "px");
-            }
-        },
-    /**
-     * @private
-     *
-     * Attaches necessary handlers for left/right scroll buttons.
-     */
-        this.attachScrollButtonHandlers = function() {
-            // scroll buttons --------------------------------
-            var colWidth = this.findElement('#columnsContainerTrack').find('.columns:first').css('width');
-            var isScrolling = false;
-
-            function resetIsScrolling() {
-                isScrolling = false;
-            }
-
-            this.findElement("#btn-l").css("visibility", "hidden");
-            this.findElement("#btn-r").css("visibility", "hidden");
-
-            // right button
-            // -----------------------------------------------
-            this.findElement("#btn-r").live("mouseover", function() {
-                $(this).css({
-                    "border-color" : "#369",
-                    "background-position" : "-52px center"
-                });
-            });
-            this.findElement("#btn-r").live("mouseout", function() {
-                $(this).css({
-                    "border-color" : "#666",
-                    "background-position" : "-18px center"
-                });
-            });
-            this.findElement("#btn-r").live("click", function() {
-                if (!isScrolling) {
-                    isScrolling = true;
-                    this.findElement("#columnsContainerTrack").animate({
-                        marginLeft: "-=" + colWidth
-                    }, 500, function() {
-                        this.setScrollButtonStates();
-                        setTimeout(resetIsScrolling, 250);
-                    });
-                }
-            });
-            // left button
-            // -----------------------------------------------
-            this.findElement("#btn-l").live("mouseover", function() {
-                $(this).css({
-                    "border-color" : "#369",
-                    "background-position" : "-36px center"
-                });
-            });
-            this.findElement("#btn-l").live("mouseout", function() {
-                $(this).css({
-                    "border-color" : "#666",
-                    "background-position" : "-1px center"
-                });
-            });
-            this.findElement("#btn-l").live("click", function() {
-                if (!isScrolling) {
-                    isScrolling = true;
-                    this.findElement("#columnsContainerTrack").animate({
-                        marginLeft: "+=" + colWidth
-                    }, 500, function() {
-                        this.setScrollButtonStates();
-                        setTimeout(resetIsScrolling, 250);
-                    });
-                }
-            });
-            // common
-            this.findElement("#btn-r, #btn-l").live("mousedown", function() {
-                $(this).css({
-                    "border-color" : "#036"
-                });
-            });
-            this.findElement("#btn-r, #btn-l").live("mouseup", function() {
-                $(this).css({
-                    "border-color" : "#369"
-                });
-            });
-        },
-
-        this.slideDownScrollButtons = function() {
-            if (this.findElement("#btn-l").hasClass('visible')) {
-                this.findElement("#btn-l").slideDown();
-            }
-            if (this.findElement("#btn-r").hasClass('visible')) {
-                this.findElement("#btn-r").slideDown();
-            }
-        },
-
-        this.slideUpScrollButtons = function() {
-            if (this.findElement("#btn-l").hasClass('visible')) {
-                this.findElement("#btn-l").slideUp();
-            }
-            if (this.findElement("#btn-r").hasClass('visible')) {
-                this.findElement("#btn-r").slideUp();
-            }
-        },
-
-        this.setScrollButtonStates = function() {
-            var columnWidth = this.findElement('#columnsContainerTrack').find('.columns:first').width();
-            var trackMarginLeft = this.findElement('#columnsContainerTrack').css('margin-left');
-            trackMarginLeft = trackMarginLeft == 'auto' ? 0 : parseInt(trackMarginLeft);
-            // left scroll
-            if (trackMarginLeft == 0) {
-                this.findElement("#btn-l").fadeOut(250);
-                this.findElement("#btn-l").removeClass('visible');
-            } else {
-                this.findElement("#btn-l").fadeIn(250);
-                this.findElement("#btn-l").addClass('visible');
-            }
-            // right scroll
-            if (((this.numColumns * columnWidth) + trackMarginLeft) <= this.findElement('#columnsContainer').width()) {
-                this.findElement("#btn-r").fadeOut(250);
-                this.findElement("#btn-r").removeClass('visible');
-            } else {
-                this.findElement("#btn-r").fadeIn(250);
-                this.findElement("#btn-r").addClass('visible');
-            }
-        },
-
-
-        this.getPath = function(list, id, path) {
-            if (path == null)
-                path = '';
-
-            if (list[id] != null) {
-                return path += '/' + id;
-            } else {
-                for (var x in list) {
-                    var p = path + '/' + x;
-
-                    if (list[x] instanceof Array)
-                        var newPath = this.getPath(list[x], id, p);
-                    if (newPath != undefined) {
-                        return newPath;
-                    }
-                }
-            }
-        }
-}
-;
-
 function setMepDescription(mepDescription) {
     if (mepDescription != null) {
         $('.mepHomeContextText').text(mepDescription);
@@ -1683,12 +885,12 @@ var NonHierarchicalMenu = {
     /**
      * HTML for rendering section
      */
-    sectionHtml: $("<li><div class='menu-section'/><ul></ul></li>"),
+    sectionHtml: $("<li class='menu-list-item'><div class='menu-section'/><ul></ul></li>"),
 
     /**
      * HTML for rendering menu items
      */
-    itemHtml: $("<li><div class='menu-item'></div></li>"),
+    itemHtml: $("<li class='menu-list-item'><div class='menu-item'></div></li>"),
 
     callbackPostItemClick: null,
 
@@ -1773,20 +975,20 @@ ToolsMenu.initialize = function() {
     $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
     $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
 
-    var toolsContainer = $("<div id='toolsContainer'/>");
-    $('#toolsButton').append(toolsContainer);
-
-    $('#toolsContainer').prepend("<div id='toolsMenu'>"
-        + "<div class='browseMenuShadow'>"
-        + "<div id='toolsCanvas'></div>"
+    $('#toolsButton').append("<div id='toolsCanvas' class='toolsMenuShadow'>"
+        + "<div id='toolsMenu'><ul id='toolsList' class='tools-list'></div>"
         + "</div>"
         + "</div>");
-    this.dropDown = $("#toolsContainer");
-    this.dropDown.find("#toolsCanvas").append("<ul/>")
-    this.canvas = this.dropDown.find("#toolsCanvas ul");
+    this.dropDown = ControlBar.node.find("#toolsCanvas");
+    this.canvas =  ControlBar.node.find('#toolsList');
     this.callbackPostItemClick = toggleToolsMenu;
 
-    $('#toolsButton').bind("click", toggleToolsMenu);
+    $('#tools').bind("click", toggleToolsMenu);
+}
+ToolsMenu.closeMenu = function() {
+    if (!$('#toolsCanvas').is(':hidden')) {
+        $('#toolsCanvas').removeClass('tools-active');
+    }
 }
 
 var SignInMenu = Object.create(NonHierarchicalMenu);
@@ -1800,7 +1002,7 @@ SignInMenu.initialize = function() {
 
     this.dropDown = ControlBar.node.find("#signInCanvas");
     this.canvas =  ControlBar.node.find('#signList');
-    this.callbackPostItemClick = toggleSignMenu;
+    this.callbackPostItemClick = signIn;
 
     ControlBar.node.find('.signIn-mobile').click(function(){
         if ( $('.signIn-list li').length > 1 ) {
@@ -1808,12 +1010,18 @@ SignInMenu.initialize = function() {
         } else {
             signIn();
         }
+        return false;
     });
 }
 SignInMenu.addAccessibilityInfo = function(selector, elemAriaLabel, elemTitle) {
     var elemDiv = ControlBar.node.find(selector);
     elemDiv.attr('title',elemTitle);
     elemDiv.attr('aria-label', elemAriaLabel);
+}
+SignInMenu.closeMenu = function() {
+    if (!$('#signInCanvas').is(':hidden')) {
+        $('#signInCanvas').removeClass('signIn-active');
+    }
 }
 
 /**

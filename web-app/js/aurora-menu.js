@@ -92,7 +92,7 @@ function ScrollableMenuTable(root, menuList) {
         }
 
        function createUI(){
-            var menu = "<div id='menu' role='application' class='institution-menu hide'>"+
+            var menu = "<div id='menu' role='application' class='menu-wrapper hide'>"+
                         "<ul id='menuList'></ul></div>";
             $(root).append(menu);
         }
@@ -261,11 +261,8 @@ function ScrollableMenuTable(root, menuList) {
         function addBackButton(){
             var subMenuName = _fnGetSelectedMenuName();
             var backButton = "<li><div class='menu-item'>"
-                +"<div class='menu-text'><a href='#' id='backButton'> Back </a></div>"
-                +"</div></li>"
-                +"<li><div class='menu-submenu-item'>"
-                +"<div class='menu-submenu-header'>"+subMenuName+"</div>"
-                +"</div></li>"
+                +"<div class='menu-back-icon'></div><div class='menu-text'><a href='#' id='backButton'> Back </a></div>"
+                +"</div>"
             return backButton;
         };
 
@@ -356,6 +353,18 @@ function ScrollableMenuTable(root, menuList) {
                     if (newPath != undefined) {
                         return newPath;
                     }
+                }
+            }
+        },
+
+        this.closeMenu = function() {
+            var currentElement = document.activeElement;
+            var menuDiv = $(currentElement).parents('#menu');
+
+            if (!menuDiv.length && $(currentElement).attr('id') !== "backButton") {
+                if ($('#menu').hasClass('show')) {
+                    $('#menu').addClass('hide');
+                    $('#menu').removeClass('show');
                 }
             }
         }

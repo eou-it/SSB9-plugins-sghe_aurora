@@ -1,70 +1,84 @@
 /** *****************************************************************************
  Copyright 2016 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
-
-#toolsButton {
-    margin-left:0px;
-}
-
-#toolsContainer {
+#toolsCanvas {
+    background-color: #FFFFFF;
     position: absolute;
     z-index: 1000;
-    width: 250px;
-    left:auto;
-}
-#toolsMenu {
-    display: none;
-    z-index: 999;
+    padding: 0px;
+    margin: 0px;
 }
 #toolsCanvas {
-    background: #FFFFFF; /*#477b9c*/
+    display:none;
 }
-#toolsCanvas ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
+#toolsCanvas.tools-active {
+    display: block;
+}
+#toolsCanvas.tools-active ul {
+    list-style:none;
+    white-space:nowrap;
+    display: block;
 }
 
-#toolsCanvas .menu-section {
+#toolsCanvas.tools-active li {
+    display:block;
+    vertical-align: top;
+}
+
+.toolsMenuShadow {
+    border:1px solid #DEE5E7;
+}
+
+
+#toolsList .menu-section {
     font-weight: bold;
-    font: 14pt Open Sans;
-    padding-right: 13px;
-    padding-left: 13px;
-    line-height: 40px;
-    color: #41566f;
+    font: 1em Open sans;
+    color: #41566F;
 }
-#toolsCanvas .menu-item {
-    cursor: pointer;
-    font: 14pt Open Sans;
-    padding-right: 13px;
-    padding-left: 30px;
-    line-height: 30px;
-    color: #41566f;
-    border-bottom: 1px solid #DEE5E7;
+#toolsList .menu-item {
+    font: 0.875em Open sans;
+    height: 4.8828125%;
+    padding-left: 1%;
+    color: #41566F;
+    border-bottom: 1px solid #DEDEDE;
 }
-#toolsCanvas .menu-item:hover {
-    background: #bfbebe;
+#toolsList .menu-item:hover {
+    background-color: #F3FCFF;
 }
 
-@media (min-width:0px) and (max-width:768px) {
-    #toolsContainer {
         right: 0em;
 
+@media (min-width:0px) and (max-width:768px) {
+    #toolsList .menu-item {
+        font: 0.875em Open sans;
+        height: 5.6338028169014086%;
+        padding-left: 1%;
+        color: #41566F;
+        border-bottom: 0.091em solid #DEDEDE;
+        width: 82.5%;
+    }
+    #toolsCanvas {
+        right: 0px;
     }
 }
 
 @media (min-width:0px) and (max-width:768px) and (orientation : portrait)	{
-    #toolsContainer {
         right: 0em;
         left: 0em;
-        width: 100%;
         margin-top: 1em;
-    }
-
 }
 
+
 @media (min-width:769px) and (max-width:1023px)	{
-    #toolsContainer {
+    #toolsList .menu-item {
         right: 0em;
+        font: 1.25em Open sans;
+        height: 8.333333333333333%;
+        padding-left: 1.1428571428571429%;
+        color: #41566F;
+        border-bottom: 1px solid #DEDEDE;
+    }
+    #toolsCanvas {
+        right: 120px;
     }
 }
