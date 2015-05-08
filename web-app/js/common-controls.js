@@ -99,7 +99,7 @@ var AuroraHeader =  {
                 $('#branding')[0].click();
             },
             'alt+m', toggleBrowseMenu,
-            'ctrl+shift+F', signIn,
+            'ctrl+shift+F', toggleSignInAndSignOut,
             'alt+n', toggleNotificationCenter,
             'alt+l',toggleToolsMenu
         ];
@@ -130,6 +130,7 @@ function closeAllMenus(target) {
     scrollableList.closeMenu(target);
     ToolsMenu.closeMenu();
     SignInMenu.closeMenu();
+    ProfileMenu.closeMenu();
 }
 
 
@@ -148,6 +149,7 @@ function scrollSelectedItemIntoView() {
 function toggleBrowseMenu() {
     ToolsMenu.closeMenu();
     SignInMenu.closeMenu();
+    ProfileMenu.closeMenu();
     if ($('#menu').hasClass('show')) {
         $('#menu').addClass('hide');
         $('#menu').removeClass('show');
@@ -171,9 +173,21 @@ function toggleSignMenu() {
     }
 }
 
+function toggleProfileMenu() {
+    scrollableList.closeMenu();
+    ToolsMenu.closeMenu();
+    if ($('#userCanvas').is(':hidden')) {
+        $('#userCanvas').addClass('user-active');
+    } else {
+        $('#userCanvas').removeClass('user-active');
+    }
+    return false;
+}
+
 function toggleToolsMenu() {
     scrollableList.closeMenu();
     SignInMenu.closeMenu();
+    ProfileMenu.closeMenu();
     if ($('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').addClass('tools-active');
         // $('#toolsMenu').find('.selectedToolsItem').focus();
@@ -184,10 +198,20 @@ function toggleToolsMenu() {
 }
 
 function signIn(){
-    var location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
-    window.location=location;
+    window.location=$('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
 }
 
+function signOut(){
+    window.location = $('meta[name=logoutEndpoint]').attr("content") || ApplicationConfig.logoutEndpoint;
+}
+
+function toggleSignInAndSignOut() {
+    if ($('#signInButton').length > 0) {
+        signIn();
+    } else {
+        signOut();
+    }
+}
 
 function UserControls( options ) {
 
@@ -220,8 +244,14 @@ function UserControls( options ) {
         }
 
     } else {
-        var userDiv = $("<div id='userDiv'><a id='user' href='#'></a><span id='username'>"+CommonContext.user+"</span></div>");
+        var userDiv = $("<div id='userDiv'><a id='user'></a><span id='username'>"+CommonContext.user+"</span></div>");
         ControlBar.append(userDiv);
+        ProfileMenu.initialize();
+        ProfileMenu.addItem("signOut", ResourceManager.getString("userdetails_signout"),undefined,
+            function () {
+                signOut();
+            }
+        );
     }
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
@@ -966,6 +996,25 @@ var NonHierarchicalMenu = {
     }
 }
 
+
+var ProfileMenu = Object.create(NonHierarchicalMenu);
+ProfileMenu.initialize = function() {
+    ControlBar.node.find('#userDiv').append("<div id='userCanvas' class='userMenuShadow'>"
+        + "<div id='userMenu'><div id='userList' class='user-list'></div>"
+        + "</div>"
+        + "</div>");
+    this.dropDown = ControlBar.node.find("#userCanvas");
+    this.canvas =  ControlBar.node.find('#userList');
+    this.callbackPostItemClick = toggleProfileMenu;
+
+    ControlBar.node.find('#user').bind("click", toggleProfileMenu);
+}
+ProfileMenu.closeMenu = function() {
+    if (!$('#userCanvas').is(':hidden')) {
+        $('#userCanvas').removeClass('user-active');
+    }
+}
+
 var ToolsMenu = Object.create(NonHierarchicalMenu);
 ToolsMenu.initialize = function() {
     $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
@@ -1061,7 +1110,7 @@ var SignInMenu = {
 
         this.dropDown = ControlBar.node.find("#signInCanvas");
         this.canvas = ControlBar.node.find('#signList');
-        this.callbackPostItemClick = signIn;
+        this.callbackPostItemClick = toggleSignMenu;
 
         ControlBar.node.find('.signIn-mobile').click(function () {
             if ($('.signIn-list li').length > 1) {
