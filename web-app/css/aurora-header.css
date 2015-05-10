@@ -19,6 +19,7 @@
     width: 100%;
     background-color: #206E9F;
     height: 5.859375%;
+    display: inline-block;
 }
 
 #header-main-section-west-part {
@@ -30,35 +31,45 @@
 #header-main-section-west-part  div{
     float:left;
 }
+div#header-east-part-user-controls {
+    display: inline-block;
+    height: 100%;
+}
+
 #header-main-section-east-part{
     float: right;
     background-color: #1B6496;
     height:100%;
 }
 
-div#header-east-part-user-controls {
-    display: inline-block;
-}
-
 #header-main-section-east-part #signInButton  {
     float:left;
+    border-left: 1px #1D5F8C solid;
+    margin: 0px;
+    padding: 0px;
+    height:100%;
 }
 
 #header-main-section-east-part #userDiv {
     float:left;
+    height:100%;
+    border-left: 1px #1D5F8C solid;
+    margin-right: 1em;
 }
 
 #header-main-section-east-part #userDiv #username{
     color: #ffffff;
-    font: 12px Open Sans;
-    padding-left: 7px;
+    font: 1em Open Sans;
+    padding-left: 0.5em;
 }
-#header-main-section-east-part #signInButton {
-    margin: 0px;
-    padding: 0px;
-}
+
 #header-main-section-east-part #toolsButton {
     float:left;
+    border-left: 1px #1D5F8C solid;
+    height: 100%;
+    padding-left: 1em;
+    padding-right: 1em;
+    display: inline-block;
 }
 
 #header-main-section-east-part #notification-center {
@@ -66,16 +77,15 @@ div#header-east-part-user-controls {
 }
 
 #bannerMenu {
-    background: url("images/menu.svg") no-repeat;
+    background: url("images/menu.svg") center center no-repeat;
     height: 1.5em;
     width: 1.5em;
     float: left;
-    margin-left: 1.5625em;
-    transform: translateY(39%);
+    margin-left: 1em;
 }
 
 .institutionalBranding {
-    background: url("images/logo.svg") no-repeat;
+    background: url("images/logo.svg") left center  no-repeat;
     height: 1.875em;
     width: 4.875em;
     float: left;
@@ -83,20 +93,18 @@ div#header-east-part-user-controls {
 }
 
 #tools {
-    background: url("images/settings.svg") no-repeat;
-    display: inline-block;
-    position: relative;
+    background: url("images/settings.svg") center center no-repeat;
     height: 1.375em;
     width: 1.375em;
 }
 
 #user {
-    background: url("images/avatar.svg") no-repeat;
-    display: inline-block;
+    background: url("images/avatar.svg") left center no-repeat;
+    display: block;
     position: relative;
-    height: 1.375em;
-    width: 1.5em;
-    transform: translateY(38%);
+    height: 1.6em;
+    width: 1.7em;
+    margin-left: 1em;
 }
 
 .notification-center {
@@ -117,8 +125,9 @@ div#header-east-part-user-controls {
     height: 100%;
 }
 
-#signInButton {
-    margin-left:0px;
+.notification-center-anchor.notification-center-anchor-displayed {
+    text-decoration: none;
+    height: 100%;
 }
 
 #signInCanvas ul {
@@ -128,20 +137,27 @@ div#header-east-part-user-controls {
 }
 
 .signIn-mobile {
-    background: url("images/lock.svg") no-repeat;
-    display: inline-block;
-    position: relative;
-    height: 1.375em;
-    width: 1em;
+    display:none;
+}
+
+#signInCanvas {
+    height: 100%;
+}
+
+#signInMenu {
+    height: 100%;
 }
 
 #signInButton li {
-    display:inline-block;
-    vertical-align: top;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    height: 100%;
+    float:left
 }
 #signInButton ul {
     list-style:none;
     white-space:nowrap;
+    height:100%;
 }
 
 #signList .signMenu-item  {
@@ -212,14 +228,13 @@ div#header-east-part-user-controls {
     display: block;
     width: 0;
     top: -15px;
-    left: 0px;
+    right: 0px;
 }
 
 /*Mobile device*/
 
-@media only screen
-and (min-device-width: 0px)
-and (max-device-width: 768px) {
+@media only screen and (min-device-width: 0px) and (max-device-width: 767px) {
+
     #header-main-section {
         height: 7.39436%;
         display: inline-block;
@@ -235,16 +250,10 @@ and (max-device-width: 768px) {
         height: 100%;
     }
 
-    #header-main-section-east-part #signInButton {
-
-    }
-
-    #header-main-section-east-part #toolsButton {
-        transform: translateY(20%);
-    }
-
     #header-main-section-east-part #userDiv {
         border: none;
+        margin:0;
+        display: inline-block;
     }
 
     #header-main-section-east-part #userDiv #username{
@@ -262,32 +271,23 @@ and (max-device-width: 768px) {
         width: 1.5em;
     }
     .institutionalBranding {
-        margin-left: 1.5625em;
         height: 2.125em;
         width: 9.125em;
-        transform: translateY(20%);
     }
     .signIn-mobile {
         display:block;
         height: 2.5em;
-        width: 1.875em;
-        margin-left: 1em;
-        margin-right: 1em;
-        transform: translateY(20%);
+        width: 2.5em;
+        margin:0;
+        background: url("images/lock.svg") center center no-repeat;
     }
 
-    .signIn-mobile {
-
-    }
     #user {
-        background: url("images/avatar.svg") no-repeat;
         display: inline-block;
         position: relative;
         height: 3.125em;
-        width: 3.125em;
-        transform: translateY(12%);
-        margin-left: 1em;
-        margin-right: 1em;
+        width: 2.125em;
+        margin:0;
     }
 
     #signInCanvas {
@@ -320,6 +320,8 @@ and (max-device-width: 768px) {
     #signInCanvas.signIn-active li {
         display:block;
         vertical-align: top;
+        float: left;
+        height: auto;
     }
 
 
@@ -359,10 +361,9 @@ and (max-device-width: 768px) {
     }
 
     #tools {
-        height: 2.5em;
         width: 2.5em;
-        margin-left: 1em;
-        transform: translateY(22%);
+        display: inline-block;
+        height: 100%;
     }
 
     .notification-center {
@@ -382,67 +383,43 @@ and (max-device-width: 768px) {
         height: 100%;
     }
 
-    .notification-center-count span {
-
-    }
-
-    a.notification-center-anchor.notification-center-anchor-hidden {
-        text-decoration: none;
-        height: 100%;
-    }
-
     .notification-center-anchor.notification-center-anchor-hidden:hover {
         background: #0071A7;
         border-radius: 4px;
         -moz-border-radius: 4px;
         -webkit-border-radius: 4px;
-        text-decoration: none;
     }
 
     div#header-east-part-user-controls {
         display: inline-block;
+        height: 100%;
     }
 }
 
-@media (min-width:0px) and (max-width:768px) and (orientation : portrait)	{
-
+@media (min-width:0px) and (max-width:767px) and (orientation : portrait)	{
     #header-main-section-east-part #toolsButton {
-        transform: inherit;
-        height: 100%;
+        padding:0;
     }
 
-    #tools {
-        transform: translateY(22%);
-    }
+}
 
-    .institutionalBranding {
-        transform: translateY(20%);
-    }
+@media (min-width:0px) and (max-width:767px) and (orientation : landscape)	{
 
-    #bannerMenu {
-        transform: translateY(20%);
-    }
-
-    .signIn-mobile {
-        transform: translateY(20%);
-    }
 }
 
 /*Tablet device*/
 
 @media only screen
-and (min-device-width: 769px)
+and (min-device-width: 768px)
 and (max-device-width: 1023px) {
+
     #bannerMenu {
         height: 1.875em;
         width: 1.875em;
-        transform: translateY(45%);
     }
     .institutionalBranding {
-        margin-left: 0.9765625em;
         height: 2.125em;
         width: 8.125em;
-        transform: translateY(20%);
     }
 
     #header-main-section {
@@ -457,7 +434,8 @@ and (max-device-width: 1023px) {
     }
 
     #header-main-section-east-part #userDiv #username{
-        font: 10px Open Sans;
+        font: 0.750em Open Sans;
+
     }
 
     #header-main-section-west-part{
@@ -471,26 +449,21 @@ and (max-device-width: 1023px) {
     }
 
     #header-main-section-east-part #signInButton {
-        transform: translateY(27%);
         border-left: 1px #1D5F8C solid;
         background-color: #1B6496;
     }
 
     #header-main-section-east-part #toolsButton {
         border-left: 1px #1D5F8C solid;
-        height: 100%;
+        padding: 0;
     }
 
     #header-main-section-east-part #userDiv {
         border: none;
         border-left: 1px #1D5F8C solid;
         background-color: #1B6496;
-        width: 4.8828125em;
     }
 
-    #header-main-section-east-part #userDiv #username{
-        display: none;
-    }
     #header-main-section-east-part #toolsDiv {
         display: none;
         border: none;
@@ -504,37 +477,12 @@ and (max-device-width: 1023px) {
     #bannerMenu {
         height: 1.5em;
         width: 1.5em;
-        transform: translateY(20%);
     }
-    .institutionalBranding {
-        margin-left: 1.5625em;
-        height: 2.125em;
-        width: 8.125em;
-        transform: translateY(15%);
-    }
-
 
     #tools {
         height: 2.5em;
         width: 2.5em;
-        display: block;
-        margin-right: auto;
-        margin-left: auto;
-        transform: translateY(23%);
-    }
-
-    #user {
-        background: url("images/avatar.svg") no-repeat;
-        display: block;
-        position: relative;
-        height: 3.25em;
-        width: 2.663em;
-        transform: translateY(15%);
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .notification-center {
+        display: inline-block;
     }
 
     .notification-center-count {
@@ -560,14 +508,14 @@ and (max-device-width: 1023px) {
         border-radius: 4px;
         -moz-border-radius: 4px;
         -webkit-border-radius: 4px;
-        text-decoration: none;
     }
-    a.notification-center-anchor.notification-center-anchor-hidden {
-        text-decoration: none;
-    }
+}
 
-    div#signInCanvas {
-        display: none;
-    }
+@media (min-width:768px) and (max-width:1023px) and (orientation : portrait)	{
 
 }
+
+@media (min-width:768px) and (max-width:1023px) and (orientation : landscape)	{
+
+}
+

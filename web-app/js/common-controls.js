@@ -217,7 +217,7 @@ function UserControls( options ) {
 
     ControlBar.initialize();
 
-    var toolsDiv = $("<div id='toolsButton'><a id='tools' ></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='vertical-align'><a id='tools' ></a></div>");
     ControlBar.append(toolsDiv);
 
     // add user context
@@ -244,7 +244,7 @@ function UserControls( options ) {
         }
 
     } else {
-        var userDiv = $("<div id='userDiv'><a id='user'></a><span id='username'>"+CommonContext.user+"</span></div>");
+        var userDiv = $("<div id='userDiv' class='vertical-align'><a id='user'></a><span id='username'>"+CommonContext.user+"</span></div>");
         ControlBar.append(userDiv);
         ProfileMenu.initialize();
         ProfileMenu.addItem("signOut", ResourceManager.getString("userdetails_signout"),undefined,
@@ -1050,7 +1050,7 @@ var SignInMenu = {
     /**
      * HTML for rendering menu items
      */
-    itemHtml: $("<li class='signMenu-list-item'><div class='signMenu-item'></div></li>"),
+    itemHtml: $("<li class='signMenu-list-item vertical-align'><div class='signMenu-item'></div></li>"),
 
     callbackPostItemClick: null,
 
@@ -1102,7 +1102,7 @@ var SignInMenu = {
     },
 
     initialize: function() {
-        var signInDom = $("<div id='signInButton'><a class='signIn-mobile'  />"
+        var signInDom = $("<div id='signInButton' class='vertical-align'><a class='signIn-mobile'  />"
             + "<div id='signInCanvas' class='signInMenuShadow'><div id='signInMenu'><ul id='signList' class='signIn-list'>"
             + "</ul></div></div>"
             + "</div>");
