@@ -190,9 +190,11 @@ function toggleToolsMenu() {
     ProfileMenu.closeMenu();
     if ($('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').addClass('tools-active');
+        $('#tools').addClass('tools-expanded');
         // $('#toolsMenu').find('.selectedToolsItem').focus();
     } else {
         $('#toolsCanvas').removeClass('tools-active');
+        $('#tools').removeClass('tools-expanded');
     }
     return false;
 }

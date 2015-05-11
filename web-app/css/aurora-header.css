@@ -20,6 +20,7 @@
     background-color: #206E9F;
     height: 5.859375%;
     display: inline-block;
+    position: relative;
 }
 
 #header-main-section-west-part {
