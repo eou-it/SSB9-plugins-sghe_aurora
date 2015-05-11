@@ -168,8 +168,10 @@ function toggleSignMenu() {
     ToolsMenu.closeMenu();
     if ($('#signInCanvas').is(':hidden')) {
         $('#signInCanvas').addClass('signIn-active');
+        $('.signIn-mobile').addClass('signIn-expanded');
     } else {
         $('#signInCanvas').removeClass('signIn-active');
+        $('.signIn-mobile').removeClass('signIn-expanded');
     }
 }
 
@@ -969,6 +971,7 @@ var NonHierarchicalMenu = {
         var handlerPostItemClick = this.callbackPostItemClick;
         item.attr('id', id);
         item.text(label);
+        item.addClass('pointer');
         item.click(function (e) {
             if (callback)
                 callback(e);
@@ -1038,91 +1041,36 @@ ToolsMenu.closeMenu = function() {
     }
 }
 
-var SignInMenu = {
-    /**
-     * Dropdown menu
-     */
-    dropDown: "",
+var SignInMenu = Object.create(NonHierarchicalMenu);
+SignInMenu.initialize = function() {
+    var signInDom = $("<div id='signInButton'  ><a class='signIn-mobile'  />"
+        + "<div id='signInCanvas' class='vertical-align signInMenuShadow'><div id='signInMenu'><div id='signList' class='signIn-list'>"
+        + "</div></div></div>"
+        + "</div>");
+    ControlBar.append(signInDom);
 
-    /**
-     * container for menu items
-     */
-    canvas: "",
+    this.dropDown = ControlBar.node.find("#signInCanvas");
+    this.canvas = ControlBar.node.find('#signList');
+    this.callbackPostItemClick = toggleSignMenu;
 
-    /**
-     * HTML for rendering menu items
-     */
-    itemHtml: $("<li class='signMenu-list-item vertical-align'><div class='signMenu-item'></div></li>"),
-
-    callbackPostItemClick: null,
-
-    /**
-     * adds a menu item to the specified section and also attaches a callback, if provided
-     * @param id
-     * @param label
-     * @param sectionId
-     * @param callback
-     */
-    addItem: function (id, label, sectionId, callback) {
-        var item = this.itemHtml.clone();
-        var i = item.find('div');
-        var handlerPostItemClick = this.callbackPostItemClick;
-        i.attr('id', id);
-        i.text(label);
-        i.attr('tabindex',0);
-        i.addClass('pointer');
-        item.click(function (e) {
-            if (callback)
-                callback(e);
-            handlerPostItemClick.call();
-        });
-        item.keyup(function(e){
-            if(e.keyCode == 13 || e.keyCode == 32)
-            {
-                if (callback)
-                    callback(e);
-                handlerPostItemClick.call();
-            }
-        });
-        if (sectionId)
-            this.canvas.find('#' + sectionId).next('ul').append(item);
-        else
-            this.canvas.append(item);
-        return item;
-    },
-
-    closeMenu: function() {
-        if (!$('#signInCanvas').is(':hidden')) {
-            $('#signInCanvas').removeClass('signIn-active');
+    ControlBar.node.find('.signIn-mobile').click(function () {
+        if ($('.signIn-list div').length > 1) {
+            toggleSignMenu();
+        } else {
+            signIn();
         }
-    },
-
-    addAccessibilityInfo: function(selector, elemAriaLabel, elemTitle) {
-        var elemDiv = ControlBar.node.find(selector);
-        elemDiv.attr('title',elemTitle);
-        elemDiv.attr('aria-label', elemAriaLabel);
-    },
-
-    initialize: function() {
-        var signInDom = $("<div id='signInButton' class='vertical-align'><a class='signIn-mobile'  />"
-            + "<div id='signInCanvas' class='signInMenuShadow'><div id='signInMenu'><ul id='signList' class='signIn-list'>"
-            + "</ul></div></div>"
-            + "</div>");
-        ControlBar.append(signInDom);
-
-        this.dropDown = ControlBar.node.find("#signInCanvas");
-        this.canvas = ControlBar.node.find('#signList');
-        this.callbackPostItemClick = toggleSignMenu;
-
-        ControlBar.node.find('.signIn-mobile').click(function () {
-            if ($('.signIn-list li').length > 1) {
-                toggleSignMenu();
-            } else {
-                signIn();
-            }
-            return false;
-        });
+        return false;
+    });
+}
+SignInMenu.closeMenu = function() {
+    if (!$('#signInCanvas').is(':hidden')) {
+        $('#signInCanvas').removeClass('signIn-active');
     }
+}
+SignInMenu.addAccessibilityInfo= function(selector, elemAriaLabel, elemTitle) {
+    var elemDiv = ControlBar.node.find(selector);
+    elemDiv.attr('title',elemTitle);
+    elemDiv.attr('aria-label', elemAriaLabel);
 }
 
 /**
