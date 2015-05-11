@@ -96,6 +96,8 @@ div#header-east-part-user-controls {
     background: url("images/settings.svg") center center no-repeat;
     height: 1.375em;
     width: 1.375em;
+    display: inline-block;
+    height: 100%;
 }
 
 #user {
@@ -362,8 +364,6 @@ div#header-east-part-user-controls {
 
     #tools {
         width: 2.5em;
-        display: inline-block;
-        height: 100%;
     }
 
     .notification-center {
