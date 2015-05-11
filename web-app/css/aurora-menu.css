@@ -2,14 +2,6 @@
  Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
-#menuContainer {
-/*
-    height: 90%;
-    width: 100%;
-    display:none;
-*/
-}
-
 #menu   {
     height:60%;
     width:31.25%;
@@ -72,7 +64,6 @@
     margin-left: 1%;
     margin-right: 1%;
     margin-top:2%;
-    line-height: 100%;
 }
 
 #menu .menu-text    {
@@ -86,10 +77,10 @@
 }
 
 #menu .menu-text, #menu .menu-subheader-text{
-    margin-right:1%;
     letter-spacing: 2px;
     font-size: 1em;
     color: #41566F;
+    text-align: left;
 }
 
 #menu .menu-text{
@@ -101,13 +92,15 @@
     text-overflow: ellipsis;;
 }
 
+
 #menu ul li:hover{
     background-color: #F3FCFF;
     cursor:pointer;
 }
 
 #menu .menu-icon    {
-    background:url(images/arrow-right.svg) no-repeat;
+    background:url(images/arrow-right.svg) no-repeat center center;
+    background-size:0.625em 1.125em;
     float:right;
     height:1.125em;
     width:0.625em;
@@ -116,7 +109,8 @@
 
 
 #menu .menu-back-icon    {
-    background:url(images/arrow-left.svg) no-repeat;
+    background:url(images/arrow-left.svg) no-repeat center center;
+    background-size:0.625em 1.125em;
     float:left;
     height:1.125em;
     width:0.625em;
@@ -135,4 +129,142 @@
     margin:0px;
     padding:0px;
     text-decoration: none;
+}
+
+/** Mobile **/
+@media only screen
+and (min-width:0px)
+and (max-width:767px)
+and (orientation : landscape)   {
+    #menu   {
+        height:90%;
+        width:80%;
+        float:left;
+        top:7.39436%;
+        position:fixed;
+        background-color: #FFFFFF;
+        box-shadow: 0 1px 7px #000000;
+    }
+
+    #menu ul>li {
+        border-bottom: 1px solid #D0DBDE;
+        height: 7.74647887%;
+    }
+
+    #menu .menu-icon    {
+        background:url(images/arrow-right.svg) no-repeat center center;
+        background-size:1em 1.75em;
+        float:right;
+        height:1.75em;
+        width:1em;
+    }
+
+    #menu .menu-back-icon    {
+        background:url(images/arrow-left.svg) no-repeat center center;
+        float:left;
+        background-size: 1em 1.75em;
+        padding-right: 1%;
+    }
+    .menu-item{
+        padding-right:1.953125%;
+        padding-left:1.953125%;
+    }
+
+
+}
+
+@media only screen
+and (min-width:0px)
+and (max-width:767px)
+and (orientation : portrait)   {
+
+    #menu   {
+        height: 95%;
+        width: 98%;
+        float:left;
+        top:7.39436%;
+        position:fixed;
+        background-color: #FFFFFF;
+        box-shadow: 0 1px 7px #000000;
+    }
+
+    #menu ul>li {
+        border-bottom: 1px solid #D0DBDE;
+        height: 7.74647887%;
+    }
+
+    #menu .menu-icon    {
+        background:url(images/arrow-right.svg) no-repeat center center;
+        float:right;
+        background-size:1em 1.75em;
+        height:1.75em;
+        width:1em;
+    }
+
+    #menu .menu-back-icon    {
+        background:url(images/arrow-left.svg) no-repeat center center;
+        background-size:1em 1.75em;
+        float:left;
+        height:1.75em;
+        width:1em;
+    }
+    .menu-item{
+        margin-right:1.953125%;
+        margin-left:1.953125%;
+        margin-top:0px;
+    }
+}
+
+
+
+/*** Tablet ***/
+@media only screen
+and (min-width:768px)
+and (max-width:1024px)
+and (orientation : landscape)   {
+    #menu   {
+        height: 60%;
+        width: 31.25%;
+        float:left;
+        top: 6.51042%;
+        position:fixed;
+        background-color: #FFFFFF;
+        box-shadow: 0 1px 7px #000000;
+    }
+
+    #menu ul>li {
+        border-bottom: 1px solid #D0DBDE;
+        height: 6.510416666667%;
+    }
+
+    .menu-item{
+        padding-right:1.953125%;
+        padding-left:1.953125%;
+    }
+}
+
+@media only screen
+and (min-width:768px)
+and (max-width:1024px)
+and (orientation : portrait)   {
+    #menu   {
+        height: 60%;
+        width: 31.25%;
+        float:left;
+        top: 6.51042%;
+        position:fixed;
+        background-color: #FFFFFF;
+        box-shadow: 0 1px 7px #000000;
+    }
+
+    #menu ul>li {
+        border: 1px solid red;
+        border-bottom: 1px solid #D0DBDE;
+        height: 6.510416666667%;
+    }
+
+    .menu-item{
+        margin-right:1.953125%;
+        margin-left:1.953125%;
+    }
 }
