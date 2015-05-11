@@ -92,8 +92,8 @@ function ScrollableMenuTable(root, menuList) {
         }
 
        function createUI(){
-            var menu = "<div id='menu' role='application' class='menu-wrapper hide'>"+
-                        "<ul id='menuList'></ul></div>";
+            var menu = "<nav id='menu' role='application' class='menu-wrapper hide'>"+
+                        "<ul id='menuList'></ul></nav>";
             $(root).append(menu);
         }
 
@@ -164,7 +164,7 @@ function ScrollableMenuTable(root, menuList) {
                         _that.findElement('.selectedListItem').removeClass("selectedListItem");
                         var menuItem = "";
                         menuItem = "<li id='"+_that.marker + x +"' class='scrollableListFolder' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
-                            +"<div class='menu-item' style='align:center'>"
+                            +"<div class='menu-item'>"
                             +"<div class='menu-text'><span>" + x + "</span></div>"
                             +"<div class='menu-icon'></div>"
                             +"</div></li>";
