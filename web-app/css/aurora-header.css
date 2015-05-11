@@ -67,8 +67,6 @@ div#header-east-part-user-controls {
     float:left;
     border-left: 1px #1D5F8C solid;
     height: 100%;
-    padding-left: 1em;
-    padding-right: 1em;
     display: inline-block;
 }
 
@@ -95,7 +93,7 @@ div#header-east-part-user-controls {
 #tools {
     background: url("images/settings.svg") center center no-repeat;
     height: 1.375em;
-    width: 1.375em;
+    width: 2.375em;
     display: inline-block;
     height: 100%;
 }
@@ -107,6 +105,7 @@ div#header-east-part-user-controls {
     height: 1.6em;
     width: 1.7em;
     margin-left: 1em;
+    height: 100%;
 }
 
 .notification-center {
@@ -290,6 +289,7 @@ div#header-east-part-user-controls {
         height: 3.125em;
         width: 2.125em;
         margin:0;
+        height: 100%;
     }
 
     #signInCanvas {
