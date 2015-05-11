@@ -483,6 +483,7 @@ and (max-device-width: 1023px) {
         height: 2.5em;
         width: 2.5em;
         display: inline-block;
+        height:100%;
     }
 
     .notification-center-count {
