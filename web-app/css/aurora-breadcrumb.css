@@ -9,7 +9,7 @@
 
 a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited , .breadcrumbButton {
    color: #41566F;
-   font-size: 0.875em;
+   font-size: 1.25em;
 }
 
 a.breadcrumbButton{
@@ -19,7 +19,7 @@ a.breadcrumbButton{
 #title-panel{
     height: 6.25%;
     color : #557287;
-    font-size: 1em;
+    font-size: 1.25em;
 }
 
 #breadcrumb-panel, #title-panel{
@@ -85,14 +85,14 @@ and (max-width: 768px) {
     #breadcrumbBackButton{
         background:url("images/icon-arrow-back.svg") no-repeat center;
         position:relative;
-        height: 1.625em;
-        width: 1.625em;
+        height: 1.25em;
+        width: 1.25em;
         float:left;
         margin-right: 1.953125%;
     }
 
     #breadcrumbHeader, #breadcrumbPageTitle {
-        font-size: 1.875em;
+        font-size: 1.25em;
     }
 
     .breadcrumbButton, #title-panel, .breadcrumbButton:after{
