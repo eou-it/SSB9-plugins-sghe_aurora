@@ -56,12 +56,23 @@ div#header-east-part-user-controls {
     height:100%;
     border-left: 1px #1D5F8C solid;
     margin-right: 1em;
+    display: inline-block;
 }
 
-#header-main-section-east-part #userDiv #username{
+
+#header-main-section-east-part #userDiv #user.user-expanded:after {
+    content: '';
+    border-style: solid;
+    border-width: 0 8px 9px;
+    border-color: #ffffff transparent;
+    margin : 0 auto;
+}
+
+#header-main-section-east-part #username{
     color: #ffffff;
     font: 1em Open Sans;
     padding-left: 0.5em;
+    height : 100%;
 }
 
 #header-main-section-east-part #toolsButton {
@@ -101,7 +112,7 @@ div#header-east-part-user-controls {
 
 #user {
     background: url("images/avatar.svg") left center no-repeat;
-    display: block;
+    display: flex;
     position: relative;
     height: 1.6em;
     width: 1.7em;
@@ -169,10 +180,6 @@ div#header-east-part-user-controls {
     display:block;
 }
 
-.userMenuShadow {
-    border:1px solid #DEE5E7;
-}
-
 #userList .canvas-section {
     font-weight: bold;
     font: 1em Open sans;
@@ -194,21 +201,9 @@ div#header-east-part-user-controls {
 
 #userCanvas {
     background-color: #FFFFFF;
-    box-shadow: 0 1px 7px #000000;
+    box-shadow: 0 1px 1px #000000;
 }
 
-
-#userList:after{
-    content: '';
-    position: absolute;
-    border-style: solid;
-    border-width: 0 10px 18px;
-    border-color: #ffffff transparent;
-    display: block;
-    width: 0;
-    top: -15px;
-    right: 0px;
-}
 
 /*Mobile device*/
 
@@ -235,7 +230,7 @@ div#header-east-part-user-controls {
         display: inline-block;
     }
 
-    #header-main-section-east-part #userDiv #username{
+    #header-main-section-east-part #username{
         display: none;
     }
 
@@ -254,15 +249,15 @@ div#header-east-part-user-controls {
         width: 9.125em;
     }
     .signIn-mobile {
-        display:block;
+        display:flex;
         height: 2.5em;
         width: 2.5em;
         margin:0;
         background: url("images/lock.svg") center center no-repeat;
+        height: 100%;
     }
 
     #user {
-        display: inline-block;
         position: relative;
         height: 3.125em;
         width: 2.125em;
@@ -278,7 +273,7 @@ div#header-east-part-user-controls {
         margin: 0px;
         right:0;
         left: auto;
-        box-shadow: 0 1px 7px #000000;
+        box-shadow: 0 1px 1px #000000;
         width: 82.5%;
     }
 
@@ -295,10 +290,6 @@ div#header-east-part-user-controls {
 
     #signInCanvas.signIn-active {
         display:inline-table;
-    }
-
-    .signInMenuShadow {
-        border:1px solid #DEE5E7;
     }
 
     #signList .canvas-section {
@@ -324,12 +315,10 @@ div#header-east-part-user-controls {
 
     .signIn-mobile.signIn-expanded:after {
         content: '';
-        position: absolute;
         border-style: solid;
-        border-width: 0 10px 10px;
+        border-width: 0 8px 9px;
         border-color: #ffffff transparent;
-        width: 0;
-        bottom: 0;
+        margin : 0 auto;
     }
 
     #tools {
@@ -403,7 +392,7 @@ and (max-width: 1023px) {
         float: left;
     }
 
-    #header-main-section-east-part #userDiv #username{
+    #header-main-section-east-part #username{
         font: 0.750em Open Sans;
 
     }
