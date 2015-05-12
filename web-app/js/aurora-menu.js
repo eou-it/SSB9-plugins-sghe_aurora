@@ -157,13 +157,13 @@ function ScrollableMenuTable(root, menuList) {
 
                 if (x != "none") {
                     if (len == 1) {
-                        _that.findElement('#menuList').append("<li id='" + _that.marker + x + "'  class='scrollableListFolder' tabIndex='0' role='treeitem' aria-expanded='false' aria-level='1'><span>" + x + "</span></li>");
+                        _that.findElement('#menuList').append("<li id='" + _that.marker + x + "'  class='scrollableListFolder menu-content-align' tabIndex='0' role='treeitem' aria-expanded='false' aria-level='1'><span>" + x + "</span></li>");
                     } else {
                         var temp = "list_" + x;
                         _that.findElement(_that.escapeLocator('#' + temp)).remove();
                         _that.findElement('.selectedListItem').removeClass("selectedListItem");
                         var menuItem = "";
-                        menuItem = "<li id='"+_that.marker + x +"' class='scrollableListFolder' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
+                        menuItem = "<li id='"+_that.marker + x +"' class='scrollableListFolder menu-content-align' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
                             +"<div class='menu-item'>"
                             +"<div class='menu-text'><span>" + x + "</span></div>"
                             +"<div class='menu-icon'></div>"
@@ -227,7 +227,7 @@ function ScrollableMenuTable(root, menuList) {
 
                     var liCaption = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['caption'];
                     var liTitle = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['title'];
-                    menuItem = "<li id='"+ id +"' class='scrollableListFolder' tabindex='-1' role='treeitem' aria-expanded='false' aria-level='"+columnIndex+"'>"
+                    menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-content-align' tabindex='-1' role='treeitem' aria-expanded='false' aria-level='"+columnIndex+"'>"
                         +"<div class='menu-item'>"
                         +"<div class='menu-text'> <span title=\"" + liTitle + "\">" +liCaption+"</span></div>"
                         +"<div class='menu-icon'></div>"
@@ -238,7 +238,7 @@ function ScrollableMenuTable(root, menuList) {
                         var navItem = list[x];
                         var liCaption = _that.getCaption(list[x])['caption'];
                         var liTitle = _that.getCaption(list[x])['title'];
-                        menuItem = "<li id='"+ id +"' class='scrollableListFolder' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
+                        menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-content-align' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
                             +"<div class='menu-item'>"
                             +"<div class='menu-text'> <span title=\"" + liTitle + "\">"
                             +"<a href=\"" + navItem.url + "\">"+liCaption+"</a>"
@@ -260,7 +260,7 @@ function ScrollableMenuTable(root, menuList) {
 
         function addBackButton(){
             var subMenuName = _fnGetSelectedMenuName();
-            var backButton = "<li><div class='menu-item'>"
+            var backButton = "<li class='menu-content-align'><div class='menu-item'>"
                 +"<div class='menu-back-icon'></div><div class='menu-subheader-text'><span title="+subMenuName+"><a href='#' id='backButton'> "+subMenuName+" </a></span></div>"
                 +"</div>"
             return backButton;
