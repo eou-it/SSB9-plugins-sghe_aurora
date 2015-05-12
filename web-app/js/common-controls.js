@@ -180,8 +180,10 @@ function toggleProfileMenu() {
     ToolsMenu.closeMenu();
     if ($('#userCanvas').is(':hidden')) {
         $('#userCanvas').addClass('user-active');
+        $('#user').addClass('user-expanded');
     } else {
         $('#userCanvas').removeClass('user-active');
+        $('#user').removeClass('user-expanded');
     }
     return false;
 }
@@ -248,8 +250,9 @@ function UserControls( options ) {
         }
 
     } else {
-        var userDiv = $("<div id='userDiv' class='vertical-align'><a id='user'></a><span id='username'>"+CommonContext.user+"</span></div>");
+        var userDiv = $("<div id='userDiv' class='vertical-align'><a id='user'></a></div>");
         ControlBar.append(userDiv);
+        ControlBar.append($("<div id='username' class='vertical-align'>"+CommonContext.user+"</div>'"));
         ProfileMenu.initialize();
         ProfileMenu.addItem("signOut", ResourceManager.getString("userdetails_signout"),undefined,
             function () {
@@ -1004,7 +1007,7 @@ var NonHierarchicalMenu = {
 
 var ProfileMenu = Object.create(NonHierarchicalMenu);
 ProfileMenu.initialize = function() {
-    ControlBar.node.find('#userDiv').append("<div id='userCanvas' class='userMenuShadow'>"
+    ControlBar.node.find('#userDiv').append("<div id='userCanvas'>"
         + "<div id='userMenu'><div id='userList' class='user-list'></div>"
         + "</div>"
         + "</div>");
@@ -1017,6 +1020,7 @@ ProfileMenu.initialize = function() {
 ProfileMenu.closeMenu = function() {
     if (!$('#userCanvas').is(':hidden')) {
         $('#userCanvas').removeClass('user-active');
+        $('#user').removeClass('user-expanded');
     }
 }
 
@@ -1038,13 +1042,14 @@ ToolsMenu.initialize = function() {
 ToolsMenu.closeMenu = function() {
     if (!$('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').removeClass('tools-active');
+        $('#tools').removeClass('tools-expanded');
     }
 }
 
 var SignInMenu = Object.create(NonHierarchicalMenu);
 SignInMenu.initialize = function() {
     var signInDom = $("<div id='signInButton'  ><a class='signIn-mobile'  />"
-        + "<div id='signInCanvas' class='vertical-align signInMenuShadow'><div id='signInMenu'><div id='signList' class='signIn-list'>"
+        + "<div id='signInCanvas' class='vertical-align'><div id='signInMenu'><div id='signList' class='signIn-list'>"
         + "</div></div></div>"
         + "</div>");
     ControlBar.append(signInDom);
@@ -1065,6 +1070,7 @@ SignInMenu.initialize = function() {
 SignInMenu.closeMenu = function() {
     if (!$('#signInCanvas').is(':hidden')) {
         $('#signInCanvas').removeClass('signIn-active');
+        $('.signIn-mobile').removeClass('signIn-expanded');
     }
 }
 SignInMenu.addAccessibilityInfo= function(selector, elemAriaLabel, elemTitle) {
