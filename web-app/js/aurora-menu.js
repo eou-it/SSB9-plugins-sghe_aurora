@@ -261,7 +261,7 @@ function ScrollableMenuTable(root, menuList) {
         function addBackButton(){
             var subMenuName = _fnGetSelectedMenuName();
             var backButton = "<li><div class='menu-item'>"
-                +"<div class='menu-back-icon'></div><div class='menu-subheader-text'><a href='#' id='backButton'> "+subMenuName+" </a></div>"
+                +"<div class='menu-back-icon'></div><div class='menu-subheader-text'><span title="+subMenuName+"><a href='#' id='backButton'> "+subMenuName+" </a></span></div>"
                 +"</div>"
             return backButton;
         };

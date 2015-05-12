@@ -2,14 +2,23 @@
  Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
-#menu   {
-    height:60%;
+#menuContainer{
+    height:90%;
+    display:none;
+    top:5.859375%;
     width:31.25%;
-    float:left;
-    position:fixed;
     background-color: #FFFFFF;
     box-shadow: 0 1px 7px #000000;
-    top:5.859375%;
+    float:left;
+    position:fixed;
+    opacity: .99;
+    z-index: 999;
+}
+
+#menu   {
+    height:100%;
+    width:100%;
+    overflow-y:auto;
 }
 
 .menu-wrapper.hide,#menuContainer.hide {
@@ -23,12 +32,9 @@
 .menu-wrapper
 {
     background-color: #ffffff;
-    opacity: .99;
-    z-index: 999;
-    overflow-y:auto;
 }
 
-.menu-wrapper:after
+#menuContainer:after
 {
     content: '';
     position: absolute;
@@ -63,24 +69,21 @@
     background-color: #FFFFFF;
     margin-left: 1%;
     margin-right: 1%;
-    margin-top:2%;
 }
 
 #menu .menu-text    {
     float:left;
-    text-align:center;
 }
 
 #menu .menu-subheader-text   {
-    float:left;
-    text-align:center;
+    margin-left:5%;
 }
 
 #menu .menu-text, #menu .menu-subheader-text{
     letter-spacing: 2px;
     font-size: 1em;
     color: #41566F;
-    text-align: left;
+/*    text-align: left;*/
 }
 
 #menu .menu-text{
@@ -104,7 +107,6 @@
     float:right;
     height:1.125em;
     width:0.625em;
-    margin-left:1%;
 }
 
 
@@ -114,7 +116,6 @@
     float:left;
     height:1.125em;
     width:0.625em;
-    margin-right: 1%;
 }
 
 #menu .menu-submenu-header    {
@@ -136,13 +137,10 @@
 and (min-width:0px)
 and (max-width:767px)
 and (orientation : landscape)   {
-    #menu   {
-        height:90%;
+    #menuContainer   {
+        height:80%;
         width:80%;
-        float:left;
         top:7.39436%;
-        position:fixed;
-        background-color: #FFFFFF;
         box-shadow: 0 1px 7px #000000;
     }
 
@@ -163,11 +161,13 @@ and (orientation : landscape)   {
         background:url(images/arrow-left.svg) no-repeat center center;
         float:left;
         background-size: 1em 1.75em;
-        padding-right: 1%;
+        margin-right: 1%;
+        height:1.75em;
+        width:1em;
     }
     .menu-item{
-        padding-right:1.953125%;
-        padding-left:1.953125%;
+        margin-right:1.953125%;
+        margin-left:1.953125%;
     }
 
 
@@ -178,14 +178,10 @@ and (min-width:0px)
 and (max-width:767px)
 and (orientation : portrait)   {
 
-    #menu   {
-        height: 95%;
+    #menuContainer   {
+        height: 80%;
         width: 98%;
-        float:left;
         top:7.39436%;
-        position:fixed;
-        background-color: #FFFFFF;
-        box-shadow: 0 1px 7px #000000;
     }
 
     #menu ul>li {
@@ -215,50 +211,18 @@ and (orientation : portrait)   {
     }
 }
 
-
-
 /*** Tablet ***/
 @media only screen
 and (min-width:768px)
-and (max-width:1024px)
+and (max-width:1023px)
 and (orientation : landscape)   {
-    #menu   {
-        height: 60%;
+    #menuContainer   {
+        height: 90%;
         width: 31.25%;
-        float:left;
-        top: 6.51042%;
-        position:fixed;
-        background-color: #FFFFFF;
-        box-shadow: 0 1px 7px #000000;
+        top: 5.859375%;
     }
 
     #menu ul>li {
-        border-bottom: 1px solid #D0DBDE;
-        height: 6.510416666667%;
-    }
-
-    .menu-item{
-        padding-right:1.953125%;
-        padding-left:1.953125%;
-    }
-}
-
-@media only screen
-and (min-width:768px)
-and (max-width:1024px)
-and (orientation : portrait)   {
-    #menu   {
-        height: 60%;
-        width: 31.25%;
-        float:left;
-        top: 6.51042%;
-        position:fixed;
-        background-color: #FFFFFF;
-        box-shadow: 0 1px 7px #000000;
-    }
-
-    #menu ul>li {
-        border: 1px solid red;
         border-bottom: 1px solid #D0DBDE;
         height: 6.510416666667%;
     }
@@ -266,5 +230,48 @@ and (orientation : portrait)   {
     .menu-item{
         margin-right:1.953125%;
         margin-left:1.953125%;
+        height:auto;
+    }
+}
+
+@media only screen
+and (min-width:768px)
+and (max-width:1023px)
+and (orientation : portrait)   {
+    #menuContainer   {
+        height: 90%;
+        width: 31.25%;
+        top: 5.859375%;
+    }
+
+    #menu ul>li {
+        border-bottom: 1px solid #D0DBDE;
+        height: 6.510416666667%;
+    }
+
+    .menu-item{
+        margin-right:1.953125%;
+        margin-left:1.953125%;
+        height:auto;
+    }
+}
+
+/*Desktop*/
+
+@media only screen
+and (min-width:1024px)
+and (orientation : portrait)   {
+    .menu-item{
+        margin-right:1%;
+        margin-left:1%;
+    }
+}
+
+@media only screen
+and (min-width:1024px)
+and (orientation : landscape)   {
+    .menu-item{
+        margin-right:1%;
+        margin-left:1%;
     }
 }
