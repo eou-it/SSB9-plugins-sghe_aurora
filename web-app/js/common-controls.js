@@ -49,7 +49,7 @@ var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<div id='header-main-section' class='vertical-align'>"
                     + "<div id='header-main-section-west-part' class='vertical-align'>"
-            + "<a id='bannerMenu'  alt='Banner Menu'></a>"
+            + "<a id='bannerMenu' href='javascript:void(0);'  alt='Banner Menu'></a>"
             + "<a id='branding'  class='institutionalBranding'></a>"
                     + "</div>";
 
@@ -223,7 +223,7 @@ function UserControls( options ) {
 
     ControlBar.initialize();
 
-    var toolsDiv = $("<div id='toolsButton' class='vertical-align'><a id='tools' ></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='vertical-align'><a href='javascript:void(0);' id='tools' ></a></div>");
     ControlBar.append(toolsDiv);
 
     // add user context
@@ -975,6 +975,7 @@ var NonHierarchicalMenu = {
         item.attr('id', id);
         item.text(label);
         item.addClass('pointer');
+        item.attr('tabindex',0);
         item.click(function (e) {
             if (callback)
                 callback(e);
