@@ -223,7 +223,7 @@ function UserControls( options ) {
 
     ControlBar.initialize();
 
-    var toolsDiv = $("<div id='toolsButton' class='vertical-align'><a href='javascript:void(0);' id='tools' ></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='vertical-align'><a href='javascript:void(0);' id='tools' class='flex-box'></a></div>");
     ControlBar.append(toolsDiv);
 
     // add user context
@@ -250,7 +250,7 @@ function UserControls( options ) {
         }
 
     } else {
-        var userDiv = $("<div id='userDiv' class='vertical-align'><a id='user'></a></div>");
+        var userDiv = $("<div id='userDiv' class='vertical-align'><a id='user' class='flex-box'></a></div>");
         ControlBar.append(userDiv);
         ControlBar.append($("<div id='username' class='vertical-align'>"+CommonContext.user+"</div>'"));
         ProfileMenu.initialize();
@@ -927,7 +927,7 @@ var NonHierarchicalMenu = {
     /**
      * HTML for rendering menu items
      */
-    itemHtml: $("<div class='canvas-item'/></div>"),
+    itemHtml: $("<div class='canvas-item vertical-align'/></div>"),
 
     callbackPostItemClick: null,
 

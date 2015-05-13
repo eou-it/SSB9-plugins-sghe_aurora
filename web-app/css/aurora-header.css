@@ -15,6 +15,14 @@
     align-items: center;
 }
 
+.flex-box{
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+}
+
 #header-main-section {
     width: 100%;
     background-color: #206E9F;
@@ -84,6 +92,9 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part #notification-center {
     float:left;
+    height: 100%;
+    margin-left: 1em;
+    display: inline-block;
 }
 
 #bannerMenu {
@@ -106,13 +117,11 @@ div#header-east-part-user-controls {
     background: url("images/settings.svg") center center no-repeat;
     height: 1.375em;
     width: 2.375em;
-    display: flex;
     height: 100%;
 }
 
 #user {
     background: url("images/avatar.svg") left center no-repeat;
-    display: flex;
     position: relative;
     height: 1.6em;
     width: 1.7em;
@@ -126,22 +135,34 @@ div#header-east-part-user-controls {
 }
 
 .notification-center-count {
-    text-align: center;
-    font-size: 1.5em;
-    background-color: #FFD079;
     font-family: Open Sans-Semibold;
     color: #4F585F;
     height: 100%;
+    width: 100%;
+    -webkit-justify-content: center;
+    justify-content: center;
+    font-size: 1.25em;
 }
 
 #notification-center-div {
     height: 100%;
 }
 
-.notification-center-anchor.notification-center-anchor-displayed {
+.notification-center-anchor.notification-center-anchor{
     text-decoration: none;
     height: 100%;
+    background-color: #FFD079;
+    width : 2.5em;
 }
+
+.notification-center-anchor.notification-center-anchor-displayed{
+    display: block;
+}
+
+.notification-center-anchor.notification-center-anchor-hidden{
+    display: none;
+}
+
 
 #signInCanvas {
     height: 100%;
@@ -171,8 +192,6 @@ div#header-east-part-user-controls {
 #userCanvas .canvas-section, #userCanvas .canvas-item {
     padding-bottom : 2%;
     padding-top:2%;
-    display: flex;
-    align-items: center;
     border-bottom: 1px solid #D0DBDE;
 }
 
@@ -235,8 +254,7 @@ div#header-east-part-user-controls {
     }
 
     #header-main-section-east-part #notification-center {
-        border: none;
-        height: 100%;
+        margin-left: 0.25em;
         float: right;
     }
 
@@ -249,7 +267,8 @@ div#header-east-part-user-controls {
         width: 9.125em;
     }
     .signIn-mobile {
-        display:flex;
+        display: -webkit-flex;
+        display: flex;
         height: 2.5em;
         width: 2.5em;
         margin:0;
@@ -325,28 +344,16 @@ div#header-east-part-user-controls {
         width: 2.5em;
     }
 
-    .notification-center {
+    .notification-center-count {
+        font-size: 1em;
     }
 
-    .notification-center-count {
-        text-align: center;
-        font-size: 1.5em;
-        background-color: #FFD079;
-        font-family: Open Sans-Semibold;
-        color: #4F585F;
-        height: 100%;
-        width: 2em;
+    .notification-center-anchor.notification-center-anchor {
+        width: 1.8em;
     }
 
     #notification-center-div {
         height: 100%;
-    }
-
-    .notification-center-anchor.notification-center-anchor-hidden:hover {
-        background: #0071A7;
-        border-radius: 4px;
-        -moz-border-radius: 4px;
-        -webkit-border-radius: 4px;
     }
 
     div#header-east-part-user-controls {
@@ -370,7 +377,7 @@ div#header-east-part-user-controls {
 
 @media only screen
 and (min-width: 768px)
-and (max-width: 1023px) {
+and (max-width: 1024px) {
 
     #bannerMenu {
         height: 1.875em;
@@ -429,8 +436,7 @@ and (max-width: 1023px) {
     }
 
     #header-main-section-east-part #notification-center {
-        border: none;
-        height: 100%;
+        margin-left: 0.75em;
     }
 
     #bannerMenu {
@@ -441,41 +447,29 @@ and (max-width: 1023px) {
     #tools {
         height: 2.5em;
         width: 2.5em;
-        display: flex;
         height:100%;
     }
 
     .notification-center-count {
-        text-align: center;
-        font-size: 1.5em;
-        background-color: #FFD079;
-        font-family: Open Sans-Semibold;
-        color: #4F585F;
-        height: 100%;
         width: 2em;
+        font-size: 1.25em;
     }
 
     #notification-center-div {
         height: 100%;
     }
 
-    .notification-center-count span {
-
+    .notification-center-anchor.notification-center-anchor {
+        width: 2.25em;
     }
-
-    .notification-center-anchor.notification-center-anchor-hidden:hover {
-        background: #0071A7;
-        border-radius: 4px;
-        -moz-border-radius: 4px;
-        -webkit-border-radius: 4px;
-    }
-}
-
-@media (min-width:768px) and (max-width:1023px) and (orientation : portrait)	{
 
 }
 
-@media (min-width:768px) and (max-width:1023px) and (orientation : landscape)	{
+@media (min-width:768px) and (max-width:1024px) and (orientation : portrait)	{
+
+}
+
+@media (min-width:768px) and (max-width:1024px) and (orientation : landscape)	{
 
 }
 
