@@ -294,7 +294,7 @@ div#header-east-part-user-controls {
 
     #signList .canvas-section {
         font-weight: bold;
-        font: 1em Open sans;
+        font: 1em Open Sans;
         color: #41566F;
         padding-left: 2%;
         background-color: #F9FAFB;;
@@ -332,7 +332,9 @@ div#header-east-part-user-controls {
         text-align: center;
         font-size: 1.5em;
         background-color: #FFD079;
-        font-family: Open Sans-Semibold;
+        font-family: Open Sans;
+        font-style:normal;
+        font-weight:500;
         color: #4F585F;
         height: 100%;
         width: 2em;
