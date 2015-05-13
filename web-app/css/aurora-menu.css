@@ -28,7 +28,7 @@
 }
 
 .menu-wrapper.show, #menuContainer.show{
-    display:table;
+    display:block;
 }
 
 .menu-wrapper {
