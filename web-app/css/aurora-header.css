@@ -135,13 +135,15 @@ div#header-east-part-user-controls {
 }
 
 .notification-center-count {
-    font-family: Open Sans-Semibold;
+    font-family: Open Sans;
     color: #4F585F;
     height: 100%;
     width: 100%;
     -webkit-justify-content: center;
     justify-content: center;
     font-size: 1.25em;
+    font-style: normal;
+    font-weight: 500;
 }
 
 #notification-center-div {
