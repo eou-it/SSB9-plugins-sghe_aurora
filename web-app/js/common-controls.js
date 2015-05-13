@@ -49,7 +49,7 @@ var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<div id='header-main-section' class='vertical-align'>"
                     + "<div id='header-main-section-west-part' class='vertical-align'>"
-            + "<a id='bannerMenu'  alt='Banner Menu'></a>"
+            + "<a id='bannerMenu' href='javascript:void(0);'  alt='Banner Menu'></a>"
             + "<a id='branding'  class='institutionalBranding'></a>"
                     + "</div>";
 
@@ -87,8 +87,8 @@ var AuroraHeader =  {
     },
 
     addNavigationControls: function () {
-        TitlePanel.create();
         BreadCrumb.create();
+        TitlePanel.create();
         ToolsMenu.initialize();
         setupBannerMenu();
 
@@ -223,7 +223,7 @@ function UserControls( options ) {
 
     ControlBar.initialize();
 
-    var toolsDiv = $("<div id='toolsButton' class='vertical-align'><a id='tools' ></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='vertical-align'><a href='javascript:void(0);' id='tools' class='flex-box'></a></div>");
     ControlBar.append(toolsDiv);
 
     // add user context
@@ -250,7 +250,7 @@ function UserControls( options ) {
         }
 
     } else {
-        var userDiv = $("<div id='userDiv' class='vertical-align'><a id='user'></a></div>");
+        var userDiv = $("<div id='userDiv' class='vertical-align'><a id='user' class='flex-box'></a></div>");
         ControlBar.append(userDiv);
         ControlBar.append($("<div id='username' class='vertical-align'>"+CommonContext.user+"</div>'"));
         ProfileMenu.initialize();
@@ -666,104 +666,11 @@ var NavigationRC = {
 };
 
 
-function BreadCrumbValueObject(id, label, url) {
-    this.id = id;
-    this.label = label;
-    this.url = url;
-}
-
-var BreadCrumb = {
-
-    items: [],
-
-    UI: $("<div id='breadcrumb-panel'>"
-        + "<div id='breadcrumbHeader'>"
-        + "</div>"
-        + "</div>"),
-
-    create: function () {
-        $('#header-main-section').after(BreadCrumb.UI);
-    },
-
-    setFullBreadcrumb : function(breadCrumbItems, pageTitle) {
-        BreadCrumb.updateBreadcrumbItems(breadCrumbItems);
-        BreadCrumb.addBackButton();
-        BreadCrumb.showPageTitleAsBreadcrumb(pageTitle);
-        BreadCrumb.registerBreadcrumbClickListener();
-    },
-
-    updateBreadcrumbItems: function(breadcrumbItems){
-        var index = 0;
-        $.each(breadcrumbItems, function(label, url) {
-            index = index + 1;
-            var breadCrumbItem = new BreadCrumbValueObject(index,label, url.trim());
-            BreadCrumb.items.push(breadCrumbItem);
-            BreadCrumb.drawItem(breadCrumbItem);
-        });
-    },
-
-    drawItem: function (item) {
-        var breadcrumbHeader = BreadCrumb.UI.find('#breadcrumbHeader');
-        var breadcrumbItem = "<span class='breadcrumbButton' data-id='"+item.id+"'>"+item.label+"</span>";
-        if(item.url.length){
-            breadcrumbItem = "<a class='breadcrumbButton' data-id='"+item.id+"' data-path='"+item.url+"' href='#'>"+item.label+"</a>";
-        }
-        breadcrumbHeader.append(breadcrumbItem);
-    },
-
-    addBackButton: function () {
-        var leafItemId = _.last(BreadCrumb.items, [1])[0].id;
-        var previousNavigableURL = BreadCrumb.getPreviousBreadCrumbNavigationLocation(leafItemId);
-
-        if(previousNavigableURL.length){
-            var backButton = "<a id='breadcrumbBackButton' href='#'></a>";
-            BreadCrumb.UI.prepend(backButton);
-            BreadCrumb.registerBackButtonClickListener();
-        }
-    },
-
-    showPageTitleAsBreadcrumb : function(pageTitle) {
-        if(!_.isUndefined(pageTitle) && pageTitle.trim().length){
-            $('<div id="breadcrumbPageTitle">'+pageTitle+'</div>').insertBefore('#breadcrumbHeader');
-        }
-        else{
-            $('#breadcrumbHeader').addClass('breadcrumb-show-leaf');
-        }
-    },
-
-    registerBreadcrumbClickListener: function(){
-        $('a.breadcrumbButton').on('click',function(){
-            var uri = $(this).attr('data-path');
-            window.location = Application.getApplicationPath() + uri;
-        })
-    },
-
-    registerBackButtonClickListener: function(){
-        $('#breadcrumbBackButton').on('click',function(){
-            var breadcrumbItem =  $('.breadcrumbButton:last').attr('data-id');
-            var location = BreadCrumb.getPreviousBreadCrumbNavigationLocation(breadcrumbItem);
-            window.location = location;
-        })
-    },
-
-    getPreviousBreadCrumbNavigationLocation: function(breadcrumbId){
-        var previousNavigableURL = "";
-        var itemsWithURL = BreadCrumb.items.filter(function(breadcrumb) {
-            return (breadcrumb.url.length > 0 && (breadcrumb.id < parseInt(breadcrumbId))) ;
-        });
-
-        var previousBreadcrumbWithURI = _.last(itemsWithURL, [1]);
-        if(previousBreadcrumbWithURI.length){
-            previousNavigableURL = Application.getApplicationPath() + previousBreadcrumbWithURI[0].url;
-        }
-        return previousNavigableURL;
-    }
-};
 
 
 var TitlePanel = {
     create: function () {
-        $('#header-main-section').after("<div id='title-panel'></div>");
+        $('#breadcrumb-panel').after("<div id='title-panel' class='vertical-align'></div>");
     }
 }
 
@@ -927,7 +834,7 @@ var NonHierarchicalMenu = {
     /**
      * HTML for rendering menu items
      */
-    itemHtml: $("<div class='canvas-item'/></div>"),
+    itemHtml: $("<div class='canvas-item vertical-align'/></div>"),
 
     callbackPostItemClick: null,
 
@@ -975,6 +882,7 @@ var NonHierarchicalMenu = {
         item.attr('id', id);
         item.text(label);
         item.addClass('pointer');
+        item.attr('tabindex',0);
         item.click(function (e) {
             if (callback)
                 callback(e);
@@ -1120,22 +1028,3 @@ var ControlBar = {
     }
 }
 
-
-$(document).ready(function(){
-
-    if($('meta[name=headerAttributes]').attr("content")){
-        var headerAttributes = JSON.parse($('meta[name=headerAttributes]').attr("content"));
-        var breadcrumbItems = headerAttributes.breadcrumb;
-        var pageTitle = headerAttributes.pageTitle;
-        $('#title-panel').text(pageTitle);
-        if(!_.isEmpty(breadcrumbItems)){
-            BreadCrumb.setFullBreadcrumb(breadcrumbItems, pageTitle);
-        }
-    }
-
-    ContentManager.setContentPosition();
-
-    $(window).on('resize',function(){
-        ContentManager.setContentPosition();
-    });
-})

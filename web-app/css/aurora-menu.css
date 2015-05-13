@@ -28,28 +28,25 @@
 }
 
 .menu-wrapper.show, #menuContainer.show{
-    display:table;
+    display:block;
 }
 
 .menu-wrapper {
     background-color: #ffffff;
 }
 
-.menu-content-align{
-    display:inline-block;
-}
 
 #menuContainer:after
 {
     content: '';
     position: absolute;
     border-style: solid;
-    border-width: 0 10px 18px;
+    border-width: 0 14px 14px;
     border-color: #ffffff transparent;
     display: block;
     width: 0;
-    top: -15px;
-    left: 20px;
+    top: -12px;
+    left: 15px;
 }
 
 #menu ul {
@@ -69,7 +66,7 @@
     height: 4.8828125%;
     margin:0px;
     padding:0px;
-    width:99%;
+    width:100%;
 }
 
 .menu-item  {
@@ -89,6 +86,7 @@
     letter-spacing: 2px;
     font-size: 1em;
     color: #41566F;
+    font-family:"Open Sans";
 }
 
 #menu .menu-text{
