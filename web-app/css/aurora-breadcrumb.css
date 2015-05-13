@@ -27,16 +27,6 @@ a.breadcrumbButton{
     border-bottom: 2px solid #DEE5E7;
     font-family: "Open Sans";
     padding-left: 1%;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-box-align: center;
-    -moz-box-align: center;
-    -webkit-align-items: center;
-    -ms-flex-align: center;
-    align-items: center;
 }
 
 #breadcrumbBackButton, #breadcrumbPageTitle{
@@ -75,11 +65,12 @@ a.breadcrumbButton{
 
 @media only screen
 and (min-width: 0px)
-and (max-width: 768px) {
+and (max-width: 767px) {
 
     #breadcrumb-panel{
         height: 5.6338028169014086%;
         padding-left: 1.953125%;
+        color: #41566F;
     }
 
     #breadcrumbBackButton{
@@ -108,7 +99,6 @@ and (max-width: 768px) {
         width: auto;
     }
 
-
 }
 
 
@@ -117,8 +107,8 @@ and (max-width: 768px) {
 /*Tablet device*/
 
 @media only screen
-and (min-device-width: 769px)
-and (max-device-width: 1023px) {
+and (min-device-width: 768px)
+and (max-device-width: 1024px) {
 
     .breadcrumbButton:after{
         padding-left: 0.9765625%;
