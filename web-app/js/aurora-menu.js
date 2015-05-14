@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2015 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 function ScrollableMenuTable(root, menuList) {
@@ -70,8 +70,16 @@ function ScrollableMenuTable(root, menuList) {
 
         var SPLIT_CHAR = "_";
 
+        var KEY_CODE = {
+                    ENTER: 13
+            ,       ESC: 27
+            ,       LEFT_ARROW: 37
+            ,       UP_ARROW: 38
+            ,       RIGHT_ARROW: 39
+            ,       DOWN_ARROW: 40
+        };
+
         function _fnSetCurrentSelectedMenu(currentSelMenu)  {
-            console.log('currentSelMenu is ',currentSelMenu);
             currentSelectedMenuFullPath = currentSelMenu;
         }
 
@@ -99,21 +107,56 @@ function ScrollableMenuTable(root, menuList) {
        };
 
        function _fnSetupMenuItemEvent()    {
+            $('#menuList > .scrollableListFolder').on('click',_fnMouseEventsHandlerForMenu);
+            $('#menuList > .scrollableListFolder').on('keydown',_fnKeyBoardEventsHandlerForMenu);
+        };
 
+        function _fnMouseEventsHandlerForMenu(e){
             /** Need to be revisited **/
-            $('#menuList > .scrollableListFolder').on('click',function(){
-                console.log('this value is ',this);
-                var menuName = ($(this)).attr('id');
-                if(menuName !== 'list')
-                    {_that.load(menuName);}
-                else {
-                    _fnMenuInitialize();
-                }
-            });
-            $('#menuList > .scrollableListFolder').on('keypress',function(e){
-                console.log('this value is ',this, e.keyCode);
-                $(e.target).click();
-            });
+            console.log('click event triggered');
+            var menuName = ($(this)).attr('id');
+            if(menuName !== 'list'){
+                _that.load(menuName);
+            }
+            else {
+                _fnMenuInitialize();
+            }
+        };
+
+        function _fnKeyBoardEventsHandlerForMenu(e){
+            var currentTarget = e.target;
+            var code = (e.keyCode ? e.keyCode : e.which);
+            console.log('target and keycode is',code, e.target);
+            switch(code)    {
+                case KEY_CODE.ESC:
+                    _fnHideBannerMenu();
+                    break;
+                case KEY_CODE.ENTER:
+                    $(e.target).click();
+                    break;
+                case KEY_CODE.DOWN_ARROW:
+                    if($(currentTarget).next('li').length){
+                        $(currentTarget).next('li').focus();
+                    }
+                    break;
+                case KEY_CODE.UP_ARROW:
+                    if($(currentTarget).prev('li').length){
+                        $(currentTarget).prev('li').focus();
+                    }
+                    break;
+                case KEY_CODE.RIGHT_ARROW:
+                    var isRightArrowExits = $(currentTarget).find('.menu-icon').length > 0;
+                    if(isRightArrowExits){
+                        $(currentTarget).click();
+                    }
+                    break;
+                case KEY_CODE.LEFT_ARROW:
+                    var isBackArrowExists = $(currentTarget).find('.menu-back-icon').length > 0;
+                    if(isBackArrowExists)   {
+                        $(currentTarget).click();
+                    }
+                    break;
+            }
         };
 
         function _fnMenuInitialize(len){
@@ -141,6 +184,7 @@ function ScrollableMenuTable(root, menuList) {
                     }
                 }
             }
+            $('#menuList').find('li:first').focus();
             _fnSetupMenuItemEvent();
         };
 
@@ -160,7 +204,6 @@ function ScrollableMenuTable(root, menuList) {
             var next = $('#menuList');
             var thisObj = this;
             var menuItem = "";
-            console.log('item is ',item);
             $('#menuList> li').remove();
 
             _fnAddBackButtonIfItIsSubMenu();
@@ -204,20 +247,21 @@ function ScrollableMenuTable(root, menuList) {
                 }
             }
 
-            $('#menuList > .scrollableListFolder').first().focus();
-            $( "#menu ul").scrollTop( 0 );
+            $('#menuList').find('li:first').focus();
+            $("#menuList").scrollTop(0);
+            _fnSetupMenuItemEvent();
 
             EventDispatcher.dispatchEvent(_that.events.click, item);
 
             // NavigationRC might have more menu items to be fetched automatically
             NavigationRC.loadNext(_that);
-            _fnSetupMenuItemEvent();
+
         };
 
         function _fnAddBackButtonUI(){
             var subMenuName = _fnGetSelectedMenuName();
             var parentMenu = _fnGetParentMenuPath();
-            var backButton = "<li id='"+parentMenu+"' class='scrollableListFolder menu-common'><div class='menu-item'>"
+            var backButton = "<li id='"+parentMenu+"' class='scrollableListFolder menu-common' tabindex='0'><div class='menu-item'>"
                 +"<div class='menu-back-icon menu-common'></div><div class='menu-subheader-text menu-common'>"
                 +"<span class='menu-common' title="+subMenuName+"><a class='menu-common' href='#' id='backButton'> "+subMenuName+" </a></span></div>"
                 +"</div>"
@@ -241,8 +285,8 @@ function ScrollableMenuTable(root, menuList) {
             }
         };
 
+        /*** Need to be revisited ***/
         function _fnBackButtonClickHandler(){
-            console.log('backbutton clicked');
             var currParentMenu = _fnGetParentMenuPath();
             var loc = currParentMenu.split(SPLIT_CHAR);
             var list;
@@ -255,13 +299,11 @@ function ScrollableMenuTable(root, menuList) {
             }
         };
 
-        function _fnCheckMenuItemClicked(target){
-            var result = true;
-            var liTag = $('.menu-item',target);
-
-            console.log('result is ',result);
-            return result;
+        function _fnHideBannerMenu(){
+            $('#menuContainer').removeClass('show').addClass('hide');
+            $('#menu').removeClass('show').addClass('hide');
         }
+
 
         /**
          * ScrollableList UI component initialization method.
@@ -270,7 +312,6 @@ function ScrollableMenuTable(root, menuList) {
             _that = this;
             _fnCreateMenuUI();
             this.initialized = true;
-            console.log('initialize executed ');
         };
 
         this.findElement = function (expr) {
@@ -281,19 +322,6 @@ function ScrollableMenuTable(root, menuList) {
             }
         };
 
-        this.clickListItem = function(indexList) {
-            console.log('clicked on clickListItem');
-            for (var x in indexList) {
-                var column = this.findElement('.columns')[x];
-                if (column != undefined) {
-
-                    var item = $(column).find('.navList > li')[indexList[x]];
-                    if (item != undefined && item.length > 0) {
-                        item.click();
-                    }
-                }
-            }
-        };
 
         this.reinitialize = function(len) {
             if (this.initialized == true) {
@@ -304,7 +332,6 @@ function ScrollableMenuTable(root, menuList) {
                     this.initialized = true;
                     return;
                 }
-
                 _fnMenuInitialize(len);
                 this.initialized = true;
             }
@@ -339,25 +366,6 @@ function ScrollableMenuTable(root, menuList) {
             _fnLoadMenu(item, list);
         };
 
-        //element id's pre-fixed with * needs to be escaped when using
-        // as jquery id selectors.
-        this.escapeId = function (itemId) {
-            return itemId.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/])/g, '\\$1');
-        },
-
-
-        this.escapeApostrophe = function (str) {
-            return str.replace(/(['])/g, '\\$1');
-        },
-
-        this.navigateScript = function (listItem) {
-            return "Navigation.navigate(&#39;" + listItem.id + "&#39;)";
-        },
-
-        this.scrollableListItemClickHandler = function (listItem) {
-            return "toggleBrowseMenu(); " + this.navigateScript(listItem);
-
-        },
 
         /**
          * loads data using the service
@@ -369,34 +377,12 @@ function ScrollableMenuTable(root, menuList) {
             Navigation.nextNavItem(name, item);
         },
 
-        this.getPath = function(list, id, path) {
-            if (path == null)
-                path = '';
-
-            if (list[id] != null) {
-                return path += '/' + id;
-            } else {
-                for (var x in list) {
-                    var p = path + '/' + x;
-
-                    if (list[x] instanceof Array)
-                        var newPath = this.getPath(list[x], id, p);
-                    if (newPath != undefined) {
-                        return newPath;
-                    }
-                }
-            }
-        },
 
         this.closeMenu = function(target) {
             var currentElement = target;
-            console.log('target is ',target,$(target).hasClass('menu-common'),$(target).parents('#menu'));
             if (!$(target).hasClass('menu-common')) {
                 if ($('#menu').hasClass('show')) {
-                    $('#menuContainer').addClass('hide');
-                    $('#menuContainer').removeClass('show');
-                    $('#menu').addClass('hide');
-                    $('#menu').removeClass('show');
+                    _fnHideBannerMenu();
                  }
             }
         },

@@ -160,6 +160,7 @@ function toggleBrowseMenu() {
         $('#menu').removeClass('hide');
         $('#menuContainer').removeClass('hide');
         $('#menuContainer').addClass('show');
+        $('#menuList').find('li:first').focus();
     }
 }
 
