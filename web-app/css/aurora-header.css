@@ -135,13 +135,15 @@ div#header-east-part-user-controls {
 }
 
 .notification-center-count {
-    font-family: Open Sans-Semibold;
+    font-family: Open Sans;
     color: #4F585F;
     height: 100%;
     width: 100%;
     -webkit-justify-content: center;
     justify-content: center;
     font-size: 1.25em;
+    font-style: normal;
+    font-weight: 500;
 }
 
 #notification-center-div {
@@ -313,7 +315,7 @@ div#header-east-part-user-controls {
 
     #signList .canvas-section {
         font-weight: bold;
-        font: 1em Open sans;
+        font: 1em Open Sans;
         color: #41566F;
         padding-left: 2%;
         background-color: #F9FAFB;;
@@ -350,6 +352,9 @@ div#header-east-part-user-controls {
 
     .notification-center-anchor.notification-center-anchor {
         width: 1.8em;
+        font-family: Open Sans;
+        font-style:normal;
+        font-weight:500;
     }
 
     #notification-center-div {
