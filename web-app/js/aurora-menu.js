@@ -71,6 +71,7 @@ function ScrollableMenuTable(root, menuList) {
         var SPLIT_CHAR = "_";
 
         function _fnSetCurrentSelectedMenu(currentSelMenu)  {
+            console.log('currentSelMenu is ',currentSelMenu);
             currentSelectedMenuFullPath = currentSelMenu;
         }
 
@@ -95,60 +96,23 @@ function ScrollableMenuTable(root, menuList) {
             var menu = "<nav id='menu' role='application' class='menu-wrapper hide menu-common'>"+
                         "<ul id='menuList' class='menu-common'></ul></nav>";
             $(root).append(menu);
-        };
+       };
 
+       function _fnSetupMenuItemEvent()    {
 
-        /**
-         * ScrollableList UI component initialization method.
-         */
-        this.initialize = function() {
-            _that = this;
-            _fnCreateMenuUI();
-            this.initialized = true;
-            console.log('initialize executed ');
-        };
-
-        this.findElement = function (expr) {
-            if (expr != undefined && $.trim(expr) != "") {
-                return $(this.root + ' ' + expr);
-            } else {
-                return $(this.root);
-            }
-        };
-
-        this.clickListItem = function(indexList) {
-            for (var x in indexList) {
-                var column = this.findElement('.columns')[x];
-                if (column != undefined) {
-
-                    var item = $(column).find('.navList > li')[indexList[x]];
-                    if (item != undefined && item.length > 0) {
-                        item.click();
-                    }
-                }
-            }
-        };
-
-        this.reinitialize = function(len) {
-            if (this.initialized == true) {
-                this.initialized = false;
-                console.log('hre in reinitialize');
-                if (_fnGetCurrentSelectedMenu()) {
-                    this.load(_fnGetCurrentSelectedMenu());
-                    this.initialized = true;
-                    return;
-                }
-
-                _fnMenuInitialize(len);
-                this.initialized = true;
-            }
-        };
-
-        function _fnSetupMenuItemEvent(){
-            console.log('setting up  menu event');
-            $('#menuList >li').on('click',function(){
+            /** Need to be revisited **/
+            $('#menuList > .scrollableListFolder').on('click',function(){
+                console.log('this value is ',this);
                 var menuName = ($(this)).attr('id');
-               _that.load(menuName);
+                if(menuName !== 'list')
+                    {_that.load(menuName);}
+                else {
+                    _fnMenuInitialize();
+                }
+            });
+            $('#menuList > .scrollableListFolder').on('keypress',function(e){
+                console.log('this value is ',this, e.keyCode);
+                $(e.target).click();
             });
         };
 
@@ -180,10 +144,6 @@ function ScrollableMenuTable(root, menuList) {
             _fnSetupMenuItemEvent();
         };
 
-        this.escapeLocator = function (itemId) {
-            return itemId.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/])/g, '\\$1');
-        };
-
        function _fnGetMenuItemsFor(loc){
             var list = _that.getMenuList();
             for (var x = 0; x < loc.length; x++) {
@@ -196,26 +156,13 @@ function ScrollableMenuTable(root, menuList) {
             return list;
         };
 
-       /**
-         * Loads list content and populates the next list for a selected list item.
-         * @param {Element} item The JQuery element for the selected list item.
-       */
-
-        this.load = function(item) {
-            _fnSetCurrentSelectedMenu(item);
-            var menuFullPath = item.replace(this.marker,"");
-            var loc = menuFullPath.split(SPLIT_CHAR);
-            var thisObj = this;
-            var list = _fnGetMenuItemsFor(loc);
-            _fnLoadMenu(item, list);
-        };
-
         function _fnLoadMenu(item, list)  {
             var next = $('#menuList');
             var thisObj = this;
             var menuItem = "";
             console.log('item is ',item);
             $('#menuList> li').remove();
+
             _fnAddBackButtonIfItIsSubMenu();
 
             for (var x in list) {
@@ -231,7 +178,6 @@ function ScrollableMenuTable(root, menuList) {
                 var id = item + SPLIT_CHAR + x;
                 var columnIndex = next.parents('.columns:first').index() + 1;
                 if ((list[x] instanceof Array || list[x]['type'] == 'MENU') && x != Navigation.nonLeafNavEntryValObjKey) {
-
                     var liCaption = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['caption'];
                     var liTitle = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['title'];
                     menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-common' tabindex='-1' role='treeitem' aria-expanded='false' aria-level='"+columnIndex+"'>"
@@ -258,8 +204,10 @@ function ScrollableMenuTable(root, menuList) {
                 }
             }
 
-            EventDispatcher
-                .dispatchEvent(_that.events.click, item);
+            $('#menuList > .scrollableListFolder').first().focus();
+            $( "#menu ul").scrollTop( 0 );
+
+            EventDispatcher.dispatchEvent(_that.events.click, item);
 
             // NavigationRC might have more menu items to be fetched automatically
             NavigationRC.loadNext(_that);
@@ -268,8 +216,8 @@ function ScrollableMenuTable(root, menuList) {
 
         function _fnAddBackButtonUI(){
             var subMenuName = _fnGetSelectedMenuName();
-            var parentMenu = _fnGetCurrentSelectedMenu();
-            var backButton = "<li id="+parentMenu+" class='menu-common'><div class='menu-item'>"
+            var parentMenu = _fnGetParentMenuPath();
+            var backButton = "<li id='"+parentMenu+"' class='scrollableListFolder menu-common'><div class='menu-item'>"
                 +"<div class='menu-back-icon menu-common'></div><div class='menu-subheader-text menu-common'>"
                 +"<span class='menu-common' title="+subMenuName+"><a class='menu-common' href='#' id='backButton'> "+subMenuName+" </a></span></div>"
                 +"</div>"
@@ -315,6 +263,53 @@ function ScrollableMenuTable(root, menuList) {
             return result;
         }
 
+        /**
+         * ScrollableList UI component initialization method.
+         */
+        this.initialize = function() {
+            _that = this;
+            _fnCreateMenuUI();
+            this.initialized = true;
+            console.log('initialize executed ');
+        };
+
+        this.findElement = function (expr) {
+            if (expr != undefined && $.trim(expr) != "") {
+                return $(this.root + ' ' + expr);
+            } else {
+                return $(this.root);
+            }
+        };
+
+        this.clickListItem = function(indexList) {
+            console.log('clicked on clickListItem');
+            for (var x in indexList) {
+                var column = this.findElement('.columns')[x];
+                if (column != undefined) {
+
+                    var item = $(column).find('.navList > li')[indexList[x]];
+                    if (item != undefined && item.length > 0) {
+                        item.click();
+                    }
+                }
+            }
+        };
+
+        this.reinitialize = function(len) {
+            if (this.initialized == true) {
+                this.initialized = false;
+                console.log('hre in reinitialize');
+                if (_fnGetCurrentSelectedMenu()) {
+                    this.load(_fnGetCurrentSelectedMenu());
+                    this.initialized = true;
+                    return;
+                }
+
+                _fnMenuInitialize(len);
+                this.initialized = true;
+            }
+        };
+
         this.getCaption = function (navEntry) {
             var captionInfo = [];
             captionInfo['caption'] = navEntry.pageCaption;
@@ -326,6 +321,23 @@ function ScrollableMenuTable(root, menuList) {
             return captionInfo;
         };
 
+        this.escapeLocator = function (itemId) {
+            return itemId.replace(/([ #;&,.+*~\':"!^$[\]()=>|\/])/g, '\\$1');
+        };
+
+       /**
+         * Loads list content and populates the next list for a selected list item.
+         * @param {Element} item The JQuery element for the selected list item.
+       */
+
+        this.load = function(item) {
+            _fnSetCurrentSelectedMenu(item);
+            var menuFullPath = item.replace(this.marker,"");
+            var loc = menuFullPath.split(SPLIT_CHAR);
+            var thisObj = this;
+            var list = _fnGetMenuItemsFor(loc);
+            _fnLoadMenu(item, list);
+        };
 
         //element id's pre-fixed with * needs to be escaped when using
         // as jquery id selectors.
