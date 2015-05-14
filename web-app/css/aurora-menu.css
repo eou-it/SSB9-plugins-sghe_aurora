@@ -23,6 +23,7 @@
     overflow-y:auto;
 }
 
+
 .menu-wrapper.hide,#menuContainer.hide {
     display:none;
 }
@@ -41,12 +42,12 @@
     content: '';
     position: absolute;
     border-style: solid;
-    border-width: 0 14px 14px;
+    border-width: 0 10px 14px;
     border-color: #ffffff transparent;
     display: block;
     width: 0;
     top: -12px;
-    left: 15px;
+    left: 17px;
 }
 
 #menu ul {

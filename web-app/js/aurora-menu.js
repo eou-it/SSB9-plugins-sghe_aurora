@@ -91,11 +91,11 @@ function ScrollableMenuTable(root, menuList) {
            return parentMenuPath;
         }
 
-       function createUI(){
-            var menu = "<nav id='menu' role='application' class='menu-wrapper hide'>"+
-                        "<ul id='menuList'></ul></nav>";
+       function _fnCreateMenuUI(){
+            var menu = "<nav id='menu' role='application' class='menu-wrapper hide menu-common'>"+
+                        "<ul id='menuList' class='menu-common'></ul></nav>";
             $(root).append(menu);
-        }
+        };
 
 
         /**
@@ -103,13 +103,10 @@ function ScrollableMenuTable(root, menuList) {
          */
         this.initialize = function() {
             _that = this;
-            this.findElement('#menuList > .scrollableListFolder').live('click', function() {
-                var menuName = ($(this)).attr('id');
-                _that.load(menuName);
-            });
-            createUI();
+            _fnCreateMenuUI();
             this.initialized = true;
-        },
+            console.log('initialize executed ');
+        };
 
         this.findElement = function (expr) {
             if (expr != undefined && $.trim(expr) != "") {
@@ -117,7 +114,7 @@ function ScrollableMenuTable(root, menuList) {
             } else {
                 return $(this.root);
             }
-        },
+        };
 
         this.clickListItem = function(indexList) {
             for (var x in indexList) {
@@ -130,12 +127,12 @@ function ScrollableMenuTable(root, menuList) {
                     }
                 }
             }
-        },
+        };
 
         this.reinitialize = function(len) {
             if (this.initialized == true) {
                 this.initialized = false;
-
+                console.log('hre in reinitialize');
                 if (_fnGetCurrentSelectedMenu()) {
                     this.load(_fnGetCurrentSelectedMenu());
                     this.initialized = true;
@@ -145,6 +142,14 @@ function ScrollableMenuTable(root, menuList) {
                 _fnMenuInitialize(len);
                 this.initialized = true;
             }
+        };
+
+        function _fnSetupMenuItemEvent(){
+            console.log('setting up  menu event');
+            $('#menuList >li').on('click',function(){
+                var menuName = ($(this)).attr('id');
+               _that.load(menuName);
+            });
         };
 
         function _fnMenuInitialize(len){
@@ -157,21 +162,22 @@ function ScrollableMenuTable(root, menuList) {
 
                 if (x != "none") {
                     if (len == 1) {
-                        _that.findElement('#menuList').append("<li id='" + _that.marker + x + "'  class='scrollableListFolder menu-content-align' tabIndex='0' role='treeitem' aria-expanded='false' aria-level='1'><span>" + x + "</span></li>");
+                        _that.findElement('#menuList').append("<li id='" + _that.marker + x + "'  class='scrollableListFolder menu-common' tabIndex='0' role='treeitem' aria-expanded='false' aria-level='1'><span class='menu-common'>" + x + "</span></li>");
                     } else {
                         var temp = "list_" + x;
                         _that.findElement(_that.escapeLocator('#' + temp)).remove();
                         _that.findElement('.selectedListItem').removeClass("selectedListItem");
                         var menuItem = "";
-                        menuItem = "<li id='"+_that.marker + x +"' class='scrollableListFolder menu-content-align' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
-                            +"<div class='menu-item'>"
-                            +"<div class='menu-text'><span>" + x + "</span></div>"
-                            +"<div class='menu-icon'></div>"
+                        menuItem = "<li id='"+_that.marker + x +"' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
+                            +"<div class='menu-item menu-common'>"
+                            +"<div class='menu-text menu-common'><span class='menu-common'>" + x + "</span></div>"
+                            +"<div class='menu-icon menu-common'></div>"
                             +"</div></li>";
                         _that.findElement('#menuList').append(menuItem);
                     }
                 }
             }
+            _fnSetupMenuItemEvent();
         };
 
         this.escapeLocator = function (itemId) {
@@ -208,6 +214,7 @@ function ScrollableMenuTable(root, menuList) {
             var next = $('#menuList');
             var thisObj = this;
             var menuItem = "";
+            console.log('item is ',item);
             $('#menuList> li').remove();
             _fnAddBackButtonIfItIsSubMenu();
 
@@ -227,10 +234,10 @@ function ScrollableMenuTable(root, menuList) {
 
                     var liCaption = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['caption'];
                     var liTitle = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['title'];
-                    menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-content-align' tabindex='-1' role='treeitem' aria-expanded='false' aria-level='"+columnIndex+"'>"
-                        +"<div class='menu-item'>"
-                        +"<div class='menu-text'> <span title=\"" + liTitle + "\">" +liCaption+"</span></div>"
-                        +"<div class='menu-icon'></div>"
+                    menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-common' tabindex='-1' role='treeitem' aria-expanded='false' aria-level='"+columnIndex+"'>"
+                        +"<div class='menu-item menu-common'>"
+                        +"<div class='menu-text menu-common'> <span class='menu-common' title=\"" + liTitle + "\">" +liCaption+"</span></div>"
+                        +"<div class='menu-icon menu-common'></div>"
                         +"</div>";
                     next.append(menuItem);
                 } else if (list[x] instanceof NavigationEntryValueObject) {
@@ -238,10 +245,10 @@ function ScrollableMenuTable(root, menuList) {
                         var navItem = list[x];
                         var liCaption = _that.getCaption(list[x])['caption'];
                         var liTitle = _that.getCaption(list[x])['title'];
-                        menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-content-align' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
-                            +"<div class='menu-item'>"
-                            +"<div class='menu-text'> <span title=\"" + liTitle + "\">"
-                            +"<a href=\"" + navItem.url + "\">"+liCaption+"</a>"
+                        menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
+                            +"<div class='menu-item menu-common'>"
+                            +"<div class='menu-text menu-common'> <span title=\"" + liTitle + "\">"
+                            +"<a class='menu-common' href=\"" + navItem.url + "\">"+liCaption+"</a>"
                             +"</span></div>"
                             +"</div>";
                         next.append(menuItem);
@@ -256,12 +263,15 @@ function ScrollableMenuTable(root, menuList) {
 
             // NavigationRC might have more menu items to be fetched automatically
             NavigationRC.loadNext(_that);
+            _fnSetupMenuItemEvent();
         };
 
-        function addBackButton(){
+        function _fnAddBackButtonUI(){
             var subMenuName = _fnGetSelectedMenuName();
-            var backButton = "<li class='menu-content-align'><div class='menu-item'>"
-                +"<div class='menu-back-icon'></div><div class='menu-subheader-text'><span title="+subMenuName+"><a href='#' id='backButton'> "+subMenuName+" </a></span></div>"
+            var parentMenu = _fnGetCurrentSelectedMenu();
+            var backButton = "<li id="+parentMenu+" class='menu-common'><div class='menu-item'>"
+                +"<div class='menu-back-icon menu-common'></div><div class='menu-subheader-text menu-common'>"
+                +"<span class='menu-common' title="+subMenuName+"><a class='menu-common' href='#' id='backButton'> "+subMenuName+" </a></span></div>"
                 +"</div>"
             return backButton;
         };
@@ -278,12 +288,13 @@ function ScrollableMenuTable(root, menuList) {
         function _fnAddBackButtonIfItIsSubMenu(){
             if(_isCurrentMenuASubMenu()) {
                 var next = $('#menuList');
-                next.append(addBackButton());
+                next.append(_fnAddBackButtonUI());
                 $('#backButton').on('click',_fnBackButtonClickHandler);
             }
         };
 
         function _fnBackButtonClickHandler(){
+            console.log('backbutton clicked');
             var currParentMenu = _fnGetParentMenuPath();
             var loc = currParentMenu.split(SPLIT_CHAR);
             var list;
@@ -295,6 +306,14 @@ function ScrollableMenuTable(root, menuList) {
                 _fnMenuInitialize();
             }
         };
+
+        function _fnCheckMenuItemClicked(target){
+            var result = true;
+            var liTag = $('.menu-item',target);
+
+            console.log('result is ',result);
+            return result;
+        }
 
         this.getCaption = function (navEntry) {
             var captionInfo = [];
@@ -359,15 +378,16 @@ function ScrollableMenuTable(root, menuList) {
 
         this.closeMenu = function(target) {
             var currentElement = target;
-            var menuDiv = $(currentElement).parents('#menu');
-            if (!menuDiv.length && $(currentElement).attr('id') !== "backButton") {
+            console.log('target is ',target,$(target).hasClass('menu-common'),$(target).parents('#menu'));
+            if (!$(target).hasClass('menu-common')) {
                 if ($('#menu').hasClass('show')) {
-                    $('#menu').addClass('hide');
-                    $('#menu').removeClass('show');
                     $('#menuContainer').addClass('hide');
                     $('#menuContainer').removeClass('show');
-                }
+                    $('#menu').addClass('hide');
+                    $('#menu').removeClass('show');
+                 }
             }
-        }
-}
-;
+        },
+
+        this.initialize();
+};
