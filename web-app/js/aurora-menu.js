@@ -112,16 +112,20 @@ function ScrollableMenuTable(root, menuList) {
         };
 
         function _fnMouseEventsHandlerForMenu(e){
+            _fnOpenUpSubMenu(e.target);
+        };
+
+        function _fnOpenUpSubMenu(target) {
             /** Need to be revisited **/
             console.log('click event triggered');
-            var menuName = ($(this)).attr('id');
+            var menuName = ($(target)).attr('id');
             if(menuName !== 'list'){
                 _that.load(menuName);
             }
             else {
                 _fnMenuInitialize();
             }
-        };
+        }
 
         function _fnKeyBoardEventsHandlerForMenu(e){
             var currentTarget = e.target;
@@ -132,7 +136,13 @@ function ScrollableMenuTable(root, menuList) {
                     _fnHideBannerMenu();
                     break;
                 case KEY_CODE.ENTER:
-                    $(e.target).click();
+                    var leafNodes = $(currentTarget).find('a');
+                    var isLinkExists = leafNodes.length > 0;
+                    if(isLinkExists)    {
+                        leafNodes[0].click();
+                    } else {
+                        _fnOpenUpSubMenu(currentTarget);
+                    }
                     break;
                 case KEY_CODE.DOWN_ARROW:
                     if($(currentTarget).next('li').length){
@@ -145,6 +155,7 @@ function ScrollableMenuTable(root, menuList) {
                     }
                     break;
                 case KEY_CODE.RIGHT_ARROW:
+                    console.log('right arrow clicked');
                     var isRightArrowExits = $(currentTarget).find('.menu-icon').length > 0;
                     if(isRightArrowExits){
                         $(currentTarget).click();
