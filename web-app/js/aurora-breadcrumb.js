@@ -7,12 +7,7 @@ $(document).ready(function(){
 
     if($('meta[name=headerAttributes]').attr("content")){
         var headerAttributes = JSON.parse($('meta[name=headerAttributes]').attr("content"));
-        var breadcrumbItems = headerAttributes.breadcrumb;
-        var pageTitle = headerAttributes.pageTitle;
-        $('#title-panel').text(pageTitle);
-        if(!_.isEmpty(breadcrumbItems)){
-            BreadCrumb.setFullBreadcrumb(breadcrumbItems, pageTitle);
-        }
+        BreadCrumb.drawBreadcrumbAndPageTitle(headerAttributes);
     }
 
     ContentManager.setContentPosition();
@@ -32,20 +27,26 @@ var BreadCrumb = {
 
     items: [],
 
-    UI: $("<div id='breadcrumb-panel' class='vertical-align'>"
-        + "<div id='breadcrumbHeader'>"
-        + "</div>"
-        + "</div>"),
+    UI: $("<div id='breadcrumb-panel' class='vertical-align'></div>"),
 
     create: function () {
         $('#header-main-section').after(BreadCrumb.UI);
     },
 
+    drawBreadcrumbAndPageTitle: function(headerAttributes){
+        var breadcrumbItems = headerAttributes.breadcrumb;
+        var pageTitle = headerAttributes.pageTitle;
+        $('#title-panel').text(pageTitle);
+        if(!_.isEmpty(breadcrumbItems)){
+            BreadCrumb.setFullBreadcrumb(breadcrumbItems, pageTitle);
+        }
+    },
+
     setFullBreadcrumb : function(breadCrumbItems, pageTitle) {
+        $('#breadcrumb-panel').empty();
+        $('#breadcrumb-panel').append("<div id='breadcrumbHeader'></div>");
         BreadCrumb.updateBreadcrumbItems(breadCrumbItems);
-        BreadCrumb.addBackButton();
         BreadCrumb.showPageTitleAsBreadcrumb(pageTitle);
-        BreadCrumb.registerBreadcrumbClickListener();
     },
 
     updateBreadcrumbItems: function(breadcrumbItems){
@@ -56,6 +57,9 @@ var BreadCrumb = {
             BreadCrumb.items.push(breadCrumbItem);
             BreadCrumb.drawItem(breadCrumbItem);
         });
+
+        BreadCrumb.addBackButton();
+        BreadCrumb.registerBreadcrumbClickListener();
     },
 
     drawItem: function (item) {
@@ -74,8 +78,8 @@ var BreadCrumb = {
         if(previousNavigableURL.length){
             var backButton = "<a id='breadcrumbBackButton' href='#'></a>";
             BreadCrumb.UI.prepend(backButton);
-            BreadCrumb.registerBackButtonClickListener();
         }
+        BreadCrumb.registerBackButtonClickListener();
     },
 
     showPageTitleAsBreadcrumb : function(pageTitle) {
