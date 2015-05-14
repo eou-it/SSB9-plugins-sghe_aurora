@@ -87,10 +87,14 @@ var AuroraHeader =  {
     },
 
     addNavigationControls: function () {
-        BreadCrumb.create();
-        TitlePanel.create();
+        BreadCrumbAndPageTitle.create();
         ToolsMenu.initialize();
         setupBannerMenu();
+
+        if($('meta[name=headerAttributes]').attr("content")){
+            var headerAttributes = JSON.parse($('meta[name=headerAttributes]').attr("content"));
+            BreadCrumbAndPageTitle.draw(headerAttributes);
+        }
 
         var shortcuts = [
             'shift+home', function() {

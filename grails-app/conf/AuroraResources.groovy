@@ -18,7 +18,7 @@ modules = {
         resource url:[plugin: 'sghe-aurora', file: 'js/utils.js']
         resource url:[plugin: 'sghe-aurora', file: 'js/config.js']
         resource url:[plugin: 'sghe-aurora', file: 'js/common-controls.js']
-        resource url:[plugin: 'sghe-aurora', file: 'js/aurora-breadcrumb.js']
+        resource url:[plugin: 'sghe-aurora', file: 'js/aurora-breadcrumb-title.js']
         resource url:[plugin: 'sghe-aurora', file: 'js/aurora-menu.js']
         resource url:[plugin: 'sghe-aurora', file: 'js/common-integration.js']
         resource url:[plugin: 'sghe-aurora', file: 'js/common-navigation.js']
