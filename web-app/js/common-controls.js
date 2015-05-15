@@ -226,13 +226,14 @@ function toggleSignInAndSignOut() {
 function UserControls( options ) {
 
     ControlBar.initialize();
-
+    if (CommonContext.mepHomeContext) {
+        MepDesciption.populateMepDescForOthers();
+    }
     var toolsDiv = $("<div id='toolsButton' class='vertical-align'><a href='javascript:void(0);' id='tools' class='flex-box'></a></div>");
     ControlBar.append(toolsDiv);
     ToolsMenu.initialize();
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForMobile();
-        MepDesciption.populateMepDescForOthers();
     }
 
     // add user context
