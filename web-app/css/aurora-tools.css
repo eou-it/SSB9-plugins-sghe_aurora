@@ -57,10 +57,21 @@
     margin : 0 auto;
 }
 
+
+#toolsList #mepDescForMobile {
+    display: none;
+    background-color: #CCCCCC;
+}
+
 @media (min-width:0px) and (max-width:767px) {
     #toolsCanvas{
         width : 82.5%;
     }
+
+    #toolsList #mepDescForMobile {
+        display: flex;
+    }
+
 }
 @media (min-width:0px) and (max-width:767px) and (orientation : portrait)	{}
 

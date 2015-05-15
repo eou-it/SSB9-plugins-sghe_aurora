@@ -88,7 +88,6 @@ var AuroraHeader =  {
 
     addNavigationControls: function () {
         BreadCrumbAndPageTitle.create();
-        ToolsMenu.initialize();
         setupBannerMenu();
 
         if($('meta[name=headerAttributes]').attr("content")){
@@ -110,7 +109,7 @@ var AuroraHeader =  {
         key && key.bind.apply( window, shortcuts );
     },
 
-    addBodyClickListenerToCloseAllMenus: function() {
+   addBodyClickListenerToCloseAllMenus: function() {
         $('body').on('click', function (e) {
             closeAllMenus(e.target);
         });
@@ -230,6 +229,11 @@ function UserControls( options ) {
 
     var toolsDiv = $("<div id='toolsButton' class='vertical-align'><a href='javascript:void(0);' id='tools' class='flex-box'></a></div>");
     ControlBar.append(toolsDiv);
+    ToolsMenu.initialize();
+    if (CommonContext.mepHomeContext) {
+        MepDesciption.populateMepDescForMobile();
+        MepDesciption.populateMepDescForOthers();
+    }
 
     // add user context
     if (CommonContext.user == null) {
@@ -255,10 +259,11 @@ function UserControls( options ) {
         }
 
     } else {
-        var userDiv = $("<div id='userDiv' class='vertical-align'><a id='user' class='flex-box'></a></div>");
+        var userDiv = $("<div id='userDiv' class='vertical-align'><a id='user' class='flex-box' href='javascript:void(0);'></a></div>");
         ControlBar.append(userDiv);
-        ControlBar.append($("<div id='username' class='vertical-align'>"+CommonContext.user+"</div>'"));
+        UserName.populateUserNameForOthers();
         ProfileMenu.initialize();
+        UserName.populateUserNameForMobile();
         ProfileMenu.addItem("signOut", ResourceManager.getString("userdetails_signout"),undefined,
             function () {
                 signOut();
@@ -939,10 +944,10 @@ ProfileMenu.closeMenu = function() {
 
 var ToolsMenu = Object.create(NonHierarchicalMenu);
 ToolsMenu.initialize = function() {
-    $('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
-    $('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
+    ControlBar.node.find('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
+    ControlBar.node.find('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
 
-    $('#toolsButton').append("<div id='toolsCanvas' class='toolsMenuShadow'>"
+    ControlBar.node.find('#toolsButton').append("<div id='toolsCanvas' class='toolsMenuShadow'>"
         + "<div id='toolsMenu'><div id='toolsList' class='tools-list'></div>"
         + "</div>"
         + "</div>");
@@ -950,7 +955,7 @@ ToolsMenu.initialize = function() {
     this.canvas =  ControlBar.node.find('#toolsList');
     this.callbackPostItemClick = toggleToolsMenu;
 
-    $('#tools').bind("click", toggleToolsMenu);
+    ControlBar.node.find('#tools').bind("click", toggleToolsMenu);
 }
 ToolsMenu.closeMenu = function() {
     if (!$('#toolsCanvas').is(':hidden')) {
@@ -959,6 +964,31 @@ ToolsMenu.closeMenu = function() {
     }
 }
 
+var MepDesciption = {
+    populateMepDescForOthers : function() {
+        ControlBar.append($("<div id='mepDiv' class='vertical-align'>"+CommonContext.mepHomeContext+"</div>"));
+    },
+
+    populateMepDescForMobile : function() {
+        ToolsMenu.addItem("mepDescForMobile",CommonContext.mepHomeContext,undefined, function() {} );
+        var elem=ControlBar.node.find('#mepDescForMobile');
+        elem.attr('tabindex', -1);
+        elem.removeClass('pointer');
+    }
+}
+
+var UserName = {
+    populateUserNameForOthers: function() {
+        ControlBar.append($("<div id='username' class='vertical-align'>"+CommonContext.user+"</div>'"));
+    },
+
+    populateUserNameForMobile : function() {
+        ProfileMenu.addItem("usernameForMobile",CommonContext.user,undefined, function() {} );
+        var elem = ControlBar.node.find('#usernameForMobile');
+        elem.attr('tabindex', -1);
+        elem.removeClass('pointer');
+    }
+}
 var SignInMenu = Object.create(NonHierarchicalMenu);
 SignInMenu.initialize = function() {
     var signInDom = $("<div id='signInButton'  ><a class='signIn-mobile'  />"

@@ -1,7 +1,6 @@
 /*******************************************************************************
  Copyright 2015 Ellucian Company L.P. and its affiliates.
 *******************************************************************************/
-
 .vertical-align {
     display: -webkit-box;
     display: -moz-box;
@@ -51,6 +50,15 @@ div#header-east-part-user-controls {
     height:100%;
 }
 
+#header-main-section-east-part #mepDiv  {
+    float:left;
+    height:100%;
+    border-left: 1px #1D5F8C solid;
+    margin-right: 1em;
+    color: #ffffff;
+    font: 1em Open Sans;
+}
+
 #header-main-section-east-part #signInButton  {
     float:left;
     border-left: 1px #1D5F8C solid;
@@ -81,6 +89,7 @@ div#header-east-part-user-controls {
     font: 1em Open Sans;
     padding-left: 0.5em;
     height : 100%;
+    float: left;
 }
 
 #header-main-section-east-part #toolsButton {
@@ -225,6 +234,11 @@ div#header-east-part-user-controls {
     box-shadow: 0 1px 1px #000000;
 }
 
+#userList #usernameForMobile {
+    display: none;
+    background-color: #CCCCCC;
+}
+
 
 /*Mobile device*/
 
@@ -364,6 +378,18 @@ div#header-east-part-user-controls {
     div#header-east-part-user-controls {
         display: inline-block;
         height: 100%;
+    }
+
+    #header-main-section-east-part #mepDiv {
+        display: none;
+    }
+
+    #userList #usernameForMobile {
+        display: flex;
+    }
+
+    #header-main-section-east-part #username {
+        display: none;
     }
 }
 
