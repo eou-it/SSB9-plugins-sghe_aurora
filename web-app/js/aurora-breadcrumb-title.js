@@ -18,20 +18,20 @@ var BreadCrumbAndPageTitle = (function () {
     var UI = $("<div id='breadcrumb-panel' class='vertical-align'></div>" +
         "<div id='title-panel' class='vertical-align'></div>");
 
-    var setFullBreadcrumb = function(breadCrumbItems, pageTitle) {
+    function setFullBreadcrumb(breadCrumbItems, pageTitle) {
         $('#breadcrumb-panel').empty();
         $('#breadcrumb-panel').append("<div id='breadcrumbHeader'></div>");
         updateBreadcrumbItems(breadCrumbItems);
         showPageTitleAsBreadcrumb(pageTitle);
     };
 
-    var BreadCrumbValueObject = function(id, label, url) {
+    function BreadCrumbValueObject (id, label, url) {
         this.id = id;
         this.label = label;
         this.url = url;
     };
 
-    var updateBreadcrumbItems = function(breadcrumbItems){
+    function updateBreadcrumbItems(breadcrumbItems){
         var index = 0;
         $.each(breadcrumbItems, function(label, url) {
             index = index + 1;
@@ -44,7 +44,7 @@ var BreadCrumbAndPageTitle = (function () {
         registerBreadcrumbClickListener();
     };
 
-    var drawItem = function (item) {
+    function drawItem(item) {
         var breadcrumbHeader = UI.find('#breadcrumbHeader');
         var breadcrumbItem = "<span class='breadcrumbButton' data-id='"+item.id+"'>"+item.label+"</span>";
         if(item.url.length){
@@ -53,7 +53,7 @@ var BreadCrumbAndPageTitle = (function () {
         breadcrumbHeader.append(breadcrumbItem);
     };
 
-    var addBackButton = function () {
+    function addBackButton() {
         var leafItemId = _.last(items, [1])[0].id;
         var previousNavigableURL = getPreviousBreadCrumbNavigationLocation(leafItemId);
 
@@ -64,7 +64,7 @@ var BreadCrumbAndPageTitle = (function () {
         }
     };
 
-    var showPageTitleAsBreadcrumb = function(pageTitle) {
+    function showPageTitleAsBreadcrumb(pageTitle) {
         if(!_.isUndefined(pageTitle) && pageTitle.trim().length){
             $('<div id="breadcrumbPageTitle">'+pageTitle+'</div>').insertBefore('#breadcrumbHeader');
         }
@@ -73,14 +73,14 @@ var BreadCrumbAndPageTitle = (function () {
         }
     };
 
-    var registerBreadcrumbClickListener = function(){
+    function registerBreadcrumbClickListener(){
         $('a.breadcrumbButton').on('click',function(){
             var uri = $(this).attr('data-path');
             window.location = Application.getApplicationPath() + uri;
         })
     };
 
-    var registerBackButtonClickListener =function(){
+    function registerBackButtonClickListener(){
         $('#breadcrumbBackButton').on('click',function(){
             var breadcrumbItem =  $('.breadcrumbButton:last').attr('data-id');
             var location = getPreviousBreadCrumbNavigationLocation(breadcrumbItem);
@@ -88,7 +88,7 @@ var BreadCrumbAndPageTitle = (function () {
         })
     };
 
-    var getPreviousBreadCrumbNavigationLocation = function(breadcrumbId){
+    function getPreviousBreadCrumbNavigationLocation(breadcrumbId){
         var previousNavigableURL = "";
         var itemsWithURL = items.filter(function(breadcrumb) {
             return (breadcrumb.url.length > 0 && (breadcrumb.id < parseInt(breadcrumbId))) ;
