@@ -4,6 +4,7 @@
 
 #menuContainer{
     height:90%;
+   /* max-height: 100%;*/
     display:none;
     top:5.859375%;
     width:25.25%;
@@ -138,13 +139,14 @@ and (max-width:767px){
     }
     #menu ul>li {
         border-bottom: 1px solid #D0DBDE;
-        height: 7.74647887%;
+      height: 7.74647887%;
     }
 
 
     .menu-item{
         margin-right:1.953125%;
         margin-left:1.953125%;
+
     }
 }
 
@@ -167,6 +169,9 @@ and (orientation : landscape)   {
         height:1.75em;
         width:1em;
     }
+    .menu-item{
+        min-height: 7.74647887%;
+    }
 }
 
 @media only screen
@@ -175,7 +180,7 @@ and (max-width:767px)
 and (orientation : portrait)   {
 
     #menuContainer   {
-     width: 100%;
+     width: 80%;
     }
 
     #menu .menu-icon    {
@@ -189,16 +194,19 @@ and (orientation : portrait)   {
         height:1.75em;
         width:1em;
     }
+    .menu-item{
+        min-height: 7.74647887%;
+    }
 }
 
 /*** Tablet ***/
 @media only screen
 and (min-width:768px)
-and (max-width:1023px){
+and (max-width:1024px){
     #menuContainer   {
-        height: 92%;
+        height: 90%;
         width: 50.25%;
-        top: 6.859375%;
+        top:7.6436%;
     }
     #menu ul>li {
         height: 6.510416666667%;
@@ -207,6 +215,28 @@ and (max-width:1023px){
     .menu-item{
         margin-right:1.953125%;
         margin-left:1.953125%;
+        min-height: 6.510416666667%;
+
     }
 }
 
+/** Desktop **/
+@media only screen
+and (min-width:1024px)
+and (max-width:1219px){
+    #menuContainer   {
+        height: 90%;
+        width: 50.25%;
+        top:7.6436%;
+    }
+    #menu ul>li {
+        height: 6.510416666667%;
+    }
+
+    .menu-item{
+        margin-right:1.953125%;
+        margin-left:1.953125%;
+        min-height: 6.510416666667%;
+
+    }
+}
