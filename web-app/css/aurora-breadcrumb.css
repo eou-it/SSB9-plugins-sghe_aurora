@@ -5,6 +5,7 @@
 #breadcrumb-panel{
     height: 4.1015625%;
     clear: both;
+    min-height: 2.4em;
 }
 
 a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited , .breadcrumbButton {
@@ -20,6 +21,7 @@ a.breadcrumbButton{
     height: 6.25%;
     color : #557287;
     font-size: 1.25em;
+    min-height: 3.5em;
 }
 
 #breadcrumb-panel, #title-panel{
@@ -71,6 +73,7 @@ and (max-width: 767px) {
         height: 5.6338028169014086%;
         padding-left: 1.953125%;
         color: #41566F;
+        min-height: 3.1em;
     }
 
     #breadcrumbBackButton{
@@ -88,7 +91,8 @@ and (max-width: 767px) {
 
     .breadcrumbButton, #title-panel, .breadcrumbButton:after{
         display:none;
-        height: 0%;
+        height: 0;
+        min-height: 0;
     }
 
     #breadcrumbBackButton, #breadcrumbPageTitle, .breadcrumb-show-leaf .breadcrumbButton:last-child{
@@ -117,10 +121,12 @@ and (max-device-width: 1024px) {
 
     #breadcrumb-panel{
         height: 6.510416666666667%;
+        min-height: 2.351em;
     }
 
     #title-panel{
         height: 5.46875%;
         font-size: 1.25em;
+        min-height: 3.582em;
     }
 }

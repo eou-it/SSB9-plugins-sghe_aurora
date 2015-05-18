@@ -28,6 +28,7 @@
     height: 5.859375%;
     display: inline-block;
     position: relative;
+    min-height: 3.4em;
 }
 
 #header-main-section-west-part {
@@ -254,6 +255,7 @@ div#header-east-part-user-controls {
     #header-main-section {
         height: 7.39436%;
         display: inline-block;
+        min-height: 4.2em;
     }
 
     #header-main-section-east-part{
@@ -429,6 +431,7 @@ and (max-width: 1024px) {
     #header-main-section {
         height: 6.510416666666667%;
         display: inline-block;
+        min-height : 3.7em;
     }
 
     div#header-east-part-user-controls {
