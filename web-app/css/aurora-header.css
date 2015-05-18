@@ -190,6 +190,7 @@ div#header-east-part-user-controls {
     padding-right: 0.5em;
     float:left;
     color: #FFFFFF;
+    --navigation: tab;
 }
 
 #userCanvas {
@@ -387,6 +388,10 @@ div#header-east-part-user-controls {
     }
 
     #userList #usernameForMobile {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
         display: flex;
     }
 
