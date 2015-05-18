@@ -112,12 +112,12 @@ function ScrollableMenuTable(root, menuList) {
         };
 
         function _fnMouseEventsHandlerForMenu(e){
-            _fnOpenUpSubMenu(e.target);
+            var target = $(e.target).closest('li');
+            _fnOpenUpSubMenu(target);
         };
 
         function _fnOpenUpSubMenu(target) {
             /** Need to be revisited **/
-            console.log('click event triggered');
             var menuName = ($(target)).attr('id');
             if(menuName !== 'list'){
                 _that.load(menuName);
@@ -130,44 +130,91 @@ function ScrollableMenuTable(root, menuList) {
         function _fnKeyBoardEventsHandlerForMenu(e){
             var currentTarget = e.target;
             var code = (e.keyCode ? e.keyCode : e.which);
-            console.log('target and keycode is',code, e.target);
-            switch(code)    {
-                case KEY_CODE.ESC:
-                    _fnHideBannerMenu();
-                    break;
-                case KEY_CODE.ENTER:
-                    var leafNodes = $(currentTarget).find('a');
-                    var isLinkExists = leafNodes.length > 0;
-                    if(isLinkExists)    {
-                        leafNodes[0].click();
-                    } else {
-                        _fnOpenUpSubMenu(currentTarget);
-                    }
-                    break;
-                case KEY_CODE.DOWN_ARROW:
-                    if($(currentTarget).next('li').length){
-                        $(currentTarget).next('li').focus();
-                    }
-                    break;
-                case KEY_CODE.UP_ARROW:
-                    if($(currentTarget).prev('li').length){
-                        $(currentTarget).prev('li').focus();
-                    }
-                    break;
-                case KEY_CODE.RIGHT_ARROW:
-                    console.log('right arrow clicked');
-                    var isRightArrowExits = $(currentTarget).find('.menu-icon').length > 0;
-                    if(isRightArrowExits){
-                        $(currentTarget).click();
-                    }
-                    break;
-                case KEY_CODE.LEFT_ARROW:
-                    var isBackArrowExists = $(currentTarget).find('.menu-back-icon').length > 0;
-                    if(isBackArrowExists)   {
-                        $(currentTarget).click();
-                    }
-                    break;
+            if((code !==KEY_CODE.LEFT_ARROW) && (code!==KEY_CODE.RIGHT_ARROW))  {
+                console.log('inside it');
+                switch(code)    {
+                    case KEY_CODE.ESC:
+                        _fnHideBannerMenu();
+                        break;
+                    case KEY_CODE.ENTER:
+                        if(_isLeafNode(currentTarget))    {
+                           $(currentTarget).find('a:first')[0].click();
+                        } else {
+                            _fnOpenUpSubMenu(currentTarget);
+                        }
+                        break;
+                    case KEY_CODE.DOWN_ARROW:
+                        if($(currentTarget).next('li').length){
+                            $(currentTarget).next('li').focus();
+                        }
+                        break;
+                    case KEY_CODE.UP_ARROW:
+                        if($(currentTarget).prev('li').length){
+                            $(currentTarget).prev('li').focus();
+                        }
+                        break;
+                }
+            } else {
+                _fnLeftAndRightNavigation(code,currentTarget);
             }
+        };
+
+        function _fnLeftAndRightNavigation(keyCode, currentTarget){
+            console.log('leftandright navigation');
+            if(isRTLMode()){
+                console.log('rlt mode',keyCode);
+                switch(keyCode){
+                    case KEY_CODE.LEFT_ARROW:
+                        if(!_isLeafNode(currentTarget)){
+                            $(currentTarget).click();
+                        }
+                        break;
+                    case KEY_CODE.RIGHT_ARROW:
+                        if(_isLeafNode(currentTarget)){
+                            $(currentTarget).parent().find('li:first').click();
+                        } else if(isNotOriginMenu(currentTarget)) {
+                            $(currentTarget).click();
+                        }
+                        break;
+                }
+
+            } else {
+                console.log('ltr mode',keyCode);
+                switch(keyCode){
+                    case KEY_CODE.RIGHT_ARROW:
+                        if(!_isLeafNode(currentTarget)){
+                            $(currentTarget).click();
+                        }
+                        break;
+                    case KEY_CODE.LEFT_ARROW:
+                        if(_isLeafNode(currentTarget)){
+                            $(currentTarget).parent().find('li:first').click();
+                        } else if(isNotOriginMenu(currentTarget)) {
+                            $(currentTarget).click();
+                        }
+                        break;
+                }
+            }
+        };
+
+        function isNotOriginMenu(currentTarget){
+            var id = $(currentTarget).attr('id');
+            var result = false;
+            var array = id.split("_");
+            if(array.length > 2){
+                result = true;
+            }
+            return result;
+        };
+
+        function _isLeafNode(target)  {
+          var leafNode = $(target).closest('li').find('a');
+          var len = leafNode.length;
+          var isLeafNode = false;
+          if(len > 0){
+              isLeafNode=true;
+          }
+          return isLeafNode;
         };
 
         function _fnMenuInitialize(len){
@@ -217,6 +264,8 @@ function ScrollableMenuTable(root, menuList) {
             var menuItem = "";
             $('#menuList> li').remove();
 
+            console.log("$.i18n.prop('default.language.direction')",$.i18n.prop('default.language.direction'));
+
             _fnAddBackButtonIfItIsSubMenu();
 
             for (var x in list) {
@@ -258,10 +307,9 @@ function ScrollableMenuTable(root, menuList) {
                 }
             }
 
-            $('#menuList').find('li:first').focus();
+            $('#menuList').find('li:nth-child(2)').focus();
             $("#menuList").scrollTop(0);
             _fnSetupMenuItemEvent();
-
             EventDispatcher.dispatchEvent(_that.events.click, item);
 
             // NavigationRC might have more menu items to be fetched automatically
@@ -308,6 +356,7 @@ function ScrollableMenuTable(root, menuList) {
             } else {
                 _fnMenuInitialize();
             }
+            return false;
         };
 
         function _fnHideBannerMenu(){
@@ -337,7 +386,6 @@ function ScrollableMenuTable(root, menuList) {
         this.reinitialize = function(len) {
             if (this.initialized == true) {
                 this.initialized = false;
-                console.log('hre in reinitialize');
                 if (_fnGetCurrentSelectedMenu()) {
                     this.load(_fnGetCurrentSelectedMenu());
                     this.initialized = true;
