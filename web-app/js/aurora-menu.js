@@ -45,6 +45,10 @@ function ScrollableMenuTable(root, menuList) {
      */
         this.root = root;
 
+     /** last focused element **/
+
+        this.lastFocusedElement;
+
     /**
      * Events associated with the ScrollableList.
      */
@@ -63,6 +67,14 @@ function ScrollableMenuTable(root, menuList) {
         this.construct = function () {
             this.initialize();
         };
+
+        this.setLastFocsedElement = function(target){
+            this.lastFocusedElement = target;
+        };
+
+        this.getLastFocusedElement = function(){
+            return this.lastFocusedElement;
+        }
 
         var currentSelectedMenuFullPath = null;
 
@@ -122,7 +134,15 @@ function ScrollableMenuTable(root, menuList) {
             } else {
                 _fnMenuInitialize();
             }
-        }
+        };
+
+        function _fnSetFocusToLastElement(){
+           var target = _that.getLastFocusedElement();
+            console.log('target in focus element ',target);
+            if(target){
+                $(target).focus();
+            }
+        };
 
         function _fnKeyBoardEventsHandlerForMenu(e){
             var currentTarget = e.target;
@@ -131,6 +151,7 @@ function ScrollableMenuTable(root, menuList) {
                 switch(code)    {
                     case KEY_CODE.ESC:
                         _fnHideBannerMenu();
+                        _fnSetFocusToLastElement();
                         break;
                     case KEY_CODE.ENTER:
                         if(_isLeafNode(currentTarget))    {
@@ -410,9 +431,8 @@ function ScrollableMenuTable(root, menuList) {
             if (!$(target).hasClass('menu-common')) {
                 if ($('#menu').hasClass('show')) {
                     _fnHideBannerMenu();
+                    _fnSetFocusToLastElement();
                  }
             }
-        },
-
-        this.initialize();
+        }
 };

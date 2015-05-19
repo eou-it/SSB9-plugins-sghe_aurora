@@ -158,7 +158,9 @@ function toggleBrowseMenu() {
         $('#menu').removeClass('show');
         $('#menuContainer').addClass('hide');
         $('#menuContainer').removeClass('show');
+        scrollableList.getLastFocsedElement().focus();
     } else {
+        scrollableList.setLastFocsedElement(document.activeElement);
         $('#menu').addClass('show');
         $('#menu').removeClass('hide');
         $('#menuContainer').removeClass('hide');
