@@ -369,7 +369,7 @@ div#header-east-part-user-controls {
         font-size: 1em;
     }
 
-    .notification-center-anchor.notification-center-anchor {
+    .notification-center-anchor {
         width: 1.8em;
         font-family: Open Sans;
         font-style:normal;
@@ -496,7 +496,7 @@ and (max-width: 1024px) {
         height: 100%;
     }
 
-    .notification-center-anchor.notification-center-anchor {
+    .notification-center-anchor {
         width: 2.25em;
     }
 
