@@ -277,7 +277,7 @@ function ScrollableMenuTable(root, menuList) {
                 if ((list[x] instanceof Array || list[x]['type'] == 'MENU') && x != Navigation.nonLeafNavEntryValObjKey) {
                     var liCaption = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['caption'];
                     var liTitle = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['title'];
-                    menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-common' tabindex='-1' role='treeitem' aria-expanded='false' aria-level='"+columnIndex+"'>"
+                    menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='"+columnIndex+"'>"
                         +"<div class='menu-item menu-common'>"
                         +"<div class='menu-text menu-common'> <span class='menu-common' title=\"" + liTitle + "\">" +liCaption+"</span></div>"
                         +"<div class='menu-icon menu-common'></div>"
