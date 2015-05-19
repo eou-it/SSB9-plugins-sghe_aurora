@@ -79,23 +79,17 @@ function ScrollableMenuTable(root, menuList) {
             ,       DOWN_ARROW: 40
         };
 
-        function _fnSetCurrentSelectedMenu(currentSelMenu)  {
-            currentSelectedMenuFullPath = currentSelMenu;
-        }
 
-        function _fnGetCurrentSelectedMenu(){
-            return currentSelectedMenuFullPath;
-        }
 
         function _fnGetSelectedMenuName(){
-            var menuName = _fnGetCurrentSelectedMenu();
+            var menuName = currentSelectedMenuFullPath;
             menuName = menuName.substr(menuName.lastIndexOf(SPLIT_CHAR));
             menuName = menuName.replace(SPLIT_CHAR,"");
             return menuName;
         }
 
         function _fnGetParentMenuPath(){
-           var currMenuFullPath = _fnGetCurrentSelectedMenu();
+           var currMenuFullPath = currentSelectedMenuFullPath;
            var parentMenuPath = currMenuFullPath.substr(0,currMenuFullPath.lastIndexOf(SPLIT_CHAR));
            return parentMenuPath;
         }
@@ -112,17 +106,20 @@ function ScrollableMenuTable(root, menuList) {
         };
 
         function _fnMouseEventsHandlerForMenu(e){
-            var target = $(e.target).closest('li');
-            _fnOpenUpSubMenu(target);
+            var currTarget = e.target;
+            var target = $(currTarget).closest('li');
+            if(_isLeafNode(currTarget)){
+                $(target).find('a:first')[0].click();
+            } else {
+                _fnOpenUpSubMenu(target);
+            }
         };
 
         function _fnOpenUpSubMenu(target) {
-            /** Need to be revisited **/
-            var menuName = ($(target)).attr('id');
-            if(menuName !== 'list'){
+            var menuName = $(target).attr('id');
+            if(_isNotOriginMenu(menuName)){
                 _that.load(menuName);
-            }
-            else {
+            } else {
                 _fnMenuInitialize();
             }
         }
@@ -131,7 +128,6 @@ function ScrollableMenuTable(root, menuList) {
             var currentTarget = e.target;
             var code = (e.keyCode ? e.keyCode : e.which);
             if((code !==KEY_CODE.LEFT_ARROW) && (code!==KEY_CODE.RIGHT_ARROW))  {
-                console.log('inside it');
                 switch(code)    {
                     case KEY_CODE.ESC:
                         _fnHideBannerMenu();
@@ -157,51 +153,47 @@ function ScrollableMenuTable(root, menuList) {
             } else {
                 _fnLeftAndRightNavigation(code,currentTarget);
             }
+            return false;
         };
 
         function _fnLeftAndRightNavigation(keyCode, currentTarget){
-            console.log('leftandright navigation');
             if(isRTLMode()){
-                console.log('rlt mode',keyCode);
                 switch(keyCode){
                     case KEY_CODE.LEFT_ARROW:
-                        if(!_isLeafNode(currentTarget)){
-                            $(currentTarget).click();
-                        }
+                        _fnLeftKeyRTLModeRightKeyLTRMode(currentTarget);
                         break;
                     case KEY_CODE.RIGHT_ARROW:
-                        if(_isLeafNode(currentTarget)){
-                            $(currentTarget).parent().find('li:first').click();
-                        } else if(isNotOriginMenu(currentTarget)) {
-                            $(currentTarget).click();
-                        }
+                        _fnRightKeyRTLModeLeftKeyLTRMode(currentTarget);
                         break;
                 }
-
-            } else {
-                console.log('ltr mode',keyCode);
+              } else {
                 switch(keyCode){
                     case KEY_CODE.RIGHT_ARROW:
-                        if(!_isLeafNode(currentTarget)){
-                            $(currentTarget).click();
-                        }
+                        _fnLeftKeyRTLModeRightKeyLTRMode(currentTarget);
                         break;
                     case KEY_CODE.LEFT_ARROW:
-                        if(_isLeafNode(currentTarget)){
-                            $(currentTarget).parent().find('li:first').click();
-                        } else if(isNotOriginMenu(currentTarget)) {
-                            $(currentTarget).click();
-                        }
+                        _fnRightKeyRTLModeLeftKeyLTRMode(currentTarget);
                         break;
                 }
             }
         };
 
-        function isNotOriginMenu(currentTarget){
-            var id = $(currentTarget).attr('id');
+        function _fnLeftKeyRTLModeRightKeyLTRMode(currentTarget){
+            if(!_isLeafNode(currentTarget)){
+                $(currentTarget).click();
+            }
+        };
+
+        function _fnRightKeyRTLModeLeftKeyLTRMode(currentTarget){
+            if(_isLeafNode(currentTarget) || _isNotOriginMenu(currentTarget)){
+                $(currentTarget).parent().find('li:first').click();
+            }
+        };
+
+        function _isNotOriginMenu(currentTarget){
+            var liObj = $(currentTarget)[0];
             var result = false;
-            var array = id.split("_");
-            if(array.length > 2){
+            if(!$(liObj).hasClass('origin-menu'))    {
                 result = true;
             }
             return result;
@@ -227,13 +219,13 @@ function ScrollableMenuTable(root, menuList) {
 
                 if (x != "none") {
                     if (len == 1) {
-                        _that.findElement('#menuList').append("<li id='" + _that.marker + x + "'  class='scrollableListFolder menu-common' tabIndex='0' role='treeitem' aria-expanded='false' aria-level='1'><span class='menu-common'>" + x + "</span></li>");
+                        _that.findElement('#menuList').append("<li id='" + _that.marker + x + "'  class='scrollableListFolder menu-common origin-menu' tabIndex='0' role='treeitem' aria-expanded='false' aria-level='1'><span class='menu-common'>" + x + "</span></li>");
                     } else {
                         var temp = "list_" + x;
                         _that.findElement(_that.escapeLocator('#' + temp)).remove();
                         _that.findElement('.selectedListItem').removeClass("selectedListItem");
                         var menuItem = "";
-                        menuItem = "<li id='"+_that.marker + x +"' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
+                        menuItem = "<li id='"+_that.marker + x +"' class='scrollableListFolder menu-common origin-menu' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
                             +"<div class='menu-item menu-common'>"
                             +"<div class='menu-text menu-common'><span class='menu-common'>" + x + "</span></div>"
                             +"<div class='menu-icon menu-common'></div>"
@@ -258,15 +250,17 @@ function ScrollableMenuTable(root, menuList) {
             return list;
         };
 
-        function _fnLoadMenu(item, list)  {
+        function _fnLoadMenu(item)  {
             var next = $('#menuList');
-            var thisObj = this;
             var menuItem = "";
             $('#menuList> li').remove();
 
-            console.log("$.i18n.prop('default.language.direction')",$.i18n.prop('default.language.direction'));
+            var menuFullPath = item.replace(this.marker,"");
+            var loc = menuFullPath.split(SPLIT_CHAR);
+            var list = _fnGetMenuItemsFor(loc);
 
-            _fnAddBackButtonIfItIsSubMenu();
+            $('#menuList').append(_fnAddBackButtonUI());
+            $('#backButton').on('click',_fnBackButtonClickHandler);
 
             for (var x in list) {
                 if (typeof list[x] == "function") {
@@ -311,7 +305,6 @@ function ScrollableMenuTable(root, menuList) {
             $("#menuList").scrollTop(0);
             _fnSetupMenuItemEvent();
             EventDispatcher.dispatchEvent(_that.events.click, item);
-
             // NavigationRC might have more menu items to be fetched automatically
             NavigationRC.loadNext(_that);
 
@@ -322,37 +315,17 @@ function ScrollableMenuTable(root, menuList) {
             var parentMenu = _fnGetParentMenuPath();
             var backButton = "<li id='"+parentMenu+"' class='scrollableListFolder menu-common' tabindex='0'><div class='menu-item'>"
                 +"<div class='menu-back-icon menu-common'></div><div class='menu-subheader-text menu-common'>"
-                +"<span class='menu-common' title="+subMenuName+"><a class='menu-common' href='#' id='backButton'> "+subMenuName+" </a></span></div>"
+                +"<span class='menu-common' title="+subMenuName+"><a href='#' id='backButton'>"+subMenuName+"</a></span></div>"
                 +"</div>"
             return backButton;
         };
 
-        function _isCurrentMenuASubMenu(){
-            var result = true;
-            var currentMenuFullPath = _fnGetCurrentSelectedMenu();
-            if(currentMenuFullPath == "list"){
-                return false;
-            }
-            return result;
-        };
 
-        function _fnAddBackButtonIfItIsSubMenu(){
-            if(_isCurrentMenuASubMenu()) {
-                var next = $('#menuList');
-                next.append(_fnAddBackButtonUI());
-                $('#backButton').on('click',_fnBackButtonClickHandler);
-            }
-        };
-
-        /*** Need to be revisited ***/
-        function _fnBackButtonClickHandler(){
+       function _fnBackButtonClickHandler(){
             var currParentMenu = _fnGetParentMenuPath();
-            var loc = currParentMenu.split(SPLIT_CHAR);
-            var list;
-            _fnSetCurrentSelectedMenu(currParentMenu);
+            currentSelectedMenuFullPath = currParentMenu;
             if(currParentMenu != "list")  {
-                list = _fnGetMenuItemsFor(loc);
-                _fnLoadMenu(currParentMenu,list);
+                _fnLoadMenu(currParentMenu);
             } else {
                 _fnMenuInitialize();
             }
@@ -363,7 +336,6 @@ function ScrollableMenuTable(root, menuList) {
             $('#menuContainer').removeClass('show').addClass('hide');
             $('#menu').removeClass('show').addClass('hide');
         }
-
 
         /**
          * ScrollableList UI component initialization method.
@@ -386,8 +358,8 @@ function ScrollableMenuTable(root, menuList) {
         this.reinitialize = function(len) {
             if (this.initialized == true) {
                 this.initialized = false;
-                if (_fnGetCurrentSelectedMenu()) {
-                    this.load(_fnGetCurrentSelectedMenu());
+                if (currentSelectedMenuFullPath) {
+                    this.load(currentSelectedMenuFullPath);
                     this.initialized = true;
                     return;
                 }
@@ -417,12 +389,8 @@ function ScrollableMenuTable(root, menuList) {
        */
 
         this.load = function(item) {
-            _fnSetCurrentSelectedMenu(item);
-            var menuFullPath = item.replace(this.marker,"");
-            var loc = menuFullPath.split(SPLIT_CHAR);
-            var thisObj = this;
-            var list = _fnGetMenuItemsFor(loc);
-            _fnLoadMenu(item, list);
+            currentSelectedMenuFullPath = item;
+            _fnLoadMenu(item);
         };
 
 
