@@ -22,7 +22,7 @@ var NonHierarchicalMenu = {
     /**
      * HTML for rendering menu items
      */
-    itemHtml: $("<div class='canvas-item vertical-align'/></div>"),
+    itemHtml: $("<div class='canvas-item'/></div>"),
 
     callbackPostItemClick: null,
 
@@ -201,7 +201,7 @@ ToolsMenu.initialize = function() {
 ToolsMenu.closeMenu = function() {
     if (!$('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').removeClass('tools-active');
-        $('#tools').removeClass('tools-expanded');
+        $('#toolsButton').removeClass('tools-expanded');
         if(window.lastFocus !=null) {
             $(window.lastFocus).focus();
         }
@@ -211,7 +211,7 @@ ToolsMenu.closeMenu = function() {
 var SignInMenu = Object.create(NonHierarchicalMenu);
 SignInMenu.initialize = function() {
     var signInDom = $("<div id='signInButton' class='non-hierarchical-menu'  ><a class='signIn-mobile menu-icon'  href='javascript:void(0);' />"
-        + "<div id='signInCanvas' class='vertical-align'><div id='signInMenu'><div id='signList' class='signIn-list'>"
+        + "<div id='signInCanvas'><div id='signInMenu'><div id='signList' class='signIn-list'>"
         + "</div></div></div>"
         + "</div>");
     ControlBar.append(signInDom);

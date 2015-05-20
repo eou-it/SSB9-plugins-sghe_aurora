@@ -20,6 +20,9 @@
     width:100%;
 }
 
+#bannerMenuDiv, #bannerMenu{
+    height: inherit;
+}
 
 .menu-wrapper.hide,#menuContainer.hide {
     display:none;

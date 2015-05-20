@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 /**
@@ -47,8 +47,8 @@ function Button(id, label, callback, type) {
 
 var AuroraHeader =  {
     createSkeleton: function () {
-        var header ="<div id='header-main-section' class='vertical-align'>"
-            + "<div id='header-main-section-west-part' class='vertical-align'>"
+        var header ="<div id='header-main-section'>"
+            + "<div id='header-main-section-west-part'>"
             + "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a></div>"
             + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'></a></div>"
             + "</div>";
@@ -71,11 +71,11 @@ var AuroraHeader =  {
     },
 
     placeEastPart: function (options) {
-        var eastPartElement =  $("<div id='header-main-section-east-part' class='vertical-align'>"
+        var eastPartElement =  $("<div id='header-main-section-east-part'>"
             + "</div>");
 
         $('#header-main-section').append(eastPartElement.append(UserControls( options )));
-        var notificationDiv = "<div id='notification-center'  class='vertical-align'></div>";
+        var notificationDiv = "<div id='notification-center'></div>";
         eastPartElement.append(notificationDiv);
     },
 
@@ -201,11 +201,11 @@ function toggleToolsMenu() {
     if ($('#toolsCanvas').is(':hidden')) {
         fnSetLastFocus();
         $('#toolsCanvas').addClass('tools-active');
-        $('#tools').addClass('tools-expanded');
+        $('#toolsButton').addClass('tools-expanded');
         $('#toolsList > .canvas-item:visible:first').focus();
     } else {
         $('#toolsCanvas').removeClass('tools-active');
-        $('#tools').removeClass('tools-expanded');
+        $('#toolsButton').removeClass('tools-expanded');
         fnSetFocusOnCloseMenuItems();
     }
     return false;
@@ -243,7 +243,7 @@ function UserControls( options ) {
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForOthers();
     }
-    var toolsDiv = $("<div id='toolsButton' class='vertical-align non-hierarchical-menu'><a href='javascript:void(0);' id='tools' class='flex-box menu-icon'></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' class='menu-icon'></a></div>");
     ControlBar.append(toolsDiv);
     ToolsMenu.initialize();
     window.lastFocus = $(document.activeElement);
@@ -262,7 +262,7 @@ function UserControls( options ) {
                 signIn();
             }
         );
-        ControlBar.addAccessibilityInfo('#signIn',ResourceManager.getString("userdetails_signin_description"),ResourceManager.getString("userdetails_signin_title"));
+       // ControlBar.addAccessibilityInfo('#signIn',ResourceManager.getString("userdetails_signin_description"),ResourceManager.getString("userdetails_signin_title"));
         var guestSignInLink
         if("true" == $('meta[name=guestLoginEnabled]').attr("content")) {
             SignInMenu.addItem("guestSignIn",ResourceManager.getString("guestuserdetails_signin"),undefined,
@@ -273,7 +273,7 @@ function UserControls( options ) {
         }
 
     } else {
-        var userDiv = $("<div id='userDiv' class='vertical-align non-hierarchical-menu'><a id='user' class='flex-box menu-icon' href='javascript:void(0);'></a></div>");
+        var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' class='menu-icon' href='javascript:void(0);'></a></div>");
         ControlBar.append(userDiv);
         UserName.populateUserNameForOthers();
         ProfileMenu.initialize();
@@ -696,7 +696,7 @@ var NavigationRC = {
 
 var TitlePanel = {
     create: function () {
-        $('#breadcrumb-panel').after("<div id='title-panel' class='vertical-align'></div>");
+        $('#breadcrumb-panel').after("<div id='title-panel'></div>");
     }
 }
 
@@ -839,7 +839,7 @@ function setCurrentPage(currentPage) {
 
 var MepDesciption = {
     populateMepDescForOthers : function() {
-        ControlBar.append($("<div id='mepDiv' class='vertical-align'>"+CommonContext.mepHomeContext+"</div>"));
+        ControlBar.append($("<div id='mepDiv'>"+CommonContext.mepHomeContext+"</div>"));
     },
 
     populateMepDescForMobile : function() {
@@ -852,7 +852,7 @@ var MepDesciption = {
 
 var UserName = {
     populateUserNameForOthers: function() {
-        ControlBar.append($("<div id='username' class='vertical-align'>"+CommonContext.user+"</div>'"));
+        ControlBar.append($("<div id='username'><span>"+CommonContext.user+"</span></div>'"));
     },
 
     populateUserNameForMobile : function() {
