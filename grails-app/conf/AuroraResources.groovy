@@ -1,9 +1,5 @@
 /*******************************************************************************
-<<<<<<< HEAD
-Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
-=======
  Copyright 2015 Ellucian Company L.P. and its affiliates.
->>>>>>> release-platform-9.13.2
 *******************************************************************************/
 
 modules = {
