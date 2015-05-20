@@ -177,6 +177,9 @@ ProfileMenu.closeMenu = function() {
     if (!$('#userCanvas').is(':hidden')) {
         $('#userCanvas').removeClass('user-active');
         $('#user').removeClass('user-expanded');
+        if(window.lastFocus !=null) {
+            $(window.lastFocus).focus();
+        }
     }
 }
 
@@ -199,6 +202,9 @@ ToolsMenu.closeMenu = function() {
     if (!$('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').removeClass('tools-active');
         $('#tools').removeClass('tools-expanded');
+        if(window.lastFocus !=null) {
+            $(window.lastFocus).focus();
+        }
     }
 }
 
@@ -227,6 +233,9 @@ SignInMenu.closeMenu = function() {
     if (!$('#signInCanvas').is(':hidden')) {
         $('#signInCanvas').removeClass('signIn-active');
         $('.signIn-mobile').removeClass('signIn-expanded');
+        if(window.lastFocus !=null) {
+            $(window.lastFocus).focus();
+        }
     }
 }
 

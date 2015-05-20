@@ -138,7 +138,6 @@ function ScrollableMenuTable(root, menuList) {
 
         function _fnSetFocusToLastElement(){
            var target = _that.getLastFocusedElement();
-            console.log('target in focus element ',target);
             if(target){
                 $(target).focus();
             }
