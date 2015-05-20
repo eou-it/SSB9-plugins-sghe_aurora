@@ -97,7 +97,8 @@ var AuroraHeader =  {
             'alt+m', toggleBrowseMenu,
             'ctrl+shift+F', toggleSignInAndSignOut,
             'alt+n', toggleNotificationCenter,
-            'alt+l',toggleToolsMenu
+            'alt+l',toggleToolsMenu,
+            'alt+a',toggleProfileMenu
         ];
         key && key.bind.apply( window, shortcuts );
     },
