@@ -1,16 +1,7 @@
-
 /*********************************************************************************
- Copyright 2009-2011 SunGard Higher Education. All Rights Reserved.
- This copyrighted software contains confidential and proprietary information of
- SunGard Higher Education and its subsidiaries. Any use of this software is limited
- solely to SunGard Higher Education licensees, and is further subject to the terms
- and conditions of one or more written license agreements between SunGard Higher
- Education and the licensee in question. SunGard is either a registered trademark or
- trademark of SunGard Data Systems in the U.S.A. and/or other regions and/or countries.
- Banner and Luminis are either registered trademarks or trademarks of SunGard Higher
- Education in the U.S.A. and/or other regions and/or countries.
+ Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
-var scrollableList = new ScrollableMenuTable('#browseMenuContainer');
+var scrollableList = new ScrollableMenuTable('#menuContainer', Navigation.menuList);
 
 var CommonPlatform = {
 	/**
@@ -62,15 +53,15 @@ var CommonPlatform = {
 
 				//Initialize header
 				if (options.header && typeof(options.header) == 'boolean' && options.header || options.header == null) {
-					$('body').prepend(Header().prepend(InstitutionalBranding()).prepend(UserControls( options )));
-
+                    $('body').prepend(AuroraHeader.createSkeleton());
+                    AuroraHeader.placeEastPart(options);
+                    AuroraHeader.fillWestPart();
 					if (options.globalNav && typeof (options.globalNav) == 'boolean' && options.globalNav || options.globalNav == null) {
-						addNavigationControls();
+                        AuroraHeader.addNavigationControls();
                         Navigation.initialize(scrollableList);
                         scrollableList.initialize();
-                        BreadCrumb.initialize();
 					}
-
+                    AuroraHeader.addBodyClickListenerToCloseAllMenus();
 				}
 
 				ContentManager.initialize();

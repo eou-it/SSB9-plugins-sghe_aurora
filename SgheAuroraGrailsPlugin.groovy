@@ -33,7 +33,26 @@ Brief description of the plugin.
     def documentation = "http://grails.org/plugin/sghe-aurora"
 
     def doWithWebDescriptor = { xml ->
-        // TODO Implement additions to web.xml (optional), this event occurs before 
+        def mimeMappings = xml.'mime-mapping'
+        def node
+        if(mimeMappings.size()) {
+            node  = mimeMappings
+        } else {
+            node= xml[0]
+        }
+
+        node + {
+            'mime-mapping'{
+                'extension'('svg')
+                'mime-type'('image/svg+xml')
+            }
+        }
+        node + {
+            'mime-mapping'{
+                'extension'('svgz')
+                'mime-type'('image/svg+xml')
+            }
+        }
     }
 
     def doWithSpring = {

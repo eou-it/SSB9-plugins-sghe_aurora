@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2009-2014 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
 .selectedListItem span {
     background: #7FADCA url(images/bp-arrow-right-selected.png) no-repeat -38px 10px;
@@ -19,10 +19,6 @@
 
 .navListStart .parent {
     background: transparent url(images/arrow-right-gray.png) no-repeat -38px .6em;
-}
-
-.signOutText, .signInText {
-    background: url(images/icon-lock.png) no-repeat scroll 38px center;
 }
 
 .helpText {
@@ -69,12 +65,6 @@
     background: url("images/callout_arrow.png") no-repeat scroll left 8px transparent;
 }
 
-.signOutText, .signInText {
-    background: url("images/icon-lock.png") no-repeat scroll right center transparent;
-    margin-left: 8px;
-    margin-right: 4px;
-}
-
 #globalNav .globalnav-list-item:first-child {
     margin-left: 4px;
 }
@@ -85,10 +75,6 @@
 
 .navList .parent:focus span {
     background: url("images/bp-arrow-right-blue.png") no-repeat scroll -38px 10px #E1EFFD;
-}
-
-.breadcrumb {
-    padding-right: 0;
 }
 
 #browseButtonState {
@@ -123,11 +109,6 @@
     padding-right: 16px;
 }
 
-#openedItemsButtonState, #toolsButtonState {
-    float: left;
-}
-
-
 #browseButtonState {
     right: 4px;
 }
@@ -137,32 +118,8 @@
     right: 25px;
 }
 
-#breadcrumb {
-    margin-left: 8px;
-}
-
 .columns {
     margin-right: -1px;
 }
 
-.breadcrumb .breadCrumbItemArrow {
-    transform: scaleX(-1); /* CSS 3 */
-    -ms-transform: scaleX(-1); /* Internet Explorer */
-    -moz-transform: scaleX(-1); /* Firefox */
-    -webkit-transform: scaleX(-1); /* Safari and Chrome */
-    -o-transform: scaleX(-1); /* Opera */
-}
 
-.ie8 .breadcrumb .breadCrumbItemArrow {
-    filter: FlipH; /* IE 8 */
-}
-
-.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedRight {
-    background: url("images/breadcrumb-selected-right.png") no-repeat scroll 0 1px transparent;
-    width: 6px;
-}
-
-.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedLeft {
-    background: url("images/breadcrumb-selected-left.png") no-repeat scroll 0 1px transparent;
-    width: 3px;
-}

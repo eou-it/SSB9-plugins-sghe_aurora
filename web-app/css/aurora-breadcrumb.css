@@ -1,0 +1,132 @@
+/*******************************************************************************
+ Copyright 2015 Ellucian Company L.P. and its affiliates.
+*******************************************************************************/
+
+#breadcrumb-panel{
+    height: 4.1015625%;
+    clear: both;
+    min-height: 2.4em;
+}
+
+a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited , .breadcrumbButton {
+   color: #41566F;
+   font-size: 1.25em;
+}
+
+a.breadcrumbButton{
+    text-decoration: underline;
+}
+
+#title-panel{
+    height: 6.25%;
+    color : #557287;
+    font-size: 1.25em;
+    min-height: 3.5em;
+}
+
+#breadcrumb-panel, #title-panel{
+    background-color: #F9FAFB;
+    border-bottom: 2px solid #DEE5E7;
+    font-family: "Open Sans";
+    padding-left: 1%;
+}
+
+#breadcrumbBackButton, #breadcrumbPageTitle{
+    display: none;
+}
+
+
+#breadcrumbPageTitle, #title-panel{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.breadcrumbButton:after{
+    content: '';
+    background: url("images/breadcrumb-separator.svg") no-repeat center;
+    width: 0.5em;
+    height: 0.5em;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.breadcrumbButton:last-child:after{
+    display:none;
+}
+
+#breadcrumbHeader{
+    width: 100%;
+}
+
+.page-title-separator{
+    border-bottom: 2px solid #DEE5E7;
+}
+
+/*Mobile device*/
+
+@media only screen
+and (min-width: 0px)
+and (max-width: 767px) {
+
+    #breadcrumb-panel{
+        height: 5.6338028169014086%;
+        padding-left: 1.953125%;
+        color: #41566F;
+        min-height: 3.1em;
+    }
+
+    #breadcrumbBackButton{
+        background:url("images/icon-arrow-back.svg") no-repeat center;
+        position:relative;
+        height: 1.25em;
+        width: 1.25em;
+        float:left;
+        margin-right: 1.953125%;
+    }
+
+    #breadcrumbHeader, #breadcrumbPageTitle {
+        font-size: 1.25em;
+    }
+
+    .breadcrumbButton, #title-panel, .breadcrumbButton:after{
+        display:none;
+        height: 0;
+        min-height: 0;
+    }
+
+    #breadcrumbBackButton, #breadcrumbPageTitle, .breadcrumb-show-leaf .breadcrumbButton:last-child{
+        display: block;
+    }
+
+    #breadcrumbHeader{
+        width: auto;
+    }
+
+}
+
+
+
+
+/*Tablet device*/
+
+@media only screen
+and (min-device-width: 768px)
+and (max-device-width: 1024px) {
+
+    .breadcrumbButton:after{
+        padding-left: 0.9765625%;
+        padding-right:  0.9765625%;
+    }
+
+    #breadcrumb-panel{
+        height: 6.510416666666667%;
+        min-height: 2.351em;
+    }
+
+    #title-panel{
+        height: 5.46875%;
+        font-size: 1.25em;
+        min-height: 3.582em;
+    }
+}

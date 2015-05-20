@@ -1,5 +1,5 @@
 /** *****************************************************************************
- Copyright 2009-2014 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
 /*
  Updates to this file for IE6 ================================================================
@@ -344,12 +344,6 @@
     margin: 8px 8px 0 0;
 }
 
-#header {
-
-    background:url("images/header-bg.png") repeat-x scroll left bottom #76AFDC;
-    background-color: #999999;
-    height: 75px;
-}
 
 .headerBottomBorder {
     position: relative;
@@ -370,16 +364,6 @@
     background: url('images/areas_drop_shadow_gradient.png') repeat-x;
     background-color: transparent;
     height: 9px;
-}
-
-#areas {
-    background-color:transparent;
-    clear:both;
-    height:22px;
-    padding-top:5px;
-    position:relative;
-    width:100%;
-    z-index:1000;
 }
 
 #areasMenu {
@@ -425,7 +409,7 @@
     z-index: 999;
 }
 
-.browseMenuShadow{
+.browseMenuShadow {
     display:block;
     padding:7px 5px 5px;
     border: 1px #13689E solid;
@@ -465,7 +449,6 @@
     float:left;
     height:33px;
     left:4px;
-    padding-top:5px;
     position:absolute;
     right:198px;
 }
@@ -617,88 +600,12 @@
 
 /* opened items */
 
-#openedButton, #toolsButton {
-    margin-left:0px;
-}
-
-#openedItemsContainer {
-    position: absolute;
-    top: 75px;
-    z-index: 1501;
-    right: 99px;
-    width: 50%;
-}
-#openedItemsMenu {
-    display: none;
-    z-index: 999;
-}
-#openedItemsCanvas {
-    background: #477b9c;
-}
-
 #buttonContainer {
     float:right;
     position: absolute;
     right: 7px;
     left: auto;
 }
-
-#openedItemsButtonState, #toolsButtonState {
-    border:1px solid transparent;
-    float:left;
-    height:33px;
-    margin:0 0 0 -2px;
-    padding:5px 5px 0px;
-    -moz-border-radius: 4px 4px 0 0;
-    -webkit-border-radius: 4px 4px 0 0;
-}
-
-#openedItemsButtonState.active, #toolsButtonState.active {
-    background-color: #477b9c;
-    border:1px solid #13689E;
-    border-bottom: none;
-}
-
-/* tools menu */
-
-#toolsContainer {
-    position: absolute;
-    top: 75px;
-    z-index: 1000;
-    right: 5px;
-    width: 250px;
-    left: auto;
-}
-#toolsMenu {
-    display: none;
-    z-index: 999;
-}
-#toolsCanvas {
-    background: #FFFFFF; /*#477b9c*/
-}
-#toolsCanvas ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-#toolsCanvas .menu-section {
-    background: #999999;
-    font-size: 1.2em;
-    font-weight: bold;
-    padding: 5px;
-}
-#toolsCanvas .menu-item {
-    background: #CCCCCC;
-    font-size: 1.2em;
-    font-style: normal;
-    padding: 5px;
-    cursor: pointer;
-}
-#toolsCanvas .menu-item:hover {
-    background: #bfbebe;
-}
-/* ============================================================================================ */
-
 
 #outerFooter {
     background: transparent url("images/footer-background.png") repeat-x top left;
@@ -1085,91 +992,6 @@ div[id=mainMenuContainer] .navList .parent:focus span {
 #openItemsPanel li {
 
 }
-/* breadcrumbs */
-
-#breadcrumb {
-    left:55px;
-    position:absolute;
-    right: 0px;
-}
-
-#breadcrumbMainPage {
-    left:71px;
-    position:absolute;
-    right:10px;
-}
-
-.breadcrumb {
-    background:url("images/header-button-sprites.png") no-repeat scroll 0 0 transparent;
-    cursor:pointer;
-    margin-right:0;
-    padding-left:4px;
-    padding-right: 8px;
-    height:24px;
-}
-.breadcrumb div {
-    background:url("images/header-button-sprites.png") no-repeat scroll right 0px transparent;
-    height:24px;
-    margin-right:0px;
-    padding-right:4px;
-    padding-left:4px;
-}
-.breadcrumb div div {
-    background:url("images/header-button-sprites.png") repeat-x scroll 0 -24px transparent;
-}
-
-#breadcrumbHeader {
-}
-
-a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited {
-    color:#FFFFFF;
-    display:inline;
-    font-size:0.9em;
-    margin:0;
-    padding:0 12px;
-    text-align:left;
-    text-decoration:none;
-}
-a.breadcrumbleaf:link, a.breadcrumbleaf:active, a.breadcrumbleaf:visited {
-    cursor: default;
-}
-
-.breadcrumb div div .breadCrumbItemBody {
-    background:url("images/header-button-sprites.png") repeat-x scroll 0 -24px transparent;
-    color:#FFFFFF;
-    float:left;
-    height:24px;
-    line-height:20px;
-    margin:0 0;
-}
-
-.breadcrumb div div .breadCrumbItemBody.folderIcon {
-    background:url("images/breadcrumb-folder-icon.png") no-repeat scroll center center transparent;
-}
-
-.breadcrumb div div .breadCrumbItemBody.breadCrumbSelected {
-    background:url("images/breadcrumb-selected-center.png") repeat-x scroll 0 1px transparent;
-}
-
-.breadcrumb .breadCrumbItemArrow {
-    background:url("images/breadcrumb-divider.png") no-repeat scroll 0 0 transparent;
-    color:#FFFFFF;
-    float:left;
-    height:24px;
-    line-height:20px;
-    margin:0 0;
-    width:7px;
-}
-
-.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedRight {
-    background:url("images/breadcrumb-selected-right.png") no-repeat scroll 0 1px transparent;
-    width:6px;
-}
-
-.breadcrumb .breadCrumbItemArrow.breadCrumbSelectedLeft {
-    background:url("images/breadcrumb-selected-left.png") no-repeat scroll 0 1px transparent;
-    width:3px;
-}
 
 /* Main Page Menu */
 
@@ -1211,4 +1033,7 @@ a.breadcrumbleaf:link, a.breadcrumbleaf:active, a.breadcrumbleaf:visited {
     right: auto;
     top: -20em;
 }
+
+
+
 

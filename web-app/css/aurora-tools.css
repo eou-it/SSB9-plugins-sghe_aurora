@@ -1,0 +1,84 @@
+/** *****************************************************************************
+ Copyright 2016 Ellucian Company L.P. and its affiliates.
+ ****************************************************************************** */
+#toolsCanvas {
+    background-color: #FFFFFF;
+    position: absolute;
+    z-index: 1000;
+    padding: 0px;
+    margin: 0px;
+    width : 30%;
+    right:0;
+}
+
+#toolsCanvas {
+    display:none;
+}
+
+#toolsCanvas .canvas-section, #toolsCanvas .canvas-item {
+    padding-bottom : 2%;
+    padding-top:2%;
+    border-bottom: 1px solid #D0DBDE;
+}
+
+#toolsCanvas.tools-active {
+    display:block;
+}
+
+#toolsList .canvas-section {
+    font-weight: bold;
+    font: 1em Open sans;
+    color: #41566F;
+    padding-left: 2%;
+    background-color: #F9FAFB;;
+}
+
+#toolsList .canvas-item {
+    font: 0.875em Open sans;
+    padding-left: 6%;
+    color: #41566F;
+    border-bottom: 1px solid #D0DBDE;
+}
+
+#toolsList .canvas-item:hover, #toolsList .canvas-item:focus {
+    background-color: #F3FCFF;
+}
+
+#toolsCanvas {
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 1px #000000;
+}
+
+#tools.tools-expanded:after {
+    content: '';
+    border-style: solid;
+    border-width: 0 8px 9px;
+    border-color: #ffffff transparent;
+    margin : 0 auto;
+}
+
+
+#toolsList #mepDescForMobile {
+    display: none;
+    background-color: #E8E3E3;
+}
+
+@media (min-width:0px) and (max-width:767px) {
+    #toolsCanvas{
+        width : 82.5%;
+    }
+
+    #toolsList #mepDescForMobile {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+    }
+
+}
+@media (min-width:0px) and (max-width:767px) and (orientation : portrait)	{}
+@media (min-width:0px) and (max-width:767px) and (orientation : landscape)	{}
+
+@media (min-width:768px) and (max-width:1024px)	{ }
+
