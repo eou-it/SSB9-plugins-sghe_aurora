@@ -270,7 +270,6 @@ function UserControls( options ) {
                     window.location = ApplicationConfig.loginEndpoint;
                 }
             );
-            ControlBar.addAccessibilityInfo('#guestSignIn',ResourceManager.getString("userdetails_guestsignin_description"),ResourceManager.getString("userdetails_guestsignin_title"));
         }
 
     } else {
