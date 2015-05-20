@@ -97,20 +97,18 @@
 
 #menu .menu-icon    {
     background:url(images/arrow-right.svg) no-repeat center;
-    background-size: 0.625em 1.125em;
     float:right;
-    height:1.125em;
-    width:0.625em;
     margin-right: 0.5em ;
     display: inline-block;
-
 }
-
 
 #menu .menu-back-icon    {
     background:url(images/arrow-left.svg) no-repeat center center;
-    background-size:0.625em 1.125em;
     float:left;
+}
+
+#menu .menu-icon, #menu .menu-back-icon{
+    background-size: 0.625em 1.125em;
     height:1.125em;
     width:0.625em;
 }
@@ -130,16 +128,16 @@ and (max-width:767px){
         height: 90%;
         top:7.6436%;
     }
-    #menu ul>li {
-        border-bottom: 1px solid #D0DBDE;
-        padding: 0.5em 0.25em 0.5em 0.25em;
-    }
-
 
     .menu-item{
         margin-right:1.953125%;
         margin-left:1.953125%;
-
+        padding: 0.5em 0.25em 0.5em 0.25em;
+    }
+    #menu .menu-back-icon, #menu .menu-icon {
+        background-size:0.625em 0.9em;
+        height:0.9em;
+        padding-top:0.5em;
     }
 }
 
@@ -150,21 +148,6 @@ and (orientation : landscape)   {
     #menuContainer   {
         width:80%;
      }
-
-    #menu .menu-icon    {
-        background-size:1em 1.75em;
-        height:1.75em;
-        width:1em;
-    }
-
-    #menu .menu-back-icon    {
-        background-size: 1em 1.75em;
-        height:1.75em;
-        width:1em;
-    }
-    .menu-item{
-        padding: 0.5em 0.25em 0.5em 0.25em;
-    }
 }
 
 @media only screen
@@ -173,22 +156,11 @@ and (max-width:767px)
 and (orientation : portrait)   {
 
     #menuContainer   {
-     width: 80%;
+     width: 99%;
     }
 
-    #menu .menu-icon    {
-        background-size:1em 1.75em;
-        height:1.75em;
-        width:1em;
-    }
-
-    #menu .menu-back-icon    {
-        background-size:1em 1.75em;
-        height:1.75em;
-        width:1em;
-    }
-    .menu-item{
-        padding: 0.5em 0.25em 0.5em 0.25em;
+    #menu .menu-subheader-text{
+        margin-left:10%;
     }
 }
 
@@ -201,10 +173,6 @@ and (max-width:1024px){
         width: 50.25%;
         top: 6.859375%;
     }
-    #menu ul>li {
-        padding: 0.5em 0.25em 0.5em 0.25em;
-    }
-
     .menu-item{
         margin-right:1.953125%;
         margin-left:1.953125%;
