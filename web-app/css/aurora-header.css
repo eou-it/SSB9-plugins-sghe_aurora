@@ -181,6 +181,10 @@ div#header-east-part-user-controls {
     display: none;
 }
 
+.signIn-mobile {
+    display: none;
+}
+
 
 #signInCanvas {
     height: 100%;
@@ -191,7 +195,6 @@ div#header-east-part-user-controls {
     padding-right: 0.5em;
     float:left;
     color: #FFFFFF;
-    --navigation: tab;
 }
 
 #userCanvas {
@@ -233,7 +236,7 @@ div#header-east-part-user-controls {
     border-bottom: 1px solid #D0DBDE;
 }
 
-#userList .canvas-item:hover {
+#userList .canvas-item:hover, #userList .canvas-item:focus {
     background-color: #F3FCFF;
 }
 
@@ -244,7 +247,7 @@ div#header-east-part-user-controls {
 
 #userList #usernameForMobile {
     display: none;
-    background-color: #CCCCCC;
+    background-color: #E8E3E3;
 }
 
 
@@ -349,7 +352,7 @@ div#header-east-part-user-controls {
         width: 100%;
     }
 
-    #signList .canvas-item:hover {
+    #signList .canvas-item:hover, #signList .canvas-item:focus {
         background-color: #F3FCFF;
     }
 

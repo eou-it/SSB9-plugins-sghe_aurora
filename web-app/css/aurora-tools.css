@@ -60,7 +60,7 @@
 
 #toolsList #mepDescForMobile {
     display: none;
-    background-color: #CCCCCC;
+    background-color: #E8E3E3;
 }
 
 @media (min-width:0px) and (max-width:767px) {
