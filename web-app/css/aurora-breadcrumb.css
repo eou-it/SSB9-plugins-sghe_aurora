@@ -27,7 +27,7 @@ a.breadcrumbButton{
     position: relative;
 }
 
-#title-panel div, #breadcrumb-panel *{
+#title-panel div, #breadcrumb-panel #breadcrumbHeader, #breadcrumbBackButton, #breadcrumbPageTitle {
     position: relative;
     top: 50%;
     -webkit-transform: translateY(-50%);
@@ -105,5 +105,21 @@ and (max-width: 767px) {
         display: block;
     }
 
+    #breadcrumbHeader:before{
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+    }
+
+    .breadcrumb-show-leaf .breadcrumbButton:last-child {
+        display: inline-block;
+        vertical-align: middle;
+    }
+
+    #breadcrumb-panel #breadcrumbHeader{
+        position: static;
+        transform: inherit;
+    }
 }
 
