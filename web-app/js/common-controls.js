@@ -75,7 +75,7 @@ var AuroraHeader =  {
             + "</div>");
 
         $('#header-main-section').append(eastPartElement.append(UserControls( options )));
-        var notificationDiv = "<div id='notification-center'></div>";
+        var notificationDiv = "<div id='notification-center' title='"+ResourceManager.getString("notification_title")+"'></div>";
         eastPartElement.append(notificationDiv);
     },
 
