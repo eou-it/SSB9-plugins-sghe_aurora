@@ -154,7 +154,7 @@ function toggleBrowseMenu() {
         $('#menuContainer').removeClass('show');
         scrollableList.getLastFocsedElement().focus();
     } else {
-        scrollableList.setLastFocsedElement(document.activeElement);
+        scrollableList.setLastFocusedElement(document.activeElement);
         $('#menu').addClass('show');
         $('#menu').removeClass('hide');
         $('#menuContainer').removeClass('hide');

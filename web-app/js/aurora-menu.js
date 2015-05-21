@@ -68,7 +68,7 @@ function ScrollableMenuTable(root, menuList) {
             this.initialize();
         };
 
-        this.setLastFocsedElement = function(target){
+        this.setLastFocusedElement = function(target){
             this.lastFocusedElement = target;
         };
 
