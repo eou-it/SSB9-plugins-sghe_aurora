@@ -27,9 +27,11 @@ a.breadcrumbButton{
     position: relative;
 }
 
-#title-panel div{
-    position: absolute;
+#title-panel div, #breadcrumb-panel *{
+    position: relative;
     top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
     transform: translateY(-50%);
 }
 
@@ -43,7 +45,6 @@ a.breadcrumbButton{
 #breadcrumbBackButton, #breadcrumbPageTitle{
     display: none;
 }
-
 
 #breadcrumbPageTitle, #title-panel{
     overflow: hidden;
@@ -64,10 +65,6 @@ a.breadcrumbButton{
     display:none;
 }
 
-#breadcrumbHeader{
-    padding-top:0.5em;
-}
-
 .page-title-separator{
     border-bottom: 2px solid #DEE5E7;
 }
@@ -80,10 +77,9 @@ and (max-width: 767px) {
 
     #breadcrumb-panel{
         height: 4.6338028169014086%;
-        padding-left: 1.953125%;
+        padding-left: 0.75em;
         color: #41566F;
         min-height: 2.8em;
-        border-spacing: 0.5em;
     }
 
     #breadcrumbBackButton{
@@ -93,12 +89,10 @@ and (max-width: 767px) {
         width: 1.5em;
         float: left;
         margin-right: 0.5em;
-        margin-top: 0.5em;
     }
 
     #breadcrumbHeader, #breadcrumbPageTitle {
         font-size: 1em;
-        padding-top:0.5em;
     }
 
     .breadcrumbButton, #title-panel, .breadcrumbButton:after{
@@ -108,11 +102,6 @@ and (max-width: 767px) {
     }
 
     #breadcrumbBackButton, #breadcrumbPageTitle, .breadcrumb-show-leaf .breadcrumbButton:last-child{
-        display: block;
-    }
-
-    #breadcrumbHeader{
-        width: auto;
         display: block;
     }
 
