@@ -1,7 +1,6 @@
 /*******************************************************************************
  Copyright 2015 Ellucian Company L.P. and its affiliates.
 *******************************************************************************/
-
 #header-main-section {
     width: 100%;
     background-color: #206E9F;
@@ -41,6 +40,12 @@ div#header-east-part-user-controls {
     margin-right: 1em;
     color: #ffffff;
     font: 1em Open Sans;
+    display: table;
+}
+
+#header-main-section-east-part #mepDiv span{
+    display: table-cell;
+    vertical-align: middle;
 }
 
 #header-main-section-east-part #signInButton  {
@@ -178,12 +183,12 @@ div#header-east-part-user-controls {
     display: table;
 }
 
-#header-east-part-user-controls{
-    float: left;
-}
-
 #brandingDiv, #branding{
     height: inherit;
+}
+
+.signIn-mobile {
+    display: none;
 }
 
 /*Mobile device*/

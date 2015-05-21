@@ -262,7 +262,7 @@ function UserControls( options ) {
                 signIn();
             }
         );
-       // ControlBar.addAccessibilityInfo('#signIn',ResourceManager.getString("userdetails_signin_description"),ResourceManager.getString("userdetails_signin_title"));
+       ControlBar.addAccessibilityInfo('#signIn',ResourceManager.getString("userdetails_signin_description"),ResourceManager.getString("userdetails_signin_title"));
         var guestSignInLink
         if("true" == $('meta[name=guestLoginEnabled]').attr("content")) {
             SignInMenu.addItem("guestSignIn",ResourceManager.getString("guestuserdetails_signin"),undefined,
@@ -839,7 +839,7 @@ function setCurrentPage(currentPage) {
 
 var MepDesciption = {
     populateMepDescForOthers : function() {
-        ControlBar.append($("<div id='mepDiv'>"+CommonContext.mepHomeContext+"</div>"));
+        ControlBar.append($("<div id='mepDiv'><span>"+CommonContext.mepHomeContext+"</span></div>"));
     },
 
     populateMepDescForMobile : function() {
@@ -905,12 +905,11 @@ var ControlBar = {
 
     addAccessibilityInfo: function(selector, elemAriaLabel, elemTitle) {
         var elemDiv = ControlBar.node.find(selector);
-        var wrapelemDivId=elemDiv.attr('id')+"Div";
-        var wrapElement = "<span id='"+wrapelemDivId+"' tabindex='-1' title='"+elemTitle+"'></span>";
-        elemDiv.wrap( wrapElement );
-        var spanElementId=elemDiv.attr('id')+"ShortCut";
-        var spanElement="<span id="+spanElementId+" class='offscreen'>"+elemAriaLabel+"</span>"
-        elemDiv.prepend(spanElement);
         elemDiv.attr('tabindex', 0);
+        elemDiv.attr('aria-label',elemAriaLabel );
+        var elementText=elemDiv.text();
+        var spanElementId=elemDiv.attr('id')+"Title";
+        var insideElement="<span tabindex='-1' title='"+elemTitle+"' id="+spanElementId+">"+elementText+"</span>";
+        elemDiv.html(insideElement);
     }
 }
