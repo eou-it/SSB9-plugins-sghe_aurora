@@ -14,8 +14,7 @@
 }
 
 #header-main-section-west-part {
-    position: absolute;
-    left : 0;
+    float: left;
     height: 100%;
 }
 
@@ -29,8 +28,7 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part{
     background-color: #1B6496;
-    position: absolute;
-    right: 0;
+    float: right;
     height: 100%;
 }
 
