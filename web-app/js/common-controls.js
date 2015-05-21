@@ -167,14 +167,12 @@ function toggleSignMenu() {
     scrollableList.closeMenu();
     ToolsMenu.closeMenu();
     if ($('#signInCanvas').is(':hidden')) {
-        fnSetLastFocus();
         $('#signInCanvas').addClass('signIn-active');
         $('.signIn-mobile').addClass('signIn-expanded');
         $('#signList > .canvas-item:visible:first').focus();
     } else {
         $('#signInCanvas').removeClass('signIn-active');
         $('.signIn-mobile').removeClass('signIn-expanded');
-        fnSetFocusOnCloseMenuItems();
     }
 }
 
@@ -182,14 +180,12 @@ function toggleProfileMenu() {
     scrollableList.closeMenu();
     ToolsMenu.closeMenu();
     if ($('#userCanvas').is(':hidden')) {
-        fnSetLastFocus();
         $('#userCanvas').addClass('user-active');
         $('#user').addClass('user-expanded');
         $('#userList > .canvas-item:visible:first').focus();
     } else {
         $('#userCanvas').removeClass('user-active');
         $('#user').removeClass('user-expanded');
-        fnSetFocusOnCloseMenuItems();
     }
     return false;
 }
@@ -199,27 +195,16 @@ function toggleToolsMenu() {
     SignInMenu.closeMenu();
     ProfileMenu.closeMenu();
     if ($('#toolsCanvas').is(':hidden')) {
-        fnSetLastFocus();
         $('#toolsCanvas').addClass('tools-active');
         $('#toolsButton').addClass('tools-expanded');
         $('#toolsList > .canvas-item:visible:first').focus();
     } else {
         $('#toolsCanvas').removeClass('tools-active');
         $('#toolsButton').removeClass('tools-expanded');
-        fnSetFocusOnCloseMenuItems();
     }
     return false;
 }
 
-function fnSetLastFocus(){
-    window.lastFocus = $(document.activeElement);
-}
-
-function fnSetFocusOnCloseMenuItems(){
-    if(window.lastFocus !=null) {
-        $(window.lastFocus).focus();
-    }
-}
 
 function signIn(){
     window.location=$('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
@@ -246,7 +231,7 @@ function UserControls( options ) {
     var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' class='menu-icon'></a></div>");
     ControlBar.append(toolsDiv);
     ToolsMenu.initialize();
-    window.lastFocus = $(document.activeElement);
+   
     ControlBar.node.find("#toolsButton").attr('title',ResourceManager.getString("areas_label_tools_title"));
     ControlBar.node.find("#tools").attr('aria-label', ResourceManager.getString("areas_label_tools_description"));
     if (CommonContext.mepHomeContext) {
