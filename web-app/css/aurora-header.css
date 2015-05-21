@@ -90,7 +90,7 @@ div#header-east-part-user-controls {
 }
 
 #header-main-section-east-part #notification-center {
-    float:left;
+    float:right;
     margin-left: 1em;
     position: relative;
 }
