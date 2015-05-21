@@ -14,7 +14,9 @@
 }
 
 #header-main-section-west-part {
-    float: left;
+    left: 0;
+    position: absolute;
+    right: auto;
     height: 100%;
 }
 
@@ -28,7 +30,9 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part{
     background-color: #1B6496;
-    float: right;
+    right: 0;
+    position: absolute;
+    left: auto;
     height: 100%;
 }
 
@@ -90,6 +94,7 @@ div#header-east-part-user-controls {
 #header-main-section-east-part #notification-center {
     float:right;
     margin-left: 1em;
+    margin-right: auto;
     position: relative;
 }
 
