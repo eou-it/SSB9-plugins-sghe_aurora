@@ -6,9 +6,7 @@
     height: 4.1015625%;
     clear: both;
     min-height: 2.4em;
-    display: table;
-    width: 100%;
-    table-layout: fixed;
+    position: relative;
 }
 
 a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited , .breadcrumbButton {
@@ -26,14 +24,13 @@ a.breadcrumbButton{
     font-size: 1em;
     font-weight: 500;
     min-height: 2.8em;
-    display: table;
-    table-layout: fixed;
-    width: 100%;
+    position: relative;
 }
 
 #title-panel div{
-    display: table-cell;
-    vertical-align: middle;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
 }
 
 #breadcrumb-panel, #title-panel{
@@ -68,8 +65,7 @@ a.breadcrumbButton{
 }
 
 #breadcrumbHeader{
-    display: table-cell;
-    vertical-align: middle;
+    padding-top:0.5em;
 }
 
 .page-title-separator{
@@ -95,10 +91,14 @@ and (max-width: 767px) {
         position:relative;
         height: 1.25em;
         width: 1.5em;
+        float: left;
+        margin-right: 0.5em;
+        margin-top: 0.5em;
     }
 
     #breadcrumbHeader, #breadcrumbPageTitle {
-        font-size: 1.25em;
+        font-size: 1em;
+        padding-top:0.5em;
     }
 
     .breadcrumbButton, #title-panel, .breadcrumbButton:after{
@@ -116,14 +116,5 @@ and (max-width: 767px) {
         display: block;
     }
 
-    #breadcrumbBackButton, #breadcrumbPageTitle{
-        display: table-cell;
-        vertical-align: middle;
-        height: 100%;
-    }
-
-    #breadcrumbPageTitle{
-        width: 100%;
-    }
 }
 
