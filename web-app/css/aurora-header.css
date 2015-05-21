@@ -100,6 +100,7 @@ div#header-east-part-user-controls {
     display: block;
     margin-left: 1em;
     position: relative;
+    margin-right:0;
 }
 
 .institutionalBranding {
@@ -108,6 +109,9 @@ div#header-east-part-user-controls {
     width: 4.875em;
     float: left;
     margin-left: 1em;
+    margin-right:0;
+    padding-right:1em;
+    padding-left:0;
 }
 
 #tools {
