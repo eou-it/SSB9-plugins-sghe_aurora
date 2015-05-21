@@ -18,7 +18,7 @@
     height: 100%;
 }
 
-#header-main-section-west-part  div{
+#header-main-section-west-part  #bannerMenuDiv, #header-main-section-west-part #brandingDiv{
     float:left;
 }
 div#header-east-part-user-controls {
@@ -97,8 +97,9 @@ div#header-east-part-user-controls {
     background: url("images/menu.svg") center center no-repeat;
     height: inherit;
     width: 1.5em;
-    float: left;
+    display: block;
     margin-left: 1em;
+    position: relative;
 }
 
 .institutionalBranding {

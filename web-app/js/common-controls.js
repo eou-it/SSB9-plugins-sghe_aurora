@@ -49,7 +49,7 @@ var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<div id='header-main-section'>"
             + "<div id='header-main-section-west-part'>"
-            + "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a></div>"
+            + "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer' role='application'></div></div>"
             + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'></a></div>"
             + "</div>";
 
@@ -111,8 +111,7 @@ var AuroraHeader =  {
 
 }
 
-function setupBannerMenu() {
-    $('#header-main-section').after("<div id=menuContainer role=application/>");
+function setupBannerMenu() {    
     $('#bannerMenu').on('click', function (e) {
         toggleBrowseMenu();
         return false;
@@ -149,6 +148,8 @@ function toggleBrowseMenu() {
     ProfileMenu.closeMenu();
     if ($('#menu').hasClass('show')) {
         $('#menu').addClass('hide');
+        $('#bannerMenu').addClass('hide');
+        $('#bannerMenu').removeClass('show');
         $('#menu').removeClass('show');
         $('#menuContainer').addClass('hide');
         $('#menuContainer').removeClass('show');
@@ -156,6 +157,8 @@ function toggleBrowseMenu() {
     } else {
         scrollableList.setLastFocusedElement(document.activeElement);
         $('#menu').addClass('show');
+        $('#bannerMenu').addClass('show');
+        $('#bannerMenu').removeClass('hide');
         $('#menu').removeClass('hide');
         $('#menuContainer').removeClass('hide');
         $('#menuContainer').addClass('show');
