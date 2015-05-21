@@ -79,7 +79,7 @@ var NonHierarchicalMenu = {
         var item = this.itemHtml.clone();
         var handlerPostItemClick = this.callbackPostItemClick;
         item.attr('id', id);
-        item.attr('role',"link");
+        item.attr('role',"menuitem");
         item.text(label);
         item.attr('tabindex',0);
         item.addClass('pointer');
@@ -189,7 +189,7 @@ ToolsMenu.initialize = function() {
     ControlBar.node.find('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
 
     ControlBar.node.find('#toolsButton').append("<div id='toolsCanvas'>"
-        + "<div id='toolsMenu'><div id='toolsList' class='tools-list'></div>"
+        + "<div id='toolsMenu'  role='menu'><div id='toolsList' class='tools-list' role='group'></div>"
         + "</div>"
         + "</div>");
     this.dropDown = ControlBar.node.find("#toolsCanvas");
@@ -210,7 +210,7 @@ ToolsMenu.closeMenu = function() {
 
 var SignInMenu = Object.create(NonHierarchicalMenu);
 SignInMenu.initialize = function() {
-    var signInDom = $("<div id='signInButton' class='non-hierarchical-menu'  ><a class='signIn-mobile menu-icon'  href='javascript:void(0);' />"
+    var signInDom = $("<div id='signInButton' class='non-hierarchical-menu'  ><a class='signIn-mobile menu-icon' aria-expanded='false' href='javascript:void(0);' />"
         + "<div id='signInCanvas'><div id='signInMenu'><div id='signList' class='signIn-list'>"
         + "</div></div></div>"
         + "</div>");

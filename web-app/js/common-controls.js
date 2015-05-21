@@ -98,7 +98,7 @@ var AuroraHeader =  {
             'ctrl+shift+F', toggleSignInAndSignOut,
             'alt+n', toggleNotificationCenter,
             'alt+l',toggleToolsMenu,
-            'alt+a',toggleProfileMenu
+            'alt+p',toggleProfileMenu
         ];
         key && key.bind.apply( window, shortcuts );
     },
@@ -173,6 +173,7 @@ function toggleSignMenu() {
     } else {
         $('#signInCanvas').removeClass('signIn-active');
         $('.signIn-mobile').removeClass('signIn-expanded');
+        $('.signIn-mobile').focus();
     }
 }
 
@@ -186,6 +187,7 @@ function toggleProfileMenu() {
     } else {
         $('#userCanvas').removeClass('user-active');
         $('#user').removeClass('user-expanded');
+        $('#user').focus();
     }
     return false;
 }
@@ -197,10 +199,13 @@ function toggleToolsMenu() {
     if ($('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').addClass('tools-active');
         $('#toolsButton').addClass('tools-expanded');
+        $('#tools').attr('aria-expanded','true');
         $('#toolsList > .canvas-item:visible:first').focus();
     } else {
         $('#toolsCanvas').removeClass('tools-active');
         $('#toolsButton').removeClass('tools-expanded');
+        $('#tools').attr('aria-expanded','false');
+        $('#tools').focus();
     }
     return false;
 }
@@ -228,10 +233,10 @@ function UserControls( options ) {
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForOthers();
     }
-    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' class='menu-icon'></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false' class='menu-icon'></a></div>");
     ControlBar.append(toolsDiv);
     ToolsMenu.initialize();
-   
+
     ControlBar.node.find("#toolsButton").attr('title',ResourceManager.getString("areas_label_tools_title"));
     ControlBar.node.find("#tools").attr('aria-label', ResourceManager.getString("areas_label_tools_description"));
     if (CommonContext.mepHomeContext) {
@@ -247,7 +252,8 @@ function UserControls( options ) {
                 signIn();
             }
         );
-       ControlBar.addAccessibilityInfo('#signIn',ResourceManager.getString("userdetails_signin_description"),ResourceManager.getString("userdetails_signin_title"));
+        ControlBar.addAccessibilityInfo('#signIn',ResourceManager.getString("userdetails_signin_description"),ResourceManager.getString("userdetails_signin_title"));
+        ControlBar.node.find('#signIn').attr('role', 'link');
         var guestSignInLink
         if("true" == $('meta[name=guestLoginEnabled]').attr("content")) {
             SignInMenu.addItem("guestSignIn",ResourceManager.getString("guestuserdetails_signin"),undefined,
@@ -255,10 +261,11 @@ function UserControls( options ) {
                     window.location = ApplicationConfig.loginEndpoint;
                 }
             );
+            ControlBar.node.find('#guestSignIn').attr('role', 'link');
         }
 
     } else {
-        var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' class='menu-icon' href='javascript:void(0);'></a></div>");
+        var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'></a></div>");
         ControlBar.append(userDiv);
         UserName.populateUserNameForOthers();
         ProfileMenu.initialize();
