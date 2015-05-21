@@ -157,6 +157,16 @@ var NonHierarchicalMenu = {
      */
     removeItem: function (id) {
 
+    },
+
+    fnSetLastFocus:function(){
+        window.lastFocus = $(document.activeElement);
+    },
+
+    fnSetFocusOnCloseMenuItems:function(){
+        if (window.lastFocus != null) {
+            $(window.lastFocus).focus();
+        }
     }
 }
 
@@ -189,7 +199,7 @@ ToolsMenu.initialize = function() {
     ControlBar.node.find('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
 
     ControlBar.node.find('#toolsButton').append("<div id='toolsCanvas'>"
-        + "<div id='toolsMenu'  role='menu'><div id='toolsList' class='tools-list' role='group'></div>"
+        + "<div id='toolsMenu'><div id='toolsList' class='tools-list'></div>"
         + "</div>"
         + "</div>");
     this.dropDown = ControlBar.node.find("#toolsCanvas");

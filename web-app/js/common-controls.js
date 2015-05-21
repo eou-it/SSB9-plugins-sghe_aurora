@@ -167,13 +167,14 @@ function toggleSignMenu() {
     scrollableList.closeMenu();
     ToolsMenu.closeMenu();
     if ($('#signInCanvas').is(':hidden')) {
+        SignInMenu.fnSetLastFocus();
         $('#signInCanvas').addClass('signIn-active');
         $('.signIn-mobile').addClass('signIn-expanded');
         $('#signList > .canvas-item:visible:first').focus();
     } else {
         $('#signInCanvas').removeClass('signIn-active');
         $('.signIn-mobile').removeClass('signIn-expanded');
-        $('.signIn-mobile').focus();
+        SignInMenu.fnSetFocusOnCloseMenuItems();
     }
 }
 
@@ -181,13 +182,14 @@ function toggleProfileMenu() {
     scrollableList.closeMenu();
     ToolsMenu.closeMenu();
     if ($('#userCanvas').is(':hidden')) {
+        ProfileMenu.fnSetLastFocus();
         $('#userCanvas').addClass('user-active');
         $('#user').addClass('user-expanded');
         $('#userList > .canvas-item:visible:first').focus();
     } else {
         $('#userCanvas').removeClass('user-active');
         $('#user').removeClass('user-expanded');
-        $('#user').focus();
+        ProfileMenu.fnSetFocusOnCloseMenuItems();
     }
     return false;
 }
@@ -197,6 +199,7 @@ function toggleToolsMenu() {
     SignInMenu.closeMenu();
     ProfileMenu.closeMenu();
     if ($('#toolsCanvas').is(':hidden')) {
+        ToolsMenu.fnSetLastFocus();
         $('#toolsCanvas').addClass('tools-active');
         $('#toolsButton').addClass('tools-expanded');
         $('#tools').attr('aria-expanded','true');
@@ -205,7 +208,7 @@ function toggleToolsMenu() {
         $('#toolsCanvas').removeClass('tools-active');
         $('#toolsButton').removeClass('tools-expanded');
         $('#tools').attr('aria-expanded','false');
-        $('#tools').focus();
+        ToolsMenu.fnSetFocusOnCloseMenuItems();
     }
     return false;
 }
