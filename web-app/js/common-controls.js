@@ -152,7 +152,7 @@ function toggleBrowseMenu() {
         $('#menu').removeClass('show');
         $('#menuContainer').addClass('hide');
         $('#menuContainer').removeClass('show');
-        scrollableList.getLastFocsedElement().focus();
+        scrollableList.getLastFocusedElement().focus();
     } else {
         scrollableList.setLastFocusedElement(document.activeElement);
         $('#menu').addClass('show');
