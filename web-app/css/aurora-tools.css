@@ -78,11 +78,7 @@
 
 @media (min-width:0px) and (max-width:767px) {
     #toolsList #mepDescForMobile {
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
+        display: inline-block;
     }
 
 }
