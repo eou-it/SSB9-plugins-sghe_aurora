@@ -7,8 +7,8 @@
     z-index: 1000;
     padding: 0px;
     margin: 0px;
-    right:0;
-    left: auto;
+    right:auto;
+    left: 0;
     height: auto;
     width: auto;
     white-space: nowrap;
@@ -79,7 +79,15 @@
     }
 }
 
-@media (min-width:0px) and (max-width:767px) and (orientation : portrait)	{}
+@media (min-width:0px) and (max-width:767px) and (orientation : portrait)	{
+    #header-main-section #userCanvas{
+        width : 100%;
+        position: fixed;
+    }
+    #header-main-section #userCanvas div{
+        width : 100%;
+    }
+}
 
 @media (min-width:768px) and (max-width:1023px)	{ }
 

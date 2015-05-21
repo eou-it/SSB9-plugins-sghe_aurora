@@ -83,7 +83,12 @@
     }
 
 }
-@media (min-width:0px) and (max-width:767px) and (orientation : portrait)	{}
+@media (min-width:0px) and (max-width:767px) and (orientation : portrait)	{
+    #header-main-section #toolsCanvas{
+        width : 100%;
+        position: fixed;
+    }
+}
 @media (min-width:0px) and (max-width:767px) and (orientation : landscape)	{}
 
 @media (min-width:768px) and (max-width:1024px)	{ }

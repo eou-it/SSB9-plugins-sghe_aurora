@@ -372,6 +372,11 @@ div#header-east-part-user-controls {
         padding:0;
     }
 
+    #signInCanvas.signIn-active {
+        width : 100%;
+        position: fixed;
+    }
+
 }
 
 @media (min-width:0px) and (max-width:767px) and (orientation : landscape)	{
