@@ -79,7 +79,7 @@
 
 @media (min-width:0px) and (max-width:767px) {
     #toolsList #mepDescForMobile {
-        display: inline-block;
+        display: block;
     }
 
 }
