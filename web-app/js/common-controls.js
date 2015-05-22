@@ -111,7 +111,7 @@ var AuroraHeader =  {
 
 }
 
-function setupBannerMenu() {    
+function setupBannerMenu() {
     $('#bannerMenu').on('click', function (e) {
         toggleBrowseMenu();
         return false;
@@ -170,14 +170,13 @@ function toggleSignMenu() {
     scrollableList.closeMenu();
     ToolsMenu.closeMenu();
     if ($('#signInCanvas').is(':hidden')) {
-        SignInMenu.fnSetLastFocus();
         $('#signInCanvas').addClass('signIn-active');
         $('.signIn-mobile').addClass('signIn-expanded');
         $('#signList > .canvas-item:visible:first').focus();
     } else {
         $('#signInCanvas').removeClass('signIn-active');
         $('.signIn-mobile').removeClass('signIn-expanded');
-        SignInMenu.fnSetFocusOnCloseMenuItems();
+        $('.signIn-mobile').focus();
     }
 }
 
@@ -185,14 +184,13 @@ function toggleProfileMenu() {
     scrollableList.closeMenu();
     ToolsMenu.closeMenu();
     if ($('#userCanvas').is(':hidden')) {
-        ProfileMenu.fnSetLastFocus();
         $('#userCanvas').addClass('user-active');
         $('#user').addClass('user-expanded');
         $('#userList > .canvas-item:visible:first').focus();
     } else {
         $('#userCanvas').removeClass('user-active');
         $('#user').removeClass('user-expanded');
-        ProfileMenu.fnSetFocusOnCloseMenuItems();
+        $('#user').focus();
     }
     return false;
 }
@@ -202,16 +200,13 @@ function toggleToolsMenu() {
     SignInMenu.closeMenu();
     ProfileMenu.closeMenu();
     if ($('#toolsCanvas').is(':hidden')) {
-        ToolsMenu.fnSetLastFocus();
         $('#toolsCanvas').addClass('tools-active');
         $('#toolsButton').addClass('tools-expanded');
-        $('#tools').attr('aria-expanded','true');
         $('#toolsList > .canvas-item:visible:first').focus();
     } else {
         $('#toolsCanvas').removeClass('tools-active');
         $('#toolsButton').removeClass('tools-expanded');
-        $('#tools').attr('aria-expanded','false');
-        ToolsMenu.fnSetFocusOnCloseMenuItems();
+        $('#tools').focus();
     }
     return false;
 }
