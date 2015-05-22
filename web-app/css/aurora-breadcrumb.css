@@ -85,10 +85,11 @@ and (max-width: 767px) {
     #breadcrumbBackButton{
         background:url("images/icon-arrow-back.svg") no-repeat center;
         position:relative;
-        height: 1.25em;
+        height: 2.8em;
         width: 1.5em;
         float: left;
         margin-right: 0.5em;
+        cursor: pointer;
     }
 
     #breadcrumbHeader, #breadcrumbPageTitle {
