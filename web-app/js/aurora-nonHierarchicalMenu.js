@@ -22,7 +22,7 @@ var NonHierarchicalMenu = {
     /**
      * HTML for rendering menu items
      */
-    itemHtml: $("<div class='canvas-item vertical-align'/></div>"),
+    itemHtml: $("<div class='canvas-item'/></div>"),
 
     callbackPostItemClick: null,
 
@@ -79,7 +79,7 @@ var NonHierarchicalMenu = {
         var item = this.itemHtml.clone();
         var handlerPostItemClick = this.callbackPostItemClick;
         item.attr('id', id);
-        item.attr('role',"link");
+        item.attr('role',"menuitem");
         item.text(label);
         item.attr('tabindex',0);
         item.addClass('pointer');
@@ -157,6 +157,16 @@ var NonHierarchicalMenu = {
      */
     removeItem: function (id) {
 
+    },
+
+    fnSetLastFocus:function(){
+        window.lastFocus = $(document.activeElement);
+    },
+
+    fnSetFocusOnCloseMenuItems:function(){
+        if (window.lastFocus != null) {
+            $(window.lastFocus).focus();
+        }
     }
 }
 
@@ -201,7 +211,7 @@ ToolsMenu.initialize = function() {
 ToolsMenu.closeMenu = function() {
     if (!$('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').removeClass('tools-active');
-        $('#tools').removeClass('tools-expanded');
+        $('#toolsButton').removeClass('tools-expanded');
         if(window.lastFocus !=null) {
             $(window.lastFocus).focus();
         }
@@ -210,8 +220,8 @@ ToolsMenu.closeMenu = function() {
 
 var SignInMenu = Object.create(NonHierarchicalMenu);
 SignInMenu.initialize = function() {
-    var signInDom = $("<div id='signInButton' class='non-hierarchical-menu'  ><a class='signIn-mobile menu-icon'  href='javascript:void(0);' />"
-        + "<div id='signInCanvas' class='vertical-align'><div id='signInMenu'><div id='signList' class='signIn-list'>"
+    var signInDom = $("<div id='signInButton' class='non-hierarchical-menu'  ><a class='signIn-mobile menu-icon' aria-expanded='false' href='javascript:void(0);' />"
+        + "<div id='signInCanvas'><div id='signInMenu'><div id='signList' class='signIn-list'>"
         + "</div></div></div>"
         + "</div>");
     ControlBar.append(signInDom);

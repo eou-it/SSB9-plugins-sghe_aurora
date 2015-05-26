@@ -6,11 +6,12 @@
     height: 4.1015625%;
     clear: both;
     min-height: 2.4em;
+    position: relative;
 }
 
 a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited , .breadcrumbButton {
-   color: #41566F;
-   font-size: 1.25em;
+    color: #41566F;
+    font-size: 1em;
 }
 
 a.breadcrumbButton{
@@ -18,10 +19,20 @@ a.breadcrumbButton{
 }
 
 #title-panel{
-    height: 6.25%;
+    height: 5.25%;
     color : #557287;
-    font-size: 1.25em;
-    min-height: 3.5em;
+    font-size: 1em;
+    font-weight: 500;
+    min-height: 2.8em;
+    position: relative;
+}
+
+#title-panel div, #breadcrumb-panel #breadcrumbHeader, #breadcrumbBackButton, #breadcrumbPageTitle {
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
 }
 
 #breadcrumb-panel, #title-panel{
@@ -34,7 +45,6 @@ a.breadcrumbButton{
 #breadcrumbBackButton, #breadcrumbPageTitle{
     display: none;
 }
-
 
 #breadcrumbPageTitle, #title-panel{
     overflow: hidden;
@@ -55,10 +65,6 @@ a.breadcrumbButton{
     display:none;
 }
 
-#breadcrumbHeader{
-    width: 100%;
-}
-
 .page-title-separator{
     border-bottom: 2px solid #DEE5E7;
 }
@@ -70,23 +76,24 @@ and (min-width: 0px)
 and (max-width: 767px) {
 
     #breadcrumb-panel{
-        height: 5.6338028169014086%;
-        padding-left: 1.953125%;
+        height: 4.6338028169014086%;
+        padding-left: 0.75em;
         color: #41566F;
-        min-height: 3.1em;
+        min-height: 2.8em;
     }
 
     #breadcrumbBackButton{
         background:url("images/icon-arrow-back.svg") no-repeat center;
         position:relative;
-        height: 1.25em;
-        width: 1.25em;
-        float:left;
-        margin-right: 1.953125%;
+        height: 2.8em;
+        width: 1.5em;
+        float: left;
+        margin-right: 0.5em;
+        cursor: pointer;
     }
 
     #breadcrumbHeader, #breadcrumbPageTitle {
-        font-size: 1.25em;
+        font-size: 1em;
     }
 
     .breadcrumbButton, #title-panel, .breadcrumbButton:after{
@@ -99,34 +106,21 @@ and (max-width: 767px) {
         display: block;
     }
 
-    #breadcrumbHeader{
-        width: auto;
+    #breadcrumbHeader:before{
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
     }
 
-}
-
-
-
-
-/*Tablet device*/
-
-@media only screen
-and (min-device-width: 768px)
-and (max-device-width: 1024px) {
-
-    .breadcrumbButton:after{
-        padding-left: 0.9765625%;
-        padding-right:  0.9765625%;
+    .breadcrumb-show-leaf .breadcrumbButton:last-child {
+        display: inline-block;
+        vertical-align: middle;
     }
 
-    #breadcrumb-panel{
-        height: 6.510416666666667%;
-        min-height: 2.351em;
-    }
-
-    #title-panel{
-        height: 5.46875%;
-        font-size: 1.25em;
-        min-height: 3.582em;
+    #breadcrumb-panel #breadcrumbHeader{
+        position: static;
+        transform: inherit;
     }
 }
+

@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 /**
@@ -47,9 +47,9 @@ function Button(id, label, callback, type) {
 
 var AuroraHeader =  {
     createSkeleton: function () {
-        var header ="<div id='header-main-section' class='vertical-align'>"
-            + "<div id='header-main-section-west-part' class='vertical-align'>"
-            + "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a></div>"
+        var header ="<div id='header-main-section'>"
+            + "<div id='header-main-section-west-part'>"
+            + "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer' role='application'></div></div>"
             + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'></a></div>"
             + "</div>";
 
@@ -71,11 +71,11 @@ var AuroraHeader =  {
     },
 
     placeEastPart: function (options) {
-        var eastPartElement =  $("<div id='header-main-section-east-part' class='vertical-align'>"
+        var eastPartElement =  $("<div id='header-main-section-east-part'>"
             + "</div>");
 
         $('#header-main-section').append(eastPartElement.append(UserControls( options )));
-        var notificationDiv = "<div id='notification-center'  class='vertical-align'></div>";
+        var notificationDiv = "<div id='notification-center' title='"+ResourceManager.getString("notification_title")+"'></div>";
         eastPartElement.append(notificationDiv);
     },
 
@@ -98,7 +98,7 @@ var AuroraHeader =  {
             'ctrl+shift+F', toggleSignInAndSignOut,
             'alt+n', toggleNotificationCenter,
             'alt+l',toggleToolsMenu,
-            'alt+a',toggleProfileMenu
+            'alt+p',toggleProfileMenu
         ];
         key && key.bind.apply( window, shortcuts );
     },
@@ -112,7 +112,6 @@ var AuroraHeader =  {
 }
 
 function setupBannerMenu() {
-    $('#header-main-section').after("<div id=menuContainer role=application/>");
     $('#bannerMenu').on('click', function (e) {
         toggleBrowseMenu();
         return false;
@@ -149,13 +148,17 @@ function toggleBrowseMenu() {
     ProfileMenu.closeMenu();
     if ($('#menu').hasClass('show')) {
         $('#menu').addClass('hide');
+        $('#bannerMenu').addClass('hide');
+        $('#bannerMenu').removeClass('show');
         $('#menu').removeClass('show');
         $('#menuContainer').addClass('hide');
         $('#menuContainer').removeClass('show');
-        scrollableList.getLastFocsedElement().focus();
+        scrollableList.getLastFocusedElement().focus();
     } else {
-        scrollableList.setLastFocsedElement(document.activeElement);
+        scrollableList.setLastFocusedElement(document.activeElement);
         $('#menu').addClass('show');
+        $('#bannerMenu').addClass('show');
+        $('#bannerMenu').removeClass('hide');
         $('#menu').removeClass('hide');
         $('#menuContainer').removeClass('hide');
         $('#menuContainer').addClass('show');
@@ -167,14 +170,13 @@ function toggleSignMenu() {
     scrollableList.closeMenu();
     ToolsMenu.closeMenu();
     if ($('#signInCanvas').is(':hidden')) {
-        fnSetLastFocus();
         $('#signInCanvas').addClass('signIn-active');
         $('.signIn-mobile').addClass('signIn-expanded');
         $('#signList > .canvas-item:visible:first').focus();
     } else {
         $('#signInCanvas').removeClass('signIn-active');
         $('.signIn-mobile').removeClass('signIn-expanded');
-        fnSetFocusOnCloseMenuItems();
+        $('.signIn-mobile').focus();
     }
 }
 
@@ -182,14 +184,13 @@ function toggleProfileMenu() {
     scrollableList.closeMenu();
     ToolsMenu.closeMenu();
     if ($('#userCanvas').is(':hidden')) {
-        fnSetLastFocus();
         $('#userCanvas').addClass('user-active');
         $('#user').addClass('user-expanded');
         $('#userList > .canvas-item:visible:first').focus();
     } else {
         $('#userCanvas').removeClass('user-active');
         $('#user').removeClass('user-expanded');
-        fnSetFocusOnCloseMenuItems();
+        $('#user').focus();
     }
     return false;
 }
@@ -199,27 +200,17 @@ function toggleToolsMenu() {
     SignInMenu.closeMenu();
     ProfileMenu.closeMenu();
     if ($('#toolsCanvas').is(':hidden')) {
-        fnSetLastFocus();
         $('#toolsCanvas').addClass('tools-active');
-        $('#tools').addClass('tools-expanded');
+        $('#toolsButton').addClass('tools-expanded');
         $('#toolsList > .canvas-item:visible:first').focus();
     } else {
         $('#toolsCanvas').removeClass('tools-active');
-        $('#tools').removeClass('tools-expanded');
-        fnSetFocusOnCloseMenuItems();
+        $('#toolsButton').removeClass('tools-expanded');
+        $('#tools').focus();
     }
     return false;
 }
 
-function fnSetLastFocus(){
-    window.lastFocus = $(document.activeElement);
-}
-
-function fnSetFocusOnCloseMenuItems(){
-    if(window.lastFocus !=null) {
-        $(window.lastFocus).focus();
-    }
-}
 
 function signIn(){
     window.location=$('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
@@ -243,10 +234,10 @@ function UserControls( options ) {
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForOthers();
     }
-    var toolsDiv = $("<div id='toolsButton' class='vertical-align non-hierarchical-menu'><a href='javascript:void(0);' id='tools' class='flex-box menu-icon'></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false' class='menu-icon'></a></div>");
     ControlBar.append(toolsDiv);
     ToolsMenu.initialize();
-    window.lastFocus = $(document.activeElement);
+
     ControlBar.node.find("#toolsButton").attr('title',ResourceManager.getString("areas_label_tools_title"));
     ControlBar.node.find("#tools").attr('aria-label', ResourceManager.getString("areas_label_tools_description"));
     if (CommonContext.mepHomeContext) {
@@ -263,6 +254,7 @@ function UserControls( options ) {
             }
         );
         ControlBar.addAccessibilityInfo('#signIn',ResourceManager.getString("userdetails_signin_description"),ResourceManager.getString("userdetails_signin_title"));
+        ControlBar.node.find('#signIn').attr('role', 'link');
         var guestSignInLink
         if("true" == $('meta[name=guestLoginEnabled]').attr("content")) {
             SignInMenu.addItem("guestSignIn",ResourceManager.getString("guestuserdetails_signin"),undefined,
@@ -270,10 +262,11 @@ function UserControls( options ) {
                     window.location = ApplicationConfig.loginEndpoint;
                 }
             );
+            ControlBar.node.find('#guestSignIn').attr('role', 'link');
         }
 
     } else {
-        var userDiv = $("<div id='userDiv' class='vertical-align non-hierarchical-menu'><a id='user' class='flex-box menu-icon' href='javascript:void(0);'></a></div>");
+        var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'></a></div>");
         ControlBar.append(userDiv);
         UserName.populateUserNameForOthers();
         ProfileMenu.initialize();
@@ -696,7 +689,7 @@ var NavigationRC = {
 
 var TitlePanel = {
     create: function () {
-        $('#breadcrumb-panel').after("<div id='title-panel' class='vertical-align'></div>");
+        $('#breadcrumb-panel').after("<div id='title-panel'></div>");
     }
 }
 
@@ -839,7 +832,7 @@ function setCurrentPage(currentPage) {
 
 var MepDesciption = {
     populateMepDescForOthers : function() {
-        ControlBar.append($("<div id='mepDiv' class='vertical-align'>"+CommonContext.mepHomeContext+"</div>"));
+        ControlBar.append($("<div id='mepDiv'><span>"+CommonContext.mepHomeContext+"</span></div>"));
     },
 
     populateMepDescForMobile : function() {
@@ -852,7 +845,7 @@ var MepDesciption = {
 
 var UserName = {
     populateUserNameForOthers: function() {
-        ControlBar.append($("<div id='username' class='vertical-align'>"+CommonContext.user+"</div>'"));
+        ControlBar.append($("<div id='username'><span>"+CommonContext.user+"</span></div>'"));
     },
 
     populateUserNameForMobile : function() {
@@ -905,12 +898,11 @@ var ControlBar = {
 
     addAccessibilityInfo: function(selector, elemAriaLabel, elemTitle) {
         var elemDiv = ControlBar.node.find(selector);
-        var wrapelemDivId=elemDiv.attr('id')+"Div";
-        var wrapElement = "<span id='"+wrapelemDivId+"' tabindex='-1' title='"+elemTitle+"'></span>";
-        elemDiv.wrap( wrapElement );
-        var spanElementId=elemDiv.attr('id')+"ShortCut";
-        var spanElement="<span id="+spanElementId+" class='offscreen'>"+elemAriaLabel+"</span>"
-        elemDiv.prepend(spanElement);
         elemDiv.attr('tabindex', 0);
+        elemDiv.attr('aria-label',elemAriaLabel );
+        var elementText=elemDiv.text();
+        var spanElementId=elemDiv.attr('id')+"Title";
+        var insideElement="<span tabindex='-1' title='"+elemTitle+"' id="+spanElementId+">"+elementText+"</span>";
+        elemDiv.html(insideElement);
     }
 }

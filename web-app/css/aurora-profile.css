@@ -1,8 +1,8 @@
 /** *****************************************************************************
  Copyright 2015 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
-#header-main-section #toolsCanvas {
-
+#header-main-section #userCanvas {
+    background-color: #FFFFFF;
     position: absolute;
     z-index: 1000;
     padding: 0px;
@@ -12,28 +12,30 @@
     height: auto;
     width: auto;
     white-space: nowrap;
+    background-color: #FFFFFF;
+    box-shadow: 0 1px 1px #000000;
 }
 
-#header-main-section #toolsCanvas div{
+#header-main-section #userCanvas div{
     height : auto;
 }
 
-#toolsCanvas {
+#userCanvas {
     display:none;
 }
 
-#toolsCanvas .canvas-section, #toolsCanvas .canvas-item {
+#userCanvas .canvas-section, #userCanvas .canvas-item {
     border-bottom: 1px solid #D0DBDE;
     padding-right: 5em;
     padding-top: 0.5em;
     padding-bottom: 0.5em;
 }
 
-#toolsCanvas.tools-active {
+#userCanvas.user-active {
     display:block;
 }
 
-#toolsList .canvas-section {
+#userList .canvas-section {
     font-weight: bold;
     font: 1em Open sans;
     color: #41566F;
@@ -41,24 +43,18 @@
     padding-left: 0.5em;
 }
 
-#toolsList .canvas-item {
+#userList .canvas-item {
     font: 0.875em Open sans;
     color: #41566F;
     border-bottom: 1px solid #D0DBDE;
-    padding-left: 2em;
+    padding-left: 1.5em;
 }
 
-#toolsList .canvas-item:hover, #toolsList .canvas-item:focus {
+#userList .canvas-item:hover, #userList .canvas-item:focus {
     background-color: #F3FCFF;
 }
 
-#toolsCanvas {
-    background-color: #FFFFFF;
-    box-shadow: 0 1px 1px #000000;
-}
-
-
-#toolsButton.tools-expanded:after {
+#header-main-section-east-part #userDiv #user.user-expanded:after {
     content: '';
     position: absolute;
     left: 0;
@@ -72,27 +68,26 @@
 }
 
 
-#toolsList #mepDescForMobile {
+#userList #usernameForMobile {
     display: none;
-    background-color: #E8E3E3;
+    background-color: #CCCCCC;
 }
 
 @media (min-width:0px) and (max-width:767px) {
-    #toolsList #mepDescForMobile {
-        display: block;
+    #userList #usernameForMobile {
+        display: inline-block;
     }
-
 }
+
 @media (min-width:0px) and (max-width:767px) and (orientation : portrait)	{
-    #header-main-section #toolsCanvas{
+    #header-main-section #userCanvas{
         width : 100%;
         position: fixed;
     }
-    #toolsList #mepDescForMobile {
-        width: 100%;
+    #header-main-section #userCanvas div{
+        width : 100%;
     }
 }
-@media (min-width:0px) and (max-width:767px) and (orientation : landscape)	{}
 
-@media (min-width:768px) and (max-width:1024px)	{ }
+@media (min-width:768px) and (max-width:1023px)	{ }
 

@@ -68,7 +68,7 @@ function ScrollableMenuTable(root, menuList) {
             this.initialize();
         };
 
-        this.setLastFocsedElement = function(target){
+        this.setLastFocusedElement = function(target){
             this.lastFocusedElement = target;
         };
 
@@ -309,7 +309,7 @@ function ScrollableMenuTable(root, menuList) {
                         var liCaption = _that.getCaption(list[x])['caption'];
                         var liTitle = _that.getCaption(list[x])['title'];
                         menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
-                            +"<div class='menu-item menu-common'>"
+                            +"<div class='menu-item menu-common menu-leaf-node'>"
                             +"<div class='menu-text menu-common'> <span title=\"" + liTitle + "\">"
                             +"<a class='menu-common' href=\"" + navItem.url + "\">"+liCaption+"</a>"
                             +"</span></div>"
@@ -355,6 +355,7 @@ function ScrollableMenuTable(root, menuList) {
         function _fnHideBannerMenu(){
             $('#menuContainer').removeClass('show').addClass('hide');
             $('#menu').removeClass('show').addClass('hide');
+            $('#bannerMenu').addClass('hide').removeClass('show');
         }
 
         /**

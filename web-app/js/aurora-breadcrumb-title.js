@@ -15,8 +15,8 @@ var BreadCrumbAndPageTitle = (function () {
 
     var items = [];
 
-    var UI = $("<div id='breadcrumb-panel' class='vertical-align'></div>" +
-        "<div id='title-panel' class='vertical-align'></div>");
+    var UI = $("<div id='breadcrumb-panel'></div>" +
+        "<div id='title-panel'></div>");
 
     function setFullBreadcrumb(breadCrumbItems, pageTitle) {
         $('#breadcrumb-panel').empty();
@@ -59,7 +59,7 @@ var BreadCrumbAndPageTitle = (function () {
 
         if(previousNavigableURL.length){
             var backButton = "<a id='breadcrumbBackButton' href='#'></a>";
-            UI.prepend(backButton);
+             $('#breadcrumb-panel').prepend(backButton);
             registerBackButtonClickListener();
         }
     };
@@ -109,7 +109,10 @@ var BreadCrumbAndPageTitle = (function () {
         draw: function(headerAttributes){
             var breadcrumbItems = headerAttributes.breadcrumb;
             var pageTitle = headerAttributes.pageTitle;
-            $('#title-panel').text(pageTitle);
+            $('#title-panel').empty();
+            if(!_.isEmpty(pageTitle)){
+                $('#title-panel').append("<div>"+pageTitle+"</div>");
+            }
             if(!_.isEmpty(breadcrumbItems)){
                 setFullBreadcrumb(breadcrumbItems, pageTitle);
             }
