@@ -148,8 +148,6 @@ function toggleBrowseMenu() {
     ProfileMenu.closeMenu();
     if ($('#menu').hasClass('show')) {
         $('#menu').addClass('hide');
-        $('#bannerMenu').addClass('hide');
-        $('#bannerMenu').removeClass('show');
         $('#menu').removeClass('show');
         $('#menuContainer').addClass('hide');
         $('#menuContainer').removeClass('show');
@@ -157,8 +155,6 @@ function toggleBrowseMenu() {
     } else {
         scrollableList.setLastFocusedElement(document.activeElement);
         $('#menu').addClass('show');
-        $('#bannerMenu').addClass('show');
-        $('#bannerMenu').removeClass('hide');
         $('#menu').removeClass('hide');
         $('#menuContainer').removeClass('hide');
         $('#menuContainer').addClass('show');
