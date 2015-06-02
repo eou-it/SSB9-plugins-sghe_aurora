@@ -147,18 +147,16 @@ function toggleBrowseMenu() {
     SignInMenu.closeMenu();
     ProfileMenu.closeMenu();
     if ($('#menu').hasClass('show')) {
-        $('#menu').addClass('hide');
-        $('#menu').removeClass('show');
-        $('#menuContainer').addClass('hide');
-        $('#menuContainer').removeClass('show');
+        $('#menu').addClass('hide').removeClass('show');
+        $('#banerMenu').removeClass('show');
+        $('#menuContainer').addClass('hide').removeClass('show');
         scrollableList.getLastFocusedElement().focus();
     } else {
         scrollableList.setLastFocusedElement(document.activeElement);
-        $('#menu').addClass('show');
-        $('#menu').removeClass('hide');
-        $('#menuContainer').removeClass('hide');
-        $('#menuContainer').addClass('show');
+        $('#menu').addClass('show').removeClass('hide');
+        $('#menuContainer').removeClass('hide').addClass('show');
         $('#menuList').find('li:first').focus();
+        $('#bannerMenu').addClass('show');
     }
 }
 

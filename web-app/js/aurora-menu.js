@@ -355,6 +355,7 @@ function ScrollableMenuTable(root, menuList) {
         function _fnHideBannerMenu(){
             $('#menuContainer').removeClass('show').addClass('hide');
             $('#menu').removeClass('show').addClass('hide');
+            $('#bannerMenu').removeClass('show');
         }
 
         /**
