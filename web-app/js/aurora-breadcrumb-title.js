@@ -111,7 +111,7 @@ var BreadCrumbAndPageTitle = (function () {
             var pageTitle = headerAttributes.pageTitle;
             $('#title-panel').empty();
             if(!_.isEmpty(pageTitle)){
-                $('#title-panel').append("<div>"+pageTitle+"</div>");
+                $('#title-panel').append("<h1>"+pageTitle+"</h1>");
             }
             if(!_.isEmpty(breadcrumbItems)){
                 setFullBreadcrumb(breadcrumbItems, pageTitle);
