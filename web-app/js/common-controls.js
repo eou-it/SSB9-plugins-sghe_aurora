@@ -60,7 +60,7 @@ function Header() {
 }
 
 function InstitutionalBranding() {
-    return $("<a href='#' id='branding' tabindex='0' target='_parent'><span class='institutionalBranding'></span></a>");
+    return $("<a href='#' id='branding' target='_parent' class='institutionalBranding'></a>");
     /* href link was ealier "/banner/" */
 }
 
@@ -153,6 +153,15 @@ function addNavigationControls() {
         });
 
     // Add the localized strings
+    var signOutShortCut
+    if(CommonContext.user){
+        signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signout"), ResourceManager.getString("userdetails_signout_shortCut"));
+
+    }else{
+        signOutShortCut = formatTitleAndShortcut( ResourceManager.getString("userdetails_signin"), ResourceManager.getString("userdetails_signout_shortCut"));
+    }
+    $('#signOutDiv').attr("title",signOutShortCut);
+
     var browseShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_browse_title"), ResourceManager.getString("areas_label_browse_shortcut"));
     var homeShortCut = formatTitleAndShortcut( ResourceManager.getString("areas_label_home_title"), ResourceManager.getString("areas_label_home_shortcut"));
     $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
@@ -176,13 +185,20 @@ function addNavigationControls() {
             // just $().click() doesn't work as the element is not an input
             $('#homeButton a')[0].click();
         },
-        'alt+m', toggleBrowseMenu
+        'alt+m', toggleBrowseMenu,
+        'ctrl+shift+F', signOut,
+        'alt+n', toggleNotificationCenter
         ];
     $('#openedButton').is(':visible') && shortcuts.push( 'alt+g', toggleOpenedItems );
     $('#openedButton').is(':visible') && shortcuts.push( 'alt+l', toggleToolsMenu );
 
     key && key.bind.apply( window, shortcuts );
 }
+
+function toggleNotificationCenter(){
+    window.notificationCenter.toggle();
+}
+
 function handleBreadCrumbWidth() {
     // set the width of breadcrumb
     var dir = Localization.getLangDirection();
@@ -385,6 +401,21 @@ function toggleToolsMenu() {
     return false;
 }
 
+function removeSignin(){
+    $("#signOutDiv").parent().remove();
+}
+
+function signOut(){
+    // set CommonContext.user to null before removing the cookie
+    CommonContext.user = null;
+
+    if ($('#signOutText').hasClass('signInText')) {
+        window.location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
+    } else {
+        window.location = $('meta[name=logoutEndpoint]').attr("content") || ApplicationConfig.logoutEndpoint;
+    }
+}
+
 function UserControls( options ) {
 
     ControlBar.initialize();
@@ -404,15 +435,20 @@ function UserControls( options ) {
         });
     }
 
-    var signInOutLink = $("<a id='signOutText' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
-        + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>").keydown(function(e) {
-            if (e.keyCode == 13 || e.keyCode == 32) {
-                e.preventDefault();
-                e.stopPropagation();
-                $(e.target).click();
-            }
-        });
+    var signInOutLink = $("<span id='signOutShortCut' class='offscreen'>"+ ResourceManager.getString("userdetails_signout_description") + "</span><a  id='signOutText' aria-describedBy='signOutShortCut'  href='#' class='" + (CommonContext.user ? "signOutText" : "signInText") + " pointer' tabindex='0'>"
+        + ResourceManager.getString((CommonContext.user ? "userdetails_signout" : "userdetails_signin")) + "</a>").keydown(function(e){
+        if (e.keyCode == 13 || e.keyCode == 32) {
+            e.preventDefault();
+            e.stopPropagation();
+            signOut();
+        }
+    });
 
+    signInOutLink.click(function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        signOut();
+    });
 
     var guestSignInLink
     if(!CommonContext.user && "true" == $('meta[name=guestLoginEnabled]').attr("content")) {
@@ -427,19 +463,11 @@ function UserControls( options ) {
         });
     }
 
-    ControlBar.append(signInOutLink);
 
-    signInOutLink.click(function() {
-        // set CommonContext.user to null before removing the cookie
-        CommonContext.user = null;
 
-        if ($(this).hasClass('signInText')) {
-            window.location = $('meta[name=loginEndpoint]').attr("content") || ApplicationConfig.loginEndpoint;
-        } else {
-            window.location = $('meta[name=logoutEndpoint]').attr("content") || ApplicationConfig.logoutEndpoint;
-        }
-    });
-
+    var signOutWrapperdiv = $("<div></div>").append(signInOutLink);
+    var signOutDiv = $("<div id='signOutDiv' tabindex='-1'></div>").append(signOutWrapperdiv)
+    ControlBar.append(signOutDiv);
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
         var helpLink = $("<a id='helpText' class='helpText pointer'>" + ResourceManager.getString("userdetails_help") + "</a>");
