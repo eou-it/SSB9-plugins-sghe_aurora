@@ -23,6 +23,8 @@ a.breadcrumbButton{
     color : #557287;
     min-height: 2.8em;
     position: relative;
+    display:table;
+    width:100%;
 }
 
 #breadcrumb-panel #breadcrumbHeader, #breadcrumbBackButton, #breadcrumbPageTitle {
@@ -41,13 +43,10 @@ a.breadcrumbButton{
 }
 
 #title-panel h1{
-    font-size: 1.5em;
     font-weight: 500;
     height:100%;
-    margin-top:0;
-    -webkit-transform: translateY(10%);
-    -ms-transform: translateY(10%);
-    transform: translateY(10%);
+    display:table-cell;
+    vertical-align: middle;
 }
 
 #breadcrumbBackButton, #breadcrumbPageTitle{
