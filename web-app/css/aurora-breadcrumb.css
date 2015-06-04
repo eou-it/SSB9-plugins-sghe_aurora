@@ -11,7 +11,7 @@
 
 a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited , .breadcrumbButton {
     color: #41566F;
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 a.breadcrumbButton{
@@ -47,6 +47,7 @@ a.breadcrumbButton{
     height:100%;
     display:table-cell;
     vertical-align: middle;
+    font-size:1.75em;
 }
 
 #breadcrumbBackButton, #breadcrumbPageTitle{
