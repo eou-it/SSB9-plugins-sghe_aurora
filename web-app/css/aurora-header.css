@@ -179,6 +179,15 @@ div#header-east-part-user-controls {
     display: none;
 }
 
+
+.notification-center.notification-center-displayed{
+    display: block;
+}
+
+.notification-center.notification-center-hidden{
+    display: none;
+}
+
 #signList .canvas-item {
     padding-left: 0.5em;
     padding-right: 0.5em;
