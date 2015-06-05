@@ -13,6 +13,10 @@
     height: 100%;
 }
 
+#header-main-section *{
+    box-sizing: content-box;
+}
+
 #header-main-section-west-part {
     left: 0;
     position: absolute;
