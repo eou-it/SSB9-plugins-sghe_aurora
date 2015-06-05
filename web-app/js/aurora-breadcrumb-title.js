@@ -40,6 +40,7 @@ var BreadCrumbAndPageTitle = (function () {
             drawItem(breadCrumbItem);
         });
 
+        $('.breadcrumbButton:last').addClass('leaf-breadcrumb');
         addBackButton();
     };
 

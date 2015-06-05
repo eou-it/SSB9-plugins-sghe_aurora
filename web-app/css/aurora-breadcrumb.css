@@ -114,7 +114,7 @@ and (max-width: 767px) {
         min-height: 0;
     }
 
-    #breadcrumbBackButton, #breadcrumbPageTitle, .breadcrumb-show-leaf .breadcrumbButton:last-child{
+    #breadcrumbBackButton, #breadcrumbPageTitle, .breadcrumb-show-leaf .leaf-breadcrumb{
         display: block;
     }
 
@@ -125,7 +125,7 @@ and (max-width: 767px) {
         vertical-align: middle;
     }
 
-    .breadcrumb-show-leaf .breadcrumbButton:last-child {
+    .breadcrumb-show-leaf .leaf-breadcrumb {
         display: inline-block;
         vertical-align: middle;
     }
