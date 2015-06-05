@@ -47,11 +47,11 @@ function Button(id, label, callback, type) {
 
 var AuroraHeader =  {
     createSkeleton: function () {
-        var header ="<div id='header-main-section'>"
+        var header ="<header id='header-main-section' class='aurora-theme' role='banner'>"
             + "<div id='header-main-section-west-part'>"
             + "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer' role='application'></div></div>"
             + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'></a></div>"
-            + "</div>";
+            + "</header>";
 
         return $(header);
     },
@@ -147,22 +147,16 @@ function toggleBrowseMenu() {
     SignInMenu.closeMenu();
     ProfileMenu.closeMenu();
     if ($('#menu').hasClass('show')) {
-        $('#menu').addClass('hide');
-        $('#bannerMenu').addClass('hide');
-        $('#bannerMenu').removeClass('show');
-        $('#menu').removeClass('show');
-        $('#menuContainer').addClass('hide');
-        $('#menuContainer').removeClass('show');
+        $('#menu').addClass('hide').removeClass('show');
+        $('#banerMenu').removeClass('show');
+        $('#menuContainer').addClass('hide').removeClass('show');
         scrollableList.getLastFocusedElement().focus();
     } else {
         scrollableList.setLastFocusedElement(document.activeElement);
-        $('#menu').addClass('show');
-        $('#bannerMenu').addClass('show');
-        $('#bannerMenu').removeClass('hide');
-        $('#menu').removeClass('hide');
-        $('#menuContainer').removeClass('hide');
-        $('#menuContainer').addClass('show');
+        $('#menu').addClass('show').removeClass('hide');
+        $('#menuContainer').removeClass('hide').addClass('show');
         $('#menuList').find('li:first').focus();
+        $('#bannerMenu').addClass('show');
     }
 }
 
@@ -684,14 +678,6 @@ var NavigationRC = {
     }
 };
 
-
-
-
-var TitlePanel = {
-    create: function () {
-        $('#breadcrumb-panel').after("<div id='title-panel'></div>");
-    }
-}
 
 /**
  * @class Contains application specific details.
