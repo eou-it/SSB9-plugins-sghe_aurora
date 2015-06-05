@@ -90,7 +90,7 @@ and (max-width: 767px) {
 
     #breadcrumb-panel{
         height: 4.6338028169014086%;
-        padding-left: 0.75em;
+        padding-left: 0.5em;
         color: #41566F;
         min-height: 2.8em;
     }
@@ -108,7 +108,7 @@ and (max-width: 767px) {
         font-size: 1em;
     }
 
-    .breadcrumbButton, #title-panel, .breadcrumbButton:after{
+    .breadcrumbButton, #title-panel, .breadcrumb-separator{
         display:none;
         height: 0;
         min-height: 0;
