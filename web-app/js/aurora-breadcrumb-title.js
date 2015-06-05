@@ -45,10 +45,10 @@ var BreadCrumbAndPageTitle = (function () {
 
     function drawItem(item) {
         var breadcrumbHeader = UI.find('#breadcrumbHeader');
-        var breadcrumbItem = "<span class='breadcrumbButton' data-id='"+item.id+"'>"+item.label+"</span>";
+        var breadcrumbItem = "<span class='breadcrumbButton' data-id='"+item.id+"'>"+item.label+"</span><span class='breadcrumb-separator'></span>";
         if(item.url.length){
             var url = Application.getApplicationPath() + item.url;
-            breadcrumbItem = "<a class='breadcrumbButton' data-id='"+item.id+"' href='"+url+"'>"+item.label+"</a>";
+            breadcrumbItem = "<a class='breadcrumbButton' data-id='"+item.id+"' href='"+url+"'>"+item.label+"</a><span class='breadcrumb-separator'></span>";
         }
         breadcrumbHeader.append(breadcrumbItem);
     };

@@ -61,7 +61,7 @@ a.breadcrumbButton{
     white-space: nowrap;
 }
 
-.breadcrumbButton:after{
+.breadcrumb-separator{
     content: '';
     background: url("images/breadcrumb-separator.svg") no-repeat center;
     width: 0.5em;
@@ -70,12 +70,16 @@ a.breadcrumbButton{
     padding-right: 1%;
 }
 
-.breadcrumbButton:last-child:after{
+.breadcrumb-separator:last-of-type{
     display:none;
 }
 
 .page-title-separator{
     border-bottom: 2px solid #DEE5E7;
+}
+
+#breadcrumbBackButton {
+    background: url("images/icon-arrow-back-left.svg") no-repeat center;
 }
 
 /*Mobile device*/
@@ -92,7 +96,6 @@ and (max-width: 767px) {
     }
 
     #breadcrumbBackButton{
-        background:url("images/icon-arrow-back.svg") no-repeat center;
         position:relative;
         height: 2.8em;
         width: 1.5em;
