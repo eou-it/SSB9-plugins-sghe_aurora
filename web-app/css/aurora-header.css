@@ -405,7 +405,6 @@ and (max-width: 1024px) {
     div#header-east-part-user-controls {
         display: inline-block;
         height: 100%;
-        float: left;
     }
 
     #header-main-section-east-part #username{
