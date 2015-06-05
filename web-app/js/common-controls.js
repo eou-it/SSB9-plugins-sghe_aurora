@@ -47,7 +47,7 @@ function Button(id, label, callback, type) {
 
 var AuroraHeader =  {
     createSkeleton: function () {
-        var header ="<div id='header-main-section'>"
+        var header ="<div id='header-main-section' class='aurora-theme'>"
             + "<div id='header-main-section-west-part'>"
             + "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer' role='application'></div></div>"
             + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'></a></div>"
@@ -678,14 +678,6 @@ var NavigationRC = {
     }
 };
 
-
-
-
-var TitlePanel = {
-    create: function () {
-        $('#breadcrumb-panel').after("<div id='title-panel'></div>");
-    }
-}
 
 /**
  * @class Contains application specific details.

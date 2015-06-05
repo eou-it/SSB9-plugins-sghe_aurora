@@ -48,6 +48,7 @@ a.breadcrumbButton{
     display:table-cell;
     vertical-align: middle;
     font-size:1.75em;
+    font-family: "Open Sans";
 }
 
 #breadcrumbBackButton, #breadcrumbPageTitle{
