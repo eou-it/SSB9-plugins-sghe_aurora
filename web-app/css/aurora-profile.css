@@ -2,7 +2,6 @@
  Copyright 2015 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
 #header-main-section #userCanvas {
-    background-color: #FFFFFF;
     position: absolute;
     z-index: 1000;
     padding: 0px;
@@ -12,23 +11,28 @@
     height: auto;
     width: auto;
     white-space: nowrap;
-    background-color: #FFFFFF;
-    box-shadow: 0 1px 1px #000000;
+
 }
 
 #header-main-section #userCanvas div{
+    background-color: #F9FAFB;
     height : auto;
+}
+
+#header-main-section #userCanvas div span{
+margin-left: 1.5em;
+margin-right: 2.5em;
 }
 
 #userCanvas {
     display:none;
+    background-color: #ffffff;
+    box-shadow: 0 1px 1px 1px #000000;
 }
 
 #userCanvas .canvas-section, #userCanvas .canvas-item {
-    border-bottom: 1px solid #D0DBDE;
-    padding-right: 5em;
+    margin-bottom: 1em;
     padding-top: 0.5em;
-    padding-bottom: 0.5em;
 }
 
 #userCanvas.user-active {
@@ -40,14 +44,14 @@
     font: 1em Open sans;
     color: #41566F;
     background-color: #F9FAFB;
-    padding-left: 0.5em;
+
 }
 
 #userList .canvas-item {
+    border-bottom: 1px solid #d0dbde;
     font: 0.875em Open sans;
     color: #41566F;
-    border-bottom: 1px solid #D0DBDE;
-    padding-left: 1.5em;
+    padding-left: 3em;
 }
 
 #userList .canvas-item:hover, #userList .canvas-item:focus {
