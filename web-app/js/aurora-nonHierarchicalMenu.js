@@ -17,12 +17,15 @@ var NonHierarchicalMenu = {
     /**
      * HTML for rendering section
      */
-    sectionHtml: $("<div class='canvas-section'/></div>"),
+    sectionHtml: $("<div class='canvas-section'></div>"),
+    sectionSpanHtml: $("<span></span>"),
+
 
     /**
      * HTML for rendering menu items
      */
     itemHtml: $("<div class='canvas-item'/></div>"),
+    itemSpanHtml: $("<span></span>"),
 
     callbackPostItemClick: null,
 
@@ -42,11 +45,15 @@ var NonHierarchicalMenu = {
      * @param label
      */
     addSection: function (id, label) {
+        if(id && label){
         var sec = this.sectionHtml.clone();
+        var secSpan= this.sectionSpanHtml.clone();
         sec.attr("id", id);
-        sec.text(label);
+        secSpan.text(label);
+        sec.append(secSpan);
         this.canvas.append(sec);
-        return sec;
+        return sec;}
+
     },
 
     /**
@@ -54,8 +61,43 @@ var NonHierarchicalMenu = {
      * @param id
      */
     removeSection: function (id) {
-
+        var sec = this.sectionHtml.clone();
+        this.canvas.parent().find('#' + id).remove();
     },
+
+    /**
+     * removes the specified Item
+     * @param id
+     */
+    removeItem: function (id) {
+        this.canvas.parent().find('#' + id).remove();
+    },
+
+
+    /** readOnly/make Item Editable in a menu
+     * * @param id
+     */
+
+    readOnlyItem:function (itemId) {
+        toggleReadOnlyStatus(itemId, true);
+    },
+    makeItemEditable:function (itemId) {
+        toggleReadOnlyStatus(itemId,  false);
+    },
+
+
+    /** hide/visible a menu item
+     * * @param id
+     */
+
+  hideItem:function(itemId) {
+       toggleVisibleStatus(itemId, false);
+
+  },
+  makeItemVisible:function (itemId) {
+     toggleVisibleStatus(itemId,  true);
+},
+
 
     /**
      * adds a menu item to the specified section and also attaches a callback, if provided
@@ -77,22 +119,26 @@ var NonHierarchicalMenu = {
         };
 
         var item = this.itemHtml.clone();
+        var itemSpan= this.itemSpanHtml.clone();
         var handlerPostItemClick = this.callbackPostItemClick;
-        item.attr('id', id);
-        item.attr('role',"menuitem");
-        item.text(label);
-        item.attr('tabindex',0);
-        item.addClass('pointer');
-        item.on('click',_fnMouseEventsHandlerForMenu);
-        item.on('keydown',_fnKeyBoardEventsHandlerForMenu);
-        if (readonly!= undefined && readonly == true) {
-            item.attr("readonly", "readonly").off('click');
+        if(id && label) {
+            item.attr('id', id);
+            item.attr('role', "menuitem");
+            itemSpan.text(label);
+            item.attr('tabindex', 0);
+            item.addClass('pointer');
+            item.on('click', _fnMouseEventsHandlerForMenu);
+            item.on('keydown', _fnKeyBoardEventsHandlerForMenu);
+            item.append(itemSpan);
+            if (readonly != undefined && readonly == true) {
+                item.attr("readonly", readonly).css({"color": "#d6d6d6", "cursor": "unset"});
+            }
+            if (sectionId)
+                this.canvas.find('#' + sectionId).append(item);
+            else
+                this.canvas.append(item);
+            return item;
         }
-        if (sectionId)
-            this.canvas.find('#' + sectionId).after(item);
-        else
-            this.canvas.append(item);
-        return item;
 
         function _fnMouseEventsHandlerForMenu(e){
             _fnAction(e);
@@ -127,7 +173,7 @@ var NonHierarchicalMenu = {
                     _fnAction(e);
                     break;
                 case KEY_CODE.SPACE:
-                    _fnAction(e)
+                    _fnAction(e);
                     break;
                 case KEY_CODE.ESC:
                     $(currentTarget).closest('.non-hierarchical-menu').find('.menu-icon').click();
@@ -151,14 +197,6 @@ var NonHierarchicalMenu = {
         }
     },
 
-    /**
-     * removes an menu item from the tools menu
-     * @param id
-     */
-    removeItem: function (id) {
-
-    },
-
     fnSetLastFocus:function(){
         window.lastFocus = $(document.activeElement);
     },
@@ -168,7 +206,27 @@ var NonHierarchicalMenu = {
             $(window.lastFocus).focus();
         }
     }
-}
+};
+
+function toggleReadOnlyStatus(id,status){
+    if (status==true ){
+        ToolsMenu.canvas.find('#' + id).attr("readonly", true).css({"color": "#d6d6d6", "cursor": "unset"});
+    }
+    if(status==false ){
+        ToolsMenu.canvas.find('#' + id).attr("readonly", false).css({"color": "#000", "cursor": "pointer"});
+    }
+};
+
+
+function toggleVisibleStatus(id,status){
+        if (status==false ){
+            ToolsMenu.canvas.parent().find('#' + id).css({"display": "none"});
+        }
+        if(status==true ){
+            ToolsMenu.canvas.parent().find('#' + id).css({"display": "block"});
+        }
+
+};
 
 
 var ProfileMenu = Object.create(NonHierarchicalMenu);
@@ -182,7 +240,7 @@ ProfileMenu.initialize = function() {
     this.callbackPostItemClick = toggleProfileMenu;
 
     ControlBar.node.find('#user').bind("click", toggleProfileMenu);
-}
+};
 ProfileMenu.closeMenu = function() {
     if (!$('#userCanvas').is(':hidden')) {
         $('#userCanvas').removeClass('user-active');
@@ -191,7 +249,7 @@ ProfileMenu.closeMenu = function() {
             $(window.lastFocus).focus();
         }
     }
-}
+};
 
 var ToolsMenu = Object.create(NonHierarchicalMenu);
 ToolsMenu.initialize = function() {
@@ -207,7 +265,7 @@ ToolsMenu.initialize = function() {
     this.callbackPostItemClick = toggleToolsMenu;
 
     ControlBar.node.find('#tools').bind("click", toggleToolsMenu);
-}
+};
 ToolsMenu.closeMenu = function() {
     if (!$('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').removeClass('tools-active');
@@ -216,7 +274,24 @@ ToolsMenu.closeMenu = function() {
             $(window.lastFocus).focus();
         }
     }
-}
+};
+
+
+ToolsMenu.toggleVisibleStatus = function(id , status) {
+    alert(" inside ToggleStatus" +status + id);
+    if (status==false ){
+        alert(" inside ToggleStatus hide"+status+""+id);
+        this.canvas.parent().find('#' + id).css({"display": "none"});
+    }
+    if(status==true ){
+        alert(" inside ToggleStatus visible"+status+""+id);
+        this.canvas.parent().find('#' + id).css({"display": "block"});
+    }
+
+    //(itemId, toggleStatus);
+
+};
+
 
 var SignInMenu = Object.create(NonHierarchicalMenu);
 SignInMenu.initialize = function() {
@@ -238,7 +313,7 @@ SignInMenu.initialize = function() {
         }
         return false;
     });
-}
+};
 SignInMenu.closeMenu = function() {
     if (!$('#signInCanvas').is(':hidden')) {
         $('#signInCanvas').removeClass('signIn-active');
@@ -247,5 +322,5 @@ SignInMenu.closeMenu = function() {
             $(window.lastFocus).focus();
         }
     }
-}
+};
 
