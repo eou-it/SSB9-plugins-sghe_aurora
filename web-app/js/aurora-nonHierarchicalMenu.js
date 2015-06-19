@@ -79,23 +79,22 @@ var NonHierarchicalMenu = {
      */
 
     readOnlyItem:function (itemId) {
-        toggleReadOnlyStatus(itemId, true);
+        toggleReadOnlyStatus.call(this,itemId, true);
     },
     makeItemEditable:function (itemId) {
-        toggleReadOnlyStatus(itemId,  false);
+        toggleReadOnlyStatus.call(this,itemId,  false);
     },
-
 
     /** hide/visible a menu item
      * * @param id
      */
 
   hideItem:function(itemId) {
-       toggleVisibleStatus(itemId, false);
+       toggleVisibleStatus.call(this,itemId, false);
 
   },
   makeItemVisible:function (itemId) {
-     toggleVisibleStatus(itemId,  true);
+     toggleVisibleStatus.call(this,itemId,  true);
 },
 
 
@@ -210,20 +209,20 @@ var NonHierarchicalMenu = {
 
 function toggleReadOnlyStatus(id,status){
     if (status==true ){
-        ToolsMenu.canvas.find('#' + id).attr("readonly", true).css({"color": "#d6d6d6", "cursor": "unset"});
+        this.canvas.find('#' + id).attr("readonly", true).css({"color": "#d6d6d6", "cursor": "unset"});
     }
     if(status==false ){
-        ToolsMenu.canvas.find('#' + id).attr("readonly", false).css({"color": "#000", "cursor": "pointer"});
+        this.canvas.find('#' + id).attr("readonly", false).css({"color": "#000", "cursor": "pointer"});
     }
 };
 
 
 function toggleVisibleStatus(id,status){
         if (status==false ){
-            ToolsMenu.canvas.parent().find('#' + id).css({"display": "none"});
+            this.canvas.parent().find('#' + id).css({"display": "none"});
         }
         if(status==true ){
-            ToolsMenu.canvas.parent().find('#' + id).css({"display": "block"});
+            this.canvas.parent().find('#' + id).css({"display": "block"});
         }
 
 };
@@ -275,23 +274,6 @@ ToolsMenu.closeMenu = function() {
         }
     }
 };
-
-
-ToolsMenu.toggleVisibleStatus = function(id , status) {
-    alert(" inside ToggleStatus" +status + id);
-    if (status==false ){
-        alert(" inside ToggleStatus hide"+status+""+id);
-        this.canvas.parent().find('#' + id).css({"display": "none"});
-    }
-    if(status==true ){
-        alert(" inside ToggleStatus visible"+status+""+id);
-        this.canvas.parent().find('#' + id).css({"display": "block"});
-    }
-
-    //(itemId, toggleStatus);
-
-};
-
 
 var SignInMenu = Object.create(NonHierarchicalMenu);
 SignInMenu.initialize = function() {
