@@ -33,6 +33,14 @@ grails.project.dependency.resolution = {
             mavenRepo "http://repository.codehaus.org"
         }
     }
+
+    plugins {
+        test ':code-coverage:2.0.3-2',
+                {
+                    excludes 'xercesImpl'
+                }
+    }
+
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
