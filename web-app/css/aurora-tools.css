@@ -1,67 +1,68 @@
 /** *****************************************************************************
  Copyright 2015 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
-#header-main-section #toolsCanvas {
 
+#header-main-section #toolsCanvas {
     position: absolute;
     z-index: 1000;
     padding: 0px;
     margin: 0px;
-    right:0;
+    right: 0;
     left: auto;
-    /*height: 645px;*/
-    height:auto;
+    height: auto;
     width: auto;
     overflow-y: auto;
     white-space: nowrap;
 }
-
-#header-main-section #toolsCanvas div{
-    height : auto;
-    background-color: #F9FAFB;
+#header-main-section #toolsCanvas div {
+    height: auto;
 }
-#header-main-section #toolsCanvas div span{
-    margin-left: 1.5em;
-    margin-right: 2.5em;
+#header-main-section #toolsCanvas div span {
+    padding-left: 0.5em;
+    letter-spacing: 2px;
+    font-family: "Open Sans";
+    font-size: 1em;
+    display: block;
+    padding-bottom: 0.5em;
 }
-
-#toolsCanvas {
-    display:none;
+#toolsCanvas .canvas-item {
+    border-top: 1px solid #d0dbde;
+    padding-right: 5em;
+    padding-top: .5em;
+    padding-bottom: .5em;
 }
-
-#toolsCanvas .canvas-section, #toolsCanvas .canvas-item {
-    padding-top: 0.5em;
-    margin-bottom: 1em;
+#toolsCanvas .canvas-section {
+    padding-bottom: .5em;
 }
-
-
 #toolsCanvas.tools-active {
-    display:block;
+    display: block;
 }
-
 #toolsList .canvas-section {
     font-weight: bold;
     font: 1em Open sans;
-    color: #41566F;
+    color: #41566f;
+    background-color: #f9fafb;
+    border-bottom: 1px solid #d0dbde;
+    padding: 0;
+    margin: 0;
+    width: inherit;
+    padding-top: .5em;
 }
-
 #toolsList .canvas-item {
-    font: 0.875em Open sans;
-    color: #41566F;
-    border-bottom: 1px solid #D0DBDE;
-    padding-left: 3em;
+    font: .875em Open sans;
+    color: #41566f;
+    border-bottom: 1px solid #d0dbde;
+    padding-left: 2em;
+    background-color: #f9fafb;
 }
-
-#toolsList .canvas-item:hover, #toolsList .canvas-item:focus {
-    background-color: #F3FCFF;
+#toolsList .canvas-item:hover,
+#toolsList .canvas-item:focus {
+    background-color: #f3fcff;
 }
-
 #toolsCanvas {
-    background-color: #FFFFFF;
-    box-shadow: 0 1px 1px 1px #000000;
+    box-shadow: 0 1px 1px #000;
+    display: none;
 }
-
-
 #toolsButton.tools-expanded:after {
     content: '';
     position: absolute;
@@ -74,29 +75,22 @@
     border-left: 10px solid transparent;
     border-right: 10px solid transparent;
 }
-
-
 #toolsList #mepDescForMobile {
     display: none;
     background-color: #E8E3E3;
 }
-
-@media (min-width:0px) and (max-width:767px) {
+@media (min-width: 0px) and (max-width: 767px) {
     #toolsList #mepDescForMobile {
         display: block;
     }
-
 }
-@media (min-width:0px) and (max-width:767px) and (orientation : portrait)	{
-    #header-main-section #toolsCanvas{
-        width : 100%;
+@media (min-width: 0px) and (max-width: 767px) and (orientation: portrait) {
+    #header-main-section #toolsCanvas {
+        width: 100%;
         position: fixed;
     }
     #toolsList #mepDescForMobile {
         width: 100%;
     }
 }
-@media (min-width:0px) and (max-width:767px) and (orientation : landscape)	{}
-
-@media (min-width:768px) and (max-width:1024px)	{ }
-
+@media (min-width: 0px) and (max-width: 767px) and (orientation: landscape) {} @media (min-width: 768px) and (max-width: 1024px) {}
