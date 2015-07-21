@@ -14,12 +14,13 @@ var NonHierarchicalMenu = (function() {
         /**
          * HTML for rendering section
          */
-        sectionHtml: $("<div class='canvas-section'></div>"),
+        sectionHtml: $("<div class='canvas-section' role='menuitem' aria-haspopup='true'></div>"),
         sectionSpanHtml: $("<span></span>"),
+        sectionContentHtml: $("<div class='canvas-section-content'  role='menu'></div>"),
         /**
          * HTML for rendering menu items
          */
-        itemHtml: $("<div class='canvas-item'/></div>"),
+        itemHtml: $("<div class='canvas-item' role='menuitem'/></div>"),
         itemSpanHtml: $("<span></span>"),
         callbackPostItemClick: null,
         /**
@@ -39,13 +40,18 @@ var NonHierarchicalMenu = (function() {
          */
         addSection: function(id, label) {
             if (id && label) {
-                var sec = this.sectionHtml.clone();
-                var secSpan = this.sectionSpanHtml.clone();
-                sec.attr("id", id);
-                secSpan.text(label);
-                sec.append(secSpan);
-                this.canvas.append(sec);
-                return sec;
+                var titleId=id+"_title";
+                var section = this.sectionHtml.clone();
+                var sectionSpan = this.sectionSpanHtml.clone();
+                var sectionContent = this.sectionContentHtml.clone();
+                section.attr("id", titleId);
+                sectionContent.attr("id",id);
+                sectionContent.attr("aria-label",label);
+                sectionSpan.text(label);
+                section.append(sectionSpan);
+                this.canvas.append(section);
+                this.canvas.append(sectionContent);
+                return section;
             }
         },
         /**
@@ -106,7 +112,6 @@ var NonHierarchicalMenu = (function() {
             var handlerPostItemClick = this.callbackPostItemClick;
             if (id && label) {
                 item.attr('id', id);
-                item.attr('role', "menuitem");
                 itemSpan.text(label);
                 item.attr('tabindex', 0);
                 item.addClass('pointer');
@@ -120,9 +125,13 @@ var NonHierarchicalMenu = (function() {
                         "cursor": "unset"
                     });
                 }
-                if (sectionId)
-                    this.canvas.find('#' + sectionId).append(item);
-                else
+                if (sectionId) {
+                    var sectionContent = this.canvas.find('#' + sectionId);
+                    if (sectionContent.find('.canvas-item').length == 0) {
+                        sectionContent.attr("aria-activedescendant", id);
+                    }
+                    sectionContent.append(item);
+                } else
                     this.canvas.append(item);
                 return item;
             }
@@ -193,7 +202,7 @@ var NonHierarchicalMenu = (function() {
             if (window.lastFocus != null) {
                 $(window.lastFocus).focus();
             }
-        },
+        }
     };
 
     function toggleReadOnlyStatus(obj, id, status) {
@@ -228,7 +237,7 @@ var NonHierarchicalMenu = (function() {
 })();
 var ProfileMenu = Object.create(NonHierarchicalMenu);
 ProfileMenu.initialize = function() {
-    ControlBar.node.find('#userDiv').append("<div id='userCanvas'>" + "<div id='userMenu'><div id='userList' class='user-list'></div>" + "</div>" + "</div>");
+    ControlBar.node.find('#userDiv').append("<div id='userCanvas'>" + "<div id='userMenu' role='menu'><div id='userList' class='user-list'></div>" + "</div>" + "</div>");
     this.dropDown = ControlBar.node.find("#userCanvas");
     this.canvas = ControlBar.node.find('#userList');
     this.callbackPostItemClick = toggleProfileMenu;
@@ -247,7 +256,7 @@ var ToolsMenu = Object.create(NonHierarchicalMenu);
 ToolsMenu.initialize = function() {
     ControlBar.node.find('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
     ControlBar.node.find('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
-    ControlBar.node.find('#toolsButton').append("<div id='toolsCanvas'>" + "<div id='toolsMenu'><div id='toolsList' class='tools-list'></div>" + "</div>" + "</div>");
+    ControlBar.node.find('#toolsButton').append("<div id='toolsCanvas'>" + "<div id='toolsMenu' role='menu'><div id='toolsList' class='tools-list'></div>" + "</div>" + "</div>");
     this.dropDown = ControlBar.node.find("#toolsCanvas");
     this.canvas = ControlBar.node.find('#toolsList');
     this.callbackPostItemClick = toggleToolsMenu;

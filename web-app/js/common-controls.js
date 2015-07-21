@@ -196,7 +196,7 @@ function toggleToolsMenu() {
     if ($('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').addClass('tools-active');
         $('#toolsButton').addClass('tools-expanded');
-        $('#toolsList > .canvas-section .canvas-item:visible:first').focus();
+        $('#toolsList > .canvas-section-content .canvas-item:visible:first').focus();
     } else {
         $('#toolsCanvas').removeClass('tools-active');
         $('#toolsButton').removeClass('tools-expanded');
