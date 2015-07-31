@@ -63,7 +63,7 @@ var AuroraHeader =  {
         //Add href to branding
         var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
         var origin = document.location.origin || (document.location.protocol + '//' + document.location.host);
-        var appUrl = path.substring(0,path.indexOf('/ssb'))
+        var appUrl = path.substring(0,path.indexOf('/ssb'));
         $('#branding').attr('href', appUrl);
         $('#brandingDiv').attr("title", ResourceManager.getString("areas_label_home_title"));
         $('#branding').attr("aria-label", ResourceManager.getString("areas_label_home_description"));
@@ -109,7 +109,7 @@ var AuroraHeader =  {
         });
     }
 
-}
+};
 
 function setupBannerMenu() {
     $('#bannerMenu').on('click', function (e) {
@@ -196,7 +196,7 @@ function toggleToolsMenu() {
     if ($('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').addClass('tools-active');
         $('#toolsButton').addClass('tools-expanded');
-        $('#toolsList > .canvas-item:visible:first').focus();
+        $('#toolsList > .canvas-section-content .canvas-item:visible:first').focus();
     } else {
         $('#toolsCanvas').removeClass('tools-active');
         $('#toolsButton').removeClass('tools-expanded');
@@ -249,7 +249,7 @@ function UserControls( options ) {
         );
         ControlBar.addAccessibilityInfo('#signIn',ResourceManager.getString("userdetails_signin_description"),ResourceManager.getString("userdetails_signin_title"));
         ControlBar.node.find('#signIn').attr('role', 'link');
-        var guestSignInLink
+        var guestSignInLink;
         if("true" == $('meta[name=guestLoginEnabled]').attr("content")) {
             SignInMenu.addItem("guestSignIn",ResourceManager.getString("guestuserdetails_signin"),undefined,
                 function () {
@@ -283,7 +283,7 @@ function UserControls( options ) {
                 productName = "main";
             }
 
-            var h = Application.getApplicationPath() + "/help/url"
+            var h = Application.getApplicationPath() + "/help/url";
 
             $.getJSON(h, function(data) {
                 $.each(data, function(key, val) {
@@ -827,7 +827,7 @@ var MepDesciption = {
         elem.attr('tabindex', -1);
         elem.removeClass('pointer');
     }
-}
+};
 
 var UserName = {
     populateUserNameForOthers: function() {
@@ -840,7 +840,7 @@ var UserName = {
         elem.attr('tabindex', -1);
         elem.removeClass('pointer');
     }
-}
+};
 
 /**
  * Class to manage user controls on the top right corner of the Aurora header
@@ -891,4 +891,4 @@ var ControlBar = {
         var insideElement="<span tabindex='-1' title='"+elemTitle+"' id="+spanElementId+">"+elementText+"</span>";
         elemDiv.html(insideElement);
     }
-}
+};
