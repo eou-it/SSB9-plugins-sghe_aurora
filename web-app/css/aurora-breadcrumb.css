@@ -11,7 +11,7 @@
 
 a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited , .breadcrumbButton {
     color: #41566F;
-    font-size: 1em;
+    font-size: 1.2em;
 }
 
 a.breadcrumbButton{
@@ -21,13 +21,13 @@ a.breadcrumbButton{
 #title-panel{
     height: 5.25%;
     color : #557287;
-    font-size: 1em;
-    font-weight: 500;
     min-height: 2.8em;
     position: relative;
+    display:table;
+    width:100%;
 }
 
-#title-panel div, #breadcrumb-panel #breadcrumbHeader, #breadcrumbBackButton, #breadcrumbPageTitle {
+#breadcrumb-panel #breadcrumbHeader, #breadcrumbBackButton, #breadcrumbPageTitle {
     position: relative;
     top: 50%;
     -webkit-transform: translateY(-50%);
@@ -42,6 +42,15 @@ a.breadcrumbButton{
     padding-left: 1%;
 }
 
+#title-panel h1{
+    font-weight: 500;
+    height:100%;
+    display:table-cell;
+    vertical-align: middle;
+    font-size:1.75em;
+    font-family: "Open Sans";
+}
+
 #breadcrumbBackButton, #breadcrumbPageTitle{
     display: none;
 }
@@ -52,7 +61,7 @@ a.breadcrumbButton{
     white-space: nowrap;
 }
 
-.breadcrumbButton:after{
+.breadcrumb-separator{
     content: '';
     background: url("images/breadcrumb-separator.svg") no-repeat center;
     width: 0.5em;
@@ -61,12 +70,16 @@ a.breadcrumbButton{
     padding-right: 1%;
 }
 
-.breadcrumbButton:last-child:after{
+.breadcrumb-separator:last-of-type{
     display:none;
 }
 
 .page-title-separator{
     border-bottom: 2px solid #DEE5E7;
+}
+
+#breadcrumbBackButton {
+    background: url("images/icon-arrow-back-left.svg") no-repeat center;
 }
 
 /*Mobile device*/
@@ -77,13 +90,12 @@ and (max-width: 767px) {
 
     #breadcrumb-panel{
         height: 4.6338028169014086%;
-        padding-left: 0.75em;
+        padding-left: 0.5em;
         color: #41566F;
         min-height: 2.8em;
     }
 
     #breadcrumbBackButton{
-        background:url("images/icon-arrow-back.svg") no-repeat center;
         position:relative;
         height: 2.8em;
         width: 1.5em;
@@ -96,13 +108,13 @@ and (max-width: 767px) {
         font-size: 1em;
     }
 
-    .breadcrumbButton, #title-panel, .breadcrumbButton:after{
+    .breadcrumbButton, #title-panel, .breadcrumb-separator{
         display:none;
         height: 0;
         min-height: 0;
     }
 
-    #breadcrumbBackButton, #breadcrumbPageTitle, .breadcrumb-show-leaf .breadcrumbButton:last-child{
+    #breadcrumbBackButton, #breadcrumbPageTitle, .breadcrumb-show-leaf .leaf-breadcrumb{
         display: block;
     }
 
@@ -113,7 +125,7 @@ and (max-width: 767px) {
         vertical-align: middle;
     }
 
-    .breadcrumb-show-leaf .breadcrumbButton:last-child {
+    .breadcrumb-show-leaf .leaf-breadcrumb {
         display: inline-block;
         vertical-align: middle;
     }

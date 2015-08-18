@@ -13,6 +13,10 @@
     height: 100%;
 }
 
+#header-main-section *{
+    box-sizing: content-box;
+}
+
 #header-main-section-west-part {
     left: 0;
     position: absolute;
@@ -176,6 +180,15 @@ div#header-east-part-user-controls {
 }
 
 .notification-center-anchor.notification-center-anchor-hidden{
+    display: none;
+}
+
+
+.notification-center.notification-center-displayed{
+    display: block;
+}
+
+.notification-center.notification-center-hidden{
     display: none;
 }
 
@@ -405,7 +418,6 @@ and (max-width: 1024px) {
     div#header-east-part-user-controls {
         display: inline-block;
         height: 100%;
-        float: left;
     }
 
     #header-main-section-east-part #username{

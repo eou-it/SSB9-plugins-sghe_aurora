@@ -15,8 +15,8 @@ var BreadCrumbAndPageTitle = (function () {
 
     var items = [];
 
-    var UI = $("<div id='breadcrumb-panel'></div>" +
-        "<div id='title-panel'></div>");
+    var UI = $("<nav  id='breadcrumb-panel' role='navigation' class='aurora-theme'></nav>" +
+        "<div id='title-panel' class='aurora-theme'></div>");
 
     function setFullBreadcrumb(breadCrumbItems, pageTitle) {
         $('#breadcrumb-panel').empty();
@@ -40,15 +40,16 @@ var BreadCrumbAndPageTitle = (function () {
             drawItem(breadCrumbItem);
         });
 
+        $('.breadcrumbButton:last').addClass('leaf-breadcrumb');
         addBackButton();
-        registerBreadcrumbClickListener();
     };
 
     function drawItem(item) {
         var breadcrumbHeader = UI.find('#breadcrumbHeader');
-        var breadcrumbItem = "<span class='breadcrumbButton' data-id='"+item.id+"'>"+item.label+"</span>";
+        var breadcrumbItem = "<span class='breadcrumbButton' data-id='"+item.id+"'>"+item.label+"</span><span class='breadcrumb-separator'></span>";
         if(item.url.length){
-            breadcrumbItem = "<a class='breadcrumbButton' data-id='"+item.id+"' data-path='"+item.url+"' href='#'>"+item.label+"</a>";
+            var url = Application.getApplicationPath() + item.url;
+            breadcrumbItem = "<a class='breadcrumbButton' data-id='"+item.id+"' href='"+url+"'>"+item.label+"</a><span class='breadcrumb-separator'></span>";
         }
         breadcrumbHeader.append(breadcrumbItem);
     };
@@ -58,7 +59,7 @@ var BreadCrumbAndPageTitle = (function () {
         var previousNavigableURL = getPreviousBreadCrumbNavigationLocation(leafItemId);
 
         if(previousNavigableURL.length){
-            var backButton = "<a id='breadcrumbBackButton' href='#'></a>";
+            var backButton = "<a id='breadcrumbBackButton'></a>";
              $('#breadcrumb-panel').prepend(backButton);
             registerBackButtonClickListener();
         }
@@ -71,13 +72,6 @@ var BreadCrumbAndPageTitle = (function () {
         else{
             $('#breadcrumbHeader').addClass('breadcrumb-show-leaf');
         }
-    };
-
-    function registerBreadcrumbClickListener(){
-        $('a.breadcrumbButton').on('click',function(){
-            var uri = $(this).attr('data-path');
-            window.location = Application.getApplicationPath() + uri;
-        })
     };
 
     function registerBackButtonClickListener(){
@@ -111,7 +105,7 @@ var BreadCrumbAndPageTitle = (function () {
             var pageTitle = headerAttributes.pageTitle;
             $('#title-panel').empty();
             if(!_.isEmpty(pageTitle)){
-                $('#title-panel').append("<div>"+pageTitle+"</div>");
+                $('#title-panel').append("<h1>"+pageTitle+"</h1>");
             }
             if(!_.isEmpty(breadcrumbItems)){
                 setFullBreadcrumb(breadcrumbItems, pageTitle);
