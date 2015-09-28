@@ -83,6 +83,8 @@
 
 #menuArrow {
     background: url("images/header-composite-button-sprites-rtl.png") no-repeat scroll right 0px transparent !important;
+    right: 15px;
+    left: auto;
 }
 
 #menuArrow:hover {

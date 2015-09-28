@@ -144,6 +144,7 @@ div#header-east-part-user-controls {
     color: #FFD079;
     direction: ltr;
     height: 100%;
+    z-index: 1000;
 }
 
 .notification-center-count {

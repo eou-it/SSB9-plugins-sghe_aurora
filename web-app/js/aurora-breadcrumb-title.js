@@ -47,11 +47,21 @@ var BreadCrumbAndPageTitle = (function () {
     function drawItem(item) {
         var breadcrumbHeader = UI.find('#breadcrumbHeader');
         var breadcrumbItem = "<span class='breadcrumbButton' data-id='"+item.id+"'>"+item.label+"</span><span class='breadcrumb-separator'></span>";
-        if(item.url.length){
-            var url = Application.getApplicationPath() + item.url;
+        var url = item.url.trim();
+        if(url.length){
+            if(!isURLAbsolute(url)){
+                url = Application.getApplicationPath() + url;
+            }
             breadcrumbItem = "<a class='breadcrumbButton' data-id='"+item.id+"' href='"+url+"'>"+item.label+"</a><span class='breadcrumb-separator'></span>";
         }
         breadcrumbHeader.append(breadcrumbItem);
+    };
+
+    function isURLAbsolute(url){
+        if( url.indexOf('http://') === 0 || url.indexOf('https://') === 0){
+            return true;
+        }
+        return false;
     };
 
     function addBackButton() {
