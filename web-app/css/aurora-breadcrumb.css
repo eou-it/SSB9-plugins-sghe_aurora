@@ -39,6 +39,7 @@ a.breadcrumbButton{
     background-color: #F9FAFB;
     border-bottom: 2px solid #DEE5E7;
     font-family: "Open Sans";
+    padding-left: 1%;
 }
 
 #title-panel h1{
@@ -48,7 +49,6 @@ a.breadcrumbButton{
     vertical-align: middle;
     font-size:1.75em;
     font-family: "Open Sans";
-    padding-left: 1%;
 }
 
 #breadcrumbBackButton, #breadcrumbPageTitle{
