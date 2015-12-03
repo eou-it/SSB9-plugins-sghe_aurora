@@ -68,7 +68,7 @@ a.breadcrumbButton{
     height: 0.5em;
     padding-left: 1%;
     padding-right: 1%;
-    display:inline-block;
+    display: inline-block;
 }
 
 .breadcrumb-separator:last-of-type{
