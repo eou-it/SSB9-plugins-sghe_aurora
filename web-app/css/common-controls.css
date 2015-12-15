@@ -607,83 +607,6 @@
     left: auto;
 }
 
-#outerFooter {
-    background: transparent url("images/footer-background.png") repeat-x top left;
-    position: absolute;
-    bottom: -1px;
-    width: 100%;
-    height: 30px;
-    padding: 0;
-    margin: 0;
-}
-
-#footer {
-}
-
-#footerLeftCap {
-    position: relative;
-    float: left;
-    background: url('images/footer-cap-left.png') no-repeat top left;
-    width: 8px;
-    height: 25px;
-    margin-left: 1.5%;
-}
-
-#footerRightCap {
-    position: relative;
-    float: left;
-    background: url('images/footer-cap-right.png') no-repeat top left;
-    width: 8px;
-    height: 25px;
-}
-
-#footerContainer {
-    position: relative;
-    float: left;
-    height: 0px;
-    width: 100%;
-}
-
-.footerBrandingLogo {
-    background: transparent url("images/footer-logo-wht.png") no-repeat center center;
-    width: 63px;
-    height: 12px;
-    float: right;
-    padding: 9px 14px 9px 14px;
-    cursor: pointer;
-}
-
-/* application icon tray */
-#footerApplicationBar {
-    position: relative;
-    float: left;
-    height: 25px;
-    width: 100%;
-}
-
-#footerIconContainer {
-    margin: 0;
-    padding: 0;
-    float: left;
-}
-
-#footerIconContainer li {
-    position: relative;
-    float: left;
-    list-style: none;
-    padding: 5px 5px 0px 5px;
-}
-
-#footerAppContainer div {
-    position: relative;
-    float: left;
-    margin: 10px;
-    font-size: 0.88em;
-    color: #000000;
-    font-weight: normal;
-    text-decoration: none;
-}
-
 #scrollableListContainer {
     height: 100%;   /* 268px */
     width: 100%;
@@ -1035,5 +958,55 @@ div[id=mainMenuContainer] .navList .parent:focus span {
 }
 
 
+/*footer */
 
+.banner-footer {
+    background: #f4f4f4;
+    color: #4f585f;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    font-size: 12px;
+    -webkit-transition: all 1s ease-in-out;
+    -moz-transition: all 1s ease-in-out;
+    -o-transition: all 1s ease-in-out;
+    transition: all 1s ease-in-out;
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0);
+    z-index: 999999999;  /*intended if z-indx of resizer is is normal with value =2 */
+}
+
+.banner-footer > div {
+    padding: 1em 0;
+    font-size: 0.750em;
+}
+
+/* Mobile screens*/
+@media only screen and (max-width: 767px) {
+    .banner-footer-hide {
+        -webkit-transform: translateY(100%);
+        -moz-transform: translateY(100%);
+        -ms-transform: translateY(100%);
+        -o-transform: translateY(100%);
+        transform: translateY(100%);
+
+    }
+
+}
+
+/*Tablet and Desktop screens*/
+@media only screen and (min-width: 768px) {
+    .banner-footer {
+        font-size: 14px;
+    }
+    .banner-footer > div {
+        padding: 1.5em 0;
+        font-size: 0.875em;
+    }
+}
 

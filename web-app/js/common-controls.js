@@ -361,16 +361,9 @@ var Footer = {
      *
      * The HTML UI elements.
      */
-    displayUI: "<div id='outerFooter'>"
-        + "<div id='footer'>"
-        + "<div id='footerApplicationBar'>"
-        + "<ul id='footerIconContainer'></ul>"
-        + "<span class='footerBrandingLogo'></span>"
-        + "<div id='footerAppContainer'>"
-        + "</div>"
-        + "</div>"
-        + "</div>"
-        + "</div>",
+    displayUI: "<footer class='banner-footer'  role='contentinfo'>"
+       +"<div>&copy; <span class='year'></span> <span class='companyName'></span> <span class='otherInfo'></span></div>"
+        +"</footer>",
     /**
      * @private
      *
@@ -379,14 +372,10 @@ var Footer = {
     initialize: function() {
         $('body').append(Footer.displayUI);
 
-        $('.footerBrandingLogo').click(function() {
-            var nav = Navigation.findNavigationEntry("institutionHomePage");
-
-            if (nav
-                && nav instanceof NavigationEntryValueObject) {
-                Navigation.navigate(nav);
-            }
-        });
+        $( "footer.banner-footer" ).find($( "span.year")).text( $.i18n.prop("footer.copyright_year") );
+        $( "footer.banner-footer" ).find($("span.companyName")).text( $.i18n.prop("footer.company_name"));
+        $( "footer.banner-footer" ).find($("span.otherInfo")).text( $.i18n.prop("footer.other_info"));
+        $('footer.banner-footer').fadeOut(10000);
     },
     /**
      * Method for adding an application to the Footer.
