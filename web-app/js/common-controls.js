@@ -375,7 +375,35 @@ var Footer = {
         $( "footer.banner-footer" ).find($( "span.year")).text( $.i18n.prop("footer.copyright_year") );
         $( "footer.banner-footer" ).find($("span.companyName")).text( $.i18n.prop("footer.company_name"));
         $( "footer.banner-footer" ).find($("span.otherInfo")).text( $.i18n.prop("footer.other_info"));
-        $('footer.banner-footer').fadeOut(10000);
+
+        this.hideCopyrightNowOrAfterDelay();
+    },
+
+
+    /** method to hide footer now or after delay * */
+
+    hideCopyrightNowOrAfterDelay : function () {
+        var DAY_IN_MS = 24*60*60*1000;
+        var now = new Date().getTime();
+
+        var lastLoginTime = sessionStorage.getItem( 'xe.lastLogin.time' );
+        var lastLoginName = sessionStorage.getItem( 'xe.lastLogin.name' );
+
+        var currentUserName = window.CommonContext && CommonContext.user || '';
+        console.log(currentUserName);
+
+             sessionStorage.setItem('xe.lastLogin.time', now);
+                if(currentUserName){
+                    sessionStorage.setItem('xe.lastLogin.name', currentUserName);
+                }
+             if ((lastLoginName === currentUserName ) &&
+                 (lastLoginTime + DAY_IN_MS > new Date().getTime())) {
+                 $("footer.banner-footer").hide(); // already logged in today. Hide now
+             } else {
+                 var fadeCopyrightDelay = 2000;
+                 $('footer.banner-footer').fadeOut(fadeCopyrightDelay);
+             }
+
     },
     /**
      * Method for adding an application to the Footer.
@@ -385,12 +413,9 @@ var Footer = {
         if (footerApplication instanceof FooterApplicationValueObject) {
             var icon = "<li><span id='" + footerApplication.appid + "' class='" + footerApplication.className + "'></span></li>";
             var ui = $("<div id='" + footerApplication.appid + this.uiMarker + "'></div>");
-
             ui.append(footerApplication.displayUI);
-
             $('#footerIconContainer').append(icon);
             $('#footerContainer').append(ui);
-
             this.apps.push(footerApplication);
         }
     },
@@ -480,7 +505,9 @@ var Footer = {
         else {
             return Footer.createContainer(new footerAppDiv(children, appId, ""));
         }
-    }
+    },
+
+
 };
 
 /**
