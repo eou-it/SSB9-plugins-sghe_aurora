@@ -400,7 +400,13 @@ var Footer = {
                  (lastLoginTime + DAY_IN_MS > new Date().getTime())) {
                  $("footer.banner-footer").hide(); // already logged in today. Hide now
              } else {
-                 var fadeCopyrightDelay = 10000;
+                 var fadeCopyrightDelay;
+                 if($('meta[name=footerFadeAwayTime]').attr("content")!="[:]"){
+                     fadeCopyrightDelay =$('meta[name=footerFadeAwayTime]').attr("content");
+                     fadeCopyrightDelay=parseInt(fadeCopyrightDelay);
+                 }else{
+                     fadeCopyrightDelay=2000;
+                 }
                  $('footer.banner-footer').fadeOut(fadeCopyrightDelay);
              }
 
