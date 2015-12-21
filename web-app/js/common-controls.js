@@ -393,7 +393,6 @@ var Footer = {
         var lastLoginName = sessionStorage.getItem( 'xe.lastLogin.name' );
 
         var currentUserName = window.CommonContext && CommonContext.user || '';
-        console.log(currentUserName);
 
              sessionStorage.setItem('xe.lastLogin.time', now);
                 if(currentUserName){
@@ -413,7 +412,7 @@ var Footer = {
                  $('footer.banner-footer').fadeOut(fadeCopyrightDelay);
              }
 
-    },
+    }
 
 };
 
