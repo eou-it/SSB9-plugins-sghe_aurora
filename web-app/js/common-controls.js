@@ -370,11 +370,14 @@ var Footer = {
      * Initialization method.
      */
     initialize: function() {
-        $('body').append(Footer.displayUI);
+        (function ($) {
+            $('body').append(Footer.displayUI);
 
-        $( "footer.banner-footer" ).find($( "span.year")).text( $.i18n.prop("footer.copyright_year") );
-        $( "footer.banner-footer" ).find($("span.companyName")).text( $.i18n.prop("footer.company_name"));
-        $( "footer.banner-footer" ).find($("span.otherInfo")).text( $.i18n.prop("footer.other_info"));
+            $( "footer.banner-footer" ).find($( "span.year")).text( $.i18n.prop("footer.copyright_year") );
+            $( "footer.banner-footer" ).find($("span.companyName")).text( $.i18n.prop("footer.company_name"));
+            $( "footer.banner-footer" ).find($("span.otherInfo")).text( $.i18n.prop("footer.other_info"));
+        })(jQuery);
+
 
         this.hideCopyrightNowOrAfterDelay();
     },
@@ -411,108 +414,6 @@ var Footer = {
              }
 
     },
-    /**
-     * Method for adding an application to the Footer.
-     * @param {FooterApplicationValueObject} footerApplication The FooterApplicationValueObject to add.
-     */
-    add: function(footerApplication) {
-        if (footerApplication instanceof FooterApplicationValueObject) {
-            var icon = "<li><span id='" + footerApplication.appid + "' class='" + footerApplication.className + "'></span></li>";
-            var ui = $("<div id='" + footerApplication.appid + this.uiMarker + "'></div>");
-            ui.append(footerApplication.displayUI);
-            $('#footerIconContainer').append(icon);
-            $('#footerContainer').append(ui);
-            this.apps.push(footerApplication);
-        }
-    },
-
-
-    /**
-     * Method for removing an application from the Footer.
-     * @param {String} appid The id of the FooterApplicationValueObject to remove.
-     */
-    remove: function(appid) {
-        for (var x = 0; x < this.apps.length; x++) {
-            if (this.apps[x].appid == appid) {
-                $('#' + this.apps[x].appid).parent().remove();
-                $('#' + this.apps[x].appid + this.uiMarker).remove();
-            }
-        }
-    },
-
-    /** Function to create a div in the footerAppContainer
-     * @constructor
-     *
-     * @param {footerDiv} object of type footerAppDiv
-     * @return {footerAppDiv} object of type footerAppDiv
-     *
-     * @author prashanth
-     */
-    createContainer: function(footerDiv) {
-        if (footerDiv instanceof footerAppDiv) {
-            for (i = 0; i < Footer.appContainers.length; i++) {
-
-                if (Footer.appContainers[i].appId == footerDiv.appId) {
-
-                    $('#footerAppContainer').find('#' + footerDiv.appId).remove();
-                }
-            }
-
-            var ui = $("<div id='" + footerDiv.appId + "'></div>");
-            var arrIndex = $("#footerAppContainer").children().length;
-
-            if (footerDiv.index != -1 && footerDiv.index != null && footerDiv.index <= $("#footerAppContainer").children().length) {
-                if ($("#footerAppContainer").children().length > 0) {
-                    if (footerDiv.index != 0) {
-                        $("#footerAppContainer").find('div:eq(' + (footerDiv.index - 1) + ')').after(ui);
-                    }
-                    else
-                    if (footerDiv.index == 0) {
-                        $("#footerAppContainer").find('div:eq(' + footerDiv.index + ')').before(ui);
-                    }
-                }
-                else {
-                    if (footerDiv.index == 0) {
-                        $("#footerAppContainer").append(ui);
-                    }
-                }
-            }
-            else {
-                $("#footerAppContainer").append(ui);
-            }
-            $('#footer').find('#' + footerDiv.appId).html(footerDiv.html);
-            this.appContainers.push(footerDiv);
-        }
-        return footerDiv;
-    },
-
-    /** Function to get a div from the footerAppContainer
-     * @constructor
-     *
-     * @param {String} appId the appId of the managed application
-     * @return {footerAppDiv} object of type footerAppDiv
-     *
-     * @author prashanth
-     */
-    getAppContainer: function(appId) {
-        var children = $("#footerAppContainer").children().size();
-        var appNewDiv;
-        var exists = 'false';
-        for (i = 0; i < Footer.appContainers.length; i++) {
-            if (Footer.appContainers[i].appId == appId) {
-                exists = 'true';
-                appNewDiv = Footer.appContainers[i];
-                break;
-            }
-        }
-        if (exists == "true") {
-            return appNewDiv;
-        }
-        else {
-            return Footer.createContainer(new footerAppDiv(children, appId, ""));
-        }
-    },
-
 
 };
 
