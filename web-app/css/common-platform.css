@@ -108,6 +108,7 @@ body {
 	position: absolute;
 	bottom: 30px;
 	left:0;	/* rtl fix for ie */
+    height: 100%
 }
 
 .pointer {
