@@ -403,9 +403,10 @@ var Footer = {
                  $("footer.banner-footer").hide(); // already logged in today. Hide now
              } else {
                  var fadeCopyrightDelay;
-                 if($('meta[name=footerFadeAwayTime]').attr("content")!="[:]"){
-                     fadeCopyrightDelay =$('meta[name=footerFadeAwayTime]').attr("content");
-                     fadeCopyrightDelay=parseInt(fadeCopyrightDelay);
+                 var emptyMetaTagValue="false";
+                 var footerMetaTag=$('meta[name=footerFadeAwayTime]').attr("content");
+                 if(footerMetaTag!=emptyMetaTagValue && footerMetaTag!="[:]" ){
+                     fadeCopyrightDelay=parseInt(footerMetaTag);
                  }else{
                      fadeCopyrightDelay=2000;
                  }
