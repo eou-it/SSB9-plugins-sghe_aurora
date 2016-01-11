@@ -966,7 +966,7 @@ div[id=mainMenuContainer] .navList .parent:focus span {
     text-align: center;
     position: fixed;
     left: 0;
-    right: 0;
+    right: 17px;
     bottom: 0;
     font-size: 12px;
     -webkit-transition: all 1s ease-in-out;
