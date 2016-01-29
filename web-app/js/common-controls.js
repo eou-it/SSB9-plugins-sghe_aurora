@@ -370,16 +370,18 @@ var Footer = {
      * Initialization method.
      */
     initialize: function() {
-        (function ($) {
-            $('body').append(Footer.displayUI);
+        var that = this;
+        $(window).on("load", function() {
+            (function ($) {
+                /* console.log('state is '+ document.readyState); readyState here seems to be completed */
+                $('body').append(Footer.displayUI);
 
-            $( "footer.banner-footer" ).find($( "span.year")).text( $.i18n.prop("footer.copyright_year") );
-            $( "footer.banner-footer" ).find($("span.companyName")).text( $.i18n.prop("footer.company_name"));
-            $( "footer.banner-footer" ).find($("span.otherInfo")).text( $.i18n.prop("footer.other_info"));
-        })(jQuery);
-
-
-        this.hideCopyrightNowOrAfterDelay();
+                $("footer.banner-footer").find($("span.year")).text($.i18n.prop("footer.copyright_year"));
+                $("footer.banner-footer").find($("span.companyName")).text($.i18n.prop("footer.company_name"));
+                $("footer.banner-footer").find($("span.otherInfo")).text($.i18n.prop("footer.other_info"));
+            })(jQuery);
+            that.hideCopyrightNowOrAfterDelay();
+        } );
     },
 
 
