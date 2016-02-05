@@ -373,7 +373,6 @@ var Footer = {
         var that = this;
         $(window).on("load", function() {
             (function ($) {
-                /* console.log('state is '+ document.readyState); readyState here seems to be completed */
                 $('body').append(Footer.displayUI);
 
                 $("footer.banner-footer").find($("span.year")).text($.i18n.prop("footer.copyright_year"));
@@ -381,7 +380,7 @@ var Footer = {
                 $("footer.banner-footer").find($("span.otherInfo")).text($.i18n.prop("footer.other_info"));
             })(jQuery);
             that.hideCopyrightNowOrAfterDelay();
-        } );
+        });
     },
 
 
