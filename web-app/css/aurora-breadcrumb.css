@@ -23,7 +23,7 @@ a.breadcrumbButton{
     color : #557287;
     min-height: 2.8em;
     position: relative;
-    display:table;
+    display:block;
     width:100%;
 }
 

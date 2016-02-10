@@ -15,8 +15,7 @@ var BreadCrumbAndPageTitle = (function () {
 
     var items = [];
 
-    var UI = $("<nav  id='breadcrumb-panel' role='navigation' class='aurora-theme'></nav>" +
-        "<div id='title-panel' class='aurora-theme'></div>");
+    var UI = $("<nav  id='breadcrumb-panel' role='navigation' class='aurora-theme'></nav>");
 
     function setFullBreadcrumb(breadCrumbItems, pageTitle) {
         $('#breadcrumb-panel').empty();

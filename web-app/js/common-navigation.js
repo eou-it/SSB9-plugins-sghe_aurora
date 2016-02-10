@@ -239,7 +239,7 @@ var ContentManager = {
     },
 
     setContentPosition: function(){
-        var headerHeight = $('#header-main-section').outerHeight() + $('#breadcrumb-panel').outerHeight() + $('#title-panel').outerHeight();
+        var headerHeight = $('#header-main-section').outerHeight() + $('#breadcrumb-panel').outerHeight();
         $( '#' + ContentManager.container).css('top', headerHeight);
     }
 };
