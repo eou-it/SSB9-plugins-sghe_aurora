@@ -12,6 +12,7 @@
 grails.project.class.dir = "target/classes"
 grails.project.test.class.dir = "target/test-classes"
 grails.project.test.reports.dir = "target/test-reports"
+grails.project.dependency.resolver = "maven"
 //grails.project.war.file = "target/${appName}-${appVersion}.war"
 grails.project.dependency.resolution = {
     // inherit Grails' default dependencies
@@ -23,16 +24,21 @@ grails.project.dependency.resolution = {
     repositories {
         if (System.properties['PROXY_SERVER_NAME']) {
             mavenRepo "${System.properties['PROXY_SERVER_NAME']}"
-        } else
-        {
-            grailsPlugins()
-            grailsHome()
+        }
+            mavenRepo "http://repo.grails.org/grails/repo"
             grailsCentral()
             mavenCentral()
+            mavenRepo "https://code.lds.org/nexus/content/groups/main-repo"
             mavenRepo "http://repository.jboss.org/maven2/"
-            mavenRepo "http://repository.codehaus.org"
-        }
     }
+
+    plugins {
+        test ':code-coverage:2.0.3-2',
+                {
+                    excludes 'xercesImpl'
+                }
+    }
+
     dependencies {
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes eg.
 
