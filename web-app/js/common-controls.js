@@ -361,7 +361,7 @@ var Footer = {
      *
      * The HTML UI elements.
      */
-    displayUI: "<footer name='banner-footer' class='banner-footer'  role='contentinfo'>"
+    displayUI: "<footer class='banner-footer'  role='contentinfo'>"
        +"<div>&copy; <span class='year'></span> <span class='companyName'></span> <span class='otherInfo'></span></div>"
         +"</footer>",
     /**
@@ -392,15 +392,9 @@ var Footer = {
 
         var lastLoginTime = sessionStorage.getItem( 'xe.lastLogin.time' );
         var lastLoginName = sessionStorage.getItem( 'xe.lastLogin.name' );
-        function addClass(elementName, className) {
-            var e = document.getElementsByName(elementName)[0];
-            if (e) {
-                e.className += ' ' + className;
-            }
-        }
 
         function fadeCopyright() {
-            addClass( 'banner-footer', 'fade' );
+            $("footer.banner-footer").addClass('fade')
         }
 
         var currentUserName = window.CommonContext && CommonContext.user || '';
@@ -422,6 +416,7 @@ var Footer = {
                      fadeCopyrightDelay=2000;
                  }
                  setTimeout( fadeCopyright, fadeCopyrightDelay );
+
              }
 
     }
