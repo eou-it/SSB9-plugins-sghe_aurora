@@ -394,7 +394,7 @@ var Footer = {
         var lastLoginName = sessionStorage.getItem( 'xe.lastLogin.name' );
 
         function fadeCopyright() {
-            $("footer.banner-footer").addClass('fade')
+           $("footer.banner-footer").hide();
         }
 
         var currentUserName = window.CommonContext && CommonContext.user || '';
@@ -416,7 +416,6 @@ var Footer = {
                      fadeCopyrightDelay=2000;
                  }
                  setTimeout( fadeCopyright, fadeCopyrightDelay );
-
              }
 
     }

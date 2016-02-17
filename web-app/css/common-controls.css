@@ -986,10 +986,6 @@ div[id=mainMenuContainer] .navList .parent:focus span {
     font-size: 0.750em;
 }
 
-.fade {
-    opacity:0;
-}
-
 /* Mobile screens*/
 @media only screen and (max-width: 767px) {
     .banner-footer-hide {
