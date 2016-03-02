@@ -43,6 +43,10 @@ var CommonPlatform = {
 			if (options.standalone && typeof(options.standalone) == 'boolean' && options.standalone) {
 				CommonContext.standalone = options.standalone;
 
+			if(options.iframe && typeof(options.iframe)=='boolean' && options.iframe){
+				CommonContext.iframe=options.iframe;
+			}
+
 				Authenticator.authenticateUser()
 
                 // TODO:  We should pass in the user and not have to use 'CommonContext.user'
@@ -181,7 +185,14 @@ var CommonContext = {
 	 * @type Boolean
 	 * @default false
 	 */
-	standalone :false
+	standalone :false,
+
+	/**
+	 * Indicates if application is opening inside the iframe
+	 *@type Boolean
+	 *@default false
+	 * **/
+	iframe : false
 };
 
 

@@ -238,9 +238,7 @@ function UserControls( options ) {
         MepDesciption.populateMepDescForMobile();
     }
 
-    var isInIframe = (window.location != window.parent.location) ? true : false;
-
-    if(!isInIframe) {
+    if(!CommonContext.iframe) {
 
         // add user context
         if (CommonContext.user == null) {
