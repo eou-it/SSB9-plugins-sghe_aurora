@@ -5,7 +5,7 @@
 /**
  * @class UI display component representing a Button.
  *
- * @constructor
+ * @constructor                          F
  *
  * @param id {Integer} The id for the component.
  * @param label {String} The label displayed to the user by the component.
@@ -378,6 +378,7 @@ var Footer = {
                 $("footer.banner-footer").find($("span.year")).text($.i18n.prop("footer.copyright_year"));
                 $("footer.banner-footer").find($("span.companyName")).text($.i18n.prop("footer.company_name"));
                 $("footer.banner-footer").find($("span.otherInfo")).text($.i18n.prop("footer.other_info"));
+                $("#content").css("margin-bottom", $("footer.banner-footer").height());
             })(jQuery);
             that.hideCopyrightNowOrAfterDelay();
         });
@@ -394,6 +395,7 @@ var Footer = {
         var lastLoginName = sessionStorage.getItem( 'xe.lastLogin.name' );
 
         function fadeCopyright() {
+            $("#content").css("margin-bottom", 0);
            $("footer.banner-footer").hide();
         }
 
@@ -410,7 +412,7 @@ var Footer = {
                  var fadeCopyrightDelay;
                  var emptyMetaTagValue="false";
                  var footerMetaTag=$('meta[name=footerFadeAwayTime]').attr("content");
-                 if(footerMetaTag!=emptyMetaTagValue && footerMetaTag!="[:]" ){
+                  if(footerMetaTag!=emptyMetaTagValue && footerMetaTag!="[:]" ){
                      fadeCopyrightDelay=parseInt(footerMetaTag);
                  }else{
                      fadeCopyrightDelay=2000;
