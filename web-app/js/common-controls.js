@@ -5,7 +5,7 @@
 /**
  * @class UI display component representing a Button.
  *
- * @constructor                          F
+ * @constructor
  *
  * @param id {Integer} The id for the component.
  * @param label {String} The label displayed to the user by the component.
@@ -412,7 +412,7 @@ var Footer = {
                  var fadeCopyrightDelay;
                  var emptyMetaTagValue="false";
                  var footerMetaTag=$('meta[name=footerFadeAwayTime]').attr("content");
-                  if(footerMetaTag!=emptyMetaTagValue && footerMetaTag!="[:]" ){
+                 if(footerMetaTag!=emptyMetaTagValue && footerMetaTag!="[:]" ){
                      fadeCopyrightDelay=parseInt(footerMetaTag);
                  }else{
                      fadeCopyrightDelay=2000;
