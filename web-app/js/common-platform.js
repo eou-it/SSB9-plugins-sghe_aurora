@@ -40,10 +40,14 @@ var CommonPlatform = {
                 ResourceManager.addResourceMap( options.resourceMap );
             }
 
+			if (options.iframe && typeof(options.iframe) == 'boolean' && options.iframe) {
+				CommonContext.iframe = options.iframe;
+			}
+
+			CommonContext.externalApp=$('meta[name=externalApp]').attr("content");
+
 			if (options.standalone && typeof(options.standalone) == 'boolean' && options.standalone) {
 				CommonContext.standalone = options.standalone;
-
-				CommonContext.externalApp=$('meta[name=externalApp]').attr("content");
 
 				Authenticator.authenticateUser()
 
@@ -186,11 +190,18 @@ var CommonContext = {
 	standalone :false,
 
 	/**
+	 * Indicates if application is opening inside the other app
+	 *@type Boolean
+	 *@default false
+	 * **/
+	externalApp : false,
+
+	/**
 	 * Indicates if application is opening inside the iframe
 	 *@type Boolean
 	 *@default false
 	 * **/
-	externalApp : false
+	iframe : false
 };
 
 

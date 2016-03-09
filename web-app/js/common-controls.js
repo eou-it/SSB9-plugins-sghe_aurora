@@ -238,7 +238,7 @@ function UserControls( options ) {
         MepDesciption.populateMepDescForMobile();
     }
 
-    if(!CommonContext.externalApp) {
+    if(!CommonContext.externalApp || !CommonContext.iframe) {
 
         // add user context
         if (CommonContext.user == null) {
