@@ -44,7 +44,8 @@ var CommonPlatform = {
 				CommonContext.iframe = options.iframe;
 			}
 
-			CommonContext.externalApp=$('meta[name=externalApp]').attr("content");
+
+			CommonContext.ssbApps=$('meta[name=ssbApps]').attr("content");
 
 			if (options.standalone && typeof(options.standalone) == 'boolean' && options.standalone) {
 				CommonContext.standalone = options.standalone;
@@ -190,11 +191,11 @@ var CommonContext = {
 	standalone :false,
 
 	/**
-	 * Indicates if application is opening inside the other app
+	 * Indicates if ssb application is opening inside the other app
 	 *@type Boolean
 	 *@default false
 	 * **/
-	externalApp : false,
+	ssbApps : false,
 
 	/**
 	 * Indicates if application is opening inside the iframe
