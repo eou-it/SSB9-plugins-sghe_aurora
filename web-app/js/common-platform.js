@@ -45,7 +45,7 @@ var CommonPlatform = {
 			}
 
 
-			CommonContext.ssbApps=$('meta[name=ssbApps]').attr("content");
+			CommonContext.hideSSBHeaderComps=$('meta[name=hideSSBHeaderComps]').attr("content");
 
 			if (options.standalone && typeof(options.standalone) == 'boolean' && options.standalone) {
 				CommonContext.standalone = options.standalone;
@@ -195,7 +195,7 @@ var CommonContext = {
 	 *@type Boolean
 	 *@default false
 	 * **/
-	ssbApps : false,
+	hideSSBHeaderComps : false,
 
 	/**
 	 * Indicates if application is opening inside the iframe

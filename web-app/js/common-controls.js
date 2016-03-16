@@ -238,7 +238,7 @@ function UserControls( options ) {
         MepDesciption.populateMepDescForMobile();
     }
 
-    if(!(CommonContext.ssbApps=='true' && CommonContext.iframe)) {
+    if(!(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe)) {
 
         // add user context
         if (CommonContext.user == null) {
