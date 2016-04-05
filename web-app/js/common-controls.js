@@ -276,6 +276,8 @@ function UserControls( options ) {
             ControlBar.node.find("#user").attr('aria-label', ResourceManager.getString("userdetails_profile_description"));
         }
 
+    } else {
+        Message.setStatusMessage(window.name.replace(/\\/g, '').trim());
     }
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
