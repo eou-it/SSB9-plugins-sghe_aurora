@@ -237,7 +237,6 @@ function UserControls( options ) {
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForMobile();
     }
-
     if(!(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe)) {
 
         // add user context
@@ -277,7 +276,7 @@ function UserControls( options ) {
         }
 
     } else {
-        Message.setStatusMessage(window.name.replace(/\\/g, '').trim());
+        Message.setStatusMessage(window.name.substr(0,window.name.indexOf('?')).replace(/\\/g, '').trim());
     }
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
