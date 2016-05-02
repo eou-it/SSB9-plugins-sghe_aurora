@@ -4,6 +4,20 @@
     font-family: "Open Sans" !important;
 }
 
+/* Lucia Grande Font*/
+
+@font-face {
+    font-family: 'lucidaGrande';
+    src: url('fonts/lucida-grande.eot');
+    src: url('fonts/lucida-grande.eot?#iefix') format('embedded-opentype'),
+    url('fonts/lucida-grande.woff') format('woff'),
+    url('fonts/24003_LucidaGrande.ttf') format('truetype');
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 /* geezaPro Arabic Font */
 @font-face {
     font-family: 'geezaPro';
