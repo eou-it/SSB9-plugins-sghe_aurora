@@ -202,7 +202,14 @@ var CommonContext = {
 	 *@type Boolean
 	 *@default false
 	 * **/
-	iframe : false
+	iframe : false,
+
+	/**
+	 * Indicated the application is dirty or not
+	 * @type Boolean
+	 * @default false
+	 */
+	isAppDirty : function(){}
 };
 
 

@@ -12,13 +12,64 @@ var Messenger = {
     },
     createStatusMessage: function( message ){
         return M.createStatusMessage( message );
+    },
+    createStatusDirtyPagesMessage: function (pageName){
+        var dataStateResponse = [];
+        if(DirtyCheck.isDirty()){
+            dataStateResponse.push({
+                page: pageName,
+                state: "dirty"
+            });
+        }else{
+            dataStateResponse.push({
+                page: pageName,
+                state: "clean"
+            });
+        }
+        return {"type": "dataState","state": dataStateResponse}
+    },
+    messageHandler: function (message) {
+
+        if (_.isString(message)) {
+            try {
+                message = JSON.parse(message);
+            } catch (e) {
+                message = JSON.parse(Messenger.decode(message));
+            }
+        }
+        console.log("-------->>>> ssbapp.messageHandler: Got Message: " + JSON.stringify(message));
+
+        if (message.type == "request" && message.request == "dataState") {
+            if (message.pages != null && message.pages.trim() != "") {
+                Message.setAppDirtyStatus(message.pages.trim());
+            } else {
+                console.log("-------->>>> ssbapp.messageHandler: Got Dirty Check message for Empty page list");
+                Message.setAppDirtyStatus(message.pages.trim());
+            }
+        }
+
     }
 };
+
+
+
+var DirtyCheck = {
+
+    addDirtyCheckCallback: function( isDirty ) {
+        CommonContext.isAppDirty=isDirty;
+    },
+    isDirty : function() {
+        return CommonContext.isAppDirty();
+    }
+}
 
 
 var Message ={
     setStatusMessage: function(message){
         Messenger.send(Messenger.createStatusMessage("opened:"+message));
+    },
+    setAppDirtyStatus: function (seamlessDirtyPageNames) {
+        Messenger.send(Messenger.createStatusDirtyPagesMessage(seamlessDirtyPageNames));
     }
 }
 

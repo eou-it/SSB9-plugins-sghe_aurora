@@ -276,6 +276,7 @@ function UserControls( options ) {
         }
 
     } else {
+        Messenger.initialize(Messenger.messageHandler);
         Message.setStatusMessage(window.name.substr(0,window.name.indexOf('?')).replace(/\\/g, '').trim());
     }
 
