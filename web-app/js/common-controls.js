@@ -237,41 +237,46 @@ function UserControls( options ) {
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForMobile();
     }
+    if(!(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe)) {
 
-    // add user context
-    if (CommonContext.user == null) {
+        // add user context
+        if (CommonContext.user == null) {
 
-        SignInMenu.initialize();
-        SignInMenu.addItem("signIn", ResourceManager.getString("userdetails_signin"),undefined,
-            function () {
-                signIn();
-            }
-        );
-        ControlBar.addAccessibilityInfo('#signIn',ResourceManager.getString("userdetails_signin_description"),ResourceManager.getString("userdetails_signin_title"));
-        ControlBar.node.find('#signIn').attr('role', 'link');
-        var guestSignInLink;
-        if("true" == $('meta[name=guestLoginEnabled]').attr("content")) {
-            SignInMenu.addItem("guestSignIn",ResourceManager.getString("guestuserdetails_signin"),undefined,
+            SignInMenu.initialize();
+            SignInMenu.addItem("signIn", ResourceManager.getString("userdetails_signin"), undefined,
                 function () {
-                    window.location = ApplicationConfig.loginEndpoint;
+                    signIn();
                 }
             );
-            ControlBar.node.find('#guestSignIn').attr('role', 'link');
+            ControlBar.addAccessibilityInfo('#signIn', ResourceManager.getString("userdetails_signin_description"), ResourceManager.getString("userdetails_signin_title"));
+            ControlBar.node.find('#signIn').attr('role', 'link');
+            var guestSignInLink;
+            if ("true" == $('meta[name=guestLoginEnabled]').attr("content")) {
+                SignInMenu.addItem("guestSignIn", ResourceManager.getString("guestuserdetails_signin"), undefined,
+                    function () {
+                        window.location = ApplicationConfig.loginEndpoint;
+                    }
+                );
+                ControlBar.node.find('#guestSignIn').attr('role', 'link');
+            }
+
+        } else {
+            var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'></a></div>");
+            ControlBar.append(userDiv);
+            UserName.populateUserNameForOthers();
+            ProfileMenu.initialize();
+            UserName.populateUserNameForMobile();
+            ProfileMenu.addItem("signOut", ResourceManager.getString("userdetails_signout"), undefined,
+                function () {
+                    signOut();
+                }
+            );
+            ControlBar.node.find("#userDiv").attr('title', ResourceManager.getString("userdetails_profile_title"));
+            ControlBar.node.find("#user").attr('aria-label', ResourceManager.getString("userdetails_profile_description"));
         }
 
     } else {
-        var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'></a></div>");
-        ControlBar.append(userDiv);
-        UserName.populateUserNameForOthers();
-        ProfileMenu.initialize();
-        UserName.populateUserNameForMobile();
-        ProfileMenu.addItem("signOut", ResourceManager.getString("userdetails_signout"),undefined,
-            function () {
-                signOut();
-            }
-        );
-        ControlBar.node.find("#userDiv").attr('title',ResourceManager.getString("userdetails_profile_title"));
-        ControlBar.node.find("#user").attr('aria-label', ResourceManager.getString("userdetails_profile_description"));
+        initializeMessagingAPI();
     }
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
@@ -743,6 +748,15 @@ function setMepDescription(mepDescription) {
 
 function setCurrentPage(currentPage) {
     CommonContext.currentPage = currentPage;
+}
+
+/* This function is to intialize the messaging api to support
+*  messagin between SSB application and app nav.
+*
+* */
+function initializeMessagingAPI(){
+    Messenger.initialize(Messenger.messageHandler);
+    Message.setStatusMessage(window.name.substr(0,window.name.indexOf('?')).replace(/\\/g, '').trim());
 }
 
 
