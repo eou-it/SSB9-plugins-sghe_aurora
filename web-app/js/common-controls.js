@@ -276,8 +276,7 @@ function UserControls( options ) {
         }
 
     } else {
-        Messenger.initialize(Messenger.messageHandler);
-        Message.setStatusMessage(window.name.substr(0,window.name.indexOf('?')).replace(/\\/g, '').trim());
+        initializeMessagingAPI();
     }
 
     if (options.showHelp && typeof(options.showHelp) == 'boolean' && options.showHelp || options.showHelp == null) {
@@ -747,6 +746,15 @@ function setMepDescription(mepDescription) {
 
 function setCurrentPage(currentPage) {
     CommonContext.currentPage = currentPage;
+}
+
+/* This function is to intialize the messaging api to support
+*  messagin between SSB application and app nav.
+*
+* */
+function initializeMessagingAPI(){
+    Messenger.initialize(Messenger.messageHandler);
+    Message.setStatusMessage(window.name.substr(0,window.name.indexOf('?')).replace(/\\/g, '').trim());
 }
 
 

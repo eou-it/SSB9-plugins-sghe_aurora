@@ -53,17 +53,6 @@ var Messenger = {
 
 
 
-var DirtyCheck = {
-
-    addDirtyCheckCallback: function( isDirty ) {
-        CommonContext.isAppDirty=isDirty;
-    },
-    isDirty : function() {
-        return CommonContext.isAppDirty();
-    }
-}
-
-
 var Message ={
     setStatusMessage: function(message){
         Messenger.send(Messenger.createStatusMessage("opened:"+message));
