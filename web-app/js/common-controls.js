@@ -49,7 +49,7 @@ var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<header id='header-main-section' class='aurora-theme' role='banner'>"
             + "<div id='header-main-section-west-part'>"
-            + "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer' role='application'></div></div>"
+            + "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer'></div></div>"
             + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'></a></div>"
             + "</header>";
 
@@ -378,6 +378,7 @@ var Footer = {
                 $("footer.banner-footer").find($("span.year")).text($.i18n.prop("footer.copyright_year"));
                 $("footer.banner-footer").find($("span.companyName")).text($.i18n.prop("footer.company_name"));
                 $("footer.banner-footer").find($("span.otherInfo")).text($.i18n.prop("footer.other_info"));
+                $("#content").css("margin-bottom", $("footer.banner-footer").height());
             })(jQuery);
             that.hideCopyrightNowOrAfterDelay();
         });
@@ -394,6 +395,7 @@ var Footer = {
         var lastLoginName = sessionStorage.getItem( 'xe.lastLogin.name' );
 
         function fadeCopyright() {
+            $("#content").css("margin-bottom", 0);
            $("footer.banner-footer").hide();
         }
 

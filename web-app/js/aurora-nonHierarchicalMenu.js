@@ -118,12 +118,9 @@ var NonHierarchicalMenu = (function() {
                 item.on('click', _fnMouseEventsHandlerForMenu);
                 item.on('keydown', _fnKeyBoardEventsHandlerForMenu);
                 item.append(itemSpan);
-                if (readonly != undefined && readonly == true) {
+                if (readonly == true) {
                     item.attr('tabindex', -1);
-                    item.attr("readonly", readonly).css({
-                        "color": "#d6d6d6",
-                        "cursor": "unset"
-                    });
+                    item.attr("readonly", readonly);
                 }
                 if (sectionId) {
                     var sectionContent = this.canvas.find('#' + sectionId);
