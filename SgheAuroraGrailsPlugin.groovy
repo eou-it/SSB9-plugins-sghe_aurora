@@ -11,7 +11,7 @@
  **********************************************************************************/
 class SgheAuroraGrailsPlugin {
     // the plugin version
-    def version = "9.14.2"
+    def version = "9.15"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.2.1 > *"
     // the other plugins this plugin depends on
