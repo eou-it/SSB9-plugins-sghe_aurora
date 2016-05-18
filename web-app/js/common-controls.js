@@ -377,18 +377,35 @@ var Footer = {
     initialize: function() {
         var that = this;
         $(window).on("load", function() {
-            (function ($) {
-                $('body').append(Footer.displayUI);
-
-                $("footer.banner-footer").find($("span.year")).text($.i18n.prop("footer.copyright_year"));
-                $("footer.banner-footer").find($("span.companyName")).text($.i18n.prop("footer.company_name"));
-                $("footer.banner-footer").find($("span.otherInfo")).text($.i18n.prop("footer.other_info"));
-                $("#content").css("margin-bottom", $("footer.banner-footer").height());
-            })(jQuery);
-            that.hideCopyrightNowOrAfterDelay();
+            that.displayAndHideFooter();
         });
     },
 
+    /** method to display and Hide footer**/
+
+    displayAndHideFooter: function () {
+        this.displayFooter();
+        this.hideCopyrightNowOrAfterDelay();
+    },
+
+    /** method to display footer**/
+
+    displayFooter: function () {
+        (function ($) {
+            $('body').append(Footer.displayUI);
+            $("footer.banner-footer").find($("span.year")).text($.i18n.prop("footer.copyright_year"));
+            $("footer.banner-footer").find($("span.companyName")).text($.i18n.prop("footer.company_name"));
+            $("footer.banner-footer").find($("span.otherInfo")).text($.i18n.prop("footer.other_info"));
+            $("#content").css("margin-bottom", $("footer.banner-footer").height());
+        })(jQuery);
+    },
+
+    /** method to hide footer now or after delay * */
+
+    fadeCopyright: function () {
+        $("#content").css("margin-bottom", 0);
+        $("footer.banner-footer").hide();
+    },
 
     /** method to hide footer now or after delay * */
 
