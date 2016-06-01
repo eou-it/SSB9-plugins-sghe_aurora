@@ -429,7 +429,7 @@ var Footer = {
                 }
              if ((lastLoginName === currentUserName ) &&
                  (lastLoginTime + DAY_IN_MS > new Date().getTime())) {
-                 $("footer.banner-footer").hide(); // already logged in today. Hide now
+                 fadeCopyright(); // already logged in today. Hide now
              } else {
                  var fadeCopyrightDelay;
                  var emptyMetaTagValue="false";
