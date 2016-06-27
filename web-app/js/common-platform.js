@@ -40,6 +40,13 @@ var CommonPlatform = {
                 ResourceManager.addResourceMap( options.resourceMap );
             }
 
+			if (options.iframe && typeof(options.iframe) == 'boolean' && options.iframe) {
+				CommonContext.iframe = options.iframe;
+			}
+
+
+			CommonContext.hideSSBHeaderComps=$('meta[name=hideSSBHeaderComps]').attr("content");
+
 			if (options.standalone && typeof(options.standalone) == 'boolean' && options.standalone) {
 				CommonContext.standalone = options.standalone;
 
@@ -181,7 +188,28 @@ var CommonContext = {
 	 * @type Boolean
 	 * @default false
 	 */
-	standalone :false
+	standalone :false,
+
+	/**
+	 * Indicates if ssb application is opening inside the other app
+	 *@type Boolean
+	 *@default false
+	 * **/
+	hideSSBHeaderComps : false,
+
+	/**
+	 * Indicates if application is opening inside the iframe
+	 *@type Boolean
+	 *@default false
+	 * **/
+	iframe : false,
+
+	/**
+	 * Indicated the application is dirty or not
+	 * @type Boolean
+	 * @default false
+	 */
+	isAppDirty : function(){}
 };
 
 

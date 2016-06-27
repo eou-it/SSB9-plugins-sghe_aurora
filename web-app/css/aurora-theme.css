@@ -4,6 +4,34 @@
     font-family: "Open Sans" !important;
 }
 
+/* Lucia Grande Font*/
+
+@font-face {
+    font-family: 'lucidaGrande';
+    src: url('fonts/lucida-grande.eot');
+    src: url('fonts/lucida-grande.eot?#iefix') format('embedded-opentype'),
+    url('fonts/lucida-grande.woff') format('woff'),
+    url('fonts/24003_LucidaGrande.ttf') format('truetype');
+
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+/* geezaPro Arabic Font */
+@font-face {
+    font-family: 'geezaPro';
+    src: url('fonts/geeza-pro-webfont.eot');
+    src: url('fonts/geeza-pro-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/geeza-pro-webfont.woff2') format('woff2'),
+    url('fonts/geeza-pro-webfont.woff') format('woff'),
+    url('fonts/geeza-pro-webfont.ttf') format('truetype'),
+    url('fonts/geeza-pro-webfont.svg#webfontregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
 /***** Font Definition for Open Sans. This stylesheet comes from qrohlf.com/posts/better-opensans *****/
 
 /* Regular */
