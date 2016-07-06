@@ -33,10 +33,11 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        test ':code-coverage:2.0.3-2',
+        test ':code-coverage:2.0.3-3',
                 {
-                    excludes 'xercesImpl'
+                    excludes 'asm' ,'asm-util' , 'asm-commons' ,'asm-analysis' ,'asm-tree','xercesImpl'
                 }
+
     }
 
     dependencies {
