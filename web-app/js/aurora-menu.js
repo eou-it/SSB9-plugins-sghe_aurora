@@ -124,7 +124,6 @@ function ScrollableMenuTable(root, menuList) {
                if(_isLeafNode(currTarget)){
                 var XE_menu_link = target.context.href;
                 if(XE_menu_link == null){
-                    console.log("Null return");
                     return;
                 }
                 XE_menu_link = XE_menu_link.toLowerCase();
@@ -136,7 +135,6 @@ function ScrollableMenuTable(root, menuList) {
                     Test_url = true
                 }
 
-                console.log("CommonContext.hideSSBHeaderComps: "+ CommonContext.hideSSBHeaderComps);
                if(Test_url &&  CommonContext.hideSSBHeaderComps){
                     $(target).find("a").attr("target", "banner8SSB");
                }else{
