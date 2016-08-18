@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2016 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 function ScrollableMenuTable(root, menuList) {
@@ -117,15 +117,33 @@ function ScrollableMenuTable(root, menuList) {
             $('#menuList > .scrollableListFolder').on('keydown',_fnKeyBoardEventsHandlerForMenu);
         };
 
-        function _fnMouseEventsHandlerForMenu(e){
-            var currTarget = e.target;
-            var target = $(currTarget).closest('li');
-            if(_isLeafNode(currTarget)){
-                $(target).find('a:first')[0].click();
-            } else {
+       function _fnMouseEventsHandlerForMenu(e){
+          var currTarget = e.target;
+          var target = $(currTarget).closest('li');
+          var baseSSBURL = "ssomanager/c/ssb"
+               if(_isLeafNode(currTarget)){
+                var XE_menu_link = target.context.href;
+                if(XE_menu_link == null){
+                    return;
+                }
+                XE_menu_link = XE_menu_link.toLowerCase();
+                var position = XE_menu_link.search("ssomanager");
+                var SSB_baseURI = XE_menu_link.substring(position,position+16);
+
+                var Test_url;
+                if(SSB_baseURI == baseSSBURL){
+                    Test_url = true
+                }
+
+               if(Test_url &&  CommonContext.hideSSBHeaderComps){
+                    $(target).find("a").attr("target", "banner8SSB");
+               }else{
+                    (target).find('a:first')[0].click();
+               }
+          } else {
                 _fnOpenUpSubMenu(target);
-            }
-        };
+          }
+       };
 
         function _fnOpenUpSubMenu(target) {
             var menuName = $(target).attr('id');

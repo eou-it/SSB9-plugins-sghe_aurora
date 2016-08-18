@@ -215,10 +215,14 @@ function signOut(){
 }
 
 function toggleSignInAndSignOut() {
-    if ($('#signInButton').length > 0) {
-        signIn();
-    } else {
-        signOut();
+    if(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe){
+        Message.sendSignOutActionMessage();
+    }else{
+        if ($('#signInButton').length > 0) {
+            signIn();
+        } else {
+            signOut();
+        }
     }
 }
 
