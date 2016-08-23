@@ -64,7 +64,11 @@ var Message ={
     },
     setAppDirtyStatus: function (seamlessDirtyPageNames) {
         Messenger.send(Messenger.createStatusDirtyPagesMessage(seamlessDirtyPageNames));
-    }
+    },
+	
+	 sendSignOutActionMessage:function(){
+        Messenger.send(M.createActionMessage( "signout" ));
+    }
 }
 
 var Encoder = {
