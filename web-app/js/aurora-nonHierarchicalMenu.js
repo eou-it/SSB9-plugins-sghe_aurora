@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2016 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 var NonHierarchicalMenu = (function() {
     return {
@@ -258,7 +258,37 @@ ToolsMenu.initialize = function() {
     this.canvas = ControlBar.node.find('#toolsList');
     this.callbackPostItemClick = toggleToolsMenu;
     ControlBar.node.find('#tools').bind("click", toggleToolsMenu);
+
+    try{
+        if(angular.module("aboutModal")){
+            var dialogDiv = document.getElementById('dialogAppDiv');
+            dialogDiv.setAttribute("ng-app","dialogApp");
+            dialogDiv.setAttribute("ng-controller","ModalCtrl");
+            dialogDiv.innerHTML = "<xe-about-modal show='modalShown' api='aboutApi'></xe-about-modal>";
+            ToolsMenu.addItem(
+                "about",
+                $.i18n.prop("aurora.areas_label_about_title"),
+                "",
+                aboutDialogPopUp
+            );
+        }
+    } catch(e){
+        console.log('Not adding About menu item because aboutModal Module is not found in resource.');
+    }
 };
+
+function aboutDialogPopUp () {
+    var scope = angular.element(document.getElementById('dialogAppDiv')).scope();
+    if(!scope){
+        angular.element(document.getElementById('dialogAppDiv')).ready(function() {
+            angular.bootstrap(document.getElementById('dialogAppDiv'), ['dialogApp']);
+        });
+        scope = angular.element(document.getElementById('dialogAppDiv')).scope();
+    }
+    scope.$apply(function(){
+        scope.modalShown = true;
+    })
+}
 ToolsMenu.closeMenu = function() {
     if (!$('#toolsCanvas').is(':hidden')) {
         $('#toolsCanvas').removeClass('tools-active');
