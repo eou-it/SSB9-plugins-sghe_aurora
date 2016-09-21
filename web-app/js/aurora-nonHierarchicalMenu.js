@@ -286,7 +286,7 @@ function aboutDialogPopUp () {
         scope = angular.element(document.getElementById('dialogAppDiv')).scope();
     }
     scope.$apply(function(){
-        scope.modalShown = true;
+        scope.toggleModal();
     })
 }
 ToolsMenu.closeMenu = function() {
