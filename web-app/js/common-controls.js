@@ -215,8 +215,8 @@ function signOut(){
 }
 
 function toggleSignInAndSignOut() {
-    if(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe){
-        Message.sendSignOutActionMessage();
+    if(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe){
+        Message.sendSignOutActionMessage();
     }else{
         if ($('#signInButton').length > 0) {
             signIn();
@@ -241,7 +241,7 @@ function UserControls( options ) {
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForMobile();
     }
-    if(!(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe)) {
+    if(!(CommonContext.hideSSBHeaderComps=='true'&& CommonContext.iframe)) {
 
         // add user context
         if (CommonContext.user == null) {

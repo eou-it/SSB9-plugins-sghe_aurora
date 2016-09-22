@@ -18,6 +18,12 @@ var Messenger = {
     createStatusMessage: function( message ){
         return M.createStatusMessage( message );
     },
+    createKeepAliveMessage:function(message){
+        return M.createKeepAliveMessage(message);
+    },
+    createActionMessage:function(message){
+        return M.createActionMessage(message);
+    },
     createStatusDirtyPagesMessage: function (pageName){
         var dataStateResponse = [];
         if(DirtyCheck.isDirty()){
@@ -51,6 +57,19 @@ var Messenger = {
                 console.log("-------->>>> ssbapp.messageHandler: Got Dirty Check message for Empty page list");
                 Message.setAppDirtyStatus(message.pages.trim());
             }
+        }else if (message.type == "keepAlive" ) {
+            $.ajax({
+                url: Application.getApplicationPath()+"/keepAlive/data",
+                dataType: "html",
+                success: function(data, textStatus, jqXHR) {
+                    CommonContext.keepAlive=false;
+                    if(CommonContext.resetInActivityTimer!=null){
+                        CommonContext.resetInActivityTimer.reset();
+                        notifications.remove( CommonContext.removeNotification );
+                    }
+                }
+            });
+
         }
 
     }
@@ -65,11 +84,51 @@ var Message ={
     setAppDirtyStatus: function (seamlessDirtyPageNames) {
         Messenger.send(Messenger.createStatusDirtyPagesMessage(seamlessDirtyPageNames));
     },
-	
-	 sendSignOutActionMessage:function(){
-        Messenger.send(M.createActionMessage( "signout" ));
-    }
-}
+    sendSignOutActionMessage:function(){
+        Messenger.send(M.createActionMessage( "signout" ));
+    },
+    setKeepAliveMessage: function(){
+        Messenger.send(Messenger.createKeepAliveMessage(true) );
+    }
+};
+
+
+/**
+ *checklocalactivity function poll in every 5 minutes/300000 seconds
+ * to check if any local activity happened. If any localactivity occured
+ * keealive flag set to true. After 5 minutes it will check the keepalive
+ * flag, if true will send the message to the application navigator
+ * and reset the keepalive flag to false and reset the timer for next
+ * poll interval.
+ */
+
+
+var timer = "";
+$(document).ready(function(){
+    if(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe) {
+        var checkLocalActivity = function () {
+            if (timer === '') {
+                timer = setTimeout(function () {
+                    if (CommonContext.keepAlive) {
+                        Message.setKeepAliveMessage();
+                        CommonContext.keepAlive = false;
+                    }
+                    clearTimeout(timer);
+                    timer = "";
+                    checkLocalActivity();
+                }, 300000); // polling interval keep 5 minutes
+            } else {
+                timer = "";
+            }
+        }
+
+        checkLocalActivity();
+    }
+}).on("focus keypress click", function() {
+    CommonContext.keepAlive=true;
+}).ajaxSend(function() {
+    CommonContext.keepAlive=true;
+});
 
 var Encoder = {
     //properties
