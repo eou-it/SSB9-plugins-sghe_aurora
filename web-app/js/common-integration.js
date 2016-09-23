@@ -104,7 +104,7 @@ var Message ={
 
 
 var timer = "";
-$(document).ready(function(){
+$(document.body).ready(function(){
     if(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe) {
         var checkLocalActivity = function () {
             if (timer === '') {
@@ -123,11 +123,12 @@ $(document).ready(function(){
         }
 
         checkLocalActivity();
+        $(this).on("focus keypress click", function() {
+            CommonContext.keepAlive=true;
+        }).ajaxSend(function() {
+            CommonContext.keepAlive=true;
+        });
     }
-}).on("focus keypress click", function() {
-    CommonContext.keepAlive=true;
-}).ajaxSend(function() {
-    CommonContext.keepAlive=true;
 });
 
 var Encoder = {
