@@ -209,7 +209,22 @@ var CommonContext = {
 	 * @type Boolean
 	 * @default false
 	 */
-	isAppDirty : function(){}
+	isAppDirty : function(){},
+
+	/**
+	 * Callback object of inactivity timer to reset
+	 */
+	resetInActivityTimer : null,
+
+	/**
+	 * Callback Object of Notification to remove the notification on Keep alive message
+	 */
+	removeNotification : null,
+
+	/**
+	 * Indicates local activity based on the boolean value
+	 */
+	keepAlive	:	false
 };
 
 
