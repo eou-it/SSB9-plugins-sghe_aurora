@@ -198,8 +198,12 @@ function toggleToolsMenu() {
         $('#toolsButton').addClass('tools-expanded');
         $('#toolsList > .canvas-section-content .canvas-item:visible:first').focus();
     } else {
-        $('#toolsCanvas').removeClass('tools-active');
-        $('#toolsButton').removeClass('tools-expanded');
+        //Using timeout because after selecting menu item from tool menu, tool menu drop down was remains open.
+        // jQuery function removeClass is not working correctly without timeout for Firefox.
+        setTimeout(function(){
+            $("#toolsCanvas").removeClass("tools-active");
+            $('#toolsButton').removeClass('tools-expanded');
+        });
         $('#tools').focus();
     }
     return false;
