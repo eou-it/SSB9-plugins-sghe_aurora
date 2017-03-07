@@ -152,7 +152,6 @@ var NonHierarchicalMenu = (function() {
                 var code = (e.keyCode ? e.keyCode : e.which);
                 switch (code) {
                     case KEY_CODE.DOWN_ARROW:
-                        console.log("this.canvas" + this.canvas);
                         var nextElem = getNextTabbableElement($(currentTarget), $(container));
                         if (!isTabNavigation(currentTarget) && nextElem.length ) {
                             nextElem.focus();
