@@ -254,6 +254,7 @@ ProfileMenu.closeMenu = function() {
 var ToolsMenu = Object.create(NonHierarchicalMenu);
 ToolsMenu.initialize = function() {
     ControlBar.node.find('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
+    ControlBar.node.find('#toolsButton').attr("xe-section",'extzToolIcon');
     ControlBar.node.find('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
     ControlBar.node.find('#toolsButton').append("<div id='toolsCanvas'>" + "<div id='toolsMenu' role='menu'><div id='toolsList' class='tools-list' xe-section='extzToolList'></div>" + "</div>" + "</div>");
     this.dropDown = ControlBar.node.find("#toolsCanvas");
