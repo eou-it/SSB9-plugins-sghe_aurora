@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2016 Ellucian Company L.P. and its affiliates.
+ Copyright 2017 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 var NonHierarchicalMenu = (function() {
     return {
@@ -47,6 +47,8 @@ var NonHierarchicalMenu = (function() {
                 section.attr("id", titleId);
                 sectionContent.attr("id",id);
                 sectionContent.attr("aria-label",label);
+                sectionContent.attr("xe-section",id);
+                section.attr("xe-section", id);
                 sectionSpan.text(label);
                 section.append(sectionSpan);
                 this.canvas.append(section);
@@ -112,6 +114,7 @@ var NonHierarchicalMenu = (function() {
             var handlerPostItemClick = this.callbackPostItemClick;
             if (id && label) {
                 item.attr('id', id);
+                item.attr('xe-field',id);
                 itemSpan.text(label);
                 item.attr('tabindex', 0);
                 item.addClass('pointer');
@@ -251,8 +254,9 @@ ProfileMenu.closeMenu = function() {
 var ToolsMenu = Object.create(NonHierarchicalMenu);
 ToolsMenu.initialize = function() {
     ControlBar.node.find('#toolsButton').attr("title", ResourceManager.getString("areas_label_tools_shortcut"));
+    ControlBar.node.find('#toolsButton').attr("xe-section",'extzToolIcon');
     ControlBar.node.find('#toolsButton').find('div div a').text(ResourceManager.getString("areas_label_tools"));
-    ControlBar.node.find('#toolsButton').append("<div id='toolsCanvas'>" + "<div id='toolsMenu' role='menu'><div id='toolsList' class='tools-list'></div>" + "</div>" + "</div>");
+    ControlBar.node.find('#toolsButton').append("<div id='toolsCanvas'>" + "<div id='toolsMenu' role='menu'><div id='toolsList' class='tools-list' xe-section='extzToolList'></div>" + "</div>" + "</div>");
     this.dropDown = ControlBar.node.find("#toolsCanvas");
     this.canvas = ControlBar.node.find('#toolsList');
     this.callbackPostItemClick = toggleToolsMenu;
