@@ -468,12 +468,12 @@ var Navigation = {
             Navigation.initialized = false;
             return;
         }
-        if ( xmldoc.status ) { // means its an XMLHttpRequest object
+        if ( xmldoc.status ) { // means its an XMLHttpRequest object, without XML
             if ( xmldoc.status == 404
                     || xmldoc.status == 500 ) {
                 Navigation.initialize(Navigation.scrollableMenu);
-                return;
             }
+            return;
         }
         var vo = Navigation.loadXML( xmldoc );
         if ( CommonContext.standalone == true ) {
