@@ -89,6 +89,9 @@ var Message ={
     },
     setKeepAliveMessage: function(){
         Messenger.send(Messenger.createKeepAliveMessage(true) );
+    },
+    sendDisplayDashBoardMessage:function(){
+        Messenger.send(M.createActionMessage( "displayLandingPage" ));
     }
 };
 

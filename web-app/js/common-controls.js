@@ -98,7 +98,8 @@ var AuroraHeader =  {
             'ctrl+shift+F', toggleSignInAndSignOut,
             'alt+n', toggleNotificationCenter,
             'alt+l',toggleToolsMenu,
-            'alt+p',toggleProfileMenu
+            'alt+p',toggleProfileMenu,
+            'ctrl+shift+X', toggleDashboard
         ];
         key && key.bind.apply( window, shortcuts );
     },
@@ -187,6 +188,12 @@ function toggleProfileMenu() {
         $('#user').focus();
     }
     return false;
+}
+
+function toggleDashboard() {
+    if (CommonContext.iframe) {
+        Message.sendDisplayDashBoardMessage();
+    }
 }
 
 function toggleToolsMenu() {
