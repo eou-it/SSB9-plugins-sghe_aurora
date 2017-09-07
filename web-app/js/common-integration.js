@@ -84,14 +84,8 @@ var Message ={
     setAppDirtyStatus: function (seamlessDirtyPageNames) {
         Messenger.send(Messenger.createStatusDirtyPagesMessage(seamlessDirtyPageNames));
     },
-    sendSignOutActionMessage:function(){
-        Messenger.send(M.createActionMessage( "signout" ));
-    },
     setKeepAliveMessage: function(){
         Messenger.send(Messenger.createKeepAliveMessage(true) );
-    },
-    sendDisplayDashBoardMessage:function(){
-        Messenger.send(M.createActionMessage( "displayLandingPage" ));
     }
 };
 

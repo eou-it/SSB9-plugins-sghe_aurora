@@ -99,7 +99,12 @@ var AuroraHeader =  {
             'alt+n', toggleNotificationCenter,
             'alt+l',toggleToolsMenu,
             'alt+p',toggleProfileMenu,
-            'ctrl+shift+X', toggleDashboard
+            // AppNav shortcuts
+            'ctrl+shift+X', toggleAppNavDashboard,
+            'ctrl+M', toggleAppNavMenu,
+            'ctrl+shift+Y', toggleAppNavSearch,
+            'ctrl+Y', toggleAppNavRecentlyOpened,
+            'ctrl+shift+L', toggleAppNavHelp
         ];
         key && key.bind.apply( window, shortcuts );
     },
@@ -190,9 +195,38 @@ function toggleProfileMenu() {
     return false;
 }
 
-function toggleDashboard() {
+function toggleAppNavDashboard() {
+    var event = document.createEvent('Event');
     if (CommonContext.iframe) {
-        Message.sendDisplayDashBoardMessage();
+        parent.angular.element('#appNavBody').scope().toggleAppMenuVertical( event, 'dashboard' );
+    }
+}
+
+function toggleAppNavMenu() {
+    var event = document.createEvent('Event');
+    if (CommonContext.iframe) {
+        parent.angular.element('#appNavBody').scope().toggleAppMenuVertical( event, 'menu' );
+    }
+}
+
+function toggleAppNavSearch() {
+    var event = document.createEvent('Event');
+    if (CommonContext.iframe) {
+        parent.angular.element('#appNavBody').scope().toggleAppMenuVertical( event, 'search' );
+    }
+}
+
+function toggleAppNavRecentlyOpened() {
+    var event = document.createEvent('Event');
+    if (CommonContext.iframe) {
+        parent.angular.element('#appNavBody').scope().toggleAppMenuVertical( event, 'recently' );
+    }
+}
+
+function toggleAppNavHelp() {
+    var event = document.createEvent('Event');
+    if (CommonContext.iframe) {
+        parent.angular.element('#appNavBody').scope().toggleAppMenuVertical( event, 'help' );
     }
 }
 
@@ -231,7 +265,7 @@ function signOut(){
 
 function toggleSignInAndSignOut() {
     if(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe){
-        Message.sendSignOutActionMessage();
+        parent.angular.element('#appNavBody').scope().logoutAppNav('signout');
     }else{
         if ($('#signInButton').length > 0) {
             signIn();
