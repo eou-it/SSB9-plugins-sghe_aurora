@@ -47,9 +47,13 @@ function Button(id, label, callback, type) {
 
 var AuroraHeader =  {
     createSkeleton: function () {
+        var bannerMenuDiv = "";
+        if (!(CommonContext.hideSSBHeaderComps=='true'&& CommonContext.iframe)) {
+            bannerMenuDiv = "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer'></div></div>"
+        }
         var header ="<header id='header-main-section' class='aurora-theme' role='banner'>"
             + "<div id='header-main-section-west-part'>"
-            + "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer'></div></div>"
+            + bannerMenuDiv
             + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'></a></div>"
             + "</header>";
 
