@@ -76,13 +76,15 @@ var Messenger = {
 };
 
 
-
 var Message ={
     setStatusMessage: function(message){
         Messenger.send(Messenger.createStatusMessage("opened:"+message));
     },
     setAppDirtyStatus: function (seamlessDirtyPageNames) {
         Messenger.send(Messenger.createStatusDirtyPagesMessage(seamlessDirtyPageNames));
+    },
+    sendSignOutActionMessage:function(){
+        Messenger.send(M.createActionMessage("signout"));
     },
     setKeepAliveMessage: function(){
         Messenger.send(Messenger.createKeepAliveMessage(true) );

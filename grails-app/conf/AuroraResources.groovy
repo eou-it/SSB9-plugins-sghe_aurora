@@ -18,6 +18,7 @@ modules = {
         resource url:[plugin: 'sghe-aurora', file: 'js/common-navigation.js']
         resource url:[plugin: 'sghe-aurora', file: 'js/common-platform.js']
         resource url:[plugin: 'sghe-aurora', file: 'css/aurora-theme.css'], attrs:[media:'screen, projection']
+        resource url:[plugin: 'sghe-aurora', file: 'js/appnav-keyboard-shortcuts.js']
     }
 
     'aurora' {
