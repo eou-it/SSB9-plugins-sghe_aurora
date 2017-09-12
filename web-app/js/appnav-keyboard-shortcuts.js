@@ -1,5 +1,14 @@
-$(document).ready(function(){
+/*********************************************************************************
+ Copyright 2017 Ellucian Company L.P. and its affiliates.
+ **********************************************************************************/
+$(document).ready(function () {
     var shortCutKeys = {};
+    var y = 89;
+    var x = 88;
+    var m = 77;
+    var l = 76;
+    var ctrlKey = 17;
+    var shiftKey = 16;
 
     $(document).keydown(function (e) {
         shortCutKeys[e.which] = true;
@@ -11,24 +20,10 @@ $(document).ready(function(){
         shortCutKeys = {};
     });
 
-    var y = 89;
-    var x = 88;
-    var m = 77;
-    var l = 76;
-    var ctrlKey = 17;
-    var shiftKey = 16;
-
     function checkKeys(event) {
         event = event || window.event;
 
         if (CommonContext.iframe) {
-            if ($.browser.msie && shortCutKeys[y] && shortCutKeys[ctrlKey] && shortCutKeys[shiftKey]) {
-                event.preventDefault();
-                event.stopPropagation();
-                event.returnValue = false;
-                Messenger.send(M.createActionMessage("displaySearchInput"));
-            }
-
             var dashboard = shortCutKeys[x] && shortCutKeys[ctrlKey] && shortCutKeys[shiftKey];
             var menuBar = shortCutKeys[m] && shortCutKeys[ctrlKey];
             var recentlyOpened = shortCutKeys[y] && shortCutKeys[ctrlKey];
@@ -36,19 +31,29 @@ $(document).ready(function(){
             var displaySearch = shortCutKeys[y] && shortCutKeys[ctrlKey] && shortCutKeys[shiftKey];
 
             if (dashboard) {
-                Messenger.send(M.createActionMessage("displayLandingPage"));
+                event.preventDefault();
+                event.stopPropagation();
+                Messenger.send(M.createActionMessage("showlandingpage"));
             }
             if (menuBar) {
-                Messenger.send(M.createActionMessage("displayMenu"));
+                event.preventDefault();
+                event.stopPropagation();
+                Messenger.send(M.createActionMessage("browsemenu"));
             }
             if (recentlyOpened) {
-                Messenger.send(M.createActionMessage("displayRecentlyOpened"));
+                event.preventDefault();
+                event.stopPropagation();
+                Messenger.send(M.createActionMessage("openitemsmenu"));
             }
             if (displayHelp) {
-                Messenger.send(M.createActionMessage("displayHelp"));
+                event.preventDefault();
+                event.stopPropagation();
+                Messenger.send(M.createActionMessage("help"));
             }
             if (displaySearch) {
-                Messenger.send(M.createActionMessage("displaySearchInput"));
+                event.preventDefault();
+                event.stopPropagation();
+                Messenger.send(M.createActionMessage("searchinput"));
             }
         }
     }
