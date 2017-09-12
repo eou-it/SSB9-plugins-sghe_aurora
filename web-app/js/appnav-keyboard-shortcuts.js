@@ -3,16 +3,16 @@
  **********************************************************************************/
 $(document).ready(function () {
     var shortCutKeys = {};
-    var y = 89;
-    var x = 88;
-    var m = 77;
-    var l = 76;
+    var y = 'Y'.charCodeAt(0);
+    var x = 'X'.charCodeAt(0);
+    var m = 'M'.charCodeAt(0);
+    var l = 'L'.charCodeAt(0);
     var ctrlKey = 17;
     var shiftKey = 16;
 
     $(document).keydown(function (e) {
         shortCutKeys[e.which] = true;
-        checkKeys();
+        checkKeys(e);
     });
 
     $(document).keyup(function (e) {
