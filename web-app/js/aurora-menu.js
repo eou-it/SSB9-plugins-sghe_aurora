@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2016 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2017 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 function ScrollableMenuTable(root, menuList) {
@@ -147,6 +147,9 @@ function ScrollableMenuTable(root, menuList) {
 
         function _fnOpenUpSubMenu(target) {
             var menuName = $(target).attr('id');
+            if (menuName.indexOf('/') !== -1) {
+                menuName = menuName.split('/').join('&#47;');
+            }
             if(_isNotOriginMenu(menuName)){
                 _that.load(menuName);
             } else {
