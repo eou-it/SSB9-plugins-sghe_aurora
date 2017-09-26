@@ -312,30 +312,38 @@ function ScrollableMenuTable(root, menuList) {
 
                 var id = item + SPLIT_CHAR + x;
                 var columnIndex = next.parents('.columns:first').index() + 1;
-                if ((list[x] instanceof Array || list[x]['type'] == 'MENU') && x != Navigation.nonLeafNavEntryValObjKey) {
-                    var liCaption = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['caption'];
-                    var liTitle = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['title'];
-                    menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='"+columnIndex+"'>"
-                        +"<div class='menu-item menu-common'>"
-                        +"<div class='menu-text menu-common'> <span class='menu-common' title=\"" + liTitle + "\">" +liCaption+"</span></div>"
-                        +"<div class='menu-icon menu-common'></div>"
-                        +"</div>";
-                    next.append(menuItem);
-                } else if (list[x] instanceof NavigationEntryValueObject) {
-                    if (x != Navigation.nonLeafNavEntryValObjKey) {
-                        var navItem = list[x];
-                        var liCaption = _that.getCaption(list[x])['caption'];
-                        var liTitle = _that.getCaption(list[x])['title'];
-                        menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
-                            +"<div class='menu-item menu-common menu-leaf-node'>"
-                            +"<div class='menu-text menu-common'> <span title=\"" + liTitle + "\">"
-                            +"<a class='menu-common' href=\"" + navItem.url + "\">"+liCaption+"</a>"
-                            +"</span></div>"
-                            +"</div>";
-                        next.append(menuItem);
+                if (((x != Navigation.nonLeafNavEntryValObjKey)) && ((list[x]['type'] == 'FORM') || (list[x].nonLeafNavEntryValObjKey["type"] == 'FORM') )) {
+                    var navItem = list[x];
+                    var liCaption = _that.getCaption( list[x] )['caption'];
+                    if (liCaption == undefined) {
+                        liCaption = _that.getCaption( list[x][Navigation.nonLeafNavEntryValObjKey] )['caption'];
                     }
+                    var liTitle = _that.getCaption( list[x] )['title'];
+                    if (liTitle == undefined) {
+                        liTitle = _that.getCaption( list[x][Navigation.nonLeafNavEntryValObjKey] )['title'];
+                    }
+                    menuItem = "<li id='" + id + "' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
+                        + "<div class='menu-item menu-common menu-leaf-node'>"
+                        + "<div class='menu-text menu-common'> <span title=\"" + liTitle + "\">"
+                        + "<a class='menu-common' href=\"" + navItem.url + "\">" + liCaption + "</a>"
+                        + "</span></div>"
+                        + "</div>";
+                    next.append( menuItem );
+                    Navigation.removeNavigationEntry( list[x].name );
+
+                } else if ((x != Navigation.nonLeafNavEntryValObjKey) && ((list[x]['type'] == 'MENU') || (list[x].nonLeafNavEntryValObjKey["type"] == 'MENU') )) {
+                    var liCaption = _that.getCaption( list[x][Navigation.nonLeafNavEntryValObjKey] )['caption'];
+                    var liTitle = _that.getCaption( list[x][Navigation.nonLeafNavEntryValObjKey] )['title'];
+                    menuItem = "<li id='" + id + "' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='" + columnIndex + "'>"
+                        + "<div class='menu-item menu-common'>"
+                        + "<div class='menu-text menu-common'> <span class='menu-common' title=\"" + liTitle + "\">" + liCaption + "</span></div>"
+                        + "<div class='menu-icon menu-common'></div>"
+                        + "</div>";
+                    next.append( menuItem );
+                } else if (x == Navigation.nonLeafNavEntryValObjKey) {
+                    continue;
                 } else {
-                    ErrorManager.show("Unknown entry encountered.");
+                    ErrorManager.show( "Unknown entry encountered." );
                 }
             }
 
