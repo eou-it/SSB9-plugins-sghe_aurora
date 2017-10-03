@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015-2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2017 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 function ScrollableMenuTable(root, menuList) {
@@ -92,9 +92,20 @@ function ScrollableMenuTable(root, menuList) {
         };
 
 
-
+        function replaceMenuName(_menuName){
+            if(_menuName.includes("&#47;")){
+                //liCaption = liCaption.replace("&#47;", "/");
+                _menuName = _menuName.replace(/&#47;/g, "/");
+            }
+            return _menuName;
+        }
         function _fnGetSelectedMenuName(){
+
             var menuName = currentSelectedMenuFullPath;
+            if(menuName.includes("&#47;")){
+                //liCaption = liCaption.replace("&#47;", "/");
+                menuName = menuName.replace(/&#47;/g, "/");
+            }
             menuName = menuName.substr(menuName.lastIndexOf(SPLIT_CHAR));
             menuName = menuName.replace(SPLIT_CHAR,"");
             return menuName;
@@ -147,6 +158,12 @@ function ScrollableMenuTable(root, menuList) {
 
         function _fnOpenUpSubMenu(target) {
             var menuName = $(target).attr('id');
+              /* if( menuName.includes("&lt")){
+                   menuName.split('&lt;').join('<');
+               }
+            if( menuName.includes("&gt")){
+                menuName.split('&gt').join('>');
+            }*/
             if (menuName.indexOf('/') !== -1) {
                 menuName = menuName.split('/').join('&#47;');
             }
@@ -252,6 +269,21 @@ function ScrollableMenuTable(root, menuList) {
 
         function _fnMenuInitialize(len){
             var menu = _that.getMenuList();
+            //console.log(menu.Banner["Advancement Officers"])
+            /*for(var i in menu.Banner)
+            {
+                var mn=menu.Banner[i].name;
+                console.log(mn);
+                if( menu.Banner[i].name.includes("&lt")){
+                    menu.Banner[i].name.split('&lt;').join('<');
+                }
+                if( menu.Banner[i].name.includes("&gt")){
+                    menu.Banner[i].name.split('&gt').join('>');
+                }
+                /!*if (menu.Banner[i].name.indexOf('&#47;') !== -1) {
+                    menu.Banner[i].name = menu.Banner[i].name.split('&#47;').join('/');
+                }*!/
+            }*/
             $('#menuList> li').remove();
             for (var x in menu) {
                 if (typeof menu[x] == "function") {
@@ -314,9 +346,18 @@ function ScrollableMenuTable(root, menuList) {
                 }
 
                 var id = item + SPLIT_CHAR + x;
+                /*if(id.includes("&#47;")){
+                    //liCaption = liCaption.replace("&#47;", "/");
+                    id = id.replace(/&#47;/g, "/");
+                }*/
                 var columnIndex = next.parents('.columns:first').index() + 1;
                 if ((list[x] instanceof Array || list[x]['type'] == 'MENU') && x != Navigation.nonLeafNavEntryValObjKey) {
                     var liCaption = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['caption'];
+                    console.log(liCaption)
+                    if(liCaption.includes("&#47;")){
+                        //liCaption = liCaption.replace("&#47;", "/");
+                        liCaption = liCaption.replace(/&#47;/g, "/");
+                    }
                     var liTitle = _that.getCaption(list[x][Navigation.nonLeafNavEntryValObjKey])['title'];
                     menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='"+columnIndex+"'>"
                         +"<div class='menu-item menu-common'>"
@@ -328,6 +369,10 @@ function ScrollableMenuTable(root, menuList) {
                     if (x != Navigation.nonLeafNavEntryValObjKey) {
                         var navItem = list[x];
                         var liCaption = _that.getCaption(list[x])['caption'];
+                        if(liCaption.includes("&#47;")){
+                            liCaption = liCaption.replace(/&#47;/g, "/");
+                        }
+                        console.log(liCaption)
                         var liTitle = _that.getCaption(list[x])['title'];
                         menuItem = "<li id='"+ id +"' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
                             +"<div class='menu-item menu-common menu-leaf-node'>"
@@ -356,8 +401,7 @@ function ScrollableMenuTable(root, menuList) {
             var parentMenu = _fnGetParentMenuPath();
             var backButton = "<li id='"+parentMenu+"' class='scrollableListFolder menu-common' tabindex='0'><div class='menu-item'>"
                 +"<div class='menu-back-icon menu-common'></div><div class='menu-subheader-text menu-common'>"
-                +"<span class='menu-common' title="+subMenuName+"><a href='#' id='backButton'>"+subMenuName+"</a></span></div>"
-                +"</div>"
+                +"<span class='menu-common' title=\"" + subMenuName + "\"><a href='#' id='backButton'>"+subMenuName+"</a></span></div>"
             return backButton;
         };
 
