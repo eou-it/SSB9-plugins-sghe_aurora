@@ -68,7 +68,7 @@ var ContentManager = {
         ContentManager.calculateContentHeight();
 
         if($('meta[name=menuBaseURL]').attr("content")){
-           ContentManager.processor = $('meta[name=menuBaseURL]').attr("content") + '/';
+           ContentManager.processor = $('meta[name=menuBaseURL]').attr("content") + '||';
         }
 
     },
@@ -164,7 +164,7 @@ var ContentManager = {
         if ( item
                 && item.navigationEntry instanceof NavigationEntryValueObject ) {
             if ( FragmentManager ) {
-                FragmentManager.set( item.navigationEntry.menu + "/" + item.navigationEntry.caption + "/" + this.getCUIP( name ) );
+                FragmentManager.set( item.navigationEntry.menu + "||" + item.navigationEntry.caption + "||" + this.getCUIP( name ) );
             }
 
             this.setTitle( item.navigationEntry.caption );
@@ -479,7 +479,7 @@ var Navigation = {
         if ( CommonContext.standalone == true ) {
             var nav = vo[0];
             if ( nav != null ) {
-                var location = nav.menu.split( "/" );
+                var location = nav.menu.split( "||" );
 
                 Navigation.removeParent( location );
 
@@ -526,7 +526,7 @@ var Navigation = {
             var nav = vo[0];
             if ( nav != null ) {
 //                nav.menu = Navigation.feedKeys[Navigation.feedEndpointIndex] + "/" + nav.menu;
-                var location = nav.menu.split( "/" );
+                var location = nav.menu.split( "||" );
 
                 Navigation.removeParent( location );
 
@@ -581,13 +581,13 @@ var Navigation = {
             if ( Navigation.parentMenu != null && CommonContext.standalone == true ) {
                 if ( Navigation.parentMenu.menu == "" || Navigation.parentMenu.menu == null ) {
                     nav.menu = Navigation.parentMenu.caption;
-                    var arr = Navigation.parentMenu.path.split( "/" );
-                    nav.path = "/" + arr[1] + "/" + nav.path;
+                    var arr = Navigation.parentMenu.path.split( "||" );
+                    nav.path = "||" + arr[1] + "||" + nav.path;
 
                 } else {
-                    nav.menu = Navigation.parentMenu.menu + "/" + Navigation.parentMenu.caption;
-                    var arr = Navigation.parentMenu.path.split( "/" );
-                    nav.path = "/" + arr[1] + "/" + nav.path;
+                    nav.menu = Navigation.parentMenu.menu + "||" + Navigation.parentMenu.caption;
+                    var arr = Navigation.parentMenu.path.split( "||" );
+                    nav.path = "||" + arr[1] + "||" + nav.path;
                 }
                 nav.port = Navigation.parentMenu.port;
                 nav.protocol = Navigation.parentMenu.protocol;
@@ -636,7 +636,7 @@ var Navigation = {
             return;
         }
 
-        var location = nav.menu.split( "/" );
+        var location = nav.menu.split( "||" );
 
         Navigation.recurseMenuStructureStandAlone( location, nav );
     },
@@ -809,7 +809,7 @@ var Navigation = {
             return false;
         }
 
-        if ( name.indexOf( "/" ) != -1 ) {
+        if ( name.indexOf( "||" ) != -1 ) {
             return Navigation.pathFindNavigationEntry( name );
         } else {
             return Navigation.recurseFindNavigationEntry( Navigation.menuList, name );
@@ -823,10 +823,10 @@ var Navigation = {
      * @return {NavigationEntryValueObject} The found navigation entry.
      */
     pathFindNavigationEntry: function( name ) {
-        var leaf = name.substring( name.lastIndexOf( "/" ) + 1 );
-        var branch = name.substring( 0, name.lastIndexOf( "/" ) );
+        var leaf = name.substring( name.lastIndexOf( "||" ) + 1 );
+        var branch = name.substring( 0, name.lastIndexOf( "||" ) );
 
-        var hierarchy = branch.split( "/" );
+        var hierarchy = branch.split( "||" );
 
         var tmpArray = Navigation.menuList;
 
@@ -1043,7 +1043,7 @@ var Navigation = {
                 var endpoint = Application.getApplicationPath()
                     + ep;
             }
-            endpoint = endpoint + "?menuName=" + navEntry.form + "&menu="+ encodeURIComponent(navEntry.menu) + "/" + encodeURIComponent(navEntry.name) + "&seq=" + navEntry.id;
+            endpoint = endpoint + "?menuName=" + navEntry.form + "&menu="+ encodeURIComponent(navEntry.menu) + "||" + encodeURIComponent(navEntry.name) + "&seq=" + navEntry.id;
 
             Navigation.removeNavigationEntry( navEntry.name );
 //            Navigation.parentMenu = navEntry;
@@ -1051,8 +1051,8 @@ var Navigation = {
 
 	  	} else {
             if ( navEntry.options == "" || navEntry.options == null ) {
-                var tempArr = navEntry.path.split( "/" );
-                var ep = Navigation.standaloneEndpoints[0] + "/" + tempArr[tempArr.length - 1] + "/" + CommonContext.udcid;
+                var tempArr = navEntry.path.split( "||" );
+                var ep = Navigation.standaloneEndpoints[0] + "||" + tempArr[tempArr.length - 1] + "||" + CommonContext.udcid;
                 /*var endpoint = window.location.protocol + "//"
                         + window.location.host + ep;*/
                 var endpoint = Application.getApplicationPath()
@@ -1062,7 +1062,7 @@ var Navigation = {
 			} else {
 
                 var temp = navEntry.options.substring( navEntry.options.lastIndexOf( "=" ) + 1 )
-					var ep = Navigation.standaloneEndpoints[0] + "/" + temp + "/" + CommonContext.udcid;
+					var ep = Navigation.standaloneEndpoints[0] + "||" + temp + "||" + CommonContext.udcid;
 					/*var endpoint = window.location.protocol + "//"
 							+ window.location.host + ep;*/
                     var endpoint = Application.getApplicationPath()
@@ -1232,7 +1232,7 @@ var OpenItems = {
      */
     add: function( openItem ) {
         var found = false;
-        var category = openItem.navigationEntry.menu.substring( openItem.navigationEntry.menu.lastIndexOf( "/" ) + 1 );
+        var category = openItem.navigationEntry.menu.substring( openItem.navigationEntry.menu.lastIndexOf( "||" ) + 1 );
         var name = openItem.navigationEntry.name + "_" + openItem.cuipid;
         var tab = name + this.openItemMarker;
 
