@@ -324,10 +324,15 @@ function ScrollableMenuTable(root, menuList) {
                     if (liTitle == undefined) {
                         liTitle = _that.getCaption( list[x][Navigation.nonLeafNavEntryValObjKey] )['title'];
                     }
+                    if(navItem.url == undefined){
+                        navItem.url = (list[x][Navigation.nonLeafNavEntryValObjKey]).url;
+                    }
+
                     if (liTitle.match(/<(\w+)((?:\s+\w+(?:\s*=\s*(?:(?:"[^"]*")|(?:'[^']*')|[^>\s]+))?)*)\s*(\/?)>/)) {
                         var regex = /(<([^>]+)>)/ig;
                         liTitle = liTitle.replace(regex, "");
                     }
+
                     menuItem = "<li id='" + id + "' class='scrollableListFolder menu-common' tabindex='0' role='treeitem' aria-expanded='false' aria-level='1'>"
                         + "<a class='menu-common' href=\"" + navItem.url + "\">"
                         + "<div class='menu-item menu-common menu-leaf-node'>"
