@@ -69,7 +69,8 @@ var Messenger = {
                     }
                 }
             });
-
+        } else if (message.type =='request' &&  message.request == 'clearShortCutKeys') {
+            shortCutKeys = {};
         }
 
     }
@@ -103,6 +104,7 @@ var Message ={
 
 
 var timer = "";
+var shortCutKeys = {};
 $(document.body).ready(function(){
     if(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe) {
         var checkLocalActivity = function () {
@@ -130,7 +132,6 @@ $(document.body).ready(function(){
 
 
         // Start -- Sending message to handle AppNav Keyboard shortcuts.
-        var shortCutKeys = {};
         var y = 'Y'.charCodeAt(0);
         var x = 'X'.charCodeAt(0);
         var m = 'M'.charCodeAt(0);
