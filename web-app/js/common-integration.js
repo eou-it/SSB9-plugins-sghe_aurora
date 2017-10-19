@@ -69,10 +69,7 @@ var Messenger = {
                     }
                 }
             });
-        } else if (message.type =='request' &&  message.request == 'clearShortCutKeys') {
-            shortCutKeys = {};
         }
-
     }
 };
 
@@ -132,64 +129,34 @@ $(document.body).ready(function(){
 
 
         // Start -- Sending message to handle AppNav Keyboard shortcuts.
-        var y = 'Y'.charCodeAt(0);
-        var x = 'X'.charCodeAt(0);
-        var m = 'M'.charCodeAt(0);
-        var l = 'L'.charCodeAt(0);
-        var ctrlKey = 17;
-        var shiftKey = 16;
-
-        $(document).keydown(function ($event) {
-            shortCutKeys[$event.which] = true;
-            checkKeys($event);
-        });
-
-        $(document).keyup(function ($event) {
-            delete shortCutKeys[$event.which];
-            shortCutKeys = {};
-        });
+        $("body").live("keydown", focusBackToBrowseMenu);
 
         function stopBrowserShortCutKeys($event) {
             $event.preventDefault();
             $event.stopPropagation();
         }
 
-        function sendActionMessage(message) {
-            Messenger.send(M.createActionMessage(message));
-        }
-
-        function checkKeys($event) {
-            $event = $event || window.event;
-
-            if (CommonContext.iframe) {
-                var dashboard = shortCutKeys[x] && shortCutKeys[ctrlKey] && shortCutKeys[shiftKey];
-                var menuBar = shortCutKeys[m] && shortCutKeys[ctrlKey];
-                var recentlyOpened = shortCutKeys[y] && shortCutKeys[ctrlKey];
-                var displayHelp = shortCutKeys[l] && shortCutKeys[ctrlKey] && shortCutKeys[shiftKey];
-                var displaySearch = shortCutKeys[y] && shortCutKeys[ctrlKey] && shortCutKeys[shiftKey];
-
-                if (dashboard) {
-                    stopBrowserShortCutKeys($event);
-                    sendActionMessage("showDashboard")
-                }
-                if (menuBar) {
-                    stopBrowserShortCutKeys($event);
-                    sendActionMessage("browsemenu")
-                }
-                if (recentlyOpened) {
-                    stopBrowserShortCutKeys($event);
-                    sendActionMessage("openitemsmenu")
-                }
-                if (displayHelp) {
-                    stopBrowserShortCutKeys($event);
-                    sendActionMessage("help")
-                }
-                if (displaySearch) {
-                    stopBrowserShortCutKeys($event);
-                    sendActionMessage("searchinput")
-                }
+        function focusBackToBrowseMenu($event) {
+            if ($event.ctrlKey == true && $event.keyCode == 77) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("browsemenu"));
+            } else if ($event.ctrlKey == true && $event.shiftKey == false && $event.keyCode == 89) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("openitemsmenu"));
+            } else if ($event.ctrlKey == true && $event.shiftKey == true && $event.keyCode == 76) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("help"));
+            } else if ($event.ctrlKey == true && $event.shiftKey == true && $event.keyCode == 89) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("searchinput"));
+            } else if ($event.ctrlKey == true && $event.shiftKey == true && $event.keyCode == 70) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("signout"));
+            } else if ($event.ctrlKey == true && $event.shiftKey == true && $event.keyCode == 88) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("showDashboard"));
             }
-        }
+        };
         // End -- Sending message to handle AppNav Keyboard shortcuts.
     }
 });
