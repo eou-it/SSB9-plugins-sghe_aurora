@@ -101,7 +101,6 @@ var Message ={
 
 
 var timer = "";
-var shortCutKeys = {};
 $(document.body).ready(function(){
     if(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe) {
         var checkLocalActivity = function () {
