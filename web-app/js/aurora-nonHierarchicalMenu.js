@@ -262,6 +262,13 @@ ToolsMenu.initialize = function() {
     this.callbackPostItemClick = toggleToolsMenu;
     ControlBar.node.find('#tools').bind("click", toggleToolsMenu);
 
+    ToolsMenu.addItem(
+        "Preference",
+        $.i18n.prop("aurora.user_preferences_label"),
+        "",
+        userPreferencePopup
+    );
+
     try{
         if(angular.module("aboutModal")){
 
@@ -293,6 +300,20 @@ function aboutDialogPopUp () {
     }
     scope.$apply(function(){
         scope.toggleModal();
+    })
+}
+
+
+function userPreferencePopup() {
+    var scope = angular.element(document.getElementById('userPreferenceDiv')).scope();
+    if(!scope){
+        angular.element(document.getElementById('userPreferenceDiv')).ready(function() {
+            angular.bootstrap(document.getElementById('userPreferenceDiv'), ['userPreference']);
+        });
+        scope = angular.element(document.getElementById('userPreferenceDiv')).scope();
+    }
+    scope.$apply(function(){
+        scope.togglepopup();
     })
 }
 ToolsMenu.closeMenu = function() {
