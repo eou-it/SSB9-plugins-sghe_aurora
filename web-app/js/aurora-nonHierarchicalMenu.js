@@ -262,12 +262,15 @@ ToolsMenu.initialize = function() {
     this.callbackPostItemClick = toggleToolsMenu;
     ControlBar.node.find('#tools').bind("click", toggleToolsMenu);
 
-    ToolsMenu.addItem(
-        "Preference",
-        $.i18n.prop("aurora.user_preferences_label"),
-        "",
-        userPreferencePopup
-    );
+    if (null != document.getElementById("userPreferenceDiv") && undefined != document.getElementById("userPreferenceDiv") && window.Application.isUserAuthenticated()) {
+        ToolsMenu.addItem(
+            "Preference",
+            $.i18n.prop("aurora.user_preferences_label"),
+            "",
+            userPreferencePopup
+        );
+    }
+
 
     try{
         if(angular.module("aboutModal")){
