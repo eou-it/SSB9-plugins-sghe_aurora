@@ -263,14 +263,15 @@ ToolsMenu.initialize = function() {
     ControlBar.node.find('#tools').bind("click", toggleToolsMenu);
 
     //conditions for displaying the preference window - HRU-7471
-    /*if (null != document.getElementById("userPreferenceDiv") && undefined != document.getElementById("userPreferenceDiv") && window.Application.isUserAuthenticated()) {*/
+    if (null != document.getElementById("userPreferenceDiv") && undefined != document.getElementById("userPreferenceDiv") && window.Application.isUserAuthenticated()) {
         ToolsMenu.addItem(
             "Preference",
-            $.i18n.prop("aurora.user_preferences_label"),
+            $.i18n.prop("userpreference.popup.language.heading"),
             "",
             userPreferencePopup
         );
-    /*}*/
+    }
+
 
     try{
         if(angular.module("aboutModal")){
