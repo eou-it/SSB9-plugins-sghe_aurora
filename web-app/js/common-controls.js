@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2009-2016 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2017 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 /**
@@ -223,9 +223,9 @@ function signOut(){
 }
 
 function toggleSignInAndSignOut() {
-    if(CommonContext.hideSSBHeaderComps=='true' && CommonContext.iframe){
+    if(CommonContext.hideSSBHeaderComps == 'true' && CommonContext.iframe) {
         Message.sendSignOutActionMessage();
-    }else{
+    } else{
         if ($('#signInButton').length > 0) {
             signIn();
         } else {

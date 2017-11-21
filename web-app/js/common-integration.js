@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2017 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 
@@ -69,12 +69,9 @@ var Messenger = {
                     }
                 }
             });
-
         }
-
     }
 };
-
 
 
 var Message ={
@@ -85,7 +82,7 @@ var Message ={
         Messenger.send(Messenger.createStatusDirtyPagesMessage(seamlessDirtyPageNames));
     },
     sendSignOutActionMessage:function(){
-        Messenger.send(M.createActionMessage( "signout" ));
+        Messenger.send(M.createActionMessage("signout"));
     },
     setKeepAliveMessage: function(){
         Messenger.send(Messenger.createKeepAliveMessage(true) );
@@ -128,6 +125,38 @@ $(document.body).ready(function(){
         }).ajaxSend(function() {
             CommonContext.keepAlive=true;
         });
+
+
+        // Start -- Sending message to handle AppNav Keyboard shortcuts.
+        $("body").live("keydown", focusBackToBrowseMenu);
+
+        function stopBrowserShortCutKeys($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+        }
+
+        function focusBackToBrowseMenu($event) {
+            if ($event.ctrlKey == true && $event.keyCode == 77) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("browsemenu"));
+            } else if ($event.ctrlKey == true && $event.shiftKey == false && $event.keyCode == 89) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("openitemsmenu"));
+            } else if ($event.ctrlKey == true && $event.shiftKey == true && $event.keyCode == 76) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("help"));
+            } else if ($event.ctrlKey == true && $event.shiftKey == true && $event.keyCode == 89) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("searchinput"));
+            } else if ($event.ctrlKey == true && $event.shiftKey == true && $event.keyCode == 70) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("signout"));
+            } else if ($event.ctrlKey == true && $event.shiftKey == true && $event.keyCode == 88) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("showDashboard"));
+            }
+        };
+        // End -- Sending message to handle AppNav Keyboard shortcuts.
     }
 });
 
