@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2017 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 var NonHierarchicalMenu = (function() {
     return {
@@ -262,6 +262,17 @@ ToolsMenu.initialize = function() {
     this.callbackPostItemClick = toggleToolsMenu;
     ControlBar.node.find('#tools').bind("click", toggleToolsMenu);
 
+    //conditions for displaying the preference window - HRU-7471
+    if (null != document.getElementById("userPreferenceDiv") && undefined != document.getElementById("userPreferenceDiv") && window.Application.isUserAuthenticated()) {
+        ToolsMenu.addItem(
+            "Preference",
+            $.i18n.prop("userpreference.popup.language.heading"),
+            "",
+            userPreferencePopup
+        );
+    }
+
+
     try{
         if(angular.module("aboutModal")){
 
@@ -293,6 +304,20 @@ function aboutDialogPopUp () {
     }
     scope.$apply(function(){
         scope.toggleModal();
+    })
+}
+
+
+function userPreferencePopup() {
+    var scope = angular.element(document.getElementById('userPreferenceDiv')).scope();
+    if(!scope){
+        angular.element(document.getElementById('userPreferenceDiv')).ready(function() {
+            angular.bootstrap(document.getElementById('userPreferenceDiv'), ['userPreference']);
+        });
+        scope = angular.element(document.getElementById('userPreferenceDiv')).scope();
+    }
+    scope.$apply(function(){
+        scope.togglepopup();
     })
 }
 ToolsMenu.closeMenu = function() {
