@@ -158,13 +158,14 @@ var NonHierarchicalMenu = (function() {
                         var nextElem = getNextTabbableElement($(currentTarget), $(container));
                         if (!isTabNavigation(currentTarget) && nextElem.length ) {
                             nextElem.focus();
-
+                            e.preventDefault();
                         }
                         break;
                     case KEY_CODE.UP_ARROW:
                         var prevElem = getPreviousTabbableElement($(currentTarget), $(container));
                         if (!isTabNavigation(currentTarget) && prevElem.length) {
                             prevElem.focus();
+                            e.preventDefault();
                         }
                         break;
                     case KEY_CODE.ENTER:
@@ -182,7 +183,7 @@ var NonHierarchicalMenu = (function() {
                         }
                         break;
                 }
-                return true;
+                return false;
             }
 
             function _fnAction(e) {
