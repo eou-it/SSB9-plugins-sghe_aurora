@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015-2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 var NonHierarchicalMenu = (function() {
     return {
@@ -264,13 +264,19 @@ ToolsMenu.initialize = function() {
     ControlBar.node.find('#tools').bind("click", toggleToolsMenu);
 
     //conditions for displaying the preference window - HRU-7471
-    if (null != document.getElementById("userPreferenceDiv") && undefined != document.getElementById("userPreferenceDiv") && window.Application.isUserAuthenticated()) {
-        ToolsMenu.addItem(
-            "Preference",
-            $.i18n.prop("userpreference.popup.language.heading"),
-            "",
-            userPreferencePopup
-        );
+    try {
+        if (angular.module("xe-ui-components")) {
+            if (null != document.getElementById("userPreferenceDiv") && undefined != document.getElementById("userPreferenceDiv") && window.Application.isUserAuthenticated()) {
+                ToolsMenu.addItem(
+                    "Preference",
+                    $.i18n.prop("userpreference.popup.language.heading"),
+                    "",
+                    userPreferencePopup
+                );
+            }
+        }
+    } catch (e) {
+        console.log('Not adding language setting menu item because userPreference Module is not found in resource.');
     }
 
 
