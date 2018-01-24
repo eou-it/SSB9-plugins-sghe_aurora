@@ -183,7 +183,7 @@ var NonHierarchicalMenu = (function() {
                         }
                         break;
                 }
-                if (KEY_CODE.TAB) {
+                if (code === KEY_CODE.TAB) {
                     return true;
                 } else {
                     return false;
