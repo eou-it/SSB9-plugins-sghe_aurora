@@ -183,7 +183,11 @@ var NonHierarchicalMenu = (function() {
                         }
                         break;
                 }
-                return false;
+                if (KEY_CODE.TAB) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
             function _fnAction(e) {
@@ -275,7 +279,7 @@ ToolsMenu.initialize = function() {
                 );
             }
     /*    }
-    } catch (e) {s
+    } catch (e) {
         console.log('Not adding language setting menu item because userPreference Module is not found in resource.');
     }*/
 
