@@ -268,8 +268,6 @@ ToolsMenu.initialize = function() {
     ControlBar.node.find('#tools').bind("click", toggleToolsMenu);
 
     //conditions for displaying the preference window - HRU-7471
-    /*try {
-        if (angular.module("xe-ui-components")) {*/
             if (null != document.getElementById("userPreferenceDiv") && undefined != document.getElementById("userPreferenceDiv") && window.Application.isUserAuthenticated()) {
                 ToolsMenu.addItem(
                     "Preference",
@@ -278,10 +276,7 @@ ToolsMenu.initialize = function() {
                     userPreferencePopup
                 );
             }
-    /*    }
-    } catch (e) {
-        console.log('Not adding language setting menu item because userPreference Module is not found in resource.');
-    }*/
+    
 
 
     try{
