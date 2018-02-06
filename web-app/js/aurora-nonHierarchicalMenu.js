@@ -148,7 +148,9 @@ var NonHierarchicalMenu = (function() {
                 //Extend Tools menu item
                 if (typeof xe !== 'undefined' && xe.extensionsFound) {
                     var menuSectionExtns = _.find(xe.extensions.sections, function (section) {
-                        return section.name == sectionId;
+                        if(section.name === sectionId || section.name === 'extzToolList') {
+                            return section.name;
+                        }
                     });
                     if (menuSectionExtns) {
                         menuSectionExtns.fields.forEach(function (field, key) {
