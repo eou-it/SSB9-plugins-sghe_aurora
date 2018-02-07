@@ -328,6 +328,7 @@ function userPreferencePopup() {
         });
         scope = angular.element(document.getElementById('userPreferenceDiv')).scope();
     }
+    scope.showDiv =  true;
     scope.$apply(function(){
         scope.togglepopup();
     })
