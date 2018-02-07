@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2017 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 var NonHierarchicalMenu = (function() {
     return {
@@ -158,13 +158,14 @@ var NonHierarchicalMenu = (function() {
                         var nextElem = getNextTabbableElement($(currentTarget), $(container));
                         if (!isTabNavigation(currentTarget) && nextElem.length ) {
                             nextElem.focus();
-
+                            e.preventDefault();
                         }
                         break;
                     case KEY_CODE.UP_ARROW:
                         var prevElem = getPreviousTabbableElement($(currentTarget), $(container));
                         if (!isTabNavigation(currentTarget) && prevElem.length) {
                             prevElem.focus();
+                            e.preventDefault();
                         }
                         break;
                     case KEY_CODE.ENTER:
@@ -182,7 +183,11 @@ var NonHierarchicalMenu = (function() {
                         }
                         break;
                 }
-                return true;
+                if (code === KEY_CODE.TAB) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
             function _fnAction(e) {
