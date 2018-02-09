@@ -3,7 +3,7 @@ Copyright 2009 - 2017 Ellucian Company L.P. and its affiliates.
 *******************************************************************************/
 class SgheAuroraGrailsPlugin {
     // the plugin version
-    def version = "9.23"
+    def version = "9.26"
     // the version or versions of Grails the plugin is designed for
     def grailsVersion = "2.2.1 > *"
     // the other plugins this plugin depends on
