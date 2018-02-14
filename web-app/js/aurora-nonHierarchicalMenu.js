@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015-2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 var NonHierarchicalMenu = (function() {
     return {
@@ -48,11 +48,23 @@ var NonHierarchicalMenu = (function() {
                 sectionContent.attr("id",id);
                 sectionContent.attr("aria-label",label);
                 sectionContent.attr("xe-section",id);
-                section.attr("xe-section", id);
+                section.attr("xe-for", id);
                 sectionSpan.text(label);
                 section.append(sectionSpan);
                 this.canvas.append(section);
                 this.canvas.append(sectionContent);
+                //Extend Tools menu sections
+                if (typeof xe !== 'undefined' && xe.extensionsFound) {
+                    var menuSection = _.find(xe.extensions.sections, function (section) {
+                        return section.name == id;
+                    });
+                    if (menuSection) {
+                        if(menuSection.exclude) {
+                            section.addClass('xe-exclude');
+                            sectionContent.addClass('xe-exclude');
+                        }
+                    }
+                }
                 return section;
             }
         },
@@ -133,6 +145,23 @@ var NonHierarchicalMenu = (function() {
                     sectionContent.append(item);
                 } else
                     this.canvas.append(item);
+                //Extend Tools menu item
+                if (typeof xe !== 'undefined' && xe.extensionsFound) {
+                    var menuSectionExtns = _.find(xe.extensions.sections, function (section) {
+                        if(section.name === sectionId || section.name === 'extzToolList') {
+                            return section.name;
+                        }
+                    });
+                    if (menuSectionExtns) {
+                        menuSectionExtns.fields.forEach(function (field, key) {
+                            if (field.name === id) {
+                                if (field.exclude) {
+                                    item.addClass('xe-exclude')
+                                }
+                            }
+                        });
+                    }
+                }
                 return item;
             }
 
