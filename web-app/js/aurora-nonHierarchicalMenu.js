@@ -158,13 +158,14 @@ var NonHierarchicalMenu = (function() {
                         var nextElem = getNextTabbableElement($(currentTarget), $(container));
                         if (!isTabNavigation(currentTarget) && nextElem.length ) {
                             nextElem.focus();
-
+                            e.preventDefault();
                         }
                         break;
                     case KEY_CODE.UP_ARROW:
                         var prevElem = getPreviousTabbableElement($(currentTarget), $(container));
                         if (!isTabNavigation(currentTarget) && prevElem.length) {
                             prevElem.focus();
+                            e.preventDefault();
                         }
                         break;
                     case KEY_CODE.ENTER:
@@ -182,7 +183,11 @@ var NonHierarchicalMenu = (function() {
                         }
                         break;
                 }
-                return true;
+                if (code === KEY_CODE.TAB) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
 
             function _fnAction(e) {
@@ -262,14 +267,21 @@ ToolsMenu.initialize = function() {
     this.callbackPostItemClick = toggleToolsMenu;
     ControlBar.node.find('#tools').bind("click", toggleToolsMenu);
 
-    //conditions for displaying the preference window - HRU-7471
-    if (null != document.getElementById("userPreferenceDiv") && undefined != document.getElementById("userPreferenceDiv") && window.Application.isUserAuthenticated()) {
-        ToolsMenu.addItem(
-            "Preference",
-            $.i18n.prop("userpreference.popup.language.heading"),
-            "",
-            userPreferencePopup
-        );
+    try {
+        if (angular.module("xe-ui-components")) {
+            var userPreferenceDiv = document.getElementById('userPreferenceDiv');
+            if (null != userPreferenceDiv && undefined != userPreferenceDiv && window.Application.isUserAuthenticated()) {
+                userPreferenceDiv.setAttribute("ng-controller","PopupCtrl");
+                ToolsMenu.addItem(
+                    "Preference",
+                    $.i18n.prop("userpreference.popup.language.heading"),
+                    "",
+                    userPreferencePopup
+                );
+            }
+        }
+    } catch(e){
+        console.log('Language Setting menu item is not added because xe-ui-components Module is not defined.');
     }
 
 
@@ -316,6 +328,7 @@ function userPreferencePopup() {
         });
         scope = angular.element(document.getElementById('userPreferenceDiv')).scope();
     }
+    scope.showDiv =  true;
     scope.$apply(function(){
         scope.togglepopup();
     })
