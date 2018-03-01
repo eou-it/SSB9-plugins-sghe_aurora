@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2009-2017 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2018 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 /**
@@ -89,7 +89,7 @@ var AuroraHeader =  {
         }
 
         var shortcuts = [
-            'shift+home', function() {
+            'ctrl+alt+home', function() {
                 // click the first link in the home div.
                 // just $().click() doesn't work as the element is not an input
                 $('#branding')[0].click();
