@@ -329,12 +329,9 @@ ToolsMenu.initialize = function() {
         console.log('Not adding About menu item because aboutModal Module is not found in resource.');
     }
 
-    testingModule();
-    shortcutOverlay();
-
     ToolsMenu.addItem(
         "keyboard",
-        "Keyboard",
+        $.i18n.prop("js.keyboard.shortcut.heading"),
         "",
         shortcutOverlayAddition
     );
@@ -363,38 +360,18 @@ function shortcutOverlayAddition(){
     var dialogDiv = document.getElementById('shortcut_module_added');
     dialogDiv.setAttribute("ng-app","keyboardshortcut");
     dialogDiv.setAttribute("ng-controller","shortcutModal");
-    var dialogDiv1 = document.getElementById('testing_module');
-    dialogDiv1.setAttribute("ng-app","testModule");
-    dialogDiv1.setAttribute("ng-controller","testingCtrlModal");
     var scope = angular.element(document.getElementById('shortcut_module_added')).scope();
-    if (!scope) {
-        angular.element(document.getElementById('shortcut_module_added')).ready(function () {
+    if(!scope){
+        angular.element(document.getElementById('shortcut_module_added')).ready(function() {
             angular.bootstrap(document.getElementById('shortcut_module_added'), ['keyboardshortcut']);
-            scope = angular.element(document.getElementById('shortcut_module_added')).scope();
-            scope.helpVisible = true;
-            scope.$apply();
         });
+        scope = angular.element(document.getElementById('shortcut_module_added')).scope();
     }
     scope.$apply(function(){
-        scope.helpVisible = true;
+        scope.toggleshortcut();
     })
 }
 
-
-
-function shortcutOverlay(){
-    var dialogDiv = document.getElementById('shortcut_module_added');
-    dialogDiv.setAttribute("ng-app","keyboardshortcut");
-    dialogDiv.setAttribute("ng-controller","shortcutModal");
-}
-//testingModule();
-//shortcutOverlay();
-
-function testingModule(){
-    var dialogDiv = document.getElementById('testing_module');
-    dialogDiv.setAttribute("ng-app","testModule");
-    dialogDiv.setAttribute("ng-controller","testingCtrlModal");
-}
 
 function userPreferencePopup() {
     var scope = angular.element(document.getElementById('userPreferenceDiv')).scope();
