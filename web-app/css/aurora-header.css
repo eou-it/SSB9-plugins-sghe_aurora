@@ -114,7 +114,7 @@ div#header-east-part-user-controls {
 }
 
 .institutionalBranding {
-    background: url("images/logo.svg") left center  no-repeat;
+    background: url("images/eds/logo.svg") left center  no-repeat;
     height: inherit;
     width: 4.875em;
     float: left;
