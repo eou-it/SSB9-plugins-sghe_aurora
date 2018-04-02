@@ -329,6 +329,7 @@ ToolsMenu.initialize = function() {
         console.log('Not adding About menu item because aboutModal Module is not found in resource.');
     }
 
+    shortcutOverlay();
     ToolsMenu.addItem(
         "keyboard",
         $.i18n.prop("js.keyboard.shortcut.heading"),
@@ -372,6 +373,11 @@ function shortcutOverlayAddition(){
     })
 }
 
+function shortcutOverlay(){
+    var dialogDiv = document.getElementById('shortcut_module_added');
+    dialogDiv.setAttribute("ng-app","keyboardshortcut");
+    dialogDiv.setAttribute("ng-controller","shortcutModal");
+}
 
 function userPreferencePopup() {
     var scope = angular.element(document.getElementById('userPreferenceDiv')).scope();
