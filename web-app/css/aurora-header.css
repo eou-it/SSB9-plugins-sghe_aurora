@@ -7,6 +7,7 @@
     height: 5.859375%;
     position: relative;
     min-height: 3.4em;
+    border-bottom: 4px solid #51ABFF;
 }
 
 #header-east-part-user-controls div{
@@ -33,7 +34,7 @@ div#header-east-part-user-controls {
 }
 
 #header-main-section-east-part{
-    background-color: #5353D1;  /*$color-primary-45*/
+    background-color: rgb(21, 22, 24,0.15);  /*$color-primary-45*/
     right: 0;
     position: absolute;
     left: auto;
@@ -42,7 +43,7 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part #mepDiv  {
     float:left;
-    border-left: 1px #1D5F8C solid;
+    /*border-left: 1px #1D5F8C solid;*/
     margin-right: 1em;
     color: #ffffff;
     font: 1em Open Sans;
@@ -56,7 +57,6 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part #signInButton  {
     float:left;
-    border-left: 1px #1D5F8C solid;
     margin: 0px;
     padding: 0px;
     position: relative;
@@ -70,7 +70,7 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part #userDiv {
     float:left;
-    border-left: 1px #1D5F8C solid;
+    /*border-left: 1px #1D5F8C solid;*/
     margin-right: 1em;
     position: relative;
 }
@@ -92,7 +92,6 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part #toolsButton {
     float:left;
-    border-left: 1px #1D5F8C solid;
     position: relative;
 }
 
@@ -434,18 +433,16 @@ and (max-width: 1024px) {
     }
 
     #header-main-section-east-part #signInButton {
-        border-left: 1px #1D5F8C solid;
         background-color: #5353D1;  /*$color-primary-45*/
     }
 
     #header-main-section-east-part #toolsButton {
-        border-left: 1px #1D5F8C solid;
         padding: 0;
     }
 
     #header-main-section-east-part #userDiv {
         border: none;
-        border-left: 1px #1D5F8C solid;
+        /*border-left: 1px #1D5F8C solid;*/
         background-color: #1B6496;
     }
 
