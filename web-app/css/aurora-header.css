@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2018 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
 *******************************************************************************/
 #header-main-section {
     width: 100%;
@@ -43,7 +43,6 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part #mepDiv  {
     float:left;
-    /*border-left: 1px #1D5F8C solid;*/
     margin-right: 1em;
     color: #ffffff;
     font: 1em Open Sans;
@@ -70,7 +69,6 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part #userDiv {
     float:left;
-    /*border-left: 1px #1D5F8C solid;*/
     margin-right: 1em;
     position: relative;
 }
@@ -442,7 +440,6 @@ and (max-width: 1024px) {
 
     #header-main-section-east-part #userDiv {
         border: none;
-        /*border-left: 1px #1D5F8C solid;*/
         background-color: #1B6496;
     }
 
