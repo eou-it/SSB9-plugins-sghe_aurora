@@ -440,7 +440,7 @@ and (max-width: 1024px) {
 
     #header-main-section-east-part #userDiv {
         border: none;
-        background-color: #1B6496;
+        background-color: rgb(21,22,24,0.15);
     }
 
     #header-main-section-east-part #toolsDiv {
