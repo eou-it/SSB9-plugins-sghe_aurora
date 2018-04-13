@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 #menuContainer{
@@ -7,12 +7,12 @@
     display:none;
     min-width:27%;
     background-color: #FFFFFF;
-    box-shadow: 0 1px 1px #000000;
     float:left;
     position:fixed;
     opacity: .99;
     z-index: 999;
     overflow-y:auto;
+    border: 1px solid #026BC8;
 }
 
 #menu   {
@@ -62,9 +62,12 @@
 }
 
 #menu ul>li {
-    border-bottom: 1px solid #D0DBDE;
+    border-bottom: 1px solid #EEEEEF;
 }
 
+#menu ul>li:focus {
+    border-bottom: none;
+}
 .menu-item  {
     height:inherit;
     position: relative;
@@ -79,8 +82,12 @@
 #menu .menu-text, #menu .menu-subheader-text{
     letter-spacing: 2px;
     font-size: 1em;
-    color: #41566F;
+    color: #151618;
     font-family:"Open Sans";
+}
+
+#menu ul li:focus .menu-text, #menu ul li:focus .menu-subheader-text{
+   color: #FFFFFF;
 }
 
 #menu .menu-subheader-text  {
@@ -92,10 +99,18 @@
 #menu .menu-leaf-node{
     white-space:nowrap;
 }
-#menu ul li:hover, #menu ul li:focus{
-    background-color: #F3FCFF;
+
+#menu ul li:hover{
+    background-color: #F7F7F7;
     cursor:pointer;
 }
+
+#menu ul li:focus{
+    background-color: #026BC8;
+    cursor:pointer;
+}
+
+
 
 #menu .menu-icon    {
     background:url(images/arrow-right.svg) no-repeat center;
@@ -103,6 +118,19 @@
     margin-right: 0.5em ;
     display: inline-block;
 }
+
+#menu ul li:focus  .menu-icon {
+    background:url(images/arrow-right-white.svg) no-repeat center;
+    float:right;
+    margin-right: 0.5em ;
+    display: inline-block;
+}
+
+#menu ul li:focus .menu-back-icon    {
+    background:url(images/arrow-left-white.svg) no-repeat center center;
+    float:left;
+}
+
 
 #menu .menu-back-icon    {
     background:url(images/arrow-left.svg) no-repeat center center;
