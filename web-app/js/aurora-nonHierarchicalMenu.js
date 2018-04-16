@@ -329,10 +329,9 @@ ToolsMenu.initialize = function() {
         console.log('Not adding About menu item because aboutModal Module is not found in resource.');
     }
 
-    shortcutOverlay();
     ToolsMenu.addItem(
         "keyboard",
-        $.i18n.prop("js.keyboard.shortcut.heading"),
+        $.i18n.prop("aurora.toolsmenu.keyboard.shortcuts.heading"),
         "",
         shortcutOverlayAddition
     );
