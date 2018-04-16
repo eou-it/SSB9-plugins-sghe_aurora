@@ -1,5 +1,5 @@
 /** *****************************************************************************
- Copyright 2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
 
 #header-main-section #toolsCanvas {
@@ -26,7 +26,6 @@
     padding-bottom: 0.5em;
 }
 #toolsCanvas .canvas-item {
-    border-top: 1px solid #d0dbde;
     padding-right: 5em;
     padding-top: .5em;
     padding-bottom: .5em;
@@ -40,28 +39,37 @@
 #toolsList .canvas-section {
     font-weight: bold;
     font: 1em Open sans;
-    color: #41566f;
-    background-color: #f9fafb;
-    border-bottom: 1px solid #d0dbde;
+    color: #151618;
+    background-color: #F7F7F7;/*EDS*/
+    border-bottom: 1px solid #EEEEEF;/*EDS*/
     padding: 0;
     margin: 0;
     width: inherit;
     padding-top: .5em;
+
 }
 #toolsList .canvas-item {
     font: .875em Open sans;
-    color: #41566f;
-    border-bottom: 1px solid #d0dbde;
+    color: #151618;/*EDS*/
+    border-bottom: 1px solid #EEEEEF; /*EDS*/
     padding-left: 2em;
-    background-color: #f9fafb;
+    background-color: #FFFFFF; /*EDS*/
 }
-#toolsList .canvas-item:hover,
+
+#toolsList .canvas-item:hover {
+    background-color: #F7F7F7; /*EDS*/
+}
+
 #toolsList .canvas-item:focus {
-    background-color: #f3fcff;
+    background-color: #026BC8; /*EDS*/
+    color:#FFFFFF;/*EDS*/
+    outline: none;
+    border:none;
 }
 #toolsCanvas {
-    box-shadow: 0 1px 1px #000;
     display: none;
+    border: 1px solid #026BC8; /*EDS*/
+    border-top: none;
 }
 #toolsButton.tools-expanded:after {
     content: '';
@@ -77,7 +85,7 @@
 }
 #toolsList #mepDescForMobile {
     display: none;
-    background-color: #E8E3E3;
+    background-color: #F7F7F7; /*EDS*/
 }
 @media (min-width: 0px) and (max-width: 767px) {
     #toolsList #mepDescForMobile {
