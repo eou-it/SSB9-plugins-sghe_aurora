@@ -106,7 +106,6 @@
 #menu ul li:first-child:focus{
     background-color: #F7F7F7 !important;
     color: #151618;
-    border: 1px solid #026BC8;
     outline: none;
 }
 
