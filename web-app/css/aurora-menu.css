@@ -13,7 +13,7 @@
     z-index: 999;
     overflow-y:auto;
     border: 1px solid #B2B3B7;
-    border-top: none;
+    margin-top: 4px;
 }
 
 #menu   {
@@ -37,21 +37,6 @@
     background-color: #ffffff;
 }
 
-
-#bannerMenu.show:after
-{
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto auto;
-    width: 0px;
-    border-bottom: 9px solid #ffffff;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-}
-
 #menu ul {
     list-style-type: none;
     -webkit-padding-start: 0px;
@@ -66,8 +51,11 @@
     border-bottom: 1px solid #EEEEEF;
 }
 
+#menu ul>li:first-child {
+    background-color: #f7f7f7;
+}
 #menu ul>li:focus {
-    border-bottom: none;
+    border: none;
 }
 .menu-item  {
     height:inherit;
@@ -85,10 +73,13 @@
     font-size: 1em;
     color: #151618;
     font-family:"Open Sans";
+
 }
 
-#menu ul li:focus .menu-text, #menu ul li:focus .menu-subheader-text{
+
+#menu ul li:not(:first-child):focus .menu-text, #menu ul li:not(:first-child):focus .menu-subheader-text{
    color: #FFFFFF;
+    border: none;
 }
 
 #menu .menu-subheader-text  {
@@ -109,8 +100,15 @@
 #menu ul li:focus{
     background-color: #026BC8;
     cursor:pointer;
+    border: none;
 }
 
+#menu ul li:first-child:focus{
+    background-color: #F7F7F7 !important;
+    color: #151618;
+    border: 1px solid #026BC8;
+    outline: none;
+}
 
 
 #menu .menu-icon    {
@@ -125,11 +123,17 @@
     float:right;
     margin-right: 0.5em ;
     display: inline-block;
+    border: none;
+}
+
+#menu ul li:first-child:focus  .menu-icon {
+    background:url(images/arrow-right.svg) no-repeat center;
 }
 
 #menu ul li:focus .menu-back-icon    {
-    background:url(images/arrow-left-white.svg) no-repeat center center;
+    background:url(images/arrow-left.svg) no-repeat center center;
     float:left;
+    border: none;
 }
 
 
