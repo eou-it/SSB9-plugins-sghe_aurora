@@ -13,6 +13,7 @@
     width: auto;
     overflow-y: auto;
     white-space: nowrap;
+    margin-top: 4px;
 }
 #header-main-section #toolsCanvas div {
     height: auto;
@@ -70,22 +71,16 @@
     border-right: 1.5px solid #81C8FF;
 
 }
+#toolsList >.canvas-item:focus {
+    /*background-color: #026BC8; !*EDS*!*/
+    /*color:#FFFFFF;!*EDS*!*/
+    outline: none;
+    border-top: none;
+}
 #toolsCanvas {
     display: none;
     border: 1px solid #81C8FF; /*EDS*/
     border-top: none;
-}
-#toolsButton.tools-expanded:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto auto;
-    width: 0px;
-    border-bottom: 9px solid #ffffff;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
 }
 #toolsList #mepDescForMobile {
     display: none;
