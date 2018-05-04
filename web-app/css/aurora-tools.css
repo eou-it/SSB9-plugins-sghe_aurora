@@ -61,14 +61,18 @@
 }
 
 #toolsList .canvas-item:focus {
-    background-color: #026BC8; /*EDS*/
-    color:#FFFFFF;/*EDS*/
+    /*background-color: #026BC8; !*EDS*!*/
+    /*color:#FFFFFF;!*EDS*!*/
     outline: none;
-    border:none;
+    border-top: 2.5px solid #81C8FF;
+    border-bottom: 2.5px solid #81C8FF;
+    border-left: 1.5px solid #81C8FF;
+    border-right: 1.5px solid #81C8FF;
+
 }
 #toolsCanvas {
     display: none;
-    border: 1px solid #026BC8; /*EDS*/
+    border: 1px solid #81C8FF; /*EDS*/
     border-top: none;
 }
 #toolsButton.tools-expanded:after {

@@ -24,6 +24,7 @@
     font-family: "Open Sans";
     font-size: 1em;
     display: block;
+    display: block;
     padding-bottom: 0.5em;
 }
 
@@ -70,6 +71,11 @@
     border-bottom: 1px solid #EEEEEF;/*EDS*/
     padding-left: 2em;
     border-top: none;
+}
+
+#userList .canvas-item:focus {
+    outline: none;
+    border: 2.5px solid #81C8FF;
 }
 
  #userList .canvas-item:hover {

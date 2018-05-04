@@ -12,8 +12,9 @@
     opacity: .99;
     z-index: 999;
     overflow-y:auto;
-    border: 1px solid #B2B3B7;
+    border: 1px solid #81C8FF; /*EDS*/
     margin-top: 4px;
+    border-top: none;
 }
 
 #menu   {
