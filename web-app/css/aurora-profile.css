@@ -76,7 +76,9 @@
 
 #userList .canvas-item:focus {
     outline: none;
-    border: 2.5px solid #81C8FF;
+    border: none;
+    background-color: #026BC8;
+    color: #FFFFFF;;
 }
 #userList > .canvas-item:focus {
     outline: none;
@@ -85,6 +87,7 @@
 
  #userList .canvas-item:hover {
     background-color: #F7F7F7;/*EDS*/
+    color: #151618;
 }
 
 #userList .canvas-item:active {

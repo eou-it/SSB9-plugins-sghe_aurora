@@ -78,7 +78,7 @@
 }
 
 
-#menu ul li:not(:first-child):focus .menu-text, #menu ul li:not(:first-child):focus .menu-subheader-text{
+#menu ul li:focus .menu-text, #menu ul li:focus .menu-subheader-text{
    color: #FFFFFF;
     border: none;
 }
@@ -101,15 +101,9 @@
 #menu ul li:focus{
     background-color: #026BC8;
     cursor:pointer;
+    color: #FFFFFF;
     border: none;
 }
-
-#menu ul li:first-child:focus{
-    background-color: #F7F7F7 !important;
-    color: #151618;
-    outline: none;
-}
-
 
 #menu .menu-icon    {
     background:url(images/arrow-right.svg) no-repeat center;
@@ -126,12 +120,8 @@
     border: none;
 }
 
-#menu ul li:first-child:focus  .menu-icon {
-    background:url(images/arrow-right.svg) no-repeat center;
-}
-
 #menu ul li:focus .menu-back-icon    {
-    background:url(images/arrow-left.svg) no-repeat center center;
+    background:url(images/arrow-left-white.svg) no-repeat center center;
     float:left;
     border: none;
 }
