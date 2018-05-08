@@ -49,11 +49,11 @@
 }
 
 #menu ul>li {
-    border-bottom: 1px solid #EEEEEF;
+    border-bottom: 1px solid #EEEEEF; /*EDS*/
 }
 
 #menu ul>li:first-child {
-    background-color: #f7f7f7;
+    background-color: #f7f7f7; /*EDS*/
 }
 #menu ul>li:focus {
     border: none;
@@ -72,14 +72,14 @@
 #menu .menu-text, #menu .menu-subheader-text{
     letter-spacing: 2px;
     font-size: 1em;
-    color: #151618;
+    color: #151618; /*EDS*/
     font-family:"Open Sans";
 
 }
 
 
 #menu ul li:focus .menu-text, #menu ul li:focus .menu-subheader-text{
-   color: #FFFFFF;
+    color: #FFFFFF; /*EDS*/
     border: none;
 }
 
@@ -94,26 +94,26 @@
 }
 
 #menu ul li:hover{
-    background-color: #F7F7F7;
+    background-color: #F7F7F7; /*EDS*/
     cursor:pointer;
 }
 
 #menu ul li:focus{
-    background-color: #026BC8;
+    background-color: #026BC8; /*EDS*/
     cursor:pointer;
-    color: #FFFFFF;
+    color: #FFFFFF; /*EDS*/
     border: none;
 }
 
-#menu .menu-icon    {
+#menu .menu-icon    { /*EDS*/
     background:url(images/arrow-right.svg) no-repeat center;
     float:right;
     margin-right: 0.5em ;
     display: inline-block;
 }
 
-#menu ul li:focus  .menu-icon {
-    background:url(images/arrow-right-white.svg) no-repeat center;
+#menu ul li:focus  .menu-icon { /*EDS*/
+    background:url(images/eds/arrow-right-white.svg) no-repeat center;
     float:right;
     margin-right: 0.5em ;
     display: inline-block;
@@ -121,7 +121,7 @@
 }
 
 #menu ul li:focus .menu-back-icon    {
-    background:url(images/arrow-left-white.svg) no-repeat center center;
+    background:url(images/eds/arrow-left-white.svg) no-repeat center center;
     float:left;
     border: none;
 }

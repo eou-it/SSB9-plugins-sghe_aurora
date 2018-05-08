@@ -67,8 +67,8 @@
 #userList .canvas-item {
     font: .875em Open sans;
     color: #151618;/*EDS*/
-    background-color: #ffffff;
-    border: 1px solid #81C8FF;
+    background-color: #ffffff; /*EDS*/
+    border: 1px solid #81C8FF; /*EDS*/
     padding-left: 2em;
     border-top: none;
 
@@ -77,8 +77,8 @@
 #userList .canvas-item:focus {
     outline: none;
     border: none;
-    background-color: #026BC8;
-    color: #FFFFFF;;
+    background-color: #026BC8; /*EDS*/
+    color: #FFFFFF; /*EDS*/
 }
 #userList > .canvas-item:focus {
     outline: none;
@@ -87,12 +87,12 @@
 
  #userList .canvas-item:hover {
     background-color: #F7F7F7;/*EDS*/
-    color: #151618;
+    color: #151618; /*EDS*/
 }
 
 #userList .canvas-item:active {
     background-color: #FFFFFF;/*EDS*/
-    border:1px solid #EEEEEF;
+    border:1px solid #EEEEEF; /*EDS*/
     outline: none;
     color: #151618; /*EDS*/
     border-top: none; /*EDS*/

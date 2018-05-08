@@ -3,11 +3,11 @@
 *******************************************************************************/
 #header-main-section {
     width: 100%;
-    background-color: #5353D1;  /*$color-primary-45*/
+    background-color: #5353D1;  /*EDS*/
     height: 5.859375%;
     position: relative;
     min-height: 3.4em;
-    border-bottom: 4px solid #51ABFF;
+    border-bottom: 4px solid #51ABFF;  /*EDS*/
 }
 
 #header-east-part-user-controls div{
@@ -34,7 +34,7 @@ div#header-east-part-user-controls {
 }
 
 #header-main-section-east-part{
-    background-color: rgb(21, 22, 24,0.15);  /*$color-primary-45*/
+    background-color: rgb(21, 22, 24,0.15);  /*EDS*/
     right: 0;
     position: absolute;
     left: auto;
@@ -111,7 +111,7 @@ div#header-east-part-user-controls {
 }
 
 .institutionalBranding {
-    background: url("images/eds/logo.svg") left center  no-repeat;  /*EDS 1.3.0 New Logo*/
+    background: url("images/eds/logo.svg") left center  no-repeat;  /*EDS New Logo*/
     height: inherit;
     width: 4.875em;
     float: left;
@@ -167,7 +167,7 @@ div#header-east-part-user-controls {
 
 .notification-center-anchor{
     text-decoration: none;
-    background-color: #efc728;  /*$color-warning*/
+    background-color: #efc728;  /*EDS*/
     width : 2.5em;
     cursor: pointer;
     display: block;
@@ -431,7 +431,7 @@ and (max-width: 1024px) {
     }
 
     #header-main-section-east-part #signInButton {
-        background-color: #5353D1;  /*$color-primary-45*/
+        background-color: #5353D1;  /*EDS*/
     }
 
     #header-main-section-east-part #toolsButton {
