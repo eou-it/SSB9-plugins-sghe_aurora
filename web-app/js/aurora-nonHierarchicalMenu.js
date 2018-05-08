@@ -330,7 +330,7 @@ ToolsMenu.initialize = function() {
     }
 
     try {
-        if (angular.module("keyboardshortcut")) {
+        if (angular.module("keyboardshortcut") && angular.module("xe-ui-components")) {
             shortcutOverlay();
             ToolsMenu.addItem(
                 "keyboard",
