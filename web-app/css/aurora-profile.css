@@ -1,5 +1,5 @@
 /** *****************************************************************************
- Copyright 2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
  ****************************************************************************** */
 #header-main-section #userCanvas {
     position: absolute;
@@ -11,7 +11,7 @@
     height: auto;
     width: auto;
     white-space: nowrap;
-
+    margin-top: 4px;
 }
 
 #header-main-section #userCanvas div{
@@ -24,12 +24,15 @@
     font-family: "Open Sans";
     font-size: 1em;
     display: block;
+    display: block;
     padding-bottom: 0.5em;
 }
 
 #userCanvas {
-    box-shadow: 0 1px 1px #000;
     display: none;
+    border: 1px solid #EEEEEF; /*EDS*/
+    border-top: none;
+    outline: none;
 }
 
 #userCanvas .canvas-section{
@@ -37,7 +40,7 @@
 }
 
 #userCanvas .canvas-item {
-    border-top: 1px solid #d0dbde;
+    border-top: 1px solid #EEEEEF; /*EDS*/
     padding-right: 5em;
     padding-top: .5em;
     padding-bottom: .5em;
@@ -51,9 +54,9 @@
 #userList .canvas-section {
     font-weight: bold;
     font: 1em Open sans;
-    color: #41566f;
-    background-color: #f9fafb;
-    border-bottom: 1px solid #d0dbde;
+    color: #151618;/*EDS*/
+    background-color: #F7F7F7;/*EDS*/
+    border-bottom: 1px solid #EEEEEF;/*EDS*/
     padding: 0;
     margin: 0;
     width: inherit;
@@ -63,34 +66,42 @@
 
 #userList .canvas-item {
     font: .875em Open sans;
-    color: #41566f;
-    background-color: #ffffff;
-    border-bottom: 1px solid #d0dbde;
+    color: #151618;/*EDS*/
+    background-color: #ffffff; /*EDS*/
+    border: 1px solid #81C8FF; /*EDS*/
     padding-left: 2em;
+    border-top: none;
+
 }
 
-#userList .canvas-item:hover, #userList .canvas-item:focus {
-    background-color: #F3FCFF;
+#userList .canvas-item:focus {
+    outline: none;
+    border: none;
+    background-color: #026BC8; /*EDS*/
+    color: #FFFFFF; /*EDS*/
+}
+#userList > .canvas-item:focus {
+    outline: none;
+    border-top: none;
+}
+
+ #userList .canvas-item:hover {
+    background-color: #F7F7F7;/*EDS*/
+    color: #151618; /*EDS*/
+}
+
+#userList .canvas-item:active {
+    background-color: #FFFFFF;/*EDS*/
+    border:1px solid #EEEEEF; /*EDS*/
+    outline: none;
+    color: #151618; /*EDS*/
+    border-top: none; /*EDS*/
 }
 
 #userList .canvas-item[readonly] {
-    color: #41566F;
+    color: #5B5E65; /*EDS*/
     cursor: auto;
 }
-
-#header-main-section-east-part #userDiv #user.user-expanded:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto auto;
-    width: 0px;
-    border-bottom: 9px solid #ffffff;
-    border-left: 10px solid transparent;
-    border-right: 10px solid transparent;
-}
-
 
 #userList #usernameForMobile {
     display: none;

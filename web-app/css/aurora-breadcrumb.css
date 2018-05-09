@@ -10,7 +10,7 @@
 }
 
 a.breadcrumbButton:link, a.breadcrumbButton:active, a.breadcrumbButton:visited , .breadcrumbButton {
-    color: #41566F;
+    color: #026BC8; /*EDS*/
     font-size: 1.2em;
 }
 
@@ -36,8 +36,8 @@ a.breadcrumbButton{
 }
 
 #breadcrumb-panel, #title-panel{
-    background-color: #F9FAFB;
-    border-bottom: 2px solid #DEE5E7;
+    background-color: #F7F7F7; /*EDS*/
+    border-bottom: 2px solid #EEEEEF; /*EDS*/
     font-family: "Open Sans";
     padding-left: 1%;
 }
@@ -49,6 +49,7 @@ a.breadcrumbButton{
     vertical-align: middle;
     font-size:1.75em;
     font-family: "Open Sans";
+    color: #151618;  /*EDS*/
 }
 
 #breadcrumbBackButton, #breadcrumbPageTitle{
