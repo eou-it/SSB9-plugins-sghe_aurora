@@ -331,14 +331,16 @@ ToolsMenu.initialize = function() {
 
     try {
         if (angular.module("keyboardshortcut") && angular.module("xe-ui-components")) {
-            shortcutOverlay();
-            ToolsMenu.addItem(
-                "keyboard",
-                $.i18n.prop("aurora.toolsmenu.keyboard.shortcuts.heading"),
-                "",
-                shortcutOverlayAddition
-            );
-
+            var shortcutDialogDiv = document.getElementById('shortcut_module_added');
+            if (null != shortcutDialogDiv && undefined != shortcutDialogDiv) {
+                shortcutOverlay();
+                ToolsMenu.addItem(
+                    "keyboard",
+                    $.i18n.prop("aurora.toolsmenu.keyboard.shortcuts.heading"),
+                    "",
+                    shortcutOverlayAddition
+                );
+            }
         }
     } catch (e) {
         console.log('Not adding Keyboard shortcut  menu item because keyboardshortcut Module is not found in resource.');
