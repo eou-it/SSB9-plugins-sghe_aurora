@@ -328,6 +328,24 @@ ToolsMenu.initialize = function() {
     } catch(e){
         console.log('Not adding About menu item because aboutModal Module is not found in resource.');
     }
+
+    try {
+        if (angular.module("keyboardshortcut") && angular.module("xe-ui-components")) {
+            var shortcutDialogDiv = document.getElementById('shortcut_module_added');
+            if (null != shortcutDialogDiv && undefined != shortcutDialogDiv) {
+                shortcutOverlay();
+                ToolsMenu.addItem(
+                    "keyboard",
+                    $.i18n.prop("aurora.toolsmenu.keyboard.shortcuts.heading"),
+                    "",
+                    shortcutOverlayAddition
+                );
+            }
+        }
+    } catch (e) {
+        console.log('Not adding Keyboard shortcut  menu item because keyboardshortcut Module is not found in resource.');
+    }
+
 };
 
 function aboutDialogPopUp () {
@@ -348,6 +366,28 @@ function aboutDialogPopUp () {
     })
 }
 
+
+function shortcutOverlayAddition(){
+    var dialogDiv = document.getElementById('shortcut_module_added');
+   /* dialogDiv.setAttribute("ng-app","keyboardshortcut");
+    dialogDiv.setAttribute("ng-controller","shortcutModal");*/
+    var scope = angular.element(document.getElementById('shortcut_module_added')).scope();
+    if(!scope){
+        angular.element(document.getElementById('shortcut_module_added')).ready(function() {
+            angular.bootstrap(document.getElementById('shortcut_module_added'), ['keyboardshortcut']);
+        });
+        scope = angular.element(document.getElementById('shortcut_module_added')).scope();
+    }
+    scope.$apply(function(){
+        scope.toggleshortcut();
+    })
+}
+
+function shortcutOverlay(){
+    var dialogDiv = document.getElementById('shortcut_module_added');
+    dialogDiv.setAttribute("ng-app","keyboardshortcut");
+    dialogDiv.setAttribute("ng-controller","shortcutModal");
+}
 
 function userPreferencePopup() {
     var scope = angular.element(document.getElementById('userPreferenceDiv')).scope();
