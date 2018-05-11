@@ -1,12 +1,13 @@
 /*******************************************************************************
- Copyright 2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
 *******************************************************************************/
 #header-main-section {
     width: 100%;
-    background-color: #206E9F;
+    background-color: #5353D1;  /*EDS*/
     height: 5.859375%;
     position: relative;
     min-height: 3.4em;
+    border-bottom: 4px solid #51ABFF;  /*EDS*/
 }
 
 #header-east-part-user-controls div{
@@ -33,7 +34,7 @@ div#header-east-part-user-controls {
 }
 
 #header-main-section-east-part{
-    background-color: #1B6496;
+    background-color: rgb(21, 22, 24,0.15);  /*EDS*/
     right: 0;
     position: absolute;
     left: auto;
@@ -42,7 +43,6 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part #mepDiv  {
     float:left;
-    border-left: 1px #1D5F8C solid;
     margin-right: 1em;
     color: #ffffff;
     font: 1em Open Sans;
@@ -56,7 +56,6 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part #signInButton  {
     float:left;
-    border-left: 1px #1D5F8C solid;
     margin: 0px;
     padding: 0px;
     position: relative;
@@ -70,7 +69,6 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part #userDiv {
     float:left;
-    border-left: 1px #1D5F8C solid;
     margin-right: 1em;
     position: relative;
 }
@@ -92,7 +90,6 @@ div#header-east-part-user-controls {
 
 #header-main-section-east-part #toolsButton {
     float:left;
-    border-left: 1px #1D5F8C solid;
     position: relative;
 }
 
@@ -114,7 +111,7 @@ div#header-east-part-user-controls {
 }
 
 .institutionalBranding {
-    background: url("images/logo.svg") left center  no-repeat;
+    background: url("images/eds/logo.svg") left center  no-repeat;  /*EDS New Logo*/
     height: inherit;
     width: 4.875em;
     float: left;
@@ -150,7 +147,7 @@ div#header-east-part-user-controls {
 
 .notification-center-count {
     font-family: Open Sans;
-    color: #4F585F;
+    color: #151618; /*EDS*/
     width: 100%;
     text-align: center;
     display: table;
@@ -170,7 +167,7 @@ div#header-east-part-user-controls {
 
 .notification-center-anchor{
     text-decoration: none;
-    background-color: #FFD079;
+    background-color: #efc728;  /*EDS*/
     width : 2.5em;
     cursor: pointer;
     display: block;
@@ -434,19 +431,15 @@ and (max-width: 1024px) {
     }
 
     #header-main-section-east-part #signInButton {
-        border-left: 1px #1D5F8C solid;
-        background-color: #1B6496;
+        background-color: #5353D1;  /*EDS*/
     }
 
     #header-main-section-east-part #toolsButton {
-        border-left: 1px #1D5F8C solid;
         padding: 0;
     }
 
     #header-main-section-east-part #userDiv {
         border: none;
-        border-left: 1px #1D5F8C solid;
-        background-color: #1B6496;
     }
 
     #header-main-section-east-part #toolsDiv {
