@@ -1,3 +1,4 @@
+//= require modules/jquery-mf.js
 //= require utils.js
 //= require config.js
 //= require aurora-nonHierarchicalMenu.js
