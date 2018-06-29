@@ -101,7 +101,7 @@ div#header-east-part-user-controls {
 }
 
 #bannerMenu {
-    background: url("images/menu.svg") center center no-repeat;
+    background: url("menu.svg") center center no-repeat;
     height: inherit;
     width: 1.5em;
     display: block;
@@ -111,7 +111,7 @@ div#header-east-part-user-controls {
 }
 
 .institutionalBranding {
-    background: url("images/eds/logo.svg") left center  no-repeat;  /*EDS New Logo*/
+    background: url("eds/logo.svg") left center  no-repeat;  /*EDS New Logo*/
     height: inherit;
     width: 4.875em;
     float: left;
@@ -122,7 +122,7 @@ div#header-east-part-user-controls {
 }
 
 #tools {
-    background: url("images/settings.svg") center center no-repeat;
+    background: url("settings.svg") center center no-repeat;
     height: inherit;
     width: 2.375em;
     display : block;
@@ -130,7 +130,7 @@ div#header-east-part-user-controls {
 }
 
 #user {
-    background: url("images/avatar.svg") center center no-repeat;
+    background: url("avatar.svg") center center no-repeat;
     position: relative;
     height: 100%;
     width: 1.7em;

@@ -344,7 +344,9 @@ ToolsMenu.initialize = function() {
         }
     } catch (e) {
         console.log('Not adding Keyboard shortcut  menu item because keyboardshortcut Module is not found in resource.');
-        document.getElementById('shortcut_module_added').style.display = 'none';
+        if( document.getElementById('shortcut_module_added')){
+            document.getElementById('shortcut_module_added').style.display = 'none';
+        }
     }
 
 };
