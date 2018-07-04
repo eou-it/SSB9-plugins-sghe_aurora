@@ -582,10 +582,10 @@ var ErrorManager = {
     show: function (message) {
         switch(typeof(message)) {
             case 'string':
-                //MessageProcessor.processMessage(Messenger.encode(createErrorMessage(message)));
+                MessageProcessor.processMessage(Messenger.encode(createErrorMessage(message)));
                 break;
             case 'array':
-                //MessageProcessor.processMessage(Messenger.encode(createErrorMessage("got an array of error messages")));
+                MessageProcessor.processMessage(Messenger.encode(createErrorMessage("got an array of error messages")));
                 break;
             default:
                 break;
