@@ -6,7 +6,337 @@
 /**
  * Delegates to Magellan's M (Messenger)
  */
+var MessageProcessor = {
+    /**
+     * @private
+     * @param {XMLDocument} xmldoc The XMLDocument to check.
+     */
+    checkForHelpMessage : function(xmldoc) {
+        var processed = false;
 
+        $(xmldoc).find('help').find('url').each( function(i) {
+            HelpManager.showHelpByURL($(this).text());
+
+            processed = true;
+        });
+
+        return processed;
+    },
+    /**
+     * @private
+     * @param {XMLDocument} xmldoc The XMLDocument to check.
+     */
+    checkForErrorMessage : function(xmldoc) {
+        var codes = [];
+        var messages = [];
+        var processed = false;
+
+        $(xmldoc).find('errors').find('error').each( function(i) {
+            codes[i] = $(this).find('code').text();
+            messages[i] = $(this).find('message').text();
+
+            processed = true;
+        });
+
+        var out = "";
+
+        if (processed && messages.length > 0) {
+            var statusMessageArr = [];
+
+            $(messages).each( function(i) {
+                msg = messages[i];
+
+                if (codes[i]) {
+                    msg += " (" + codes[i] + ")";
+                }
+
+                out += "<span class='errorMessage'>" + msg + "</span>";
+            });
+
+            var buttons = [ Button("errorOkButton", "common_ok",
+                ModalWindowFactory.close, "blue") ];
+
+            ModalWindowFactory.show("errorWindowModal",
+                "errorwindow_label_title", "blue", $(out),
+                "errorWindowContent", buttons, null);
+
+            codes = [];
+            messages = [];
+        }
+
+        return processed;
+    },
+    /**
+     * @private
+     * @param {XMLDocument} xmldoc The XMLDocument to check.
+     */
+    checkForRequestMessage : function(xmldoc) {
+        var processed = false;
+
+        if ($(xmldoc).find('request').length > 0) {
+            var req = $(xmldoc).find('request').text();
+
+            var activeFrameName = null;
+            var app = null;
+
+            if ($("li.activeOpenItem").length > 0) {
+                activeFrameName = $("li.activeOpenItem").attr("id").replace(
+                    OpenItems.openItemMarker, "");
+                app = OpenItems.findAnyOpenItemByName(activeFrameName);
+            }
+
+            switch (req) {
+                case "navigate":
+                    ChannelManager
+                        .send(
+                            Messenger.createApplicationPageNavigationMessage(app.context.pageName),
+                            activeFrameName);
+                    break;
+                case "context":
+                    if (CommonContext.standalone) {
+                        if (typeof (Messenger.setMessageHandler) == 'function') {
+                            Messenger.setMessageHandler(Messenger.createContextMessage( {
+                                pageName :CommonPlatform.defaultPageName
+                            }));
+                        }
+                    } else {
+                        ChannelManager.send(Messenger.createContextMessage(app.context),
+                            activeFrameName);
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+
+            processed = true;
+        }
+
+        return processed;
+    },
+    /**
+     * @private
+     * @param {XMLDocument} xmldoc The XMLDocument to check.
+     */
+    checkForConfirmationMessage : function(xmldoc) {
+        var processed = false;
+
+        if (xmldoc.getElementsByTagName('confirmation').length > 0) {
+            var message = XMLHelper.getElementData(xmldoc
+                .getElementsByTagName('confirmation')[0], "message");
+            var title = XMLHelper.getElementData(xmldoc
+                .getElementsByTagName('confirmation')[0], "title");
+            var responses = xmldoc.getElementsByTagName('confirmation')[0]
+                .getElementsByTagName('response');
+
+            var buttons = [];
+
+            var confirmationResponseSuffix = "_responseSelected";
+
+            for ( var x = 0; x < responses.length; x++) {
+                buttons.push(Button(responses[x].getAttribute("responseValue")
+                    + confirmationResponseSuffix, responses[x]
+                    .getAttribute("label"), function() {
+                    MessageProcessor
+                        .sendConfirmationResponse($(this).attr("id")
+                            .replace(confirmationResponseSuffix, ""));
+                    ModalWindowFactory.close();
+                }, "blue"));
+            }
+
+            ModalWindowFactory.show("confirmationWindowModal",
+                "confirmation_label_title", "blue", message, "", buttons,
+                null);
+
+            processed = true;
+        }
+
+        return processed;
+    },
+    /**
+     * @private
+     * @param {XMLDocument} xmldoc The XMLDocument to check.
+     */
+    checkForStatusMessage : function(xmldoc) {
+        var processed = false;
+
+        $(xmldoc).find('status').find('message').each( function(i) {
+            // TODO: do nothing with $(this).text();
+
+            processed = true;
+        });
+
+        return processed;
+    },
+
+    checkForUdcIdentityMessage : function(xmldoc) {
+
+        var processed = false;
+
+        if (!xmldoc || !xmldoc.getElementsByTagName('UDCIdentity')[0]) {
+            return processed;
+        }
+
+        processed = true;
+
+        CommonContext.udcIdentity = xmldoc;
+        CommonContext.udcid =  XMLHelper.getElementData(xmldoc, "UDCIdentifier");
+
+
+        return processed;
+    },
+    /**
+     * @private
+     * @param {XMLDocument} xmldoc The XMLDocument to check.
+     */
+    checkForOpenItemMessage : function(xmldoc) {
+        var processed = false;
+
+        if (!xmldoc || !xmldoc.getElementsByTagName('context')[0]) {
+            return false;
+        }
+
+        var appid = XMLHelper.getElementData(xmldoc
+            .getElementsByTagName('context')[0], "appid");
+
+        if ($(xmldoc).find('openitem').length > 0) {
+            var action = XMLHelper.getElementData(xmldoc
+                .getElementsByTagName('openitem')[0], "action");
+            var page = XMLHelper.getElementData(xmldoc
+                .getElementsByTagName('openitem')[0], "page");
+
+            switch (action) {
+                case "open":
+                    OpenItems.addApplicationPage(appid, page);
+                    break;
+                case "close":
+                    OpenItems.removeApplicationPage(appid, page);
+                    break;
+                default:
+                    break;
+            }
+
+            processed = true;
+        }
+
+        return processed;
+    },
+    /**
+     * @private
+     * @param {XMLDocument} xmldoc The XMLDocument to check.
+     */
+    checkForNavigationMessage : function(xmldoc) {
+        var processed = false;
+
+        if (xmldoc.getElementsByTagName('navigate').length > 0) {
+            var message = XMLHelper.getElementData(xmldoc
+                .getElementsByTagName('navigate')[0], "location");
+
+            if (message) {
+                Navigation.navigate(message);
+            }
+
+            processed = true;
+        }
+
+        return processed;
+    },
+
+    checkForUdcIdMessage : function(xmldoc) {
+        var processed = false;
+
+        if (xmldoc.getElementsByTagName('udcIdentity').length > 0) {
+            getUDCXml(XMLHelper.getElementData(xmldoc, "identity"));
+            processed = true;
+        }
+        return processed;
+    },
+    /**
+     * Sends the user selected response to a confirmation dialog.
+     * @param {string} response The user selected response.
+     */
+    sendConfirmationResponse : function(response) {
+        if (CommonContext.standalone) {
+            if (typeof (Messenger.getMessageHandler()) == 'function') {
+                Messenger
+                    .setMessageHandler(createConfirmationResponseMessage(response));
+            }
+        } else {
+            if ($("li.activeOpenItem").length > 0) {
+                var activeFrameName = $("li.activeOpenItem").attr("id")
+                    .replace(OpenItems.openItemMarker, "");
+
+                ChannelManager.send(
+                    createConfirmationResponseMessage(response),
+                    activeFrameName);
+            }
+        }
+    },
+
+    /**
+     * Makes necessary ajax service call using the details in the message and sends
+     * back the response.
+     * @param {Object} message
+     */
+    checkForServiceCallMessage: function(message) {
+        var processed = false;
+
+//		if(message.firstChild.childNodes[0].nodeName == "service") {
+//
+//			function callback(response) {
+//				var activeFrameName = null;
+//				var xmlString = (new XMLSerializer()).serializeToString(response);
+//				ChannelManager.send(xmlString, activeFrameName);
+//			}
+//			alert("service call progress")
+//			ServiceManager.get($(message).find('url').text(), callback);
+//			processed = true;
+//		}
+
+        return processed;
+    },
+
+    /**
+     * Primary entrance into the message processing system.
+     * @param {string} message An encoded string represented XML document.
+     */
+    processMessage : function(message) {
+
+        message = Messenger.decode(message);
+        xmldoc = Messenger.string2xml(message);
+
+        // check for expected message types
+        if (this.checkForHelpMessage(xmldoc) || this.checkForErrorMessage(xmldoc)
+            || this.checkForStatusMessage(xmldoc)
+            || this.checkForConfirmationMessage(xmldoc)
+            || this.checkForNavigationMessage(xmldoc)
+            || this.checkForRequestMessage(xmldoc)
+            || this.checkForOpenItemMessage(xmldoc)
+            || this.checkForUdcIdentityMessage(xmldoc)
+            || this.checkForUdcIdMessage(xmldoc)
+            || this.checkForServiceCallMessage(xmldoc)) {
+            alert(message)
+            return;
+        } else {
+            // propogate other messages back down to all the managed applications.
+            // encapsulated data message.
+            this.broadcast(message);
+        }
+    },
+    /**
+     * Broadcasts a message to all managed applications.
+     * @param {XMLDocument} message The message to broadcast.
+     */
+    broadcast : function(message) {
+        $('#content > iframe').each( function(i) {
+            ChannelManager.send(message, $(this).attr("name"));
+        });
+
+        if (typeof (messageHandler) == 'function') {
+            messageHandler(message);
+        }
+    }
+};
 var Messenger = {
 
     initialize: function( callback ) {
@@ -252,10 +582,10 @@ var ErrorManager = {
     show: function (message) {
         switch(typeof(message)) {
             case 'string':
-                MessageProcessor.processMessage(Messenger.encode(createErrorMessage(message)));
+                //MessageProcessor.processMessage(Messenger.encode(createErrorMessage(message)));
                 break;
             case 'array':
-                MessageProcessor.processMessage(Messenger.encode(createErrorMessage("got an array of error messages")));
+                //MessageProcessor.processMessage(Messenger.encode(createErrorMessage("got an array of error messages")));
                 break;
             default:
                 break;
