@@ -152,7 +152,7 @@ var NonHierarchicalMenu = (function() {
                             return section.name;
                         }
                     });
-                    if (menuSectionExtns) {
+                    if (menuSectionExtns && 'fields' in menuSectionExtns) {
                         menuSectionExtns.fields.forEach(function (field, key) {
                             if (field.name === id) {
                                 if (field.exclude) {
