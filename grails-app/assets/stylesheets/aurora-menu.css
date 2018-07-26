@@ -106,14 +106,14 @@
 }
 
 #menu .menu-icon    { /*EDS*/
-    background:url(images/arrow-right.svg) no-repeat center;
+    background:url(arrow-right.svg) no-repeat center;
     float:right;
     margin-right: 0.5em ;
     display: inline-block;
 }
 
 #menu ul li:focus  .menu-icon { /*EDS*/
-    background:url(images/eds/arrow-right-white.svg) no-repeat center;
+    background:url(eds/arrow-right-white.svg) no-repeat center;
     float:right;
     margin-right: 0.5em ;
     display: inline-block;
@@ -121,14 +121,14 @@
 }
 
 #menu ul li:focus .menu-back-icon    {
-    background:url(images/eds/arrow-left-white.svg) no-repeat center center;
+    background:url(eds/arrow-left-white.svg) no-repeat center center;
     float:left;
     border: none;
 }
 
 
 #menu .menu-back-icon    {
-    background:url(images/arrow-left.svg) no-repeat center center;
+    background:url(arrow-left.svg) no-repeat center center;
     float:left;
 }
 

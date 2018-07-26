@@ -1,6 +1,6 @@
 /*******************************************************************************
- Copyright 2009-2017 Ellucian Company L.P. and its affiliates.
-*******************************************************************************/
+ Copyright 2009-2018 Ellucian Company L.P. and its affiliates.
+ *******************************************************************************/
 
 /**
  * @class The class for holding the context for each individual managed application. <br>
@@ -58,6 +58,14 @@ var ContentManager = {
      * @type String
      */
     commonUIPlatformMarker: "CUIP",
+
+    /**
+     * @private
+     *  delimiter used for constructing menu url before hitting backend
+     *  @type String
+     */
+    delimiter:"~~",
+
     /**
      * Initializes this class.
      */
@@ -68,7 +76,7 @@ var ContentManager = {
         ContentManager.calculateContentHeight();
 
         if($('meta[name=menuBaseURL]').attr("content")){
-           ContentManager.processor = $('meta[name=menuBaseURL]').attr("content") + '||';
+            ContentManager.processor = $('meta[name=menuBaseURL]').attr("content") + ContentManager.delimiter;
         }
 
     },
@@ -125,7 +133,7 @@ var ContentManager = {
         }
         if ( ContentManager.processor != '' )
             nav.url = nav.url.split( '.' )[0];
-            window.location = ContentManager.processor + nav.url;
+        window.location = ContentManager.processor + nav.url;
         // ZkApplication class is used to pass control from Aurora to the ZK Application framework
         // This can be replaced with window.location for other products
         //    ZkApplication.navigateTo( nav.url, nav.id );
@@ -162,9 +170,9 @@ var ContentManager = {
         var item = OpenItems.getOpenItemByName( name );
 
         if ( item
-                && item.navigationEntry instanceof NavigationEntryValueObject ) {
+            && item.navigationEntry instanceof NavigationEntryValueObject ) {
             if ( FragmentManager ) {
-                FragmentManager.set( item.navigationEntry.menu + "||" + item.navigationEntry.caption + "||" + this.getCUIP( name ) );
+                FragmentManager.set( item.navigationEntry.menu + ContentManager.delimiter + item.navigationEntry.caption + ContentManager.delimiter + this.getCUIP( name ) );
             }
 
             this.setTitle( item.navigationEntry.caption );
@@ -217,7 +225,7 @@ var ContentManager = {
         var dateObject = new Date();
 
         var uniqueId = this.commonUIPlatformMarker
-                + Math.floor( Math.random() * 10001 );
+            + Math.floor( Math.random() * 10001 );
 
         return uniqueId;
     },
@@ -329,8 +337,8 @@ NavigationEntryValueObject.prototype.toXML = function() {
 
     for ( var x in this ) {
         if ( typeof(this[x]) !== 'function'
-                && this[x] != null
-                && x != "url" ) {
+            && this[x] != null
+            && x != "url" ) {
             xml += x + "=\"" + this[x] + "\" ";
         }
     }
@@ -452,7 +460,7 @@ var Navigation = {
                 + ep;*/
 
         var endpoint = Application.getApplicationPath()
-                + ep;
+            + ep;
 
         ServiceManager.get( endpoint, Navigation.handleFeedResults );
     },
@@ -470,7 +478,7 @@ var Navigation = {
         }
         if ( xmldoc.status ) { // means its an XMLHttpRequest object, without XML
             if ( xmldoc.status == 404
-                    || xmldoc.status == 500 ) {
+                || xmldoc.status == 500 ) {
                 Navigation.initialize(Navigation.scrollableMenu);
             }
             return;
@@ -479,7 +487,7 @@ var Navigation = {
         if ( CommonContext.standalone == true ) {
             var nav = vo[0];
             if ( nav != null ) {
-                var location = nav.menu.split( "||" );
+                var location = nav.menu.split( ContentManager.delimiter );
 
                 Navigation.removeParent( location );
 
@@ -516,7 +524,7 @@ var Navigation = {
         }
         if ( xmldoc.status ) { // means its an XMLHttpRequest object
             if ( xmldoc.status == 404
-                    || xmldoc.status == 500 ) {
+                || xmldoc.status == 500 ) {
                 Navigation.loadFeeds();
                 return;
             }
@@ -526,7 +534,7 @@ var Navigation = {
             var nav = vo[0];
             if ( nav != null ) {
 //                nav.menu = Navigation.feedKeys[Navigation.feedEndpointIndex] + "/" + nav.menu;
-                var location = nav.menu.split( "||" );
+                var location = nav.menu.split( ContentManager.delimiter );
 
                 Navigation.removeParent( location );
 
@@ -581,13 +589,13 @@ var Navigation = {
             if ( Navigation.parentMenu != null && CommonContext.standalone == true ) {
                 if ( Navigation.parentMenu.menu == "" || Navigation.parentMenu.menu == null ) {
                     nav.menu = Navigation.parentMenu.caption;
-                    var arr = Navigation.parentMenu.path.split( "||" );
-                    nav.path = "||" + arr[1] + "||" + nav.path;
+                    var arr = Navigation.parentMenu.path.split( ContentManager.delimiter );
+                    nav.path = ContentManager.delimiter + arr[1] + ContentManager.delimiter + nav.path;
 
                 } else {
                     nav.menu = Navigation.parentMenu.menu + "||" + Navigation.parentMenu.caption;
-                    var arr = Navigation.parentMenu.path.split( "||" );
-                    nav.path = "||" + arr[1] + "||" + nav.path;
+                    var arr = Navigation.parentMenu.path.split( ContentManager.delimiter );
+                    nav.path = ContentManager.delimiter + arr[1] + ContentManager.delimiter + nav.path;
                 }
                 nav.port = Navigation.parentMenu.port;
                 nav.protocol = Navigation.parentMenu.protocol;
@@ -632,11 +640,11 @@ var Navigation = {
      */
     addMenuEntryStandAlone: function( nav ) {
         if ( nav.menu == null
-                || !(nav instanceof NavigationEntryValueObject) ) {
+            || !(nav instanceof NavigationEntryValueObject) ) {
             return;
         }
 
-        var location = nav.menu.split( "||" );
+        var location = nav.menu.split( ContentManager.delimiter );
 
         Navigation.recurseMenuStructureStandAlone( location, nav );
     },
@@ -654,16 +662,16 @@ var Navigation = {
         var indx = 0;
 
         $.each( hierarchy,
-                function( i, value ) {
+            function( i, value ) {
 
-                    if ( !tmpArray[i] && !tmpArray[value] ) {
-                        tmpArray[value] = [];
-                    }
-
-                    indx = indx + 1;
-                    tmpArray = tmpArray[value];
-
+                if ( !tmpArray[i] && !tmpArray[value] ) {
+                    tmpArray[value] = [];
                 }
+
+                indx = indx + 1;
+                tmpArray = tmpArray[value];
+
+            }
         );
         tmpArray[nav.caption] = nav;
         return tmpArray;
@@ -677,7 +685,7 @@ var Navigation = {
      */
     addMenuEntry: function( nav ) {
         if ( nav.menu == null
-                || !(nav instanceof NavigationEntryValueObject) ) {
+            || !(nav instanceof NavigationEntryValueObject) ) {
             return;
         }
 
@@ -748,17 +756,17 @@ var Navigation = {
             var indx = 0;
 
             $.each( hierarchy,
-                  function( i, value ) {
+                function( i, value ) {
 
-                        indx = indx + 1;
+                    indx = indx + 1;
 
-                      if ( tmpArray[value] instanceof NavigationEntryValueObject && indx == hierarchy.length ) {
-                            tmpArray[value] = [];
-                        } else {
-                            tmpArray = tmpArray[value];
-                        }
+                    if ( tmpArray[value] instanceof NavigationEntryValueObject && indx == hierarchy.length ) {
+                        tmpArray[value] = [];
+                    } else {
+                        tmpArray = tmpArray[value];
                     }
-                    );
+                }
+            );
         }
 
 
@@ -809,7 +817,7 @@ var Navigation = {
             return false;
         }
 
-        if ( name.indexOf( "||" ) != -1 ) {
+        if ( name.indexOf( ContentManager.delimiter ) != -1 ) {
             return Navigation.pathFindNavigationEntry( name );
         } else {
             return Navigation.recurseFindNavigationEntry( Navigation.menuList, name );
@@ -823,16 +831,16 @@ var Navigation = {
      * @return {NavigationEntryValueObject} The found navigation entry.
      */
     pathFindNavigationEntry: function( name ) {
-        var leaf = name.substring( name.lastIndexOf( "||" ) + 1 );
-        var branch = name.substring( 0, name.lastIndexOf( "||" ) );
+        var leaf = name.substring( name.lastIndexOf( ContentManager.delimiter ) + 1 );
+        var branch = name.substring( 0, name.lastIndexOf( ContentManager.delimiter ) );
 
-        var hierarchy = branch.split( "||" );
+        var hierarchy = branch.split( ContentManager.delimiter );
 
         var tmpArray = Navigation.menuList;
 
         for ( var x in hierarchy ) {
             if ( tmpArray[hierarchy[x]]
-                    && tmpArray[hierarchy[x]] instanceof Array ) {
+                && tmpArray[hierarchy[x]] instanceof Array ) {
                 tmpArray = tmpArray[hierarchy[x]];
             }
         }
@@ -841,7 +849,7 @@ var Navigation = {
             for ( var x in tmpArray ) {
                 if ( tmpArray[x] instanceof NavigationEntryValueObject ) {
                     if ( tmpArray[x].name == leaf
-                            || tmpArray[x].caption == leaf ) {
+                        || tmpArray[x].caption == leaf ) {
                         return tmpArray[x];
                     }
                 }
@@ -976,11 +984,11 @@ var Navigation = {
         }
 
         if ( navEntry.page
-                && navEntry.parent ) {
+            && navEntry.parent ) {
             var app = OpenItems.findAnyOpenItemByName( navEntry.parent );
 
             if ( app instanceof OpenItemValueObject
-                    && app.navigationEntry instanceof NavigationEntryValueObject ) {
+                && app.navigationEntry instanceof NavigationEntryValueObject ) {
                 ContentManager.bringToFront( app.navigationEntry.name + "_" + app.cuipid );
             } else {
                 var context = new ContextValueObject()
@@ -1043,34 +1051,34 @@ var Navigation = {
                 var endpoint = Application.getApplicationPath()
                     + ep;
             }
-            endpoint = endpoint + "?menuName=" + navEntry.form + "&menu="+ encodeURIComponent(navEntry.menu) + "||" + encodeURIComponent(navEntry.name) + "&seq=" + navEntry.id;
+            endpoint = endpoint + "?menuName=" + navEntry.form + "&menu="+ encodeURIComponent(navEntry.menu) + ContentManager.delimiter + encodeURIComponent(navEntry.name) + "&seq=" + navEntry.id;
 
             Navigation.removeNavigationEntry( navEntry.name );
 //            Navigation.parentMenu = navEntry;
             ServiceManager.get( endpoint, Navigation.handleServiceResults );
 
-	  	} else {
+        } else {
             if ( navEntry.options == "" || navEntry.options == null ) {
-                var tempArr = navEntry.path.split( "||" );
-                var ep = Navigation.standaloneEndpoints[0] + "||" + tempArr[tempArr.length - 1] + "||" + CommonContext.udcid;
+                var tempArr = navEntry.path.split( ContentManager.delimiter );
+                var ep = Navigation.standaloneEndpoints[0] + ContentManager.delimiter + tempArr[tempArr.length - 1] + ContentManager.delimiter + CommonContext.udcid;
                 /*var endpoint = window.location.protocol + "//"
                         + window.location.host + ep;*/
                 var endpoint = Application.getApplicationPath()
-                                + ep;
+                    + ep;
                 Navigation.parentMenu = navEntry;
                 ServiceManager.get( endpoint, Navigation.handleServiceResults );
-			} else {
+            } else {
 
                 var temp = navEntry.options.substring( navEntry.options.lastIndexOf( "=" ) + 1 )
-					var ep = Navigation.standaloneEndpoints[0] + "||" + temp + "||" + CommonContext.udcid;
-					/*var endpoint = window.location.protocol + "//"
-							+ window.location.host + ep;*/
-                    var endpoint = Application.getApplicationPath()
-                                        + ep;
-					Navigation.parentMenu = navEntry;
+                var ep = Navigation.standaloneEndpoints[0] + ContentManager.delimiter + temp + ContentManager.delimiter + CommonContext.udcid;
+                /*var endpoint = window.location.protocol + "//"
+                        + window.location.host + ep;*/
+                var endpoint = Application.getApplicationPath()
+                    + ep;
+                Navigation.parentMenu = navEntry;
                 ServiceManager.get( endpoint, Navigation.handleServiceResults );
-			}
-		}
+            }
+        }
     }
 };
 
@@ -1176,30 +1184,30 @@ var OpenItems = {
      */
     initialize:function() {
         var oi = $( "<div id='openItemsContainer'>"
-                + "<div id='openItemsHeader'>"
-                + "<div>"
-                + "<h3><span class='openItemsCount'>Open Items (0)</span></h3>"
-                + "<span id='headerCloseButton' alt='Close' title='Close'></span>"
-                + "</div>"
-                + "</div>"
-                + "<div id='openItemsBody'>"
-                + "<ul id='categoryList' style='height:150px; overflow:auto'></ul>"
-                + "</div>"
-                + "<div id='openItemsFooter'>"
-                + "<div class='buttonBar'>"
-                + "</div>"
-                + "</div>"
-                + "</div>" );
+            + "<div id='openItemsHeader'>"
+            + "<div>"
+            + "<h3><span class='openItemsCount'>Open Items (0)</span></h3>"
+            + "<span id='headerCloseButton' alt='Close' title='Close'></span>"
+            + "</div>"
+            + "</div>"
+            + "<div id='openItemsBody'>"
+            + "<ul id='categoryList' style='height:150px; overflow:auto'></ul>"
+            + "</div>"
+            + "<div id='openItemsFooter'>"
+            + "<div class='buttonBar'>"
+            + "</div>"
+            + "</div>"
+            + "</div>" );
 
         oi.find( '.buttonBar' ).append( Button( "closeAllOpenItemsButton", "openitems_label_closeAll",
-                function() {
-                    ContentManager.closeAll();
-                    toggleFooterOpenItems();
-                                              } ) );
+            function() {
+                ContentManager.closeAll();
+                toggleFooterOpenItems();
+            } ) );
         oi.find( '.buttonBar' ).append( Button( "closeOpenItemsButton", "openitems_label_closeSelected",
-                function() {
-                                                  ContentManager.close( $( "li.activeOpenItem" ).attr( "id" ).replace( OpenItems.openItemMarker, "" ) );
-                                              } ) );
+            function() {
+                ContentManager.close( $( "li.activeOpenItem" ).attr( "id" ).replace( OpenItems.openItemMarker, "" ) );
+            } ) );
 
         $( "#headerCloseButton, #footerOpenItemsApplication" ).bind( "click", toggleFooterOpenItems );
 
@@ -1232,7 +1240,7 @@ var OpenItems = {
      */
     add: function( openItem ) {
         var found = false;
-        var category = openItem.navigationEntry.menu.substring( openItem.navigationEntry.menu.lastIndexOf( "||" ) + 1 );
+        var category = openItem.navigationEntry.menu.substring( openItem.navigationEntry.menu.lastIndexOf( ContentManager.delimiter ) + 1 );
         var name = openItem.navigationEntry.name + "_" + openItem.cuipid;
         var tab = name + this.openItemMarker;
 
@@ -1245,11 +1253,11 @@ var OpenItems = {
 
         if ( !found ) {
             var newCategory = "<li>"
-                    + "<h4><div class='downArrow'></div>" + category + "</h4>"
-                    + "<ul class='itemList' id='openItems'>"
-                    + "<li id='" + tab + "' class='activeOpenItem' onclick=\"ContentManager.bringToFront('" + name + "');\"><a>" + openItem.navigationEntry.caption + "</a></li>"
-                    + "</ul>"
-                    + "</li>";
+                + "<h4><div class='downArrow'></div>" + category + "</h4>"
+                + "<ul class='itemList' id='openItems'>"
+                + "<li id='" + tab + "' class='activeOpenItem' onclick=\"ContentManager.bringToFront('" + name + "');\"><a>" + openItem.navigationEntry.caption + "</a></li>"
+                + "</ul>"
+                + "</li>";
 
             $( '#categoryList' ).append( newCategory );
         }
@@ -1308,7 +1316,7 @@ var OpenItems = {
     getOpenItemById: function( id ) {
         for ( var x in this.items ) {
             if ( this.items[x].navigationEntry
-                    && this.items[x].navigationEntry.id === id ) {
+                && this.items[x].navigationEntry.id === id ) {
                 return this.items[x];
             }
         }
