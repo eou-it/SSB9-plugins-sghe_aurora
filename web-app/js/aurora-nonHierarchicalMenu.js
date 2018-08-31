@@ -152,7 +152,7 @@ var NonHierarchicalMenu = (function() {
                             return section.name;
                         }
                     });
-                    if (menuSectionExtns) {
+                    if (menuSectionExtns && 'fields' in menuSectionExtns) {
                         menuSectionExtns.fields.forEach(function (field, key) {
                             if (field.name === id) {
                                 if (field.exclude) {
@@ -333,7 +333,7 @@ ToolsMenu.initialize = function() {
         if (angular.module("keyboardshortcut") && angular.module("xe-ui-components")) {
             var shortcutDialogDiv = document.getElementById('shortcut_module_added');
             if (null != shortcutDialogDiv && undefined != shortcutDialogDiv) {
-                shortcutOverlay();
+                //shortcutOverlay();
                 ToolsMenu.addItem(
                     "keyboard",
                     $.i18n.prop("aurora.toolsmenu.keyboard.shortcuts.heading"),
@@ -369,6 +369,7 @@ function aboutDialogPopUp () {
 
 
 function shortcutOverlayAddition(){
+    shortcutOverlay();
     var dialogDiv = document.getElementById('shortcut_module_added');
    /* dialogDiv.setAttribute("ng-app","keyboardshortcut");
     dialogDiv.setAttribute("ng-controller","shortcutModal");*/
