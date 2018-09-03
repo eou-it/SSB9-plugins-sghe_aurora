@@ -252,7 +252,7 @@ div#header-east-part-user-controls {
         height: 2.5em;
         width: 2.5em;
         margin:0;
-        background: url("images/lock.svg") center center no-repeat;
+        background: url("lock.svg") center center no-repeat;
         height: 100%;
     }
 
