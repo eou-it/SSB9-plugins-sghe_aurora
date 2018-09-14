@@ -405,7 +405,7 @@ var Footer = {
     displayFooter: function () {
         (function ($) {
             $('body').append(Footer.displayUI);
-            $("footer.banner-footer").find($("span.year")).text($.i18n.prop("footer.copyright_year"));
+            $("footer.banner-footer").find($("span.year")).text(($.i18n.prop("default.copyright.startyear")+$.i18n.prop("default.copyright.endyear")));
             $("footer.banner-footer").find($("span.companyName")).text($.i18n.prop("footer.company_name"));
             $("footer.banner-footer").find($("span.otherInfo")).text($.i18n.prop("footer.other_info"));
             $("#content").css("margin-bottom", $("footer.banner-footer").height());
