@@ -86,9 +86,7 @@ a.breadcrumbButton{
 
 /*Mobile device*/
 
-@media only screen
-and (min-width: 0px)
-and (max-width: 767px) {
+@media only screen and (min-width: 0px) and (max-width: 767px) {
 
     #breadcrumb-panel{
         height: 4.6338028169014086%;

@@ -397,9 +397,7 @@ div#header-east-part-user-controls {
 
 /*Tablet device*/
 
-@media only screen
-and (min-width: 768px)
-and (max-width: 1024px) {
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
 
     #bannerMenu {
         width: 1.875em;

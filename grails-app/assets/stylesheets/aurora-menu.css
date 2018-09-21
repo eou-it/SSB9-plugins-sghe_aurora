@@ -146,9 +146,7 @@
 }
 
 /** Mobile **/
-@media only screen
-and (min-width:0px)
-and (max-width:767px){
+@media only screen and (min-width:0px) and (max-width:767px){
     #menuContainer   {
         height: 90%;
     }
@@ -163,28 +161,20 @@ and (max-width:767px){
     }
 }
 
-@media only screen
-and (min-width:0px)
-and (max-width:767px)
-and (orientation : landscape)   {
+@media only screen and (min-width:0px) and (max-width:767px) and (orientation : landscape)   {
     #menuContainer   {
         min-width:50%;
     }
 }
 
-@media only screen
-and (min-width:0px)
-and (max-width:767px)
-and (orientation : portrait)   {
+@media only screen and (min-width:0px) and (max-width:767px) and (orientation : portrait)   {
     #menuContainer   {
         width: 100%;
     }
 }
 
 /*** Tablet ***/
-@media only screen
-and (min-width:768px)
-and (max-width:1024px){
+@media only screen and (min-width:768px) and (max-width:1024px){
     #menuContainer   {
         height: 90%;
         min-width:40%;
