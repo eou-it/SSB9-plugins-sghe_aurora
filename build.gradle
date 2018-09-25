@@ -9,7 +9,7 @@ buildscript {
     }
 }
 
-version "9.28.2"
+version "9.30"
 group "sghe.aurora"
 
 apply plugin:"eclipse"
