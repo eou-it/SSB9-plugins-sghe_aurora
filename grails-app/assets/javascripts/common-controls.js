@@ -446,7 +446,7 @@ var Footer = {
                  var fadeCopyrightDelay;
                  var emptyMetaTagValue="false";
                  var footerMetaTag=$('meta[name=footerFadeAwayTime]').attr("content");
-                 if(footerMetaTag!=emptyMetaTagValue && footerMetaTag!="[:]" ){
+                 if(footerMetaTag!=emptyMetaTagValue && footerMetaTag!="[:]" && footerMetaTag != ""){
                      fadeCopyrightDelay=parseInt(footerMetaTag);
                  }else{
                      fadeCopyrightDelay=2000;
