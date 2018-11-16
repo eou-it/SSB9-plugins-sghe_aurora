@@ -66,8 +66,8 @@
 
 #userList .canvas-item {
     font: .875em Open sans;
-    color: #151618;/*EDS*/
-    background-color: #ffffff; /*EDS*/
+    color: #ffffff;/*EDS*/
+    background-color: #026BC8; /*EDS*/
     border: 1px solid #81C8FF; /*EDS*/
     padding-left: 2em;
     border-top: none;
@@ -78,6 +78,7 @@
     outline: none;
     border: none;
     background-color: #026BC8; /*EDS*/
+    border: 1px solid #81C8FF; /*EDS*/
     color: #FFFFFF; /*EDS*/
 }
 #userList > .canvas-item:focus {
@@ -85,16 +86,16 @@
     border-top: none;
 }
 
- #userList .canvas-item:hover {
-    background-color: #F7F7F7;/*EDS*/
-    color: #151618; /*EDS*/
+#userList .canvas-item:hover {
+//background-color: #F7F7F7;/*EDS*/
+    color: #FFFFFF; /*EDS*/
 }
 
 #userList .canvas-item:active {
-    background-color: #FFFFFF;/*EDS*/
-    border:1px solid #EEEEEF; /*EDS*/
+    background-color: #026BC8;/*EDS*/
+    border:1px solid #81C8FF; /*EDS*/
     outline: none;
-    color: #151618; /*EDS*/
+    color: #FFFFFF; /*EDS*/
     border-top: none; /*EDS*/
 }
 
