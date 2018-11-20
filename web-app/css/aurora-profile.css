@@ -68,7 +68,7 @@
     font: .875em Open sans;
     color: #151618;/*EDS*/
     background-color: #ffffff; /*EDS*/
-    border: 1px solid #EEEEEF; /*EDS*/
+    border-bottom: 1px solid #EEEEEF; /*EDS*/
     padding-left: 2em;
     border-top: none;
 
