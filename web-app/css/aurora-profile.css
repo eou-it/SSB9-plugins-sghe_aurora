@@ -6,10 +6,11 @@
     z-index: 1000;
     padding: 0px;
     margin: 0px;
-    right:0;
+    right: 0;
     left: auto;
     height: auto;
     width: auto;
+    overflow-y: auto;
     white-space: nowrap;
     margin-top: 4px;
 }
@@ -24,13 +25,12 @@
     font-family: "Open Sans";
     font-size: 1em;
     display: block;
-    display: block;
     padding-bottom: 0.5em;
 }
 
 #userCanvas {
     display: none;
-    border: 1px solid #EEEEEF; /*EDS*/
+    border: 1px solid #81C8FF; /*EDS*/
     border-top: none;
     outline: none;
 }
@@ -66,40 +66,41 @@
 
 #userList .canvas-item {
     font: .875em Open sans;
-    color: #ffffff;/*EDS*/
-    background-color: #026BC8; /*EDS*/
-    border: 1px solid #81C8FF; /*EDS*/
+    color: #151618;/*EDS*/
+    background-color: #ffffff; /*EDS*/
+    border: 1px solid #EEEEEF; /*EDS*/
     padding-left: 2em;
     border-top: none;
 
 }
+#userList .canvas-item:hover {
+    background-color: #F7F7F7; /*EDS*/
+}
 
 #userList .canvas-item:focus {
+    background-color: #026BC8; /*EDS*/
+    color:#FFFFFF;/*EDS*/
     outline: none;
     border: none;
-    background-color: #026BC8; /*EDS*/
-    border: 1px solid #81C8FF; /*EDS*/
-    color: #FFFFFF; /*EDS*/
+
 }
-#userList > .canvas-item:focus {
+#userList >.canvas-item:focus {
+    background-color: #026BC8; /*EDS*/
+    color:#FFFFFF;/*EDS*/
     outline: none;
     border-top: none;
 }
 
-#userList .canvas-item:hover {
-    color: #FFFFFF; /*EDS*/
-}
-
 #userList .canvas-item:active {
     background-color: #026BC8;/*EDS*/
-    border:1px solid #81C8FF; /*EDS*/
     outline: none;
     color: #FFFFFF; /*EDS*/
     border-top: none; /*EDS*/
 }
 
 #userList .canvas-item[readonly] {
-    color: #5B5E65; /*EDS*/
+    color: #151618; /*EDS*/
+    background-color: #EEEEEF;
     cursor: auto;
 }
 
