@@ -34,7 +34,7 @@ div#header-east-part-user-controls {
 }
 
 #header-main-section-east-part{
-    background-color: rgb(21, 22, 24,0.15);  /*EDS*/
+    background-color: rgba(21, 22, 24,0.15);  /*EDS*/
     right: 0;
     position: absolute;
     left: auto;
