@@ -1,10 +1,9 @@
 /*******************************************************************************
- Copyright 2015-2018 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2019 Ellucian Company L.P. and its affiliates.
 *******************************************************************************/
 #header-main-section {
     width: 100%;
     background-color: #5353D1;  /*EDS*/
-    height: 5.859375%;
     position: relative;
     min-height: 3.4em;
     border-bottom: 4px solid #51ABFF;  /*EDS*/
@@ -113,7 +112,7 @@ div#header-east-part-user-controls {
 .institutionalBranding {
     background: url("eds/logo.svg") left center  no-repeat;  /*EDS New Logo*/
     height: inherit;
-    width: 4.875em;
+    width: 10em;
     float: left;
     margin-left: 1em;
     margin-right:0;
@@ -216,9 +215,7 @@ div#header-east-part-user-controls {
 @media only screen and (min-width: 0px) and (max-width: 767px) {
 
     #header-main-section {
-        height: 5.39436%;
         display: inline-block;
-        min-height: 3.3em;
     }
 
     #header-main-section-east-part{
@@ -244,9 +241,7 @@ div#header-east-part-user-controls {
     #bannerMenu {
         width: 1.5em;
     }
-    .institutionalBranding {
-        width: 9.125em;
-    }
+
     .signIn-mobile {
         display: block;
         height: 2.5em;
@@ -402,14 +397,9 @@ div#header-east-part-user-controls {
     #bannerMenu {
         width: 1.875em;
     }
-    .institutionalBranding {
-        width: 8.125em;
-    }
 
     #header-main-section {
-        height: 6.510416666666667%;
         display: inline-block;
-        min-height : 3.7em;
     }
 
     div#header-east-part-user-controls {
