@@ -64,6 +64,12 @@ assets {
     packagePlugin = true
 }
 
+grails {
+    plugins {
+        compile project (":banner-codenarc")
+    }
+}
+
 apply plugin: 'codenarc'
 dependencies {
     //testRuntime "org.slf4j:slf4j-log4j12:1.7.5"
