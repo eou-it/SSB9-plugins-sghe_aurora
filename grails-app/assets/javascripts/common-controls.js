@@ -63,8 +63,8 @@ var AuroraHeader =  {
         //Add href to branding
         var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
         var origin = document.location.origin || (document.location.protocol + '//' + document.location.host);
-        appUrl=appUrl+"/";
         var appUrl = path.substring(0,path.indexOf('/ssb'));
+        appUrl=appUrl+"/";
         $('#branding').attr('href', appUrl);
         $('#brandingDiv').attr("title", ResourceManager.getString("areas_label_home_title"));
         $('#branding').attr("aria-label", ResourceManager.getString("areas_label_home_description"));
