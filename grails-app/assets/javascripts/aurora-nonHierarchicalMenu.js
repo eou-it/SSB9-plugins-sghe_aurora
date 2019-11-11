@@ -349,6 +349,19 @@ ToolsMenu.initialize = function() {
         }
     }
 
+    var linkedUrl = document.getElementsByName("privacyPolicyUrl")[0].content;
+    if (linkedUrl) {
+        ToolsMenu.addItem(
+            "privacyPolicy",
+            $.i18n.prop("aurora.privacypolicy_label"),
+            "",
+            function privacyPolicylinkUrl() {
+                var Uri = document.getElementsByName("privacyPolicyUrl")[0].content
+                window.open(Uri, '_blank');
+            }
+        );
+    }
+
 };
 
 function aboutDialogPopUp () {
