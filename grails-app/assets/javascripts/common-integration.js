@@ -484,6 +484,9 @@ $(document.body).ready(function(){
             } else if ($event.ctrlKey == true && $event.shiftKey == true && $event.keyCode == 88) {
                 stopBrowserShortCutKeys($event);
                 M.send(M.createActionMessage("showDashboard"));
+            } else if ($event.ctrlKey == true && $event.shiftKey == false && $event.keyCode == 68) {
+                stopBrowserShortCutKeys($event);
+                M.send(M.createActionMessage("favorites"));
             }
         };
         // End -- Sending message to handle AppNav Keyboard shortcuts.
