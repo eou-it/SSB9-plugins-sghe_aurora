@@ -46,6 +46,7 @@ var CommonPlatform = {
 
 
 			CommonContext.hideSSBHeaderComps=$('meta[name=hideSSBHeaderComps]').attr("content");
+			CommonContext.hideBannerMenu = $('meta[name=guestAuthenticationEnabled]').attr("content");
 
 			if (options.standalone && typeof(options.standalone) == 'boolean' && options.standalone) {
 				CommonContext.standalone = options.standalone;
