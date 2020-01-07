@@ -84,6 +84,16 @@ var AuroraHeader =  {
         BreadCrumbAndPageTitle.create();
         setupBannerMenu();
 
+        if (CommonContext.hideBannerMenu){
+            $('#menuContainer').removeClass('show').addClass('hide');
+            $('#menu').removeClass('show').addClass('hide');
+            $('#bannerMenu').removeClass('show').addClass('hide');
+
+            //disable tools button
+            $('#Preference').removeClass('show').addClass('hide');
+        }
+
+
         if($('meta[name=headerAttributes]').attr("content")){
             var headerAttributes = JSON.parse($('meta[name=headerAttributes]').attr("content"));
             BreadCrumbAndPageTitle.draw(headerAttributes);
