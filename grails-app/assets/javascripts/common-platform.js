@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2009-2015 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2020 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 var scrollableList = new ScrollableMenuTable('#menuContainer', Navigation.menuList);
 
@@ -61,6 +61,11 @@ var CommonPlatform = {
 				//Initialize header
 				if (options.header && typeof(options.header) == 'boolean' && options.header || options.header == null) {
                     $('body').prepend(AuroraHeader.createSkeleton());
+					if (typeof xe !== 'undefined' && xe.extensionsFound) {  //Patch for AngularJS Banner Menu extension
+						if(typeof xe.jq === "undefined" ) {
+							xe.extend($('#bannerMenuDiv'));
+						}
+					}
                     AuroraHeader.placeEastPart(options);
                     AuroraHeader.fillWestPart();
 					if (options.globalNav && typeof (options.globalNav) == 'boolean' && options.globalNav || options.globalNav == null) {
@@ -92,7 +97,7 @@ var CommonPlatform = {
  * @author jmiller
  */
 var Authenticator = {
-	
+
 	/**
 	 * Gets user details by inspecting meta tags in HTML.
 	 */
