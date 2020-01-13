@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2009-2018 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2020 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 /**
@@ -49,7 +49,7 @@ var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<header id='header-main-section' class='aurora-theme' role='banner'>"
             + "<div id='header-main-section-west-part'>"
-            + "<div id='bannerMenuDiv' tabindex='-1'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer'></div></div>"
+            + "<div id='bannerMenuDiv' tabindex='-1' xe-section='bannerMenuDiv'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer'></div></div>"
             + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'></a></div>"
             + "</header>";
 
@@ -83,6 +83,16 @@ var AuroraHeader =  {
     addNavigationControls: function () {
         BreadCrumbAndPageTitle.create();
         setupBannerMenu();
+
+        if (CommonContext.hideBannerMenu){
+            $('#menuContainer').removeClass('show').addClass('hide');
+            $('#menu').removeClass('show').addClass('hide');
+            $('#bannerMenu').removeClass('show').addClass('hide');
+
+            //disable tools button
+            $('#Preference').removeClass('show').addClass('hide');
+        }
+
 
         if($('meta[name=headerAttributes]').attr("content")){
             var headerAttributes = JSON.parse($('meta[name=headerAttributes]').attr("content"));
