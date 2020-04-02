@@ -416,7 +416,9 @@ var Footer = {
     displayFooter: function () {
         (function ($) {
             $('body').append(Footer.displayUI);
-            $("footer.banner-footer").find($("span.companyName")).text($.i18n.prop("footer.company_name",[$.i18n.prop("default.copyright.startyear"),$.i18n.prop("default.copyright.endyear")]));
+            var startyear = $.i18n.prop("default.copyright.startyear");
+            var endyear = $.i18n.prop("default.copyright.endyear");
+            $("footer.banner-footer").find($("span.companyName")).text($.i18n.prop("footer.company_name",[startyear,endyear]));
             $("footer.banner-footer").find($("span.otherInfo")).text($.i18n.prop("footer.other_info"));
             $("#content").css("margin-bottom", $("footer.banner-footer").height());
         })(jQuery);
