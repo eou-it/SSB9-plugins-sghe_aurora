@@ -73,7 +73,11 @@ var AuroraHeader =  {
               If globalGuestProxyBaseURL is not configured, then return to the root
               This will be only configured through the Proxy Access URL
              */
-            appUrl = appUrl + $('meta[name=globalGuestProxyBaseURL]').attr("content")
+            if ($('meta[name=globalGuestProxyBaseURL]').attr("content") != undefined) {
+                appUrl = appUrl + $('meta[name=globalGuestProxyBaseURL]').attr("content")
+            }else{
+                appUrl = appUrl + "/";
+            }
         }
 
         $('#branding').attr('href', appUrl);
