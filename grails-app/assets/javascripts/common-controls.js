@@ -64,7 +64,22 @@ var AuroraHeader =  {
         var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
         var origin = document.location.origin || (document.location.protocol + '//' + document.location.host);
         var appUrl = path.substring(0,path.indexOf('/ssb'));
-        appUrl=appUrl+"/";
+
+        if (!CommonContext.hideBannerMenu) {
+            appUrl = appUrl + "/";
+        }else{
+            /*
+              Add globalGuestProxyBaseURL if this is configured
+              If globalGuestProxyBaseURL is not configured, then return to the root
+              This will be only configured through the Proxy Access URL
+             */
+            if ($('meta[name=globalGuestProxyBaseURL]').attr("content") != undefined) {
+                appUrl = appUrl + $('meta[name=globalGuestProxyBaseURL]').attr("content")
+            }else{
+                appUrl = appUrl + "/";
+            }
+        }
+
         $('#branding').attr('href', appUrl);
         $('#brandingDiv').attr("title", ResourceManager.getString("areas_label_home_title"));
         $('#branding').attr("aria-label", ResourceManager.getString("areas_label_home_description"));
