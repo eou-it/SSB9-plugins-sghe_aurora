@@ -75,6 +75,15 @@ var AuroraHeader =  {
              */
             if ($('meta[name=globalGuestProxyBaseURL]').attr("content") != undefined && $('meta[name=globalGuestProxyBaseURL]').attr("content") !== null) {
                 appUrl = $('meta[name=globalGuestProxyBaseURL]').attr("content") + "/"
+
+                $("#branding").on('click', function() {
+                    jQuery.ajax({
+                        url: "proxy/returnMe",
+                        data: [],
+                        async: false
+                    });
+                });
+                
             }else{
                 appUrl = appUrl + "/";
             }
