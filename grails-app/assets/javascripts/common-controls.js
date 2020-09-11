@@ -83,7 +83,7 @@ var AuroraHeader =  {
                         async: false
                     });
                 });
-                
+
             }else{
                 appUrl = appUrl + "/";
             }
