@@ -108,13 +108,18 @@ var AuroraHeader =  {
         BreadCrumbAndPageTitle.create();
         setupBannerMenu();
 
-        if (CommonContext.hideBannerMenu){
+        if (CommonContext.hideBannerMenu == 'true'){
             $('#menuContainer').removeClass('show').addClass('hide');
             $('#menu').removeClass('show').addClass('hide');
             $('#bannerMenu').removeClass('show').addClass('hide');
 
             //disable tools button
             $('#Preference').removeClass('show').addClass('hide');
+        }else{
+            if ($('#menuContainer').hasClass('hide')) { $('#menu').removeClass('hide').addClass('show')};
+            if ($('#menu').hasClass('hide')) { $('#menu').removeClass('hide').addClass('show')};
+            if ($('#bannerMenu').hasClass('hide')) { $('#menu').removeClass('hide').addClass('show')};
+            if ($('#Preference').hasClass('hide')) { $('#menu').removeClass('hide').addClass('show')};
         }
 
 
