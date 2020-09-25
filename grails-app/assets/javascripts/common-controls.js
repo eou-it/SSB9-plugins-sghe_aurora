@@ -115,7 +115,7 @@ var AuroraHeader =  {
         }
 
         var shortcuts = [
-            'ctrl+alt+home', function() {
+            'alt+q', function() {
                 // click the first link in the home div.
                 // just $().click() doesn't work as the element is not an input
                 $('#branding')[0].click();
