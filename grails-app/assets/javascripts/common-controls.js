@@ -49,8 +49,8 @@ var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<header id='header-main-section' class='aurora-theme' role='banner'>"
             + "<div id='header-main-section-west-part'>"
-            + "<div id='bannerMenuDiv' tabindex='-1' xe-section='bannerMenuDiv'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer'></div></div>"
-            + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'></a></div>"
+            + "<div id='bannerMenuDiv' tabindex='-1' xe-section='bannerMenuDiv'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'><img id='menu-icon' src='../assets/menu.svg' alt='Menu'></a><div id='menuContainer'></div></div>"
+            + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'><img src='../assets/eds/logo.svg' alt='Branding'></a></div>"
             + "</header>";
 
         return $(header);
@@ -266,7 +266,7 @@ function UserControls( options ) {
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForOthers();
     }
-    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false' class='menu-icon'></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false'><img src='../assets/settings.svg' alt='tools'></a></div>");
     ControlBar.append(toolsDiv);
     ToolsMenu.initialize();
 
@@ -299,7 +299,7 @@ function UserControls( options ) {
             }
 
         } else {
-            var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'></a></div>");
+            var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'><img src='../assets/avatar.svg' alt='avatar'></a></div>");
             ControlBar.append(userDiv);
             UserName.populateUserNameForOthers();
             ProfileMenu.initialize();
