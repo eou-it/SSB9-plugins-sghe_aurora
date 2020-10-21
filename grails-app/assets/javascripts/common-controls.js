@@ -49,7 +49,7 @@ var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<header id='header-main-section' class='aurora-theme' role='banner'>"
             + "<div id='header-main-section-west-part'>"
-            + "<div id='bannerMenuDiv' tabindex='-1' xe-section='bannerMenuDiv'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'><img id='menu-icon' src='../assets/menu.svg' alt='Menu'></a><div id='menuContainer'></div></div>"
+            + "<div id='bannerMenuDiv' tabindex='-1' xe-section='bannerMenuDiv'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer'></div></div>"
             + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'><img src='../assets/eds/logo.svg' alt='Branding'></a></div>"
             + "</header>";
 

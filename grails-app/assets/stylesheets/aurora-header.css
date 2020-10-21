@@ -107,7 +107,6 @@ div#header-east-part-user-controls {
     margin-left: 1em;
     position: relative;
     margin-right:0;
-    line-height: 2.9em;
 }
 
 .institutionalBranding {
@@ -128,10 +127,6 @@ div#header-east-part-user-controls {
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-#menu-icon {
-    margin-left: 5px;
 }
 
 #user {
