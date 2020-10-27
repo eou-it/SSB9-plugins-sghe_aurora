@@ -266,7 +266,7 @@ function UserControls( options ) {
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForOthers();
     }
-    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false'><img src='../assets/settings.svg' alt='tools'></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false'><img src='../assets/settings.svg' alt='Tools'></a></div>");
     ControlBar.append(toolsDiv);
     ToolsMenu.initialize();
 
@@ -299,7 +299,7 @@ function UserControls( options ) {
             }
 
         } else {
-            var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'><img src='../assets/avatar.svg' alt='avatar'></a></div>");
+            var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'><img src='../assets/avatar.svg' alt='Profile'></a></div>");
             ControlBar.append(userDiv);
             UserName.populateUserNameForOthers();
             ProfileMenu.initialize();
