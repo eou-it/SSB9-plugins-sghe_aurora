@@ -107,7 +107,6 @@ var AuroraHeader =  {
     addNavigationControls: function () {
         BreadCrumbAndPageTitle.create();
         setupBannerMenu();
-
         if (CommonContext.hideBannerMenu == 'true'){
             $('#menuContainer').removeClass('show').addClass('hide');
             $('#menu').removeClass('show').addClass('hide');
@@ -115,12 +114,20 @@ var AuroraHeader =  {
 
             //disable tools button
             $('#Preference').removeClass('show').addClass('hide');
+            $('#extensibility_title').removeClass('show').addClass('hide');
+            $('#extensibility').removeClass('show').addClass('hide');
+            $('#base_title').removeClass('show').addClass('hide');
+
         }else{
-            if ($('#menuContainer').hasClass('hide')) { $('#menu').removeClass('hide').addClass('show')};
+            //enable tools button if it was disabled in a proxy mode
+            if ($('#menuContainer').hasClass('hide')) { $('#menuContainer').removeClass('hide').addClass('show')};
             if ($('#menu').hasClass('hide')) { $('#menu').removeClass('hide').addClass('show')};
-            if ($('#bannerMenu').hasClass('hide')) { $('#menu').removeClass('hide').addClass('show')};
-            if ($('#Preference').hasClass('hide')) { $('#menu').removeClass('hide').addClass('show')};
-        }
+            if ($('#bannerMenu').hasClass('hide')) { $('#bannerMenu').removeClass('hide').addClass('show')};
+            if ($('#Preference').hasClass('hide')) { $('#Preference').removeClass('hide').addClass('show')};
+            if ($('#extensibility_title').hasClass('hide')) { $('#extensibility_title').removeClass('hide').addClass('show')};
+            if ($('#extensibility').hasClass('hide')) { $('#extensibility').removeClass('hide').addClass('show')};
+            if ($('#base_title').hasClass('hide')) { $('#base_title').removeClass('hide').addClass('show')};
+    }
 
 
         if($('meta[name=headerAttributes]').attr("content")){
