@@ -78,7 +78,7 @@ var AuroraHeader =  {
 
                 $("#branding").on('click', function() {
                     jQuery.ajax({
-                        url: "proxy/returnMe",
+                        url: "proxy/onReturn",
                         data: [],
                         async: false
                     });
