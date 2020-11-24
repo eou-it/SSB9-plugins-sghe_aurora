@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2016 Ellucian Company L.P. and its affiliates.
+ Copyright 2016-2020 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 function ScrollableMenuTable(root, menuList) {
@@ -135,7 +135,7 @@ function ScrollableMenuTable(root, menuList) {
                 Test_url = true
             }
 
-            if(Test_url &&  CommonContext.hideSSBHeaderComps){
+            if(Test_url &&  CommonContext.hideSSBHeaderComps == "true"){
                 $(target).find("a").attr("target", "banner8SSB");
             }else{
                 (target).find('a:first')[0].click();
