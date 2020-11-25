@@ -107,7 +107,7 @@ var AuroraHeader =  {
     addNavigationControls: function () {
         BreadCrumbAndPageTitle.create();
         setupBannerMenu();
-        if (CommonContext.hideBannerMenu == 'true'){
+        if (CommonContext.hideBannerMenu){
             $('#menuContainer').removeClass('show').addClass('hide');
             $('#menu').removeClass('show').addClass('hide');
             $('#bannerMenu').removeClass('show').addClass('hide');
