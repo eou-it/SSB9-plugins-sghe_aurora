@@ -73,8 +73,17 @@ var AuroraHeader =  {
               If globalGuestProxyBaseURL is not configured, then return to the root
               This will be only configured through the Proxy Access URL
              */
-            if ($('meta[name=globalGuestProxyBaseURL]').attr("content") != undefined) {
-                appUrl = appUrl + $('meta[name=globalGuestProxyBaseURL]').attr("content")
+            if ($('meta[name=globalGuestProxyBaseURL]').attr("content") != undefined && $('meta[name=globalGuestProxyBaseURL]').attr("content") !== null) {
+                appUrl = $('meta[name=globalGuestProxyBaseURL]').attr("content") + "/"
+
+                $("#branding").on('click', function() {
+                    jQuery.ajax({
+                        url: "proxy/onReturn",
+                        data: [],
+                        async: false
+                    });
+                });
+
             }else{
                 appUrl = appUrl + "/";
             }
@@ -98,7 +107,6 @@ var AuroraHeader =  {
     addNavigationControls: function () {
         BreadCrumbAndPageTitle.create();
         setupBannerMenu();
-
         if (CommonContext.hideBannerMenu){
             $('#menuContainer').removeClass('show').addClass('hide');
             $('#menu').removeClass('show').addClass('hide');
@@ -106,6 +114,13 @@ var AuroraHeader =  {
 
             //disable tools button
             $('#Preference').removeClass('show').addClass('hide');
+
+        }else{
+            //enable tools button if it was disabled in a proxy mode
+            if ($('#menuContainer').hasClass('hide')) { $('#menuContainer').removeClass('hide').addClass('show')};
+            if ($('#menu').hasClass('hide')) { $('#menu').removeClass('hide').addClass('show')};
+            if ($('#bannerMenu').hasClass('hide')) { $('#bannerMenu').removeClass('hide').addClass('show')};
+            if ($('#Preference').hasClass('hide')) { $('#Preference').removeClass('hide').addClass('show')};
         }
 
 
