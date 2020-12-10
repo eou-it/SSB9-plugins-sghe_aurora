@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2015-2019 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2020 Ellucian Company L.P. and its affiliates.
 *******************************************************************************/
 #header-main-section {
     width: 100%;
@@ -110,31 +110,33 @@ div#header-east-part-user-controls {
 }
 
 .institutionalBranding {
-    background: url("eds/logo.svg") left center  no-repeat;  /*EDS New Logo*/
     height: inherit;
-    width: 10em;
     float: left;
     margin-left: 1em;
     margin-right:0;
     padding-right:1em;
     padding-left:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #tools {
-    background: url("settings.svg") center center no-repeat;
     height: inherit;
     width: 2.375em;
-    display : block;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 #user {
-    background: url("avatar.svg") center center no-repeat;
     position: relative;
     height: 100%;
     width: 1.7em;
     margin-left: 1em;
-    display: block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .notification-center {
