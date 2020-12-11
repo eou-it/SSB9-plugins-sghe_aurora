@@ -100,9 +100,10 @@ div#header-east-part-user-controls {
 }
 
 #bannerMenu {
+    background: url("menu.svg") center center no-repeat;
     height: inherit;
     width: 1.5em;
-    display: flex !important;
+    display: block;
     margin-left: 1em;
     position: relative;
     margin-right:0;

@@ -49,7 +49,7 @@ var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<header id='header-main-section' class='aurora-theme' role='banner'>"
             + "<div id='header-main-section-west-part'>"
-            + "<div id='bannerMenuDiv' tabindex='-1' xe-section='bannerMenuDiv'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'><img src='' alt='Banner Menu'></a><div id='menuContainer'></div></div>"
+            + "<div id='bannerMenuDiv' tabindex='-1' xe-section='bannerMenuDiv'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer'></div></div>"
             + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'><img src='' alt='Branding'></a></div>"
             + "</header>";
 
@@ -61,7 +61,6 @@ var AuroraHeader =  {
         $("#bannerMenu").attr("aria-label",ResourceManager.getString("areas_label_browse_description"));
         $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
         $('#brandingDiv').find('img')[0].src=Application.getApplicationName() + "/assets/eds/logo.svg";
-        $('#bannerMenuDiv').find('img')[0].src=Application.getApplicationName() + "/assets/menu.svg";
         //Add href to branding
         var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
         var origin = document.location.origin || (document.location.protocol + '//' + document.location.host);
