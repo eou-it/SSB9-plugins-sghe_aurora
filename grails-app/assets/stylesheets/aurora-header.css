@@ -100,10 +100,9 @@ div#header-east-part-user-controls {
 }
 
 #bannerMenu {
-    background: url("menu.svg") center center no-repeat;
     height: inherit;
     width: 1.5em;
-    display: block;
+    display: flex !important;
     margin-left: 1em;
     position: relative;
     margin-right:0;
@@ -245,11 +244,10 @@ div#header-east-part-user-controls {
     }
 
     .signIn-mobile {
-        display: block;
+        display: flex;
         height: 2.5em;
         width: 2.5em;
         margin:0;
-        background: url("lock.svg") center center no-repeat;
         height: 100%;
     }
 
