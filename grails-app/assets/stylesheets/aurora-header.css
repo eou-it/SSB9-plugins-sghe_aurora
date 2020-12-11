@@ -245,11 +245,10 @@ div#header-east-part-user-controls {
     }
 
     .signIn-mobile {
-        display: block;
+        display: flex;
         height: 2.5em;
         width: 2.5em;
         margin:0;
-        background: url("lock.svg") center center no-repeat;
         height: 100%;
     }
 

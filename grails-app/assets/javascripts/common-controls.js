@@ -50,7 +50,7 @@ var AuroraHeader =  {
         var header ="<header id='header-main-section' class='aurora-theme' role='banner'>"
             + "<div id='header-main-section-west-part'>"
             + "<div id='bannerMenuDiv' tabindex='-1' xe-section='bannerMenuDiv'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer'></div></div>"
-            + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'><img src='../assets/eds/logo.svg' alt='Branding'></a></div>"
+            + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'><img src='' alt='Branding'></a></div>"
             + "</header>";
 
         return $(header);
@@ -60,6 +60,7 @@ var AuroraHeader =  {
         $('#bannerMenuDiv').attr("title",ResourceManager.getString("areas_label_browse_title"));
         $("#bannerMenu").attr("aria-label",ResourceManager.getString("areas_label_browse_description"));
         $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
+        $('#brandingDiv').find('img')[0].src=Application.getApplicationName() + "/assets/eds/logo.svg";
         //Add href to branding
         var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
         var origin = document.location.origin || (document.location.protocol + '//' + document.location.host);
@@ -284,7 +285,8 @@ function UserControls( options ) {
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForOthers();
     }
-    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false'><img src='../assets/settings.svg' alt='Tools'></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false'><img src='' alt='Tools'></a></div>");
+    toolsDiv.find('img')[0].src=Application.getApplicationName() + "/assets/settings.svg";
     ControlBar.append(toolsDiv);
     ToolsMenu.initialize();
 
@@ -317,7 +319,8 @@ function UserControls( options ) {
             }
 
         } else {
-            var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'><img src='../assets/avatar.svg' alt='Profile'></a></div>");
+            var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'><img src='' alt='Profile'></a></div>");
+            userDiv.find('img')[0].src=Application.getApplicationName() + "/assets/avatar.svg";
             ControlBar.append(userDiv);
             UserName.populateUserNameForOthers();
             ProfileMenu.initialize();
@@ -745,6 +748,15 @@ var Application = {
         var protocol = Application.getProtocol();
         var host = Application.getHost();
         return protocol + "//" + host + "/" + app;
+    },
+    /**
+     * Returns the application name from the window location.
+     * Ex: http://m038034.sct.com:8000/s14s80
+     */
+    getApplicationName: function() {
+
+        var appName = Application.getApplicationPath().substring(0,Application.getApplicationPath().lastIndexOf('/'))
+        return appName;
     },
     /**
      * Returns the application path from the window location.
