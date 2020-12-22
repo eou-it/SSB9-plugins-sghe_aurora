@@ -92,6 +92,13 @@ div#header-east-part-user-controls {
     position: relative;
 }
 
+#header-main-section-east-part #notification-center {
+    float:right;
+    margin-left: 1em;
+    margin-right: auto;
+    position: relative;
+}
+
 #bannerMenu {
     background: url("menu.svg") center center no-repeat;
     height: inherit;
