@@ -286,7 +286,7 @@ function UserControls( options ) {
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForOthers();
     }
-    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false'><img src='' alt='Tools'></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false' class='menu-icon'><img src='' alt='Tools'></a></div>");
     toolsDiv.find('img')[0].src=Application.getApplicationName() + "/assets/settings.svg";
     ControlBar.append(toolsDiv);
     ToolsMenu.initialize();
