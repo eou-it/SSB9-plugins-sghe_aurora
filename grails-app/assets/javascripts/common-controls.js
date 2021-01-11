@@ -60,7 +60,14 @@ var AuroraHeader =  {
         $('#bannerMenuDiv').attr("title",ResourceManager.getString("areas_label_browse_title"));
         $("#bannerMenu").attr("aria-label",ResourceManager.getString("areas_label_browse_description"));
         $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
-        $('#brandingDiv').find('img')[0].src=Application.getApplicationName() + "/assets/eds/logo.svg";
+        var bgImage= $('.institutionalBranding').css('background-image');
+        if(bgImage.indexOf('url')>=0) {
+            $('#brandingDiv').find('img')[0].src=bgImage.replace('url(','').replace(')','').replace(/\"/gi, "");
+            $('.institutionalBranding').css({'background-image' : 'none'})
+        }
+        else{
+             $('#brandingDiv').find('img')[0].src=Application.getApplicationName() + "/assets/eds/logo.svg";
+        }
         //Add href to branding
         var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
         var origin = document.location.origin || (document.location.protocol + '//' + document.location.host);
