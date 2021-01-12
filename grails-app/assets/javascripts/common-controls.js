@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2009-2020 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2021 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 /**
@@ -61,13 +61,15 @@ var AuroraHeader =  {
         $("#bannerMenu").attr("aria-label",ResourceManager.getString("areas_label_browse_description"));
         $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
         var bgImage= $('.institutionalBranding').css('background-image');
+        var brandinglogo='';
         if(bgImage.indexOf('url')>=0) {
-            $('#brandingDiv').find('img')[0].src=bgImage.replace('url(','').replace(')','').replace(/\"/gi, "");
-            $('.institutionalBranding').css({'background-image' : 'none'})
+            brandinglogo=bgImage.replace('url(','').replace(')','').replace(/\"/gi, "");
+            $('.institutionalBranding').css({'background-image' : 'none'});
         }
         else{
-             $('#brandingDiv').find('img')[0].src=Application.getApplicationName() + "/assets/eds/logo.svg";
+            brandinglogo=Application.getApplicationName() + "/assets/eds/logo.svg";
         }
+        $('#brandingDiv').find('img')[0].src=brandinglogo;
         //Add href to branding
         var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
         var origin = document.location.origin || (document.location.protocol + '//' + document.location.host);
