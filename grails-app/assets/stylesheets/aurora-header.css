@@ -100,11 +100,12 @@ div#header-east-part-user-controls {
 }
 
 #bannerMenu {
-    background: url("menu.svg") center center no-repeat;
     height: inherit;
     width: 1.5em;
-    display: block;
+    display: flex !important;
     margin-left: 1em;
+    align-items: center;
+    justify-content: center;
     position: relative;
     margin-right:0;
 }
@@ -244,6 +245,8 @@ div#header-east-part-user-controls {
         width: 2.5em;
         margin:0;
         height: 100%;
+        align-items: center;
+        justify-content: center;
     }
 
     #user {
