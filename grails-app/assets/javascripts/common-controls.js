@@ -60,6 +60,7 @@ var AuroraHeader =  {
         $('#bannerMenuDiv').attr("title",ResourceManager.getString("areas_label_browse_title"));
         $("#bannerMenu").attr("aria-label",ResourceManager.getString("areas_label_browse_description"));
         $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
+        $('#bannerMenuDiv').find('img')[0].src=Application.getApplicationName() + "/assets/menu.svg";
         var bgImage= $('.institutionalBranding').css('background-image');
         var brandinglogo='';
         if(bgImage.indexOf('url')>=0) {
