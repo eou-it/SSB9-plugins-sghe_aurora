@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2015-2020 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2021 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 var NonHierarchicalMenu = (function() {
     return {
@@ -371,7 +371,7 @@ function aboutDialogPopUp () {
     dialogDiv.setAttribute("ng-controller","ModalCtrl");
     var scope = angular.element(document.getElementById('dialogAppDiv')).scope();
     if(!scope){
-        dialogDiv.innerHTML = "<xe-about-modal show='modalShown' api='aboutApi'></xe-about-modal>";
+        dialogDiv.innerHTML = "<xe-about-modal show='modalShown' api='aboutApi' focusbackelement='tools'></xe-about-modal>";
         angular.element(document.getElementById('dialogAppDiv')).ready(function() {
             angular.bootstrap(document.getElementById('dialogAppDiv'), ['dialogApp']);
         });
