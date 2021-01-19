@@ -762,11 +762,12 @@ var Application = {
     /**
      * Returns the application name from the window location.
      * Ex: http://m038034.sct.com:8000/s14s80
+     * Output: s14s80
      */
     getApplicationName: function() {
-
-        var appName = Application.getApplicationPath().substring(0,Application.getApplicationPath().lastIndexOf('/'))
-        return appName;
+        var applicationPath=Application.getApplicationPath()
+        var appName = applicationPath.substring(0,((applicationPath.substring(1)).indexOf('/')+1))
+        return (appName==='')?applicationPath:appName;
     },
     /**
      * Returns the application path from the window location.
