@@ -430,9 +430,7 @@ ToolsMenu.closeMenu = function() {
 };
 var SignInMenu = Object.create(NonHierarchicalMenu);
 SignInMenu.initialize = function() {
-    var signInText = ResourceManager.getString("userdetails_signin_title");
-    var signInDom = $("<div id='signInButton' class='non-hierarchical-menu'  ><a aria-label='"+ signInText +"' class='signIn-mobile menu-icon' aria-expanded='false' href='javascript:void(0);'><img src='' alt='"+ signInText +"'></a>" + "<div id='signInCanvas'><div id='signInMenu'><div id='signList' class='signIn-list'>" + "</div></div></div>" + "</div>");
-    signInDom.find('img')[0].src=window.Application.getApplicationName() + "/assets/lock.svg";
+    var signInDom = $("<div id='signInButton' class='non-hierarchical-menu'  ><a class='signIn-mobile menu-icon' aria-expanded='false' href='javascript:void(0);' />" + "<div id='signInCanvas'><div id='signInMenu'><div id='signList' class='signIn-list'>" + "</div></div></div>" + "</div>");
     ControlBar.append(signInDom);
     this.dropDown = ControlBar.node.find("#signInCanvas");
     this.canvas = ControlBar.node.find('#signList');
