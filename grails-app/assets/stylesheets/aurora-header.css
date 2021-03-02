@@ -1,5 +1,5 @@
 /*******************************************************************************
- Copyright 2015-2020 Ellucian Company L.P. and its affiliates.
+ Copyright 2015-2019 Ellucian Company L.P. and its affiliates.
 *******************************************************************************/
 #header-main-section {
     width: 100%;
@@ -100,38 +100,41 @@ div#header-east-part-user-controls {
 }
 
 #bannerMenu {
+    background: url("menu.svg") center center no-repeat;
     height: inherit;
     width: 1.5em;
-    display: flex !important;
+    display: block;
     margin-left: 1em;
-    align-items: center;
-    justify-content: center;
     position: relative;
     margin-right:0;
 }
 
 .institutionalBranding {
+    background: url("eds/logo.svg") left center  no-repeat;  /*EDS New Logo*/
+    height: inherit;
+    width: 10em;
+    float: left;
     margin-left: 1em;
     margin-right:0;
-    display: flex;
+    padding-right:1em;
+    padding-left:0;
 }
 
 #tools {
+    background: url("settings.svg") center center no-repeat;
     height: inherit;
     width: 2.375em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display : block;
+    text-align: center;
 }
 
 #user {
+    background: url("avatar.svg") center center no-repeat;
     position: relative;
     height: 100%;
     width: 1.7em;
     margin-left: 1em;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: block;
 }
 
 .notification-center {
@@ -240,13 +243,12 @@ div#header-east-part-user-controls {
     }
 
     .signIn-mobile {
-        display: flex;
+        display: block;
         height: 2.5em;
         width: 2.5em;
         margin:0;
+        background: url("lock.svg") center center no-repeat;
         height: 100%;
-        align-items: center;
-        justify-content: center;
     }
 
     #user {
