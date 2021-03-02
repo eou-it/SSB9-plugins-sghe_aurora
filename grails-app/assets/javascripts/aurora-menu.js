@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2016-2020 Ellucian Company L.P. and its affiliates.
+ Copyright 2016-2021 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 function ScrollableMenuTable(root, menuList) {
@@ -108,7 +108,7 @@ function ScrollableMenuTable(root, menuList) {
 
     function _fnCreateMenuUI(){
         var menu = "<nav id='menu' class='menu-wrapper hide menu-common'>"+
-            "<ul id='menuList' class='menu-common'></ul></nav>";
+            "<ul id='menuList' class='menu-common' role='tree'></ul></nav>";
         $(root).append(menu);
     };
 
@@ -369,7 +369,7 @@ function ScrollableMenuTable(root, menuList) {
             subMenuTitle = subMenuTitle.replace(regex, "");
         }
         var parentMenu = _fnGetParentMenuPath();
-        var backButton = "<li id='"+parentMenu+"' class='scrollableListFolder menu-common' tabindex='0'><div class='menu-item'>"
+        var backButton = "<li id='"+parentMenu+"' class='scrollableListFolder menu-common' tabindex='0' role='treeitem'><div class='menu-item'>"
             +"<a href='#' id='backButton'><div class='menu-back-icon menu-common'></div><div class='menu-subheader-text menu-common'>"
             +"<span class='menu-common' title=\"" + subMenuTitle + "\">"+subMenuName+"</span></div></a>"
             +"</div>"

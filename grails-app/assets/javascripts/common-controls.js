@@ -1,5 +1,5 @@
 /*********************************************************************************
- Copyright 2009-2020 Ellucian Company L.P. and its affiliates.
+ Copyright 2009-2021 Ellucian Company L.P. and its affiliates.
  **********************************************************************************/
 
 /**
@@ -49,8 +49,8 @@ var AuroraHeader =  {
     createSkeleton: function () {
         var header ="<header id='header-main-section' class='aurora-theme' role='banner'>"
             + "<div id='header-main-section-west-part'>"
-            + "<div id='bannerMenuDiv' tabindex='-1' xe-section='bannerMenuDiv'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'></a><div id='menuContainer'></div></div>"
-            + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'></a></div>"
+            + "<div id='bannerMenuDiv' tabindex='-1' xe-section='bannerMenuDiv'><a id='bannerMenu' href='javascript:void(0);' alt='Banner Menu'><img src='' alt='Menu'></a><div id='menuContainer'></div></div>"
+            + "<div id='brandingDiv' tabindex='-1'><a id='branding' href='javascript:void(0);' class='institutionalBranding'><img src='' alt='Branding'></a></div>"
             + "</header>";
 
         return $(header);
@@ -60,6 +60,17 @@ var AuroraHeader =  {
         $('#bannerMenuDiv').attr("title",ResourceManager.getString("areas_label_browse_title"));
         $("#bannerMenu").attr("aria-label",ResourceManager.getString("areas_label_browse_description"));
         $('#branding').attr("alt", ResourceManager.getString("areas_label_branding"));
+        $('#bannerMenuDiv').find('img')[0].src=Application.getApplicationName() + "/assets/menu.svg";
+        var bgImage= $('.institutionalBranding').css('background-image');
+        var brandinglogo='';
+        if(bgImage.indexOf('url')>=0) {
+            brandinglogo=bgImage.replace('url(','').replace(')','').replace(/\"/gi, "");
+            $('.institutionalBranding').css({'background-image' : 'none'});
+        }
+        else{
+            brandinglogo=Application.getApplicationName() + "/assets/eds/logo.svg";
+        }
+        $('#brandingDiv').find('img')[0].src=brandinglogo;
         //Add href to branding
         var path = $('meta[name=menuBaseURL]').attr('content') || document.location.href;
         var origin = document.location.origin || (document.location.protocol + '//' + document.location.host);
@@ -73,8 +84,20 @@ var AuroraHeader =  {
               If globalGuestProxyBaseURL is not configured, then return to the root
               This will be only configured through the Proxy Access URL
              */
-            if ($('meta[name=globalGuestProxyBaseURL]').attr("content") != undefined) {
-                appUrl = appUrl + $('meta[name=globalGuestProxyBaseURL]').attr("content")
+            if ($('meta[name=globalGuestProxyBaseURL]').attr("content") != undefined
+                && $('meta[name=globalGuestProxyBaseURL]').attr("content") !== null
+                && $('meta[name=globalGuestProxyBaseURL]').attr("content").length != 0) {
+                
+                appUrl = $('meta[name=globalGuestProxyBaseURL]').attr("content") + "/"
+
+                $("#branding").on('click', function() {
+                    jQuery.ajax({
+                        url: "proxy/onReturn",
+                        data: [],
+                        async: false
+                    });
+                });
+
             }else{
                 appUrl = appUrl + "/";
             }
@@ -98,7 +121,6 @@ var AuroraHeader =  {
     addNavigationControls: function () {
         BreadCrumbAndPageTitle.create();
         setupBannerMenu();
-
         if (CommonContext.hideBannerMenu){
             $('#menuContainer').removeClass('show').addClass('hide');
             $('#menu').removeClass('show').addClass('hide');
@@ -106,6 +128,13 @@ var AuroraHeader =  {
 
             //disable tools button
             $('#Preference').removeClass('show').addClass('hide');
+
+        }else{
+            //enable tools button if it was disabled in a proxy mode
+            if ($('#menuContainer').hasClass('hide')) { $('#menuContainer').removeClass('hide').addClass('show')};
+            if ($('#menu').hasClass('hide')) { $('#menu').removeClass('hide').addClass('show')};
+            if ($('#bannerMenu').hasClass('hide')) { $('#bannerMenu').removeClass('hide').addClass('show')};
+            if ($('#Preference').hasClass('hide')) { $('#Preference').removeClass('hide').addClass('show')};
         }
 
 
@@ -266,7 +295,8 @@ function UserControls( options ) {
     if (CommonContext.mepHomeContext) {
         MepDesciption.populateMepDescForOthers();
     }
-    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false' class='menu-icon'></a></div>");
+    var toolsDiv = $("<div id='toolsButton' class='non-hierarchical-menu'><a href='javascript:void(0);' id='tools' aria-expanded='false' class='menu-icon'><img src='' alt='Tools'></a></div>");
+    toolsDiv.find('img')[0].src=Application.getApplicationName() + "/assets/settings.svg";
     ControlBar.append(toolsDiv);
     ToolsMenu.initialize();
 
@@ -299,7 +329,8 @@ function UserControls( options ) {
             }
 
         } else {
-            var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'></a></div>");
+            var userDiv = $("<div id='userDiv' class='non-hierarchical-menu'><a id='user' aria-expanded='false' class='menu-icon' href='javascript:void(0);'><img src='' alt='Profile'></a></div>");
+            userDiv.find('img')[0].src=Application.getApplicationName() + "/assets/avatar.svg";
             ControlBar.append(userDiv);
             UserName.populateUserNameForOthers();
             ProfileMenu.initialize();
@@ -727,6 +758,16 @@ var Application = {
         var protocol = Application.getProtocol();
         var host = Application.getHost();
         return protocol + "//" + host + "/" + app;
+    },
+    /**
+     * Returns the application name from the window location.
+     * Ex: http://m038034.sct.com:8000/s14s80
+     * Output: s14s80
+     */
+    getApplicationName: function() {
+        var applicationPath=Application.getApplicationPath()
+        var appName = applicationPath.substring(0,((applicationPath.substring(1)).indexOf('/')+1))
+        return (appName==='')?applicationPath:appName;
     },
     /**
      * Returns the application path from the window location.
